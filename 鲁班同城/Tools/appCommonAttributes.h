@@ -15,6 +15,7 @@
 #import "UIColor+Hex.h"
 #import "UIViewExt.h"
 #import "RDVTabBarController.h"
+#import "UIFont+CustomerFonts.h"
 
 //third party class
 #import <SVProgressHUD.h>
@@ -67,6 +68,10 @@
 #define NAVIGATION_HEIGHT 44
 //电池栏高度
 #define STATUSBAR_HEIGHT (FU_iPhoneX ? 44.f : 20.f)
+
+#define TAB_BAR_HEIGHT (FU_iPhoneX ? 83.f : 49.f)
+
+#define CENTER_VIEW_HEIGHT  SCREEN_HEIGHT - StatusBarAndNavigationBarHeight - TAB_BAR_HEIGHT
 
 //主窗口
 #define APP_MAIN_WINDOW [UIApplication sharedApplication].windows[0]

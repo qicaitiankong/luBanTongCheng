@@ -68,6 +68,25 @@
 		1443C61920E37A3D0009E82F /* RegisterButtonStyleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61820E37A3D0009E82F /* RegisterButtonStyleView.m */; };
 		1443C61C20E384490009E82F /* LoginOtherTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61B20E384490009E82F /* LoginOtherTipView.m */; };
 		1443C61F20E387D80009E82F /* LoginThirdGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61E20E387D80009E82F /* LoginThirdGroupView.m */; };
+		18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DEEE20E878CF00FDF9C1 /* UIFont+CustomerFonts.m */; };
+		18E2DEFD20E882C700FDF9C1 /* SanFranciscoDisplay-Regular-2.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DEF920E882C600FDF9C1 /* SanFranciscoDisplay-Regular-2.otf */; };
+		18E2DEFE20E882C700FDF9C1 /* SanFranciscoDisplay-Medium-7.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DEFA20E882C600FDF9C1 /* SanFranciscoDisplay-Medium-7.otf */; };
+		18E2DEFF20E882C700FDF9C1 /* SanFranciscoText-Medium-17.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DEFB20E882C700FDF9C1 /* SanFranciscoText-Medium-17.otf */; };
+		18E2DF0020E882C700FDF9C1 /* SanFranciscoText-Regular-19.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DEFC20E882C700FDF9C1 /* SanFranciscoText-Regular-19.otf */; };
+		18E2DF0720E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DF0620E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.m */; };
+		18E2DF0B20E8BB9D00FDF9C1 /* JHCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DF0A20E8BB9D00FDF9C1 /* JHCollectionViewCell.m */; };
+		18E2DF0E20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DF0D20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.m */; };
+		18E2DF1120E8BED300FDF9C1 /* BaseDisplayNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DF1020E8BED300FDF9C1 /* BaseDisplayNaviViewController.m */; };
+		18E2DF1520E8C5DB00FDF9C1 /* test01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DF1420E8C5DB00FDF9C1 /* test01@3x.png */; };
+		18E2DF1920E8C60A00FDF9C1 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DF1620E8C60900FDF9C1 /* heart.png */; };
+		18E2DF1A20E8C60A00FDF9C1 /* heart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DF1720E8C60900FDF9C1 /* heart@3x.png */; };
+		18E2DF1B20E8C60A00FDF9C1 /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DF1820E8C60900FDF9C1 /* heart@2x.png */; };
+		18E2DF1E20E8C66B00FDF9C1 /* ConcernDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DF1D20E8C66B00FDF9C1 /* ConcernDisplayView.m */; };
+		18E2DF2120E8D27100FDF9C1 /* FirstPageInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DF2020E8D27100FDF9C1 /* FirstPageInfoModel.m */; };
+		18E2DF2620E8DAD400FDF9C1 /* test04.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DF2220E8DAD300FDF9C1 /* test04.png */; };
+		18E2DF2820E8DAD400FDF9C1 /* test05.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DF2420E8DAD400FDF9C1 /* test05.png */; };
+		18E2DF2920E8DAD400FDF9C1 /* test03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DF2520E8DAD400FDF9C1 /* test03.jpg */; };
+		18E2DF2B20E8E26D00FDF9C1 /* test02.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DF2A20E8E26D00FDF9C1 /* test02.png */; };
 		D8E79C20EDF22E9E186BA222 /* libPods-鲁班同城.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F951267026C77528335F765 /* libPods-鲁班同城.a */; };
 /* End PBXBuildFile section */
 
@@ -182,6 +201,32 @@
 		1443C61B20E384490009E82F /* LoginOtherTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginOtherTipView.m; sourceTree = "<group>"; };
 		1443C61D20E387D80009E82F /* LoginThirdGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginThirdGroupView.h; sourceTree = "<group>"; };
 		1443C61E20E387D80009E82F /* LoginThirdGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginThirdGroupView.m; sourceTree = "<group>"; };
+		18E2DEED20E878CF00FDF9C1 /* UIFont+CustomerFonts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CustomerFonts.h"; sourceTree = "<group>"; };
+		18E2DEEE20E878CF00FDF9C1 /* UIFont+CustomerFonts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CustomerFonts.m"; sourceTree = "<group>"; };
+		18E2DEF920E882C600FDF9C1 /* SanFranciscoDisplay-Regular-2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoDisplay-Regular-2.otf"; sourceTree = "<group>"; };
+		18E2DEFA20E882C600FDF9C1 /* SanFranciscoDisplay-Medium-7.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoDisplay-Medium-7.otf"; sourceTree = "<group>"; };
+		18E2DEFB20E882C700FDF9C1 /* SanFranciscoText-Medium-17.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Medium-17.otf"; sourceTree = "<group>"; };
+		18E2DEFC20E882C700FDF9C1 /* SanFranciscoText-Regular-19.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Regular-19.otf"; sourceTree = "<group>"; };
+		18E2DF0520E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHWaterfallCollectionLayout.h; sourceTree = "<group>"; };
+		18E2DF0620E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHWaterfallCollectionLayout.m; sourceTree = "<group>"; };
+		18E2DF0920E8BB9D00FDF9C1 /* JHCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHCollectionViewCell.h; sourceTree = "<group>"; };
+		18E2DF0A20E8BB9D00FDF9C1 /* JHCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHCollectionViewCell.m; sourceTree = "<group>"; };
+		18E2DF0C20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseHiddenNaviViewController.h; sourceTree = "<group>"; };
+		18E2DF0D20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseHiddenNaviViewController.m; sourceTree = "<group>"; };
+		18E2DF0F20E8BED300FDF9C1 /* BaseDisplayNaviViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseDisplayNaviViewController.h; sourceTree = "<group>"; };
+		18E2DF1020E8BED300FDF9C1 /* BaseDisplayNaviViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseDisplayNaviViewController.m; sourceTree = "<group>"; };
+		18E2DF1420E8C5DB00FDF9C1 /* test01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test01@3x.png"; sourceTree = "<group>"; };
+		18E2DF1620E8C60900FDF9C1 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
+		18E2DF1720E8C60900FDF9C1 /* heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@3x.png"; sourceTree = "<group>"; };
+		18E2DF1820E8C60900FDF9C1 /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
+		18E2DF1C20E8C66B00FDF9C1 /* ConcernDisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConcernDisplayView.h; sourceTree = "<group>"; };
+		18E2DF1D20E8C66B00FDF9C1 /* ConcernDisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConcernDisplayView.m; sourceTree = "<group>"; };
+		18E2DF1F20E8D27100FDF9C1 /* FirstPageInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageInfoModel.h; sourceTree = "<group>"; };
+		18E2DF2020E8D27100FDF9C1 /* FirstPageInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstPageInfoModel.m; sourceTree = "<group>"; };
+		18E2DF2220E8DAD300FDF9C1 /* test04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test04.png; sourceTree = "<group>"; };
+		18E2DF2420E8DAD400FDF9C1 /* test05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test05.png; sourceTree = "<group>"; };
+		18E2DF2520E8DAD400FDF9C1 /* test03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test03.jpg; sourceTree = "<group>"; };
+		18E2DF2A20E8E26D00FDF9C1 /* test02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test02.png; sourceTree = "<group>"; };
 		2F951267026C77528335F765 /* libPods-鲁班同城.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-鲁班同城.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9DFCA48D24F6D233555165 /* Pods-鲁班同城.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-鲁班同城.debug.xcconfig"; path = "Pods/Target Support Files/Pods-鲁班同城/Pods-鲁班同城.debug.xcconfig"; sourceTree = "<group>"; };
 		C885957278AB5E164A96EED5 /* Pods-鲁班同城.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-鲁班同城.release.xcconfig"; path = "Pods/Target Support Files/Pods-鲁班同城/Pods-鲁班同城.release.xcconfig"; sourceTree = "<group>"; };
@@ -238,6 +283,7 @@
 		1443C4FC20E204170009E82F /* 鲁班同城 */ = {
 			isa = PBXGroup;
 			children = (
+				18E2DEF020E87C3E00FDF9C1 /* Fonts */,
 				1443C5F320E357CB0009E82F /* 登录注册 */,
 				1443C5CC20E347510009E82F /* Images */,
 				1443C5AC20E339B20009E82F /* Category */,
@@ -307,8 +353,10 @@
 		1443C58420E3211B0009E82F /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
-				1443C59320E331120009E82F /* FirstPageViewController.h */,
-				1443C59420E331120009E82F /* FirstPageViewController.m */,
+				18E2DF0420E8BA9F00FDF9C1 /* Layout */,
+				18E2DF0320E8BA8C00FDF9C1 /* C */,
+				18E2DF0220E8BA8200FDF9C1 /* M */,
+				18E2DF0120E8BA7400FDF9C1 /* V */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -365,6 +413,8 @@
 			children = (
 				1443C5C920E3446B0009E82F /* AppDelegate+tabbar.h */,
 				1443C5CA20E3446B0009E82F /* AppDelegate+tabbar.m */,
+				18E2DEED20E878CF00FDF9C1 /* UIFont+CustomerFonts.h */,
+				18E2DEEE20E878CF00FDF9C1 /* UIFont+CustomerFonts.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -385,6 +435,8 @@
 		1443C5CC20E347510009E82F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				18E2DF1320E8C5C400FDF9C1 /* test */,
+				18E2DF1220E8C56100FDF9C1 /* 首页 */,
 				1443C5F720E359750009E82F /* login */,
 				1443C5EC20E357010009E82F /* navigation */,
 				1443C5CD20E348130009E82F /* tabbar */,
@@ -464,6 +516,81 @@
 				1443C61E20E387D80009E82F /* LoginThirdGroupView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		18E2DEF020E87C3E00FDF9C1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				18E2DEFC20E882C700FDF9C1 /* SanFranciscoText-Regular-19.otf */,
+				18E2DEFB20E882C700FDF9C1 /* SanFranciscoText-Medium-17.otf */,
+				18E2DEF920E882C600FDF9C1 /* SanFranciscoDisplay-Regular-2.otf */,
+				18E2DEFA20E882C600FDF9C1 /* SanFranciscoDisplay-Medium-7.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		18E2DF0120E8BA7400FDF9C1 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				18E2DF0920E8BB9D00FDF9C1 /* JHCollectionViewCell.h */,
+				18E2DF0A20E8BB9D00FDF9C1 /* JHCollectionViewCell.m */,
+				18E2DF1C20E8C66B00FDF9C1 /* ConcernDisplayView.h */,
+				18E2DF1D20E8C66B00FDF9C1 /* ConcernDisplayView.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		18E2DF0220E8BA8200FDF9C1 /* M */ = {
+			isa = PBXGroup;
+			children = (
+				18E2DF1F20E8D27100FDF9C1 /* FirstPageInfoModel.h */,
+				18E2DF2020E8D27100FDF9C1 /* FirstPageInfoModel.m */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		18E2DF0320E8BA8C00FDF9C1 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				1443C59320E331120009E82F /* FirstPageViewController.h */,
+				1443C59420E331120009E82F /* FirstPageViewController.m */,
+				18E2DF0C20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.h */,
+				18E2DF0D20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.m */,
+				18E2DF0F20E8BED300FDF9C1 /* BaseDisplayNaviViewController.h */,
+				18E2DF1020E8BED300FDF9C1 /* BaseDisplayNaviViewController.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		18E2DF0420E8BA9F00FDF9C1 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				18E2DF0520E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.h */,
+				18E2DF0620E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.m */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		18E2DF1220E8C56100FDF9C1 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				18E2DF1620E8C60900FDF9C1 /* heart.png */,
+				18E2DF1820E8C60900FDF9C1 /* heart@2x.png */,
+				18E2DF1720E8C60900FDF9C1 /* heart@3x.png */,
+			);
+			path = "首页";
+			sourceTree = "<group>";
+		};
+		18E2DF1320E8C5C400FDF9C1 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				18E2DF2A20E8E26D00FDF9C1 /* test02.png */,
+				18E2DF2520E8DAD400FDF9C1 /* test03.jpg */,
+				18E2DF2220E8DAD300FDF9C1 /* test04.png */,
+				18E2DF2420E8DAD400FDF9C1 /* test05.png */,
+				18E2DF1420E8C5DB00FDF9C1 /* test01@3x.png */,
+			);
+			path = test;
 			sourceTree = "<group>";
 		};
 		394249CA3C8379195D468734 /* Frameworks */ = {
@@ -590,13 +717,20 @@
 			files = (
 				1443C50A20E204180009E82F /* LaunchScreen.storyboard in Resources */,
 				1443C60820E35A930009E82F /* cancel@3x.png in Resources */,
+				18E2DEFE20E882C700FDF9C1 /* SanFranciscoDisplay-Medium-7.otf in Resources */,
 				1443C5FD20E35A670009E82F /* QQ@3x.png in Resources */,
 				1443C5D720E348540009E82F /* order@2x.png in Resources */,
 				1443C60D20E35AAD0009E82F /* loginLogo.png in Resources */,
 				1443C60120E35A7D0009E82F /* weixin.png in Resources */,
+				18E2DF1920E8C60A00FDF9C1 /* heart.png in Resources */,
+				18E2DF2B20E8E26D00FDF9C1 /* test02.png in Resources */,
+				18E2DEFD20E882C700FDF9C1 /* SanFranciscoDisplay-Regular-2.otf in Resources */,
+				18E2DF1520E8C5DB00FDF9C1 /* test01@3x.png in Resources */,
 				1443C5EB20E348A50009E82F /* user.png in Resources */,
 				1443C5D220E3483B0009E82F /* home.png in Resources */,
+				18E2DF2920E8DAD400FDF9C1 /* test03.jpg in Resources */,
 				1443C50720E204180009E82F /* Assets.xcassets in Resources */,
+				18E2DF1B20E8C60A00FDF9C1 /* heart@2x.png in Resources */,
 				1443C5F020E3571B0009E82F /* navLogo@3x.png in Resources */,
 				1443C60F20E35AAD0009E82F /* loginLogo@2x.png in Resources */,
 				1443C5D120E3483B0009E82F /* home@3x.png in Resources */,
@@ -605,6 +739,9 @@
 				1443C5F120E3571B0009E82F /* navLogo.png in Resources */,
 				1443C5EA20E348A50009E82F /* user@2x.png in Resources */,
 				1443C50520E204170009E82F /* Main.storyboard in Resources */,
+				18E2DEFF20E882C700FDF9C1 /* SanFranciscoText-Medium-17.otf in Resources */,
+				18E2DF1A20E8C60A00FDF9C1 /* heart@3x.png in Resources */,
+				18E2DF0020E882C700FDF9C1 /* SanFranciscoText-Regular-19.otf in Resources */,
 				1443C5DF20E3486E0009E82F /* xiangji@3x.png in Resources */,
 				1443C5E920E348A50009E82F /* user@3x.png in Resources */,
 				1443C5FC20E35A670009E82F /* QQ@2x.png in Resources */,
@@ -617,9 +754,11 @@
 				1443C5D820E348540009E82F /* order@3x.png in Resources */,
 				1443C5F220E3571B0009E82F /* navLogo@2x.png in Resources */,
 				1443C60720E35A930009E82F /* cancel.png in Resources */,
+				18E2DF2620E8DAD400FDF9C1 /* test04.png in Resources */,
 				1443C5D920E348540009E82F /* order.png in Resources */,
 				1443C5D320E3483B0009E82F /* home@2x.png in Resources */,
 				1443C60320E35A7D0009E82F /* weixin@3x.png in Resources */,
+				18E2DF2820E8DAD400FDF9C1 /* test05.png in Resources */,
 				1443C5DE20E3486E0009E82F /* xiangji@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -686,23 +825,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E2DF2120E8D27100FDF9C1 /* FirstPageInfoModel.m in Sources */,
 				1443C57620E3188E0009E82F /* LzhReturnLabelHeight.m in Sources */,
 				1443C5C820E343E50009E82F /* RDVTabBarItem.m in Sources */,
 				1443C5AA20E336740009E82F /* UIColor+Hex.m in Sources */,
+				18E2DF0B20E8BB9D00FDF9C1 /* JHCollectionViewCell.m in Sources */,
 				1443C61C20E384490009E82F /* LoginOtherTipView.m in Sources */,
 				1443C50220E204170009E82F /* ViewController.m in Sources */,
 				1443C5C620E343E50009E82F /* RDVTabBar.m in Sources */,
 				1443C5C720E343E50009E82F /* RDVTabBarController.m in Sources */,
+				18E2DF1E20E8C66B00FDF9C1 /* ConcernDisplayView.m in Sources */,
+				18E2DF1120E8BED300FDF9C1 /* BaseDisplayNaviViewController.m in Sources */,
 				1443C50D20E204180009E82F /* main.m in Sources */,
 				1443C59E20E332200009E82F /* SkillShowViewController.m in Sources */,
 				1443C58020E31B2D0009E82F /* ShareHomePath.m in Sources */,
 				1443C58320E31BC10009E82F /* ShareNetWorkState.m in Sources */,
 				1443C57C20E3194C0009E82F /* Reachability.m in Sources */,
+				18E2DF0E20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.m in Sources */,
 				1443C59520E331120009E82F /* FirstPageViewController.m in Sources */,
+				18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */,
 				1443C5AB20E336740009E82F /* UIViewExt.m in Sources */,
 				1443C5A120E3327B0009E82F /* MyInfoViewController.m in Sources */,
 				1443C59820E3316C0009E82F /* OrderTakingViewController.m in Sources */,
 				1443C57320E317F50009E82F /* CustomeLzhLabel.m in Sources */,
+				18E2DF0720E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.m in Sources */,
 				1443C4FF20E204170009E82F /* AppDelegate.m in Sources */,
 				1443C61920E37A3D0009E82F /* RegisterButtonStyleView.m in Sources */,
 				1443C59B20E331CA0009E82F /* VideoCenterViewController.m in Sources */,

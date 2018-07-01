@@ -46,9 +46,9 @@
     mobileTextField = [[OwnTextField alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
     mobileTextField.backgroundColor = [UIColor whiteColor];
     mobileTextField.myTextField.placeholder = @"请输入手机号";
-    mobileTextField.myTextField.font = [UIFont systemFontOfSize:15];
+    mobileTextField.myTextField.font = [UIFont getPingFangSCMedium:15];
     mobileTextField.myTextField.textColor = textColor;
-    [mobileTextField.myTextField setValue:[UIFont boldSystemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
+    [mobileTextField.myTextField setValue:[UIFont getPingFangSCMedium:15] forKeyPath:@"_placeholderLabel.font"];
     [self.view addSubview:mobileTextField];
     //
     UIView *mobileLineView = [[UIView alloc] init];
@@ -57,8 +57,8 @@
     //
     codeTextField = [[OwnTextField alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
     codeTextField.backgroundColor = [UIColor whiteColor];
-    codeTextField.myTextField.font = [UIFont systemFontOfSize:15];
-    [codeTextField.myTextField setValue:[UIFont boldSystemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
+    codeTextField.myTextField.font = [UIFont getPingFangSCMedium:15];
+    [codeTextField.myTextField setValue:[UIFont getPingFangSCMedium:15] forKeyPath:@"_placeholderLabel.font"];
     codeTextField.myTextField.textColor = textColor;
     codeTextField.myTextField.placeholder = @"请输入验证码";
     [self.view addSubview:codeTextField];
@@ -71,7 +71,7 @@
     codeButt.backgroundColor = [UIColor colorWithHexString:@"#78CAC5"];
     codeButt.layer.cornerRadius = 10;
     [codeButt setTitle:@"获取验证码" forState:UIControlStateNormal];
-    codeButt.titleLabel.font = [UIFont systemFontOfSize:9];
+    codeButt.titleLabel.font = [UIFont getPingFangSCMedium:9];
     [codeButt addTarget:self action:@selector(codeButtHandler) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:codeButt];
     //
@@ -79,14 +79,14 @@
     loginButt.backgroundColor = [UIColor colorWithHexString:@"#78CAC5"];
     [loginButt addTarget:self action:@selector(loginHandler) forControlEvents:UIControlEventTouchUpInside];
     [loginButt setTitle:@"登录" forState:UIControlStateNormal];
-    loginButt.titleLabel.font = [UIFont fontWithName:@"PingFang-SC-Medium" size:16];
+    loginButt.titleLabel.font = [UIFont getPingFangSCMedium:16];
     UIColor *buttTitleColor = [UIColor colorWithHexString:@"#FFFEFE"];
     [loginButt setTitleColor:buttTitleColor forState:UIControlStateNormal];
     loginButt.layer.cornerRadius = 20;
     [self.view addSubview:loginButt];
     //
     UILabel *registerLabel = [[UILabel alloc] init];
-    UIFont *registerLabelFont = [UIFont systemFontOfSize:11];
+    UIFont *registerLabelFont = [UIFont getPingFangSCMedium:11];
     registerLabel.font = registerLabelFont;
     registerLabel.text = @"没有账号？";
     CGFloat registerLabelHeight = 12;
@@ -102,7 +102,7 @@
         [weakSelf registerHandler];
     };
     //
-    CGFloat tipViewWidth = [LzhReturnLabelHeight getLabelWidth:@"你还可以选择以下方式登录" font:[UIFont systemFontOfSize:10] targetHeight:10];
+    CGFloat tipViewWidth = [LzhReturnLabelHeight getLabelWidth:@"你还可以选择以下方式登录" font:[UIFont getPingFangSCMedium:10] targetHeight:10];
     LoginOtherTipView *tipView = [[LoginOtherTipView alloc] initWithFrame:CGRectMake(0, 0, tipViewWidth + 100, 10)];
     [self.view addSubview:tipView];
     //
@@ -122,9 +122,9 @@
     .centerXEqualToView(self.view);
     
     mobileTextField.sd_layout
-    .leftSpaceToView(self.view, 63)
+    .centerXEqualToView(self.view)
     .topSpaceToView(topLogoImageView, 12)
-    .widthIs(150)
+    .widthIs(256)
     .heightIs(50);
     
     mobileLineView.sd_layout
@@ -134,7 +134,7 @@
     .heightIs(1);
     
     codeTextField.sd_layout
-    .leftSpaceToView(self.view, 63)
+    .leftEqualToView(mobileTextField)
     .topSpaceToView(mobileTextField, 12)
     .widthIs(150)
     .heightIs(50);
@@ -184,6 +184,7 @@
 }
 
 - (void)cancelHandler{
+    NSLog(@"cancel button");
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate displayVC];
 }
