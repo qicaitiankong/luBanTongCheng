@@ -36,20 +36,10 @@
 - (void)getData{
     for (int index = 0; index < 20; index ++){
         FirstPageInfoModel *webModel = [FirstPageInfoModel getModelFromDict:nil];
-        if (index / 2){
-            if (index < 10){
-                 webModel.bigImage = [UIImage imageNamed:@"test02"];
-            }else{
-                 webModel.bigImage = [UIImage imageNamed:@"test03.jpg"];
-            }
-
+        if (index % 2){
+            webModel.bigImage = [UIImage imageNamed:@"test02"];
         }else{
-            if (index > 10){
-                 webModel.bigImage = [UIImage imageNamed:@"test04"];
-            }else{
-                 webModel.bigImage = [UIImage imageNamed:@"test05"];
-            }
-
+            webModel.bigImage = [UIImage imageNamed:@"test03"];
         }
         [webModel getImageDisplayHeight:webModel.bigImage];
         [self.modelArr addObject:webModel];
