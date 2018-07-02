@@ -16,6 +16,8 @@
 
 @property (assign,nonatomic) CGFloat bigImageDisplayHeight;
 
+@property (strong,nonatomic) NSArray *recuritJobInfoArr;
+
 @property (strong,nonatomic) NSString *companyNameStr;
 
 @property (strong,nonatomic) NSString *concernCountStr;

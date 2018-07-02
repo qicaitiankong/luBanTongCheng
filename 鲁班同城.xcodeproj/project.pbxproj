@@ -68,6 +68,21 @@
 		1443C61920E37A3D0009E82F /* RegisterButtonStyleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61820E37A3D0009E82F /* RegisterButtonStyleView.m */; };
 		1443C61C20E384490009E82F /* LoginOtherTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61B20E384490009E82F /* LoginOtherTipView.m */; };
 		1443C61F20E387D80009E82F /* LoginThirdGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61E20E387D80009E82F /* LoginThirdGroupView.m */; };
+		1853689120E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853689020E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m */; };
+		1853689520E9B57B0053A5D4 /* FirstPageSearchInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853689420E9B57B0053A5D4 /* FirstPageSearchInputView.m */; };
+		1853689920E9B8230053A5D4 /* traingle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1853689620E9B8220053A5D4 /* traingle.png */; };
+		1853689A20E9B8230053A5D4 /* traingle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1853689720E9B8220053A5D4 /* traingle@2x.png */; };
+		1853689B20E9B8230053A5D4 /* traingle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1853689820E9B8220053A5D4 /* traingle@3x.png */; };
+		1853689E20E9BA160053A5D4 /* UISearchBar+CustomeStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853689D20E9BA160053A5D4 /* UISearchBar+CustomeStyle.m */; };
+		185368EC20E9CB540053A5D4 /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 185368E920E9CB540053A5D4 /* NSTimer+Block.m */; };
+		185368ED20E9CB540053A5D4 /* CXCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185368EB20E9CB540053A5D4 /* CXCarouselView.m */; };
+		185368F120E9CDC40053A5D4 /* test06.png in Resources */ = {isa = PBXBuildFile; fileRef = 185368EE20E9CDC40053A5D4 /* test06.png */; };
+		185368F220E9CDC40053A5D4 /* test04.png in Resources */ = {isa = PBXBuildFile; fileRef = 185368EF20E9CDC40053A5D4 /* test04.png */; };
+		185368F320E9CDC40053A5D4 /* test05.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 185368F020E9CDC40053A5D4 /* test05.jpeg */; };
+		185368F720E9D4D80053A5D4 /* ZHQScrollMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 185368F620E9D4D80053A5D4 /* ZHQScrollMenu.m */; };
+		185368FA20E9E9D60053A5D4 /* TraingleCategorySmallButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185368F920E9E9D60053A5D4 /* TraingleCategorySmallButtonView.m */; };
+		185368FE20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185368FD20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m */; };
+		1853690520EA11C10053A5D4 /* WaterCellRecuritJobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853690420EA11C10053A5D4 /* WaterCellRecuritJobView.m */; };
 		18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DEEE20E878CF00FDF9C1 /* UIFont+CustomerFonts.m */; };
 		18E2DEFD20E882C700FDF9C1 /* SanFranciscoDisplay-Regular-2.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DEF920E882C600FDF9C1 /* SanFranciscoDisplay-Regular-2.otf */; };
 		18E2DEFE20E882C700FDF9C1 /* SanFranciscoDisplay-Medium-7.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DEFA20E882C600FDF9C1 /* SanFranciscoDisplay-Medium-7.otf */; };
@@ -199,6 +214,30 @@
 		1443C61B20E384490009E82F /* LoginOtherTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginOtherTipView.m; sourceTree = "<group>"; };
 		1443C61D20E387D80009E82F /* LoginThirdGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginThirdGroupView.h; sourceTree = "<group>"; };
 		1443C61E20E387D80009E82F /* LoginThirdGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginThirdGroupView.m; sourceTree = "<group>"; };
+		1853688F20E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageWaterCollectionReusableHeaderView.h; sourceTree = "<group>"; };
+		1853689020E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstPageWaterCollectionReusableHeaderView.m; sourceTree = "<group>"; };
+		1853689320E9B57B0053A5D4 /* FirstPageSearchInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageSearchInputView.h; sourceTree = "<group>"; };
+		1853689420E9B57B0053A5D4 /* FirstPageSearchInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstPageSearchInputView.m; sourceTree = "<group>"; };
+		1853689620E9B8220053A5D4 /* traingle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = traingle.png; sourceTree = "<group>"; };
+		1853689720E9B8220053A5D4 /* traingle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "traingle@2x.png"; sourceTree = "<group>"; };
+		1853689820E9B8220053A5D4 /* traingle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "traingle@3x.png"; sourceTree = "<group>"; };
+		1853689C20E9BA160053A5D4 /* UISearchBar+CustomeStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+CustomeStyle.h"; sourceTree = "<group>"; };
+		1853689D20E9BA160053A5D4 /* UISearchBar+CustomeStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+CustomeStyle.m"; sourceTree = "<group>"; };
+		185368E820E9CB540053A5D4 /* NSTimer+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Block.h"; sourceTree = "<group>"; };
+		185368E920E9CB540053A5D4 /* NSTimer+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Block.m"; sourceTree = "<group>"; };
+		185368EA20E9CB540053A5D4 /* CXCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXCarouselView.h; sourceTree = "<group>"; };
+		185368EB20E9CB540053A5D4 /* CXCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXCarouselView.m; sourceTree = "<group>"; };
+		185368EE20E9CDC40053A5D4 /* test06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test06.png; sourceTree = "<group>"; };
+		185368EF20E9CDC40053A5D4 /* test04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test04.png; sourceTree = "<group>"; };
+		185368F020E9CDC40053A5D4 /* test05.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test05.jpeg; sourceTree = "<group>"; };
+		185368F520E9D4D80053A5D4 /* ZHQScrollMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHQScrollMenu.h; sourceTree = "<group>"; };
+		185368F620E9D4D80053A5D4 /* ZHQScrollMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHQScrollMenu.m; sourceTree = "<group>"; };
+		185368F820E9E9D60053A5D4 /* TraingleCategorySmallButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TraingleCategorySmallButtonView.h; sourceTree = "<group>"; };
+		185368F920E9E9D60053A5D4 /* TraingleCategorySmallButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TraingleCategorySmallButtonView.m; sourceTree = "<group>"; };
+		185368FC20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TraingleCategoryButtonGroupView.h; sourceTree = "<group>"; };
+		185368FD20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TraingleCategoryButtonGroupView.m; sourceTree = "<group>"; };
+		1853690320EA11C10053A5D4 /* WaterCellRecuritJobView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaterCellRecuritJobView.h; sourceTree = "<group>"; };
+		1853690420EA11C10053A5D4 /* WaterCellRecuritJobView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaterCellRecuritJobView.m; sourceTree = "<group>"; };
 		18E2DEED20E878CF00FDF9C1 /* UIFont+CustomerFonts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CustomerFonts.h"; sourceTree = "<group>"; };
 		18E2DEEE20E878CF00FDF9C1 /* UIFont+CustomerFonts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CustomerFonts.m"; sourceTree = "<group>"; };
 		18E2DEF920E882C600FDF9C1 /* SanFranciscoDisplay-Regular-2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoDisplay-Regular-2.otf"; sourceTree = "<group>"; };
@@ -279,6 +318,7 @@
 		1443C4FC20E204170009E82F /* 鲁班同城 */ = {
 			isa = PBXGroup;
 			children = (
+				1853689F20E9CAD70053A5D4 /* ThirdPart */,
 				18E2DEF020E87C3E00FDF9C1 /* Fonts */,
 				1443C5F320E357CB0009E82F /* 登录注册 */,
 				1443C5CC20E347510009E82F /* Images */,
@@ -411,6 +451,8 @@
 				1443C5CA20E3446B0009E82F /* AppDelegate+tabbar.m */,
 				18E2DEED20E878CF00FDF9C1 /* UIFont+CustomerFonts.h */,
 				18E2DEEE20E878CF00FDF9C1 /* UIFont+CustomerFonts.m */,
+				1853689C20E9BA160053A5D4 /* UISearchBar+CustomeStyle.h */,
+				1853689D20E9BA160053A5D4 /* UISearchBar+CustomeStyle.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -514,6 +556,46 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1853689F20E9CAD70053A5D4 /* ThirdPart */ = {
+			isa = PBXGroup;
+			children = (
+				185368F420E9D4A90053A5D4 /* ZHQScrollView */,
+				185368E720E9CB2A0053A5D4 /* CXCarouselView */,
+			);
+			path = ThirdPart;
+			sourceTree = "<group>";
+		};
+		185368E720E9CB2A0053A5D4 /* CXCarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				185368EA20E9CB540053A5D4 /* CXCarouselView.h */,
+				185368EB20E9CB540053A5D4 /* CXCarouselView.m */,
+				185368E820E9CB540053A5D4 /* NSTimer+Block.h */,
+				185368E920E9CB540053A5D4 /* NSTimer+Block.m */,
+			);
+			path = CXCarouselView;
+			sourceTree = "<group>";
+		};
+		185368F420E9D4A90053A5D4 /* ZHQScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				185368F520E9D4D80053A5D4 /* ZHQScrollMenu.h */,
+				185368F620E9D4D80053A5D4 /* ZHQScrollMenu.m */,
+			);
+			path = ZHQScrollView;
+			sourceTree = "<group>";
+		};
+		185368FB20E9EF2B0053A5D4 /* traingleView */ = {
+			isa = PBXGroup;
+			children = (
+				185368F820E9E9D60053A5D4 /* TraingleCategorySmallButtonView.h */,
+				185368F920E9E9D60053A5D4 /* TraingleCategorySmallButtonView.m */,
+				185368FC20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.h */,
+				185368FD20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m */,
+			);
+			path = traingleView;
+			sourceTree = "<group>";
+		};
 		18E2DEF020E87C3E00FDF9C1 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,10 +610,17 @@
 		18E2DF0120E8BA7400FDF9C1 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				185368FB20E9EF2B0053A5D4 /* traingleView */,
 				18E2DF0920E8BB9D00FDF9C1 /* JHCollectionViewCell.h */,
 				18E2DF0A20E8BB9D00FDF9C1 /* JHCollectionViewCell.m */,
 				18E2DF1C20E8C66B00FDF9C1 /* ConcernDisplayView.h */,
 				18E2DF1D20E8C66B00FDF9C1 /* ConcernDisplayView.m */,
+				1853688F20E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.h */,
+				1853689020E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m */,
+				1853689320E9B57B0053A5D4 /* FirstPageSearchInputView.h */,
+				1853689420E9B57B0053A5D4 /* FirstPageSearchInputView.m */,
+				1853690320EA11C10053A5D4 /* WaterCellRecuritJobView.h */,
+				1853690420EA11C10053A5D4 /* WaterCellRecuritJobView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -570,6 +659,9 @@
 		18E2DF1220E8C56100FDF9C1 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				1853689620E9B8220053A5D4 /* traingle.png */,
+				1853689720E9B8220053A5D4 /* traingle@2x.png */,
+				1853689820E9B8220053A5D4 /* traingle@3x.png */,
 				18E2DF1620E8C60900FDF9C1 /* heart.png */,
 				18E2DF1820E8C60900FDF9C1 /* heart@2x.png */,
 				18E2DF1720E8C60900FDF9C1 /* heart@3x.png */,
@@ -580,6 +672,9 @@
 		18E2DF1320E8C5C400FDF9C1 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				185368EF20E9CDC40053A5D4 /* test04.png */,
+				185368F020E9CDC40053A5D4 /* test05.jpeg */,
+				185368EE20E9CDC40053A5D4 /* test06.png */,
 				18E2DF2C20E8E73300FDF9C1 /* test03.png */,
 				18E2DF2A20E8E26D00FDF9C1 /* test02.png */,
 				18E2DF1420E8C5DB00FDF9C1 /* test01@3x.png */,
@@ -710,8 +805,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1443C50A20E204180009E82F /* LaunchScreen.storyboard in Resources */,
+				185368F220E9CDC40053A5D4 /* test04.png in Resources */,
+				185368F320E9CDC40053A5D4 /* test05.jpeg in Resources */,
+				1853689920E9B8230053A5D4 /* traingle.png in Resources */,
 				1443C60820E35A930009E82F /* cancel@3x.png in Resources */,
 				18E2DEFE20E882C700FDF9C1 /* SanFranciscoDisplay-Medium-7.otf in Resources */,
+				1853689A20E9B8230053A5D4 /* traingle@2x.png in Resources */,
+				1853689B20E9B8230053A5D4 /* traingle@3x.png in Resources */,
 				1443C5FD20E35A670009E82F /* QQ@3x.png in Resources */,
 				1443C5D720E348540009E82F /* order@2x.png in Resources */,
 				1443C60D20E35AAD0009E82F /* loginLogo.png in Resources */,
@@ -745,6 +845,7 @@
 				1443C5FB20E35A670009E82F /* QQ.png in Resources */,
 				1443C5E320E3488F0009E82F /* play@3x.png in Resources */,
 				1443C60E20E35AAD0009E82F /* loginLogo@3x.png in Resources */,
+				185368F120E9CDC40053A5D4 /* test06.png in Resources */,
 				1443C5D820E348540009E82F /* order@3x.png in Resources */,
 				1443C5F220E3571B0009E82F /* navLogo@2x.png in Resources */,
 				1443C60720E35A930009E82F /* cancel.png in Resources */,
@@ -818,26 +919,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E2DF2120E8D27100FDF9C1 /* FirstPageInfoModel.m in Sources */,
+				1853689520E9B57B0053A5D4 /* FirstPageSearchInputView.m in Sources */,
 				1443C57620E3188E0009E82F /* LzhReturnLabelHeight.m in Sources */,
 				1443C5C820E343E50009E82F /* RDVTabBarItem.m in Sources */,
 				1443C5AA20E336740009E82F /* UIColor+Hex.m in Sources */,
 				18E2DF0B20E8BB9D00FDF9C1 /* JHCollectionViewCell.m in Sources */,
+				1853689E20E9BA160053A5D4 /* UISearchBar+CustomeStyle.m in Sources */,
+				185368FE20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m in Sources */,
 				1443C61C20E384490009E82F /* LoginOtherTipView.m in Sources */,
+				185368FA20E9E9D60053A5D4 /* TraingleCategorySmallButtonView.m in Sources */,
 				1443C50220E204170009E82F /* ViewController.m in Sources */,
 				1443C5C620E343E50009E82F /* RDVTabBar.m in Sources */,
 				1443C5C720E343E50009E82F /* RDVTabBarController.m in Sources */,
 				18E2DF1E20E8C66B00FDF9C1 /* ConcernDisplayView.m in Sources */,
 				18E2DF1120E8BED300FDF9C1 /* BaseDisplayNaviViewController.m in Sources */,
 				1443C50D20E204180009E82F /* main.m in Sources */,
+				1853689120E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m in Sources */,
 				1443C59E20E332200009E82F /* SkillShowViewController.m in Sources */,
 				1443C58020E31B2D0009E82F /* ShareHomePath.m in Sources */,
 				1443C58320E31BC10009E82F /* ShareNetWorkState.m in Sources */,
 				1443C57C20E3194C0009E82F /* Reachability.m in Sources */,
 				18E2DF0E20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.m in Sources */,
 				1443C59520E331120009E82F /* FirstPageViewController.m in Sources */,
+				1853690520EA11C10053A5D4 /* WaterCellRecuritJobView.m in Sources */,
 				18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */,
 				1443C5AB20E336740009E82F /* UIViewExt.m in Sources */,
 				1443C5A120E3327B0009E82F /* MyInfoViewController.m in Sources */,
+				185368EC20E9CB540053A5D4 /* NSTimer+Block.m in Sources */,
 				1443C59820E3316C0009E82F /* OrderTakingViewController.m in Sources */,
 				1443C57320E317F50009E82F /* CustomeLzhLabel.m in Sources */,
 				18E2DF0720E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.m in Sources */,
@@ -848,6 +956,8 @@
 				1443C5F620E359110009E82F /* OwnTextField.m in Sources */,
 				1443C5CB20E3446B0009E82F /* AppDelegate+tabbar.m in Sources */,
 				1443C61220E35AF40009E82F /* LoginViewController.m in Sources */,
+				185368ED20E9CB540053A5D4 /* CXCarouselView.m in Sources */,
+				185368F720E9D4D80053A5D4 /* ZHQScrollMenu.m in Sources */,
 				1443C61F20E387D80009E82F /* LoginThirdGroupView.m in Sources */,
 				1443C57920E318EA0009E82F /* GetCellHeight.m in Sources */,
 			);

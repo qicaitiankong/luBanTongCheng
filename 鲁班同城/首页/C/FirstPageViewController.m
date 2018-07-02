@@ -10,6 +10,7 @@
 //views
 #import "JHCollectionViewCell.h"
 #import "JHWaterfallCollectionLayout.h"
+#import "FirstPageWaterCollectionReusableHeaderView.h"
 
 @interface FirstPageViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,WaterFlowLayoutDelegate>{
     UICollectionView *mainCollectionView;
@@ -47,15 +48,34 @@
     [mainCollectionView reloadData];
 }
 
+- (void)clickLocationCity:(UIButton*)targetButt{
+    [targetButt setTitle:@"李沧" forState:UIControlStateNormal];
+}
+
+-(void)carouselTouch:(CXCarouselView *)carousel atIndex:(NSUInteger)index{
+    NSLog(@"轮播%@",@(index).stringValue);
+}
+
+-(void)categoryButtonHandler:(NSInteger)tag{
+    NSLog(@"分类按钮tag=%ld",tag);
+}
+- (void)traingleButtonHandler:(NSInteger)index targetLabel:(UILabel*)targetLabel{
+    NSLog(@"筛选按钮组点击：%ld",index);
+    targetLabel.text = @"测试数据";
+}
+
+//
 - (void)addCollectionView{
     JHWaterfallCollectionLayout* layout = [[JHWaterfallCollectionLayout alloc]init];
     layout.delegate = self ;
     mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,STATUSBAR_HEIGHT,SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT) collectionViewLayout:layout];
     mainCollectionView.backgroundColor = [UIColor clearColor];
-    [mainCollectionView registerClass:[JHCollectionViewCell class] forCellWithReuseIdentifier:@"cellId"];
+    [mainCollectionView registerClass:[JHCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([JHCollectionViewCell class])];
+    [mainCollectionView registerClass:[FirstPageWaterCollectionReusableHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([FirstPageWaterCollectionReusableHeaderView class])];
     mainCollectionView.delegate = self;
     mainCollectionView.dataSource = self;
     [self.view addSubview:mainCollectionView];
+    
 }
 
 #pragma mark - WaterFlowLayoutDelegate
@@ -104,13 +124,36 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    JHCollectionViewCell *cell = (JHCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndexPath:indexPath];
+    JHCollectionViewCell *cell = (JHCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([JHCollectionViewCell class]) forIndexPath:indexPath];
     if (self.modelArr.count){
         FirstPageInfoModel *singleModel = self.modelArr[indexPath.row];
         cell.model = singleModel;
     }
     return cell;
 }
+
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    UICollectionReusableView *reusableView =nil;
+    //返回段头段尾视图
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        FirstPageWaterCollectionReusableHeaderView *header=[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([FirstPageWaterCollectionReusableHeaderView class]) forIndexPath:indexPath];
+        WS(weakSelf);
+        header.searchView.clickLocationCity = ^(UIButton *targetCityButton) {
+            [weakSelf clickLocationCity:targetCityButton];
+        };
+        header.traingleButtonGroupView.traingleButtBlock = ^(NSInteger index, UILabel *targetLabel) {
+            [weakSelf traingleButtonHandler:index targetLabel:targetLabel];
+        };
+        //添加头视图的内容
+        reusableView = header;
+        [header addConstraints];
+        return reusableView;
+    }
+    NSLog(@"viewForSupplementaryElementOfKind");
+    
+    return reusableView;
+}
+
 
 
 - (void)didReceiveMemoryWarning {

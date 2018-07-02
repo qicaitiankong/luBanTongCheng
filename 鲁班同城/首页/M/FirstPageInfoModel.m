@@ -17,8 +17,11 @@
     }else{
         localModel.bigImage = [UIImage imageNamed:@""];
         localModel.logoImage = [UIImage imageNamed:@"test01"];
+        localModel.recuritJobInfoArr = @[@{@"0":@"招聘厨师",@"1":@"100人"},
+                                         @{@"0":@"招聘厨师",@"1":@"100人"}
+                                         ];
         localModel.companyNameStr = @"鲁班同城有限公司";
-        localModel.concernCountStr = @"12345";
+        localModel.concernCountStr = @"1234";
         
     }
     return localModel;

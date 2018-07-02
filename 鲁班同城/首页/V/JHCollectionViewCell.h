@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ConcernDisplayView.h"
+#import "WaterCellRecuritJobView.h"
 #import "FirstPageInfoModel.h"
 
 @interface JHCollectionViewCell : UICollectionViewCell
@@ -17,6 +18,11 @@
 @property (strong,nonatomic) UIImageView *companyLogoView;
 
 @property (strong, nonatomic) UILabel *companyNamelabel;
+//招工信息
+@property (strong,nonatomic) WaterCellRecuritJobView * firstJobInfoView;
+
+@property (strong,nonatomic) WaterCellRecuritJobView * secondJobInfoView;
+
 
 @property (strong,nonatomic) ConcernDisplayView *concernView;
 

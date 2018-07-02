@@ -90,6 +90,15 @@ static const UIEdgeInsets defaultEdgeInsets = {10,10,10,10};
     return _columnHeight;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.headerReferenceSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, SCREEN_HEIGHT * 0.518);
+    }
+    return self;
+}
+
 //重写prepareLayout方法
 
 /**  初始化*/
@@ -99,6 +108,12 @@ static const UIEdgeInsets defaultEdgeInsets = {10,10,10,10};
     
     //如果刷新布局就会重新调用prepareLayout这个方法,所以要先把高度数组清空
     [self.columnHeight removeAllObjects];
+     [self.attrsArray removeAllObjects];
+    //头部视图
+    UICollectionViewLayoutAttributes * layoutHeader = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:[NSIndexPath indexPathWithIndex:0]];
+    layoutHeader.frame =CGRectMake(0,0, self.headerReferenceSize.width, self.headerReferenceSize.height);
+    [self.attrsArray addObject:layoutHeader];
+    //item
     for (int i = 0; i < self.columCount; i++) {
         
         [self.columnHeight addObject:@(self.defaultEdgeInsets.top)];
@@ -106,7 +121,7 @@ static const UIEdgeInsets defaultEdgeInsets = {10,10,10,10};
     
     NSInteger count = [self.collectionView numberOfItemsInSection:0];
     
-    [self.attrsArray removeAllObjects];
+   
     for (NSInteger i = 0; i < count; i++) {
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
@@ -114,6 +129,9 @@ static const UIEdgeInsets defaultEdgeInsets = {10,10,10,10};
         UICollectionViewLayoutAttributes *attr = [self layoutAttributesForItemAtIndexPath:indexPath];
         [self.attrsArray addObject:attr];
     }
+    
+   
+    
 }
 //该方法返回对应cell上的布局属性.我们可以在这个方法中设置cell 的布局样式.在prepareLayout方法中,我们根据这个方法,传入对应的IndexPath从而获取到布局属性attr,然后添加到数组中.
 
@@ -152,7 +170,7 @@ static const UIEdgeInsets defaultEdgeInsets = {10,10,10,10};
         y += self.rowMargin;
     }
     
-    attr.frame = CGRectMake(x,y,w,h);
+    attr.frame = CGRectMake(x,y + self.headerReferenceSize.height,w,h);
     
     self.columnHeight[destColumn] =  @(y+ h);
     return attr;
@@ -180,7 +198,7 @@ static const UIEdgeInsets defaultEdgeInsets = {10,10,10,10};
             maxHeight = value;
         }
     }
-    return CGSizeMake(0, maxHeight+self.defaultEdgeInsets.bottom);
+    return CGSizeMake(0, maxHeight+self.defaultEdgeInsets.bottom + self.headerReferenceSize.height);
 }
 
 

@@ -37,7 +37,7 @@
     self.rightNumLabel.sd_layout
     .leftSpaceToView(self.leftImageView, 5)
     .rightSpaceToView(self, 2)
-    .heightRatioToView(self, 0.5)
+    .heightRatioToView(self, 0.9)
     .centerYEqualToView(self);
 }
 
