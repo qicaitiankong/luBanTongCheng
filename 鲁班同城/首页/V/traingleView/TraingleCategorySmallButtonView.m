@@ -59,6 +59,16 @@
     .topEqualToView(self)
     .bottomEqualToView(self);
 }
+//作为筛选按钮时去掉三角号
+- (void)adjustDisplayWhenIsFilterButt{
+    traingleImageView.hidden = YES;
+    leftLabel.textAlignment = NSTextAlignmentCenter;
+    leftLabel.sd_resetLayout
+    .leftSpaceToView(self, 0)
+    .rightSpaceToView(self, 0)
+    .topEqualToView(self)
+    .bottomEqualToView(self);
+}
 
 
 

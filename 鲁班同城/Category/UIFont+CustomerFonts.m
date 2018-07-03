@@ -22,6 +22,10 @@
     return [UIFont fontWithName:@"PingFangSC-Regular" size:size];
 }
 
++ (UIFont *)getPingFangSCBold:(CGFloat)size{
+    return [UIFont fontWithName:@"PingFangSC-Bold" size:size];
+}
+
 //英文字体
 //SanFranciscoText-Medium
 + (UIFont *)getSanFranciscoTextMedium:(CGFloat)size{

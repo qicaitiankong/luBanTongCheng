@@ -1,5 +1,5 @@
 //
-//  OrderTakingViewController.h
+//  MyInfoViewController.h
 //  鲁班同城
 //
 //  Created by Mac on 2018/6/27.
@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseHiddenNaviViewController.h"
 
-@interface OrderTakingViewController : UIViewController
+@interface MyInfoViewController : BaseHiddenNaviViewController
 
 @end

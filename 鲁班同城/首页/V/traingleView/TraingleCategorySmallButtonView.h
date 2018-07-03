@@ -16,4 +16,7 @@
 
 - (void)addConstraints;
 
+//作为筛选按钮时去掉三角号
+- (void)adjustDisplayWhenIsFilterButt;
+
 @end

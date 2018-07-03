@@ -59,9 +59,10 @@
 -(void)categoryButtonHandler:(NSInteger)tag{
     NSLog(@"分类按钮tag=%ld",tag);
 }
+
 - (void)traingleButtonHandler:(NSInteger)index targetLabel:(UILabel*)targetLabel{
     NSLog(@"筛选按钮组点击：%ld",index);
-    targetLabel.text = @"测试数据";
+    //targetLabel.text = @"测试数据";
 }
 
 //

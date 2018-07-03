@@ -73,6 +73,9 @@
         .centerYIs(height / 2);
         smallView.layer.cornerRadius = 3;
         preferView = smallView;
+        if (i == 3){
+            [smallView adjustDisplayWhenIsFilterButt];
+        }
     }
 }
 

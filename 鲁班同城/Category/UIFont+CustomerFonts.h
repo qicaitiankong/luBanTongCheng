@@ -16,6 +16,8 @@
 
 + (UIFont *)getPingFangSCRegular:(CGFloat)size;
 
++ (UIFont *)getPingFangSCBold:(CGFloat)size;
+
 + (UIFont *)getSanFranciscoTextMedium:(CGFloat)size;
 
 + (UIFont *)getSanFranciscoDisplayMedium:(CGFloat)size;

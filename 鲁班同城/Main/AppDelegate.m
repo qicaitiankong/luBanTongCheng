@@ -26,10 +26,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    UITableView.appearance.estimatedRowHeight = 0;
-    UITableView.appearance.estimatedSectionFooterHeight = 0;
-    UITableView.appearance.estimatedSectionHeaderHeight = 0;
+    
 //    LoginViewController *loginVC = [[LoginViewController alloc] init];
 //    self.window.rootViewController = loginVC;
 //    [self.window makeKeyAndVisible];

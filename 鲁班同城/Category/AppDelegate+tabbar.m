@@ -12,7 +12,10 @@
 @implementation AppDelegate (tabbar)
 
 -(void)customizeTabBarForController:(RDVTabBarController *)tabBarController{
-    
+   UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    UITableView.appearance.estimatedRowHeight = 0;
+    UITableView.appearance.estimatedSectionFooterHeight = 0;
+    UITableView.appearance.estimatedSectionHeaderHeight = 0;
     if (FU_iPhoneX) {
         [tabBarController.tabBar setHeight:83];
     }else{

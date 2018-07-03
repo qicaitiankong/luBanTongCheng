@@ -68,6 +68,33 @@
 		1443C61920E37A3D0009E82F /* RegisterButtonStyleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61820E37A3D0009E82F /* RegisterButtonStyleView.m */; };
 		1443C61C20E384490009E82F /* LoginOtherTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61B20E384490009E82F /* LoginOtherTipView.m */; };
 		1443C61F20E387D80009E82F /* LoginThirdGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61E20E387D80009E82F /* LoginThirdGroupView.m */; };
+		1818E49A20EB025A00B676C2 /* BaseCustomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E49920EB025A00B676C2 /* BaseCustomeTableViewController.m */; };
+		1818E49D20EB08AD00B676C2 /* TakeOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E49C20EB08AD00B676C2 /* TakeOrderTableViewCell.m */; };
+		1818E4A020EB092200B676C2 /* TakeOrderMainHallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E49F20EB092200B676C2 /* TakeOrderMainHallModel.m */; };
+		1818E4A920EB42A000B676C2 /* SSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E4A720EB429F00B676C2 /* SSSearchBar.m */; };
+		1818E4AA20EB42A000B676C2 /* UIImage+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E4A820EB429F00B676C2 /* UIImage+Tool.m */; };
+		1818E4AC20EB4BD700B676C2 /* test07.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4AB20EB4BD700B676C2 /* test07.jpg */; };
+		1818E4B120EB51A500B676C2 /* set02.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4AE20EB51A500B676C2 /* set02.png */; };
+		1818E4B220EB51A500B676C2 /* set02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4AF20EB51A500B676C2 /* set02@2x.png */; };
+		1818E4B320EB51A500B676C2 /* set02@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4B020EB51A500B676C2 /* set02@3x.png */; };
+		1818E4B720EB51B300B676C2 /* set03@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4B420EB51B200B676C2 /* set03@3x.png */; };
+		1818E4B820EB51B300B676C2 /* set03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4B520EB51B300B676C2 /* set03@2x.png */; };
+		1818E4B920EB51B300B676C2 /* set03.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4B620EB51B300B676C2 /* set03.png */; };
+		1818E4BD20EB51BF00B676C2 /* set01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4BA20EB51BF00B676C2 /* set01@3x.png */; };
+		1818E4BE20EB51BF00B676C2 /* set01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4BB20EB51BF00B676C2 /* set01.png */; };
+		1818E4BF20EB51BF00B676C2 /* set01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4BC20EB51BF00B676C2 /* set01@2x.png */; };
+		1818E4C320EB51D900B676C2 /* set00.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4C020EB51D900B676C2 /* set00.png */; };
+		1818E4C420EB51D900B676C2 /* set00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4C120EB51D900B676C2 /* set00@2x.png */; };
+		1818E4C520EB51D900B676C2 /* set00@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4C220EB51D900B676C2 /* set00@3x.png */; };
+		1818E4C920EB523E00B676C2 /* withDraw.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4C620EB523E00B676C2 /* withDraw.png */; };
+		1818E4CA20EB523E00B676C2 /* withDraw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4C720EB523E00B676C2 /* withDraw@2x.png */; };
+		1818E4CB20EB523E00B676C2 /* withDraw@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4C820EB523E00B676C2 /* withDraw@3x.png */; };
+		1818E4D020EB55D200B676C2 /* MyInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E4CF20EB55D200B676C2 /* MyInfoTableViewCell.m */; };
+		1818E4D420EB57A200B676C2 /* goFlag.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4D120EB57A200B676C2 /* goFlag.png */; };
+		1818E4D520EB57A200B676C2 /* goFlag@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4D220EB57A200B676C2 /* goFlag@3x.png */; };
+		1818E4D620EB57A200B676C2 /* goFlag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4D320EB57A200B676C2 /* goFlag@2x.png */; };
+		1818E4D920EB5D1300B676C2 /* MyInfoTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E4D820EB5D1300B676C2 /* MyInfoTableHeaderView.m */; };
+		1818E4DC20EB5E2E00B676C2 /* WithDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E4DB20EB5E2E00B676C2 /* WithDrawView.m */; };
 		1853689120E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853689020E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m */; };
 		1853689520E9B57B0053A5D4 /* FirstPageSearchInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853689420E9B57B0053A5D4 /* FirstPageSearchInputView.m */; };
 		1853689920E9B8230053A5D4 /* traingle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1853689620E9B8220053A5D4 /* traingle.png */; };
@@ -214,6 +241,41 @@
 		1443C61B20E384490009E82F /* LoginOtherTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginOtherTipView.m; sourceTree = "<group>"; };
 		1443C61D20E387D80009E82F /* LoginThirdGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginThirdGroupView.h; sourceTree = "<group>"; };
 		1443C61E20E387D80009E82F /* LoginThirdGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginThirdGroupView.m; sourceTree = "<group>"; };
+		1818E49820EB025A00B676C2 /* BaseCustomeTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCustomeTableViewController.h; sourceTree = "<group>"; };
+		1818E49920EB025A00B676C2 /* BaseCustomeTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCustomeTableViewController.m; sourceTree = "<group>"; };
+		1818E49B20EB08AD00B676C2 /* TakeOrderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeOrderTableViewCell.h; sourceTree = "<group>"; };
+		1818E49C20EB08AD00B676C2 /* TakeOrderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeOrderTableViewCell.m; sourceTree = "<group>"; };
+		1818E49E20EB092200B676C2 /* TakeOrderMainHallModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeOrderMainHallModel.h; sourceTree = "<group>"; };
+		1818E49F20EB092200B676C2 /* TakeOrderMainHallModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeOrderMainHallModel.m; sourceTree = "<group>"; };
+		1818E4A520EB429F00B676C2 /* UIImage+Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tool.h"; sourceTree = "<group>"; };
+		1818E4A620EB429F00B676C2 /* SSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSearchBar.h; sourceTree = "<group>"; };
+		1818E4A720EB429F00B676C2 /* SSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSearchBar.m; sourceTree = "<group>"; };
+		1818E4A820EB429F00B676C2 /* UIImage+Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tool.m"; sourceTree = "<group>"; };
+		1818E4AB20EB4BD700B676C2 /* test07.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test07.jpg; sourceTree = "<group>"; };
+		1818E4AE20EB51A500B676C2 /* set02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set02.png; sourceTree = "<group>"; };
+		1818E4AF20EB51A500B676C2 /* set02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set02@2x.png"; sourceTree = "<group>"; };
+		1818E4B020EB51A500B676C2 /* set02@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set02@3x.png"; sourceTree = "<group>"; };
+		1818E4B420EB51B200B676C2 /* set03@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set03@3x.png"; sourceTree = "<group>"; };
+		1818E4B520EB51B300B676C2 /* set03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set03@2x.png"; sourceTree = "<group>"; };
+		1818E4B620EB51B300B676C2 /* set03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set03.png; sourceTree = "<group>"; };
+		1818E4BA20EB51BF00B676C2 /* set01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set01@3x.png"; sourceTree = "<group>"; };
+		1818E4BB20EB51BF00B676C2 /* set01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set01.png; sourceTree = "<group>"; };
+		1818E4BC20EB51BF00B676C2 /* set01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set01@2x.png"; sourceTree = "<group>"; };
+		1818E4C020EB51D900B676C2 /* set00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set00.png; sourceTree = "<group>"; };
+		1818E4C120EB51D900B676C2 /* set00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set00@2x.png"; sourceTree = "<group>"; };
+		1818E4C220EB51D900B676C2 /* set00@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set00@3x.png"; sourceTree = "<group>"; };
+		1818E4C620EB523E00B676C2 /* withDraw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = withDraw.png; sourceTree = "<group>"; };
+		1818E4C720EB523E00B676C2 /* withDraw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "withDraw@2x.png"; sourceTree = "<group>"; };
+		1818E4C820EB523E00B676C2 /* withDraw@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "withDraw@3x.png"; sourceTree = "<group>"; };
+		1818E4CE20EB55D200B676C2 /* MyInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyInfoTableViewCell.h; sourceTree = "<group>"; };
+		1818E4CF20EB55D200B676C2 /* MyInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInfoTableViewCell.m; sourceTree = "<group>"; };
+		1818E4D120EB57A200B676C2 /* goFlag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goFlag.png; sourceTree = "<group>"; };
+		1818E4D220EB57A200B676C2 /* goFlag@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goFlag@3x.png"; sourceTree = "<group>"; };
+		1818E4D320EB57A200B676C2 /* goFlag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goFlag@2x.png"; sourceTree = "<group>"; };
+		1818E4D720EB5D1300B676C2 /* MyInfoTableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyInfoTableHeaderView.h; sourceTree = "<group>"; };
+		1818E4D820EB5D1300B676C2 /* MyInfoTableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInfoTableHeaderView.m; sourceTree = "<group>"; };
+		1818E4DA20EB5E2E00B676C2 /* WithDrawView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithDrawView.h; sourceTree = "<group>"; };
+		1818E4DB20EB5E2E00B676C2 /* WithDrawView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithDrawView.m; sourceTree = "<group>"; };
 		1853688F20E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageWaterCollectionReusableHeaderView.h; sourceTree = "<group>"; };
 		1853689020E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstPageWaterCollectionReusableHeaderView.m; sourceTree = "<group>"; };
 		1853689320E9B57B0053A5D4 /* FirstPageSearchInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageSearchInputView.h; sourceTree = "<group>"; };
@@ -318,6 +380,7 @@
 		1443C4FC20E204170009E82F /* 鲁班同城 */ = {
 			isa = PBXGroup;
 			children = (
+				1818E49720EB01BE00B676C2 /* BaseInherit */,
 				1853689F20E9CAD70053A5D4 /* ThirdPart */,
 				18E2DEF020E87C3E00FDF9C1 /* Fonts */,
 				1443C5F320E357CB0009E82F /* 登录注册 */,
@@ -400,8 +463,9 @@
 		1443C58520E321270009E82F /* 接单大厅 */ = {
 			isa = PBXGroup;
 			children = (
-				1443C59620E3316C0009E82F /* OrderTakingViewController.h */,
-				1443C59720E3316C0009E82F /* OrderTakingViewController.m */,
+				1818E49620EB007300B676C2 /* M */,
+				1818E49520EB006A00B676C2 /* V */,
+				1818E49420EB006300B676C2 /* C */,
 			);
 			path = "接单大厅";
 			sourceTree = "<group>";
@@ -427,8 +491,8 @@
 		1443C58820E3219F0009E82F /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
-				1443C59F20E3327B0009E82F /* MyInfoViewController.h */,
-				1443C5A020E3327B0009E82F /* MyInfoViewController.m */,
+				1818E4CD20EB558300B676C2 /* C */,
+				1818E4CC20EB557A00B676C2 /* V */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -473,6 +537,7 @@
 		1443C5CC20E347510009E82F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1818E4AD20EB517B00B676C2 /* 我的 */,
 				18E2DF1320E8C5C400FDF9C1 /* test */,
 				18E2DF1220E8C56100FDF9C1 /* 首页 */,
 				1443C5F720E359750009E82F /* login */,
@@ -556,9 +621,108 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1818E49420EB006300B676C2 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				1443C59620E3316C0009E82F /* OrderTakingViewController.h */,
+				1443C59720E3316C0009E82F /* OrderTakingViewController.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		1818E49520EB006A00B676C2 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				1818E49B20EB08AD00B676C2 /* TakeOrderTableViewCell.h */,
+				1818E49C20EB08AD00B676C2 /* TakeOrderTableViewCell.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		1818E49620EB007300B676C2 /* M */ = {
+			isa = PBXGroup;
+			children = (
+				1818E49E20EB092200B676C2 /* TakeOrderMainHallModel.h */,
+				1818E49F20EB092200B676C2 /* TakeOrderMainHallModel.m */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		1818E49720EB01BE00B676C2 /* BaseInherit */ = {
+			isa = PBXGroup;
+			children = (
+				18E2DF0C20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.h */,
+				18E2DF0D20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.m */,
+				18E2DF0F20E8BED300FDF9C1 /* BaseDisplayNaviViewController.h */,
+				18E2DF1020E8BED300FDF9C1 /* BaseDisplayNaviViewController.m */,
+				1818E49820EB025A00B676C2 /* BaseCustomeTableViewController.h */,
+				1818E49920EB025A00B676C2 /* BaseCustomeTableViewController.m */,
+			);
+			path = BaseInherit;
+			sourceTree = "<group>";
+		};
+		1818E4A420EB41E400B676C2 /* SSSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				1818E4A620EB429F00B676C2 /* SSSearchBar.h */,
+				1818E4A720EB429F00B676C2 /* SSSearchBar.m */,
+				1818E4A520EB429F00B676C2 /* UIImage+Tool.h */,
+				1818E4A820EB429F00B676C2 /* UIImage+Tool.m */,
+			);
+			path = SSSearchBar;
+			sourceTree = "<group>";
+		};
+		1818E4AD20EB517B00B676C2 /* 我的 */ = {
+			isa = PBXGroup;
+			children = (
+				1818E4D120EB57A200B676C2 /* goFlag.png */,
+				1818E4D320EB57A200B676C2 /* goFlag@2x.png */,
+				1818E4D220EB57A200B676C2 /* goFlag@3x.png */,
+				1818E4C620EB523E00B676C2 /* withDraw.png */,
+				1818E4C720EB523E00B676C2 /* withDraw@2x.png */,
+				1818E4C820EB523E00B676C2 /* withDraw@3x.png */,
+				1818E4C020EB51D900B676C2 /* set00.png */,
+				1818E4C120EB51D900B676C2 /* set00@2x.png */,
+				1818E4C220EB51D900B676C2 /* set00@3x.png */,
+				1818E4BB20EB51BF00B676C2 /* set01.png */,
+				1818E4BC20EB51BF00B676C2 /* set01@2x.png */,
+				1818E4BA20EB51BF00B676C2 /* set01@3x.png */,
+				1818E4B620EB51B300B676C2 /* set03.png */,
+				1818E4B520EB51B300B676C2 /* set03@2x.png */,
+				1818E4B420EB51B200B676C2 /* set03@3x.png */,
+				1818E4AE20EB51A500B676C2 /* set02.png */,
+				1818E4AF20EB51A500B676C2 /* set02@2x.png */,
+				1818E4B020EB51A500B676C2 /* set02@3x.png */,
+			);
+			path = "我的";
+			sourceTree = "<group>";
+		};
+		1818E4CC20EB557A00B676C2 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				1818E4CE20EB55D200B676C2 /* MyInfoTableViewCell.h */,
+				1818E4CF20EB55D200B676C2 /* MyInfoTableViewCell.m */,
+				1818E4D720EB5D1300B676C2 /* MyInfoTableHeaderView.h */,
+				1818E4D820EB5D1300B676C2 /* MyInfoTableHeaderView.m */,
+				1818E4DA20EB5E2E00B676C2 /* WithDrawView.h */,
+				1818E4DB20EB5E2E00B676C2 /* WithDrawView.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		1818E4CD20EB558300B676C2 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				1443C59F20E3327B0009E82F /* MyInfoViewController.h */,
+				1443C5A020E3327B0009E82F /* MyInfoViewController.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
 		1853689F20E9CAD70053A5D4 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				1818E4A420EB41E400B676C2 /* SSSearchBar */,
 				185368F420E9D4A90053A5D4 /* ZHQScrollView */,
 				185368E720E9CB2A0053A5D4 /* CXCarouselView */,
 			);
@@ -639,10 +803,6 @@
 			children = (
 				1443C59320E331120009E82F /* FirstPageViewController.h */,
 				1443C59420E331120009E82F /* FirstPageViewController.m */,
-				18E2DF0C20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.h */,
-				18E2DF0D20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.m */,
-				18E2DF0F20E8BED300FDF9C1 /* BaseDisplayNaviViewController.h */,
-				18E2DF1020E8BED300FDF9C1 /* BaseDisplayNaviViewController.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -672,6 +832,7 @@
 		18E2DF1320E8C5C400FDF9C1 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				1818E4AB20EB4BD700B676C2 /* test07.jpg */,
 				185368EF20E9CDC40053A5D4 /* test04.png */,
 				185368F020E9CDC40053A5D4 /* test05.jpeg */,
 				185368EE20E9CDC40053A5D4 /* test06.png */,
@@ -808,6 +969,7 @@
 				185368F220E9CDC40053A5D4 /* test04.png in Resources */,
 				185368F320E9CDC40053A5D4 /* test05.jpeg in Resources */,
 				1853689920E9B8230053A5D4 /* traingle.png in Resources */,
+				1818E4BF20EB51BF00B676C2 /* set01@2x.png in Resources */,
 				1443C60820E35A930009E82F /* cancel@3x.png in Resources */,
 				18E2DEFE20E882C700FDF9C1 /* SanFranciscoDisplay-Medium-7.otf in Resources */,
 				1853689A20E9B8230053A5D4 /* traingle@2x.png in Resources */,
@@ -815,6 +977,9 @@
 				1443C5FD20E35A670009E82F /* QQ@3x.png in Resources */,
 				1443C5D720E348540009E82F /* order@2x.png in Resources */,
 				1443C60D20E35AAD0009E82F /* loginLogo.png in Resources */,
+				1818E4BD20EB51BF00B676C2 /* set01@3x.png in Resources */,
+				1818E4B720EB51B300B676C2 /* set03@3x.png in Resources */,
+				1818E4BE20EB51BF00B676C2 /* set01.png in Resources */,
 				1443C60120E35A7D0009E82F /* weixin.png in Resources */,
 				18E2DF1920E8C60A00FDF9C1 /* heart.png in Resources */,
 				18E2DF2B20E8E26D00FDF9C1 /* test02.png in Resources */,
@@ -822,18 +987,27 @@
 				18E2DF1520E8C5DB00FDF9C1 /* test01@3x.png in Resources */,
 				1443C5EB20E348A50009E82F /* user.png in Resources */,
 				1443C5D220E3483B0009E82F /* home.png in Resources */,
+				1818E4AC20EB4BD700B676C2 /* test07.jpg in Resources */,
 				1443C50720E204180009E82F /* Assets.xcassets in Resources */,
 				18E2DF1B20E8C60A00FDF9C1 /* heart@2x.png in Resources */,
 				1443C5F020E3571B0009E82F /* navLogo@3x.png in Resources */,
 				1443C60F20E35AAD0009E82F /* loginLogo@2x.png in Resources */,
 				1443C5D120E3483B0009E82F /* home@3x.png in Resources */,
+				1818E4C520EB51D900B676C2 /* set00@3x.png in Resources */,
+				1818E4C320EB51D900B676C2 /* set00.png in Resources */,
 				1443C60920E35A930009E82F /* cancel@2x.png in Resources */,
 				1443C5E520E3488F0009E82F /* play@2x.png in Resources */,
 				1443C5F120E3571B0009E82F /* navLogo.png in Resources */,
 				1443C5EA20E348A50009E82F /* user@2x.png in Resources */,
+				1818E4B820EB51B300B676C2 /* set03@2x.png in Resources */,
+				1818E4C920EB523E00B676C2 /* withDraw.png in Resources */,
 				1443C50520E204170009E82F /* Main.storyboard in Resources */,
 				18E2DEFF20E882C700FDF9C1 /* SanFranciscoText-Medium-17.otf in Resources */,
+				1818E4D620EB57A200B676C2 /* goFlag@2x.png in Resources */,
+				1818E4B320EB51A500B676C2 /* set02@3x.png in Resources */,
 				18E2DF1A20E8C60A00FDF9C1 /* heart@3x.png in Resources */,
+				1818E4D520EB57A200B676C2 /* goFlag@3x.png in Resources */,
+				1818E4B120EB51A500B676C2 /* set02.png in Resources */,
 				18E2DF0020E882C700FDF9C1 /* SanFranciscoText-Regular-19.otf in Resources */,
 				1443C5DF20E3486E0009E82F /* xiangji@3x.png in Resources */,
 				1443C5E920E348A50009E82F /* user@3x.png in Resources */,
@@ -845,10 +1019,16 @@
 				1443C5FB20E35A670009E82F /* QQ.png in Resources */,
 				1443C5E320E3488F0009E82F /* play@3x.png in Resources */,
 				1443C60E20E35AAD0009E82F /* loginLogo@3x.png in Resources */,
+				1818E4B220EB51A500B676C2 /* set02@2x.png in Resources */,
+				1818E4CB20EB523E00B676C2 /* withDraw@3x.png in Resources */,
 				185368F120E9CDC40053A5D4 /* test06.png in Resources */,
+				1818E4CA20EB523E00B676C2 /* withDraw@2x.png in Resources */,
 				1443C5D820E348540009E82F /* order@3x.png in Resources */,
+				1818E4D420EB57A200B676C2 /* goFlag.png in Resources */,
 				1443C5F220E3571B0009E82F /* navLogo@2x.png in Resources */,
+				1818E4C420EB51D900B676C2 /* set00@2x.png in Resources */,
 				1443C60720E35A930009E82F /* cancel.png in Resources */,
+				1818E4B920EB51B300B676C2 /* set03.png in Resources */,
 				1443C5D920E348540009E82F /* order.png in Resources */,
 				1443C5D320E3483B0009E82F /* home@2x.png in Resources */,
 				1443C60320E35A7D0009E82F /* weixin@3x.png in Resources */,
@@ -920,8 +1100,11 @@
 			files = (
 				18E2DF2120E8D27100FDF9C1 /* FirstPageInfoModel.m in Sources */,
 				1853689520E9B57B0053A5D4 /* FirstPageSearchInputView.m in Sources */,
+				1818E4A020EB092200B676C2 /* TakeOrderMainHallModel.m in Sources */,
+				1818E4AA20EB42A000B676C2 /* UIImage+Tool.m in Sources */,
 				1443C57620E3188E0009E82F /* LzhReturnLabelHeight.m in Sources */,
 				1443C5C820E343E50009E82F /* RDVTabBarItem.m in Sources */,
+				1818E4A920EB42A000B676C2 /* SSSearchBar.m in Sources */,
 				1443C5AA20E336740009E82F /* UIColor+Hex.m in Sources */,
 				18E2DF0B20E8BB9D00FDF9C1 /* JHCollectionViewCell.m in Sources */,
 				1853689E20E9BA160053A5D4 /* UISearchBar+CustomeStyle.m in Sources */,
@@ -933,6 +1116,8 @@
 				1443C5C720E343E50009E82F /* RDVTabBarController.m in Sources */,
 				18E2DF1E20E8C66B00FDF9C1 /* ConcernDisplayView.m in Sources */,
 				18E2DF1120E8BED300FDF9C1 /* BaseDisplayNaviViewController.m in Sources */,
+				1818E4D020EB55D200B676C2 /* MyInfoTableViewCell.m in Sources */,
+				1818E49D20EB08AD00B676C2 /* TakeOrderTableViewCell.m in Sources */,
 				1443C50D20E204180009E82F /* main.m in Sources */,
 				1853689120E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m in Sources */,
 				1443C59E20E332200009E82F /* SkillShowViewController.m in Sources */,
@@ -943,6 +1128,8 @@
 				1443C59520E331120009E82F /* FirstPageViewController.m in Sources */,
 				1853690520EA11C10053A5D4 /* WaterCellRecuritJobView.m in Sources */,
 				18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */,
+				1818E49A20EB025A00B676C2 /* BaseCustomeTableViewController.m in Sources */,
+				1818E4DC20EB5E2E00B676C2 /* WithDrawView.m in Sources */,
 				1443C5AB20E336740009E82F /* UIViewExt.m in Sources */,
 				1443C5A120E3327B0009E82F /* MyInfoViewController.m in Sources */,
 				185368EC20E9CB540053A5D4 /* NSTimer+Block.m in Sources */,
@@ -955,6 +1142,7 @@
 				1443C61520E36B4A0009E82F /* MobileCode.m in Sources */,
 				1443C5F620E359110009E82F /* OwnTextField.m in Sources */,
 				1443C5CB20E3446B0009E82F /* AppDelegate+tabbar.m in Sources */,
+				1818E4D920EB5D1300B676C2 /* MyInfoTableHeaderView.m in Sources */,
 				1443C61220E35AF40009E82F /* LoginViewController.m in Sources */,
 				185368ED20E9CB540053A5D4 /* CXCarouselView.m in Sources */,
 				185368F720E9D4D80053A5D4 /* ZHQScrollMenu.m in Sources */,
@@ -1135,6 +1323,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/鲁班同城/Tools/appCommonAttributes.h";
 				INFOPLIST_FILE = "鲁班同城/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1156,6 +1345,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/鲁班同城/Tools/appCommonAttributes.h";
 				INFOPLIST_FILE = "鲁班同城/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
