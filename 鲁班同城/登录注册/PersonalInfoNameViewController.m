@@ -1,0 +1,91 @@
+//
+//  PersonalInfoNameViewController.m
+//  鲁班同城
+//
+//  Created by apple on 2018/7/4.
+//  Copyright © 2018年 Mac. All rights reserved.
+//
+
+#import "PersonalInfoNameViewController.h"
+#import "PersonalInfoInputNameView.h"
+#import "PersonalInfoInputAgeView.h"
+#import "PersonalInfoExchangeViceTextView.h"
+
+@interface PersonalInfoNameViewController (){
+    PersonalInfoInputNameView *nameView;
+}
+
+@end
+
+@implementation PersonalInfoNameViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self addViews];
+}
+
+- (void)addViews{
+    CGFloat viewHeight = 50;
+    PersonalInfoExchangeViceTextView *topTipView = [[PersonalInfoExchangeViceTextView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, viewHeight)];
+    WS(weakSelf);
+    topTipView.clickSoundTextChangeViewBlock = ^(BOOL isSound) {
+        [nameView displayTextOrYuYin:isSound];
+    };
+    [self.view addSubview:topTipView];
+    [topTipView addOwnContraints];
+    //
+    nameView = [[PersonalInfoInputNameView alloc]initWithFrame:CGRectMake(0, topTipView.bottom, self.view.width,viewHeight)];
+    nameView.nameLabel.text = @"姓名";
+ nameView.rightTextField.myTextField.placeholder = @"请输入名字";
+    [self.view addSubview:nameView];
+    [nameView addOwnConstraints:[UIImage imageNamed:@"name"]];
+    //
+    PersonalInfoInputAgeView *ageView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, nameView.bottom, self.view.width, viewHeight)];
+    ageView.ageLabel.text = @"年龄";
+    [self.view addSubview:ageView];
+    ageView.rightTextField.myTextField.placeholder = @"请选择年龄";
+    ageView.backButtBlock = ^(UITextField *textField) {
+        NSLog(@"选择年龄");
+        textField.text = @"20";
+    };
+    [ageView addOwnConstraints:[UIImage imageNamed:@"age"]];
+    //性别
+    PersonalInfoInputAgeView *sexView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, ageView.bottom, self.view.width, viewHeight)];
+    sexView.ageLabel.text = @"性别";
+    [self.view addSubview:sexView];
+    sexView.rightTextField.myTextField.placeholder = @"请选择性别";
+    sexView.backButtBlock = ^(UITextField *textField) {
+        NSLog(@"选择性别");
+        textField.text = @"男";
+    };
+    [sexView addOwnConstraints:[UIImage imageNamed:@"sex"]];
+    //城市
+    PersonalInfoInputAgeView *cityView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, sexView.bottom, self.view.width, viewHeight)];
+    cityView.ageLabel.text = @"城市";
+    [self.view addSubview:cityView];
+    cityView.rightTextField.myTextField.placeholder = @"请选择城市";
+    cityView.backButtBlock = ^(UITextField *textField) {
+        NSLog(@"选择城市");
+        textField.text = @"青岛";
+    };
+    [cityView addOwnConstraints:[UIImage imageNamed:@"city"]];
+}
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

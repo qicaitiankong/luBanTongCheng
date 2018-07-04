@@ -12,4 +12,7 @@
 
 @property (strong,nonatomic) UITextField *myTextField;
 
+- (void)addOwnConstraints;
+
+
 @end

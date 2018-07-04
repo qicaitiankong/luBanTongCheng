@@ -57,17 +57,17 @@
     
     NSDictionary *textAttributes = @{
                                      
-                                     NSFontAttributeName : [UIFont systemFontOfSize:20],
+                                     NSFontAttributeName : [UIFont getPingFangSCMedium:17],
                                      
-                                     NSForegroundColorAttributeName : [UIColor whiteColor]
+                                     NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#666666"]
                                      
                                      };
     
     [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
     
     //返回按钮的箭头颜色
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    UIColor *themColor = K_THEM_COLOR;
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithHexString:@"#666666"]];
+    UIColor *themColor = [UIColor whiteColor];
     //导航栏的背景色
     [[UINavigationBar appearance] setBarTintColor:themColor];
     [[UINavigationBar appearance] setTranslucent:NO];

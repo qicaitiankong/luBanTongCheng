@@ -1,29 +1,24 @@
 //
-//  VideoCenterViewController.m
+//  BaseHiddenNavAndTabBarViewController.m
 //  鲁班同城
 //
-//  Created by Mac on 2018/6/27.
+//  Created by apple on 2018/7/4.
 //  Copyright © 2018年 Mac. All rights reserved.
 //
 
-#import "VideoCenterViewController.h"
-#import "WxQQLoginViewController.h"
+#import "BaseHiddenNavAndTabBarViewController.h"
 
-
-@interface VideoCenterViewController ()
+@interface BaseHiddenNavAndTabBarViewController ()
 
 @end
 
-@implementation VideoCenterViewController
+@implementation BaseHiddenNavAndTabBarViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc]init];
-    loginVC.isWx = YES;
-    [self.navigationController pushViewController:loginVC animated:YES];
-    
+    [self.navigationController setNavigationBarHidden:YES];
+    [self.rdv_tabBarController setTabBarHidden:YES];
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

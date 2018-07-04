@@ -9,11 +9,14 @@
 #import "MyInfoViewController.h"
 #import "MyInfoTableViewCell.h"
 #import "MyInfoTableHeaderView.h"
+#import "MyInfoTableFootView.h"
+
 
 @interface MyInfoViewController ()<UITableViewDelegate,UITableViewDataSource>{
     NSArray *cellTitleArr;
     NSMutableArray *cellImageArr;
     MyInfoTableHeaderView *headerView;
+    MyInfoTableFootView *footerView;
 }
 
 @property (strong,nonatomic) UITableView *tableView;
@@ -27,7 +30,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self initObject];
     [self addTableView:CGRectMake(0, STATUSBAR_HEIGHT, SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT) style:UITableViewStylePlain];
-
+    //
+   
+    
 }
 - (void)initObject{
     cellImageArr = [[NSMutableArray alloc] init];
@@ -45,9 +50,20 @@
     headerView.userNameLabel.text = @"昵称昵称昵称";
     headerView.commissionLabel.text = @"6666";
     [headerView.userImageView setImage:[UIImage imageNamed:@"test07.jpg"]];
+    //
+    footerView = [[MyInfoTableFootView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.195)];
+    footerView.identityButtView.clickButtBlock = ^{
+        NSLog(@"切换身份");
+    };
+    footerView.exitLoginButtView.clickButtBlock = ^{
+        NSLog(@"退出登录");
+
+    };
+    //
     self.tableView = [[UITableView alloc] initWithFrame:size style:styles];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.tableHeaderView = headerView;
+    self.tableView.tableFooterView = footerView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -73,6 +89,9 @@
     [cell.leftImageView setImage:leftImage];
     [cell.rightLabel setText:title];
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

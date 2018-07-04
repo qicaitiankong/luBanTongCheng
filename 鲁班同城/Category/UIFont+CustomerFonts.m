@@ -23,7 +23,7 @@
 }
 
 + (UIFont *)getPingFangSCBold:(CGFloat)size{
-    return [UIFont fontWithName:@"PingFangSC-Bold" size:size];
+    return [UIFont fontWithName:@"PingFangSC-Semibold" size:size];
 }
 
 //英文字体

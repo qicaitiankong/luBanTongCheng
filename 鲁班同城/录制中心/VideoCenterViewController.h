@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseHiddenNaviViewController.h"
 
-@interface VideoCenterViewController : UIViewController
+@interface VideoCenterViewController : BaseHiddenNaviViewController
 
 @end

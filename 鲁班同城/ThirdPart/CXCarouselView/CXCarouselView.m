@@ -80,7 +80,7 @@
 
 -(void) setup{
     self.wheelPageControl.pageIndicatorTintColor = [UIColor whiteColor];
-    self.wheelPageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    self.wheelPageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:247/255.0 green:125/255.0 blue:30/255.0 alpha:1];
     CGPoint p = CGPointMake(self.frame.size.width * 0.5, 0.8 * self.frame.size.height);
     self.wheelPageControl.center = p;
     if (self.hasTimer) {

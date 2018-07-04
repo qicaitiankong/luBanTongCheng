@@ -13,6 +13,10 @@
 #import "RegisterButtonStyleView.h"
 #import "LoginOtherTipView.h"
 #import "LoginThirdGroupView.h"
+#import "CustomeStyleCornerButt.h"
+//vc
+#import "WxQQLoginViewController.h"
+
 
 @interface LoginViewController (){
     OwnTextField *mobileTextField;
@@ -75,15 +79,12 @@
     [codeButt addTarget:self action:@selector(codeButtHandler) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:codeButt];
     //
-    UIButton *loginButt = [UIButton buttonWithType:UIButtonTypeCustom];
-    loginButt.backgroundColor = [UIColor colorWithHexString:@"#78CAC5"];
-    [loginButt addTarget:self action:@selector(loginHandler) forControlEvents:UIControlEventTouchUpInside];
-    [loginButt setTitle:@"登录" forState:UIControlStateNormal];
-    loginButt.titleLabel.font = [UIFont getPingFangSCMedium:16];
-    UIColor *buttTitleColor = [UIColor colorWithHexString:@"#FFFEFE"];
-    [loginButt setTitleColor:buttTitleColor forState:UIControlStateNormal];
-    loginButt.layer.cornerRadius = 20;
-    [self.view addSubview:loginButt];
+    CustomeStyleCornerButt *loginButtView = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 0, 270, 40) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:0 title:@"登录" titleColor:[UIColor colorWithHexString:@"#FFFEFE"] font: [UIFont getPingFangSCMedium:16]];
+    WS(weakSelf);
+    loginButtView.clickButtBlock = ^{
+        [weakSelf loginHandler];
+    };
+    [self.view addSubview:loginButtView];
     //
     UILabel *registerLabel = [[UILabel alloc] init];
     UIFont *registerLabelFont = [UIFont getPingFangSCMedium:11];
@@ -95,9 +96,8 @@
     [self.view addSubview:registerLabel];
     //
      CGFloat registerTipViewWidth = [LzhReturnLabelHeight getLabelWidth:@"立刻注册" font:registerLabelFont targetHeight:registerLabelHeight];
-    RegisterButtonStyleView *registerTipView = [[RegisterButtonStyleView alloc] initWithFrame:CGRectMake(0, 0, registerLabelWidth, 12)];
+    RegisterButtonStyleView *registerTipView = [[RegisterButtonStyleView alloc] initWithFrame:CGRectMake(0, 0, registerTipViewWidth, registerLabelHeight + 1)];
     [self.view addSubview:registerTipView];
-    WS(weakSelf);
     registerTipView.clickButtBlock = ^{
         [weakSelf registerHandler];
     };
@@ -107,6 +107,8 @@
     [self.view addSubview:tipView];
     //
     LoginThirdGroupView *otherLoginView = [[LoginThirdGroupView alloc] initWithFrame:CGRectMake(0, 0, 150, 35)];
+    [otherLoginView.wxButt addTarget:self action:@selector(wxHandler) forControlEvents:UIControlEventTouchUpInside];
+    [otherLoginView.qqButt addTarget:self action:@selector(qqHandler) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:otherLoginView];
     //constrain
     cancelButt.sd_layout
@@ -151,7 +153,7 @@
     .heightIs(20)
     .centerYEqualToView(codeTextField);
     
-    loginButt.sd_layout
+    loginButtView.sd_layout
     .widthIs(270)
     .heightIs(40)
     .centerXEqualToView(self.view)
@@ -159,7 +161,7 @@
     
     registerLabel.sd_layout
     .leftSpaceToView(self.view, 140)
-    .topSpaceToView(loginButt, 20)
+    .topSpaceToView(loginButtView, 20)
     .widthIs(registerLabelWidth)
     .heightIs(registerLabelHeight);
     
@@ -185,8 +187,7 @@
 
 - (void)cancelHandler{
     NSLog(@"cancel button");
-    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate displayVC];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)codeButtHandler{
@@ -196,10 +197,22 @@
 - (void)loginHandler{
     
 }
+
 - (void)registerHandler{
     NSLog(@"点击注册");
 }
 
+- (void)wxHandler{
+    WxQQLoginViewController *wxLoginVC = [[WxQQLoginViewController alloc] init];
+    wxLoginVC.isWx = YES;
+    [self.navigationController pushViewController:wxLoginVC animated:YES];
+}
+
+- (void)qqHandler{
+    WxQQLoginViewController *wxLoginVC = [[WxQQLoginViewController alloc] init];
+    wxLoginVC.isWx = NO;
+     [self.navigationController pushViewController:wxLoginVC animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

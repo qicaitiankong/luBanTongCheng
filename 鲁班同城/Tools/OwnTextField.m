@@ -25,6 +25,16 @@
     }
     return self;
 }
+
+- (void)addOwnConstraints{
+    self.myTextField.sd_layout
+    .leftEqualToView(self)
+    .rightEqualToView(self)
+    .topEqualToView(self)
+    .bottomEqualToView(self);
+}
+
+
 // called when 'return' key pressed. return NO to ignore.
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

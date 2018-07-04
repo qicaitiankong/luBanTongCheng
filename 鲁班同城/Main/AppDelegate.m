@@ -13,7 +13,6 @@
 #import "VideoCenterViewController.h"
 #import "SkillShowViewController.h"
 #import "MyInfoViewController.h"
-#import "LoginViewController.h"
 
 //category
 #import "AppDelegate+tabbar.h"

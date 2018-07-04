@@ -29,7 +29,7 @@
         UILabel *modelLabel = [[UILabel alloc]init];
         modelLabel.font = targetFont;
         w =  [[GetCellHeight ShareCellHeight] cellWidth:modelLabel content:content CellHeight:height];
-        return w + 1;
+        return w;
     }
     return w;
 }

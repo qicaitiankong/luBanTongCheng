@@ -31,7 +31,7 @@
         UIColor *textColor = [UIColor colorWithHexString:@"#78CAC5"];
         label.textColor = textColor;
         label.text = @"立刻注册";
-        label.font = [UIFont systemFontOfSize:11];
+        label.font = [UIFont getPingFangSCMedium:11];
         [self addSubview:label];
         //
          lineView = [[UIView alloc] initWithFrame:CGRectMake(0, label.bottom, frame.size.width, 1)];
