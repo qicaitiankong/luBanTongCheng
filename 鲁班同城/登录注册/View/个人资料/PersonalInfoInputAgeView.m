@@ -39,6 +39,10 @@
         self.rightTextField.myTextField.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.rightTextField];
         //
+        self.addSoundView = [[PersonalInfoAddSoundButtView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+        self.addSoundView.hidden = YES;
+        [self addSubview:self.addSoundView];
+        //
         bottomLineView = [[UIView alloc] init];
         bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#C6C6C6"];
         [self addSubview:bottomLineView];
@@ -50,10 +54,26 @@
     }
     return self;
 }
+
 - (void)backHandler{
     if(self.backButtBlock){
         self.backButtBlock(self.rightTextField.myTextField);
     }
+}
+
+- (void)displayTextOrYuYin:(BOOL)isYuYin{
+    if (isYuYin){
+        self.rightTextField.hidden = YES;
+        self.rightTextField.myTextField.text = @"";
+        self.addSoundView.hidden = NO;
+    }else{
+        self.rightTextField.hidden = NO;
+        self.addSoundView.hidden = YES;
+    }
+}
+
+- (void)hiddenBottomLine:(BOOL)hid{
+    [bottomLineView setHidden:hid];
 }
 
 - (void)addOwnConstraints:(UIImage *)iconImage{
@@ -91,6 +111,13 @@
     .heightRatioToView(self, 0.6);
     [self.rightTextField addOwnConstraints];
     
+    //
+    self.addSoundView.sd_layout
+    .leftSpaceToView(self.ageLabel, 10)
+    .rightSpaceToView(self, 10)
+    .centerYEqualToView(self)
+    .heightRatioToView(self, 0.6);
+    [self.addSoundView addOwnContraints];
     
     bottomLineView.sd_layout
     .leftEqualToView(self.ageLabel)

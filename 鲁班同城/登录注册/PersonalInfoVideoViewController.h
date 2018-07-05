@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BasePersonalInfoViewController.h"
 
-@interface PersonalInfoVideoViewController : UIViewController
+@interface PersonalInfoVideoViewController : BasePersonalInfoViewController
 
 @end

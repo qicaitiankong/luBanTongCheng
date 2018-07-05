@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "RdvtarbarBigView.h"
 
 @class RDVTabBar, RDVTabBarItem;
 
@@ -81,5 +82,8 @@
  * Enable or disable tabBar translucency. Default is NO.
  */
 @property (nonatomic, getter=isTranslucent) BOOL translucent;
+//lzh add
+@property (strong,nonatomic) RdvtarbarBigView *bigView;
 
+//
 @end

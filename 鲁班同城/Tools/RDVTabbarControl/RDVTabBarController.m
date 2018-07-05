@@ -48,7 +48,19 @@
     self.view.backgroundColor = [UIColor clearColor];
     [self.view addSubview:[self contentView]];
     [self.view addSubview:[self tabBar]];
+    //
+    [self.tabBar.bigView.backButt addTarget:self action:@selector(bigButtClick) forControlEvents:UIControlEventTouchUpInside];
+    
 }
+
+- (void)bigButtClick{
+    NSLog(@"点击大按钮");
+    if (self.clickBigButtBlock){
+        self.clickBigButtBlock();
+    }
+}
+
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

@@ -7,9 +7,13 @@
 //
 
 #import "PersonalInfoNameViewController.h"
-#import "PersonalInfoInputNameView.h"
+//
 #import "PersonalInfoInputAgeView.h"
 #import "PersonalInfoExchangeViceTextView.h"
+#import "CustomeStyleCornerButt.h"
+#import "PersonalInfoInputNameView.h"
+
+#import "PersonalInfoWorkViewController.h"
 
 @interface PersonalInfoNameViewController (){
     PersonalInfoInputNameView *nameView;
@@ -22,21 +26,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addViews];
+    WS(weakSelf);
+    self.leftBarbuttBlock = ^{
+        [weakSelf.navigationController setNavigationBarHidden:YES];
+    };
+    self.rightBarbuttBlock = ^{
+        
+    };
 }
+
 
 - (void)addViews{
     CGFloat viewHeight = 50;
     PersonalInfoExchangeViceTextView *topTipView = [[PersonalInfoExchangeViceTextView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, viewHeight)];
     WS(weakSelf);
     topTipView.clickSoundTextChangeViewBlock = ^(BOOL isSound) {
-        [nameView displayTextOrYuYin:isSound];
+        __strong typeof(weakSelf) sself = weakSelf;
+        [sself->nameView displayTextOrYuYin:isSound];
     };
     [self.view addSubview:topTipView];
     [topTipView addOwnContraints];
     //
     nameView = [[PersonalInfoInputNameView alloc]initWithFrame:CGRectMake(0, topTipView.bottom, self.view.width,viewHeight)];
     nameView.nameLabel.text = @"姓名";
- nameView.rightTextField.myTextField.placeholder = @"请输入名字";
+    nameView.rightTextField.myTextField.placeholder = @"请输入名字";
     [self.view addSubview:nameView];
     [nameView addOwnConstraints:[UIImage imageNamed:@"name"]];
     //
@@ -69,8 +82,22 @@
         textField.text = @"青岛";
     };
     [cityView addOwnConstraints:[UIImage imageNamed:@"city"]];
+    //
+    CGFloat buttWidth = SCREEN_WIDTH * 0.874;
+    CGFloat buttHeigt = buttWidth * 0.137;
+    
+    CustomeStyleCornerButt *nextButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, cityView.bottom + SCREEN_HEIGHT * 0.404, buttWidth, buttHeigt) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:4 title:@"下一步" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
+    nextButt.center = CGPointMake(self.view.width  / 2, nextButt.centerY);
+    nextButt.clickButtBlock = ^{
+        [weakSelf nextHandler];
+    };
+    [self.view addSubview:nextButt];
+    
 }
-
+- (void)nextHandler{
+    PersonalInfoWorkViewController *workVC = [[PersonalInfoWorkViewController alloc]init];
+    [self.navigationController pushViewController:workVC animated:YES];
+}
 
 
 - (void)didReceiveMemoryWarning {

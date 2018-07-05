@@ -16,6 +16,7 @@
 #import "UIViewExt.h"
 #import "RDVTabBarController.h"
 #import "UIFont+CustomerFonts.h"
+#import "ImageAndLabelView.h"
 
 //third party class
 #import <SVProgressHUD.h>

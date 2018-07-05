@@ -23,12 +23,10 @@
 
 #import "RDVTabBar.h"
 #import "RDVTabBarItem.h"
-
 @interface RDVTabBar ()
 
 @property (nonatomic) CGFloat itemWidth;
 @property (nonatomic) UIView *backgroundView;
-
 @end
 
 @implementation RDVTabBar
@@ -85,7 +83,9 @@
                                   roundf(frameSize.height - itemHeight) - self.contentEdgeInsets.top,
                                   self.itemWidth, itemHeight - self.contentEdgeInsets.bottom)];
         [item setNeedsDisplay];
-        
+        if (index == 2){
+            [self.bigView setFrame:item.frame];
+        }
         index++;
     }
 }
@@ -107,7 +107,10 @@
     for (RDVTabBarItem *item in _items) {
         [item addTarget:self action:@selector(tabBarItemWasSelected:) forControlEvents:UIControlEventTouchDown];
         [self addSubview:item];
+        
     }
+    self.bigView = [[RdvtarbarBigView alloc]init];
+    [self addSubview:self.bigView];
 }
 
 - (void)setHeight:(CGFloat)height {

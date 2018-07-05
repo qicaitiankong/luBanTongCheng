@@ -32,6 +32,9 @@
  * The tab bar controller’s delegate object.
  */
 @property (nonatomic, weak) id<RDVTabBarControllerDelegate> delegate;
+//lzh add
+
+@property (copy,nonatomic) void (^clickBigButtBlock)(void);
 
 /**
  * An array of the root view controllers displayed by the tab bar interface.

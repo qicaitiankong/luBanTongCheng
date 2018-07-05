@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OwnTextField.h"
+#import "PersonalInfoAddSoundButtView.h"
 
 @interface PersonalInfoInputAgeView : UIView
 
@@ -17,9 +18,17 @@
 
 @property (strong,nonatomic) OwnTextField *rightTextField;
 
-- (void)addOwnConstraints:(UIImage *)iconImage;
+@property (strong,nonatomic) PersonalInfoAddSoundButtView *addSoundView;
 
 @property (copy,nonatomic) void (^backButtBlock)(UITextField *textField);
+
+- (void)addOwnConstraints:(UIImage *)iconImage;
+
+- (void)displayTextOrYuYin:(BOOL)isYuYin;
+
+
+- (void)hiddenBottomLine:(BOOL)hid;
+
 
 
 @end

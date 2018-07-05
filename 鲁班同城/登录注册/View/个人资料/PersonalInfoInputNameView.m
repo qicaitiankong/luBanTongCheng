@@ -33,6 +33,7 @@
         [self addSubview:self.rightTextField];
         //
         self.addSoundView = [[PersonalInfoAddSoundButtView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+        self.addSoundView.hidden = YES;
         [self addSubview:self.addSoundView];
         //
         bottomLineView = [[UIView alloc] init];
@@ -85,10 +86,10 @@
 
     //
     self.addSoundView.sd_layout
-    .leftEqualToView(self.rightTextField)
-    .rightEqualToView(self.rightTextField)
-    .topEqualToView(self.rightTextField)
-    .bottomEqualToView(self.rightTextField);
+    .leftSpaceToView(self.nameLabel, 10)
+    .rightSpaceToView(self, 10)
+    .centerYEqualToView(self)
+    .heightRatioToView(self, 0.6);
     [self.addSoundView addOwnContraints];
     
     
@@ -99,6 +100,7 @@
     .heightIs(1);
     
 }
+
 
 
 

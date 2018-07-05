@@ -25,7 +25,6 @@
 }
 
 - (void)cancelHandler{
-    [self.rdv_tabBarController setTabBarHidden:NO];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

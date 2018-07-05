@@ -16,7 +16,7 @@
 #import "CustomeStyleCornerButt.h"
 //vc
 #import "WxQQLoginViewController.h"
-
+#import "PersonalInfoNameViewController.h"
 
 @interface LoginViewController (){
     OwnTextField *mobileTextField;
@@ -188,6 +188,8 @@
 - (void)cancelHandler{
     NSLog(@"cancel button");
     [self.navigationController popViewControllerAnimated:YES];
+    
+    [self.rdv_tabBarController setTabBarHidden:NO];
 }
 
 - (void)codeButtHandler{
@@ -200,6 +202,9 @@
 
 - (void)registerHandler{
     NSLog(@"点击注册");
+    PersonalInfoNameViewController *inputInfoVC = [[PersonalInfoNameViewController alloc] init];
+    [self.navigationController pushViewController:inputInfoVC animated:YES];
+    
 }
 
 - (void)wxHandler{

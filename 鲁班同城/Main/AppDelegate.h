@@ -15,6 +15,8 @@
 
 @property (strong,nonatomic) RDVTabBarController *tabBarController;
 
+@property (strong,nonatomic) UINavigationController *currentSelectedNav;
+
 - (void)displayVC;
 
 @end

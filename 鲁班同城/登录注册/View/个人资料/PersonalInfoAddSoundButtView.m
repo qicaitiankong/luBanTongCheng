@@ -26,6 +26,7 @@
         self.layer.borderColor = [UIColor colorWithHexString:@"#C6C6C6"].CGColor;
         self.layer.cornerRadius = 4;
         tipLabel = [[CustomeLzhLabel alloc] initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#999999"] aligement:0];
+        tipLabel.backgroundColor = [UIColor whiteColor];
         //
         voiceImageView = [[UIImageView alloc]init];
         //voiceImageView.backgroundColor = [UIColor whiteColor];
@@ -40,20 +41,22 @@
 }
 
 - (void)addOwnContraints{
-    CGFloat labelHeight = self.height * 0.8;
+    CGFloat labelHeight = self.height * 0.9;
     CGFloat titleWidth = [LzhReturnLabelHeight getLabelWidth:@"添加语音" font:[UIFont getPingFangSCMedium:14] targetHeight:labelHeight];
+    
     UIImage *image = [UIImage imageNamed:@"voiceGray"];
     CGFloat imageWidth = 11;
     CGFloat imageHeight = imageWidth / (image.size.width / image.size.height);
     CGFloat imageAndLabelSpace = 15;
-    CGFloat labelrightSpace = (self.width - titleWidth) / 2 + imageWidth + imageAndLabelSpace;
+    CGFloat labelLeftSpace = (self.width - titleWidth) / 2 - imageAndLabelSpace;
     [voiceImageView setImage:image];
     tipLabel.text = @"添加语音";
     tipLabel.sd_layout
+    .centerXEqualToView(self)
     .widthIs(titleWidth)
     .heightIs(labelHeight)
-    .centerYEqualToView(self)
-    .rightSpaceToView(self, labelrightSpace);
+    .centerYEqualToView(self);
+    
     
     voiceImageView.sd_layout
     .leftSpaceToView(tipLabel, imageAndLabelSpace)

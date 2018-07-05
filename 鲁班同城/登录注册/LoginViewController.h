@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "BaseHiddenNavAndTabBarViewController.h"
 
-@interface LoginViewController : ViewController
+@interface LoginViewController : BaseHiddenNavAndTabBarViewController
 
 @end

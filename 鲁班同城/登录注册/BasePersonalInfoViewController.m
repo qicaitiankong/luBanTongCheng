@@ -28,6 +28,7 @@
 
 - (void)leftBarButt{
     if (self.leftBarbuttBlock){
+        [self.navigationController popViewControllerAnimated:YES];
         self.leftBarbuttBlock();
     }
 }

@@ -13,7 +13,7 @@
 #import "VideoCenterViewController.h"
 #import "SkillShowViewController.h"
 #import "MyInfoViewController.h"
-
+#import "LoginViewController.h"
 //category
 #import "AppDelegate+tabbar.h"
 
@@ -70,7 +70,7 @@
 
 //set vc
 -(void)setupViewControllers{
-    
+    [SVProgressHUD setMaximumDismissTimeInterval:3];
     FirstPageViewController *firstVC=[[FirstPageViewController alloc]init];
     UINavigationController *firstNavi=[[UINavigationController alloc]initWithRootViewController:firstVC];
     
@@ -86,11 +86,20 @@
     MyInfoViewController *myInfoVC = [[MyInfoViewController alloc] init];
     UINavigationController *myInfoNavi=[[UINavigationController alloc]initWithRootViewController:myInfoVC];
     self.tabBarController = [[RDVTabBarController alloc] init];
-    
-    [self.tabBarController setViewControllers:@[firstNavi,orderNavi,videoCenterNavi,skillNavi,myInfoNavi]];//,guessHappyNavi
+    NSArray *navArr = @[firstNavi,orderNavi,videoCenterNavi,skillNavi,myInfoNavi];
+    [self.tabBarController setViewControllers:navArr];//,guessHappyNavi
     [self.tabBarController tabBar].backgroundView.backgroundColor=[UIColor whiteColor];
     self.tabBarController.selectedIndex=0;
     [self customizeTabBarForController:self.tabBarController];
+    
+    //点击中间大按钮的处理
+    WS(weakSelf);
+    self.tabBarController.clickBigButtBlock = ^{
+        UINavigationController *nav = navArr[weakSelf.tabBarController.selectedIndex];
+        weakSelf.currentSelectedNav = nav;
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [weakSelf.currentSelectedNav pushViewController:loginVC animated:YES];
+    };
    
 }
 

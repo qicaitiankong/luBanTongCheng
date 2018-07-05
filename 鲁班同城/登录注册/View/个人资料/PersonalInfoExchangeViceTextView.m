@@ -61,9 +61,10 @@
     //
     UIImage *image = nil;
     if (isSound){
-        image = soundImage;
+         image = textImage;
     }else{
-        image = textImage;
+        image = soundImage;
+
     }
    
     CGFloat imageHeight = imageWidth / (image.size.width / image.size.height);
@@ -97,10 +98,10 @@
     UIImage *image = nil;
     NSString *tipStr = nil;
     if (isSound){
-        image = soundImage;
+        image = textImage;
         tipStr = @"文字输入";
     }else{
-        image = textImage;
+        image = soundImage;
         tipStr = @"不会打字怎么办？（语音输入）";
     }
     [voiceImageView setImage:image];
