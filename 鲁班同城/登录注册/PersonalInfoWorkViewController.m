@@ -21,6 +21,7 @@
     PersonalInfoInputAgeView *jobView;
     PersonalInfoInputAgeView *experienceView;
     OwnTextView *experienceTextView;
+    __block BOOL isSound;
 }
 
 @end
@@ -42,7 +43,7 @@
 
 
 - (void)addViews{
-    CGFloat viewHeight = 50;
+    CGFloat viewHeight = SCREEN_HEIGHT * 0.074;
     PersonalInfoExchangeViceTextView *topTipView = [[PersonalInfoExchangeViceTextView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, viewHeight)];
     WS(weakSelf);
     topTipView.clickSoundTextChangeViewBlock = ^(BOOL isSound) {
@@ -53,7 +54,8 @@
         [sself->experienceTextView setHidden:isSound];
         [sself->technologyView hiddenBottomLine:isSound];
         [sself->jobView hiddenBottomLine:isSound];
-        [sself->jobView hiddenBottomLine:isSound];
+        [sself->experienceView hiddenBottomLine:isSound];
+        sself->isSound  = isSound;
     };
     [self.view addSubview:topTipView];
     [topTipView addOwnContraints];
@@ -63,10 +65,12 @@
     technologyView.ageLabel.text = @"技能";
     [self.view addSubview:technologyView];
     technologyView.backButtBlock = ^(UITextField *textField) {
-        NSLog(@"选择技能");
-        //textField.text = @"20";
-        PersonalInfoTechnologyChooseViewController *chooseVC = [[PersonalInfoTechnologyChooseViewController alloc] init];
-        [self.navigationController pushViewController:chooseVC animated:YES];
+        __strong typeof(weakSelf) sself = weakSelf;
+        if(NO == sself->isSound){
+            PersonalInfoTechnologyChooseViewController *chooseVC = [[PersonalInfoTechnologyChooseViewController alloc] init];
+            [weakSelf.navigationController pushViewController:chooseVC animated:YES];
+        }
+        
     };
     [technologyView addOwnConstraints:[UIImage imageNamed:@"tecnology"]];
     //职业类型
@@ -98,7 +102,7 @@
     CGFloat buttWidth = SCREEN_WIDTH * 0.874;
     CGFloat buttHeigt = buttWidth * 0.137;
     
-    CustomeStyleCornerButt *nextButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, experienceTextView.bottom + SCREEN_HEIGHT * 0.344, buttWidth, buttHeigt) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:4 title:@"下一步" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
+    CustomeStyleCornerButt *nextButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, experienceTextView.bottom + SCREEN_HEIGHT * 0.3, buttWidth, buttHeigt) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:4 title:@"下一步" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
     nextButt.center = CGPointMake(self.view.width  / 2, nextButt.centerY);
     nextButt.clickButtBlock = ^{
         [weakSelf nextHandler];

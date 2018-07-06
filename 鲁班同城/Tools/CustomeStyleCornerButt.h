@@ -10,6 +10,8 @@
 
 @interface CustomeStyleCornerButt : UIView
 
+@property (strong,nonatomic)  UIButton *loginButt;
+
 @property (copy,nonatomic) void (^clickButtBlock)(void);
 //radius 0:默认圆角为高度的一般
 - (instancetype)initWithFrame:(CGRect)frame backColor:(UIColor *)color cornerRadius:(CGFloat)radius title:(NSString *)titles titleColor:(UIColor *)titleColor font:(UIFont*)fonts;

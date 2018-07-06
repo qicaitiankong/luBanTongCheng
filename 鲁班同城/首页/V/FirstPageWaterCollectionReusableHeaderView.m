@@ -72,7 +72,7 @@
     self.searchView.sd_layout
     .widthIs(SCREEN_WIDTH * 0.933)
     .centerXEqualToView(self)
-    .topSpaceToView(self, 10)
+    .topSpaceToView(self, STATUSBAR_HEIGHT + 5)
     .heightIs(40);
     [self.searchView addConstraints];
     

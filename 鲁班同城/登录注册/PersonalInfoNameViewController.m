@@ -37,7 +37,7 @@
 
 
 - (void)addViews{
-    CGFloat viewHeight = 50;
+    CGFloat viewHeight = SCREEN_HEIGHT * 0.074;
     PersonalInfoExchangeViceTextView *topTipView = [[PersonalInfoExchangeViceTextView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, viewHeight)];
     WS(weakSelf);
     topTipView.clickSoundTextChangeViewBlock = ^(BOOL isSound) {

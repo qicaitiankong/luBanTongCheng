@@ -10,7 +10,8 @@
 #import "MyInfoTableViewCell.h"
 #import "MyInfoTableHeaderView.h"
 #import "MyInfoTableFootView.h"
-
+//vc
+#import "OwnPersonalInfomationViewController.h"
 
 @interface MyInfoViewController ()<UITableViewDelegate,UITableViewDataSource>{
     NSArray *cellTitleArr;
@@ -92,6 +93,21 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    switch (indexPath.row) {
+         case 0:
+            break;
+         case 1:
+            break;
+        case 2:{
+            OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
+            [self.navigationController pushViewController:personalInfoVC animated:YES];
+        }
+            break;
+         case 3:
+            break;
+        default:
+            break;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

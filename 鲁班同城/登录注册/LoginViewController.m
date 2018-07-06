@@ -73,13 +73,13 @@
     //
     codeButt = [UIButton buttonWithType:UIButtonTypeCustom];
     codeButt.backgroundColor = [UIColor colorWithHexString:@"#78CAC5"];
-    codeButt.layer.cornerRadius = 10;
+    codeButt.layer.cornerRadius = SCREEN_WIDTH * 0.213 / 4 / 2;
     [codeButt setTitle:@"获取验证码" forState:UIControlStateNormal];
     codeButt.titleLabel.font = [UIFont getPingFangSCMedium:9];
     [codeButt addTarget:self action:@selector(codeButtHandler) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:codeButt];
     //
-    CustomeStyleCornerButt *loginButtView = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 0, 270, 40) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:0 title:@"登录" titleColor:[UIColor colorWithHexString:@"#FFFEFE"] font: [UIFont getPingFangSCMedium:16]];
+    CustomeStyleCornerButt *loginButtView = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 0, self.view.width * 0.72, SCREEN_HEIGHT * 0.06) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:0 title:@"登录" titleColor:[UIColor colorWithHexString:@"#FFFEFE"] font: [UIFont getPingFangSCMedium:16]];
     WS(weakSelf);
     loginButtView.clickButtBlock = ^{
         [weakSelf loginHandler];
@@ -112,56 +112,56 @@
     [self.view addSubview:otherLoginView];
     //constrain
     cancelButt.sd_layout
-    .leftSpaceToView(self.view, 325)
-    .topSpaceToView(self.view, 41)
-    .widthIs(20)
+    .leftSpaceToView(self.view, SCREEN_WIDTH * 0.866)
+    .topSpaceToView(self.view, SCREEN_HEIGHT * 0.061)
+    .widthIs(SCREEN_HEIGHT * 0.029)
     .heightEqualToWidth();
     
     topLogoImageView.sd_layout
-    .topSpaceToView(cancelButt, 15)
-    .widthIs(161)
+    .topSpaceToView(cancelButt, SCREEN_HEIGHT * 0.022)
+    .widthIs(SCREEN_HEIGHT * 0.241)
     .heightEqualToWidth()
     .centerXEqualToView(self.view);
     
     mobileTextField.sd_layout
     .centerXEqualToView(self.view)
     .topSpaceToView(topLogoImageView, 12)
-    .widthIs(256)
-    .heightIs(50);
+    .widthIs(SCREEN_WIDTH * 0.682)
+    .heightIs(SCREEN_HEIGHT * 0.074);
     
     mobileLineView.sd_layout
     .leftEqualToView(mobileTextField)
     .topSpaceToView(mobileTextField, 1)
-    .widthIs(256)
+    .widthIs(SCREEN_WIDTH * 0.682)
     .heightIs(1);
     
     codeTextField.sd_layout
     .leftEqualToView(mobileTextField)
     .topSpaceToView(mobileTextField, 12)
-    .widthIs(150)
-    .heightIs(50);
+    .widthIs(SCREEN_WIDTH * 0.4)
+    .heightIs(SCREEN_HEIGHT * 0.074);
     
     codeLineView.sd_layout
     .leftEqualToView(codeTextField)
     .topSpaceToView(codeTextField, 1)
-    .widthIs(256)
+    .widthIs(SCREEN_WIDTH * 0.682)
     .heightIs(1);
     
     codeButt.sd_layout
-    .leftSpaceToView(codeTextField, 26)
-    .widthIs(80)
-    .heightIs(20)
+    .leftSpaceToView(codeTextField, SCREEN_WIDTH * 0.069)
+    .widthIs(SCREEN_WIDTH * 0.213)
+    .heightIs(SCREEN_WIDTH * 0.213 / 4)
     .centerYEqualToView(codeTextField);
     
     loginButtView.sd_layout
-    .widthIs(270)
-    .heightIs(40)
+    .widthIs(self.view.width * 0.72)
+    .heightIs(SCREEN_HEIGHT * 0.06)
     .centerXEqualToView(self.view)
-    .topSpaceToView(codeLineView, 75);
+    .topSpaceToView(codeLineView, SCREEN_HEIGHT * 0.112);
     
     registerLabel.sd_layout
-    .leftSpaceToView(self.view, 140)
-    .topSpaceToView(loginButtView, 20)
+    .leftSpaceToView(self.view, self.view.width * 0.373)
+    .topSpaceToView(loginButtView, SCREEN_HEIGHT * 0.029)
     .widthIs(registerLabelWidth)
     .heightIs(registerLabelHeight);
     
@@ -172,15 +172,15 @@
     .heightIs(13);
     
     tipView.sd_layout
-    .topSpaceToView(registerLabel, 60)
-    .heightIs(10)
+    .topSpaceToView(registerLabel, SCREEN_HEIGHT * 0.089)
+    .heightIs(SCREEN_HEIGHT * 0.014)
     .widthIs(tipViewWidth + 100)
     .centerXEqualToView(self.view);
     
     otherLoginView.sd_layout
-    .topSpaceToView(tipView, 20)
-    .heightIs(35)
-    .widthIs(150)
+    .topSpaceToView(tipView, SCREEN_HEIGHT * 0.029)
+    .heightIs(SCREEN_HEIGHT * 0.052)
+    .widthIs(SCREEN_WIDTH * 0.4)
     .centerXEqualToView(self.view);
     
 }
@@ -189,7 +189,7 @@
     NSLog(@"cancel button");
     [self.navigationController popViewControllerAnimated:YES];
     
-    [self.rdv_tabBarController setTabBarHidden:NO];
+    
 }
 
 - (void)codeButtHandler{
@@ -208,15 +208,17 @@
 }
 
 - (void)wxHandler{
-    WxQQLoginViewController *wxLoginVC = [[WxQQLoginViewController alloc] init];
-    wxLoginVC.isWx = YES;
-    [self.navigationController pushViewController:wxLoginVC animated:YES];
+    if (self.wxOrQQBackBlock){
+        self.wxOrQQBackBlock(YES);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)qqHandler{
-    WxQQLoginViewController *wxLoginVC = [[WxQQLoginViewController alloc] init];
-    wxLoginVC.isWx = NO;
-     [self.navigationController pushViewController:wxLoginVC animated:YES];
+    if (self.wxOrQQBackBlock){
+        self.wxOrQQBackBlock(NO);
+    }
+     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

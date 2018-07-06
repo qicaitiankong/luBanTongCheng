@@ -69,7 +69,7 @@
 - (void)addCollectionView{
     JHWaterfallCollectionLayout* layout = [[JHWaterfallCollectionLayout alloc]init];
     layout.delegate = self ;
-    mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,STATUSBAR_HEIGHT,SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT) collectionViewLayout:layout];
+    mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT + STATUSBAR_HEIGHT) collectionViewLayout:layout];
     mainCollectionView.backgroundColor = [UIColor clearColor];
     [mainCollectionView registerClass:[JHCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([JHCollectionViewCell class])];
     [mainCollectionView registerClass:[FirstPageWaterCollectionReusableHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([FirstPageWaterCollectionReusableHeaderView class])];

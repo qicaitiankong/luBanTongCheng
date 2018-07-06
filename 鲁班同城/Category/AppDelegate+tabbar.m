@@ -37,7 +37,7 @@
         
         //[item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
         
-        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@",
+        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@Selected",
                                                       [tabBarItemImages objectAtIndex:index]]];
         UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@",
                                                         [tabBarItemImages objectAtIndex:index]]];

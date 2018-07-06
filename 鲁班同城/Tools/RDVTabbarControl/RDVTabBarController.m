@@ -49,8 +49,7 @@
     [self.view addSubview:[self contentView]];
     [self.view addSubview:[self tabBar]];
     //
-    [self.tabBar.bigView.backButt addTarget:self action:@selector(bigButtClick) forControlEvents:UIControlEventTouchUpInside];
-    
+    [self.tabBar.bigButt addTarget:self action:@selector(bigButtClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)bigButtClick{
@@ -246,7 +245,29 @@
 - (void)setTabBarHidden:(BOOL)hidden {
     [self setTabBarHidden:hidden animated:NO];
 }
-
+//lzh add
+//- (void)tabBar:(RDVTabBar *)tabBar shouldSelectItemAtIndex:(NSInteger)index {
+//    //if ([[self delegate] respondsToSelector:@selector(tabBarController:shouldSelectViewController:)]) {
+//        if (![[self delegate] tabBarController:self shouldSelectViewController:[self viewControllers][index]]) {
+//
+//        }
+//    //}
+//
+//    if ([self selectedViewController] == [self viewControllers][index]) {
+//        if ([[self selectedViewController] isKindOfClass:[UINavigationController class]]) {
+//            UINavigationController *selectedController = (UINavigationController *)[self selectedViewController];
+//
+//            if ([selectedController topViewController] != [selectedController viewControllers][0]) {
+//                [selectedController popToRootViewControllerAnimated:YES];
+//            }
+//        }
+//
+//        return NO;
+//    }
+//
+//    return YES;
+//}
+//
 #pragma mark - RDVTabBarDelegate
 
 - (BOOL)tabBar:(RDVTabBar *)tabBar shouldSelectItemAtIndex:(NSInteger)index {

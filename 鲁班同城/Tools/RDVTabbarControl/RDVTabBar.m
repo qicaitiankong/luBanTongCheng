@@ -84,7 +84,7 @@
                                   self.itemWidth, itemHeight - self.contentEdgeInsets.bottom)];
         [item setNeedsDisplay];
         if (index == 2){
-            [self.bigView setFrame:item.frame];
+            [self.bigButt setFrame:item.frame];
         }
         index++;
     }
@@ -109,8 +109,8 @@
         [self addSubview:item];
         
     }
-    self.bigView = [[RdvtarbarBigView alloc]init];
-    [self addSubview:self.bigView];
+    self.bigButt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self addSubview:self.bigButt];
 }
 
 - (void)setHeight:(CGFloat)height {

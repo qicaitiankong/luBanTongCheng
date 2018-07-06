@@ -85,7 +85,11 @@
             __strong typeof(weakSelf)sself = weakSelf;
             [sself -> popbackButt setHidden:YES];
             [sself -> popView setHidden:YES];
-
+            [weakSelf.navigationController setNavigationBarHidden:YES];
+            [weakSelf.rdv_tabBarController setTabBarHidden:NO];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            //[weakSelf.rdv_tabBarController setSelectedIndex:4];
+            
         };
     }else{
         [popbackButt setHidden:NO];

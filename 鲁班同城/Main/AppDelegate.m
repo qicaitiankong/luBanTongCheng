@@ -13,7 +13,8 @@
 #import "VideoCenterViewController.h"
 #import "SkillShowViewController.h"
 #import "MyInfoViewController.h"
-#import "LoginViewController.h"
+#import "WxQQLoginViewController.h"
+
 //category
 #import "AppDelegate+tabbar.h"
 
@@ -97,7 +98,8 @@
     self.tabBarController.clickBigButtBlock = ^{
         UINavigationController *nav = navArr[weakSelf.tabBarController.selectedIndex];
         weakSelf.currentSelectedNav = nav;
-        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc] init];
+        loginVC.isWx = YES;
         [weakSelf.currentSelectedNav pushViewController:loginVC animated:YES];
     };
    

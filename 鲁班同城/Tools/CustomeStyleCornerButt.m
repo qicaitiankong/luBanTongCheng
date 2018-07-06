@@ -9,10 +9,11 @@
 #import "CustomeStyleCornerButt.h"
 
 @interface CustomeStyleCornerButt (){
-    UIButton *loginButt;
+   
 }
 @end
 @implementation CustomeStyleCornerButt
+@synthesize loginButt;
 
 - (instancetype)initWithFrame:(CGRect)frame backColor:(UIColor *)color cornerRadius:(CGFloat)radius title:(NSString *)titles titleColor:(UIColor *)titleColor font:(UIFont*)fonts
 {

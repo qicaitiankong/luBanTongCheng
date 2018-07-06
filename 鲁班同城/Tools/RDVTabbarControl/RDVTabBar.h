@@ -83,7 +83,8 @@
  */
 @property (nonatomic, getter=isTranslucent) BOOL translucent;
 //lzh add
-@property (strong,nonatomic) RdvtarbarBigView *bigView;
+
+@property (strong,nonatomic) UIButton *bigButt;
 
 //
 @end

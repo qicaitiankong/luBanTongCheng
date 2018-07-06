@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseHiddenNavAndTabBarViewController.h"
 
-
-@interface WxQQLoginViewController : UIViewController
+@interface WxQQLoginViewController : BaseHiddenNavAndTabBarViewController
 
 @property (assign,nonatomic) BOOL isWx;
 
