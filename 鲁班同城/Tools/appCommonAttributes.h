@@ -17,6 +17,8 @@
 #import "RDVTabBarController.h"
 #import "UIFont+CustomerFonts.h"
 #import "ImageAndLabelView.h"
+#import "OwnTextField.h"
+#import "NavTools.h"
 
 //third party class
 #import <SVProgressHUD.h>

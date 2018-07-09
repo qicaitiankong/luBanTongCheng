@@ -94,7 +94,7 @@ static const UIEdgeInsets defaultEdgeInsets = {10,10,10,10};
 {
     self = [super init];
     if (self) {
-        self.headerReferenceSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, SCREEN_HEIGHT * 0.518);
+        
     }
     return self;
 }

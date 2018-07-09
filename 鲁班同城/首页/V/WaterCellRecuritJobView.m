@@ -16,11 +16,11 @@
     if (self) {
         self.alpha = 0.75;
         self.leftPositionLabel = [[CustomeLzhLabel alloc
-                                   ]initWithCustomerParamer:[UIFont getPingFangSCMedium:9] titleColor:[UIColor whiteColor] aligement:1];
+                                   ]initWithCustomerParamer:[UIFont getPingFangSCMedium:9] titleColor:[UIColor whiteColor] aligement:0];
         [self addSubview:self.leftPositionLabel];
         //
         self.rightCountLabel = [[CustomeLzhLabel alloc
-                                   ]initWithCustomerParamer:[UIFont getPingFangSCMedium:9] titleColor:[UIColor whiteColor] aligement:1];
+                                   ]initWithCustomerParamer:[UIFont getPingFangSCMedium:9] titleColor:[UIColor whiteColor] aligement:0];
         [self addSubview:self.rightCountLabel];
     }
     return self;

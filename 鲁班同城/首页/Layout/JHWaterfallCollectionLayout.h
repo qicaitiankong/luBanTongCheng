@@ -33,7 +33,7 @@
 @interface JHWaterfallCollectionLayout : UICollectionViewLayout
 /**代理*/
 @property (nonatomic,assign) id <WaterFlowLayoutDelegate>delegate;
-//表头大小
+//表头大小（不设置则没有表头）
 @property (nonatomic, assign) CGSize headerReferenceSize;
 
 - (NSInteger)columCount;

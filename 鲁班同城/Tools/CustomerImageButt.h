@@ -14,5 +14,7 @@
 
 @property (copy,nonatomic) void (^clickButtBlock)(void);
 
+//导航栏的返回用到
+- (instancetype)initWithFrameForNavReturnButt:(CGRect)frame;
 
 @end

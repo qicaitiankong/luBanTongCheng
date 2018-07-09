@@ -195,6 +195,21 @@
 		1874348F20F2F6F30008A24F /* myInfoGrayStar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1874348320F2F6F30008A24F /* myInfoGrayStar@3x.png */; };
 		1874349020F2F6F30008A24F /* myInfoStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1874348420F2F6F30008A24F /* myInfoStar.png */; };
 		1874349320F2FBA00008A24F /* MessageSoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1874349220F2FBA00008A24F /* MessageSoundView.m */; };
+		1874349620F2FE780008A24F /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1874349520F2FE780008A24F /* StarView.m */; };
+		1874349C20F30A6D0008A24F /* SkillShowSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1874349B20F30A6D0008A24F /* SkillShowSecondViewController.m */; };
+		1874349F20F30B1C0008A24F /* SkillShowCommentToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1874349E20F30B1C0008A24F /* SkillShowCommentToolView.m */; };
+		187434A420F327920008A24F /* clickPraise@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 187434A120F327910008A24F /* clickPraise@3x.png */; };
+		187434A520F327920008A24F /* clickPraise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 187434A220F327910008A24F /* clickPraise@2x.png */; };
+		187434A620F327920008A24F /* clickPraise.png in Resources */ = {isa = PBXBuildFile; fileRef = 187434A320F327920008A24F /* clickPraise.png */; };
+		187434AA20F3279D0008A24F /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 187434A720F3279C0008A24F /* share.png */; };
+		187434AB20F3279D0008A24F /* share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 187434A820F3279C0008A24F /* share@3x.png */; };
+		187434AC20F3279D0008A24F /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 187434A920F3279C0008A24F /* share@2x.png */; };
+		187434B620F327E00008A24F /* message@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 187434B320F327E00008A24F /* message@3x.png */; };
+		187434B720F327E00008A24F /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = 187434B420F327E00008A24F /* message.png */; };
+		187434B820F327E00008A24F /* message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 187434B520F327E00008A24F /* message@2x.png */; };
+		187434BB20F333FD0008A24F /* CustomeLabelButt.m in Sources */ = {isa = PBXBuildFile; fileRef = 187434BA20F333FD0008A24F /* CustomeLabelButt.m */; };
+		187434C120F356AA0008A24F /* CompanyRecuritDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187434C020F356AA0008A24F /* CompanyRecuritDetailViewController.m */; };
+		187434C420F358850008A24F /* NavTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 187434C320F358850008A24F /* NavTools.m */; };
 		1888139420EC4F0700F832BE /* MyInfoTableFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139320EC4F0700F832BE /* MyInfoTableFootView.m */; };
 		1888139720EC50FE00F832BE /* CustomeStyleCornerButt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139620EC50FE00F832BE /* CustomeStyleCornerButt.m */; };
 		1888139A20EC62AA00F832BE /* WxQQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139920EC62AA00F832BE /* WxQQLoginViewController.m */; };
@@ -530,6 +545,27 @@
 		1874348420F2F6F30008A24F /* myInfoStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myInfoStar.png; sourceTree = "<group>"; };
 		1874349120F2FBA00008A24F /* MessageSoundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageSoundView.h; sourceTree = "<group>"; };
 		1874349220F2FBA00008A24F /* MessageSoundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageSoundView.m; sourceTree = "<group>"; };
+		1874349420F2FE780008A24F /* StarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarView.h; sourceTree = "<group>"; };
+		1874349520F2FE780008A24F /* StarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StarView.m; sourceTree = "<group>"; };
+		1874349A20F30A6D0008A24F /* SkillShowSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkillShowSecondViewController.h; sourceTree = "<group>"; };
+		1874349B20F30A6D0008A24F /* SkillShowSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkillShowSecondViewController.m; sourceTree = "<group>"; };
+		1874349D20F30B1C0008A24F /* SkillShowCommentToolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkillShowCommentToolView.h; sourceTree = "<group>"; };
+		1874349E20F30B1C0008A24F /* SkillShowCommentToolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkillShowCommentToolView.m; sourceTree = "<group>"; };
+		187434A120F327910008A24F /* clickPraise@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clickPraise@3x.png"; sourceTree = "<group>"; };
+		187434A220F327910008A24F /* clickPraise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clickPraise@2x.png"; sourceTree = "<group>"; };
+		187434A320F327920008A24F /* clickPraise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clickPraise.png; sourceTree = "<group>"; };
+		187434A720F3279C0008A24F /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		187434A820F3279C0008A24F /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
+		187434A920F3279C0008A24F /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		187434B320F327E00008A24F /* message@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message@3x.png"; sourceTree = "<group>"; };
+		187434B420F327E00008A24F /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
+		187434B520F327E00008A24F /* message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message@2x.png"; sourceTree = "<group>"; };
+		187434B920F333FD0008A24F /* CustomeLabelButt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomeLabelButt.h; sourceTree = "<group>"; };
+		187434BA20F333FD0008A24F /* CustomeLabelButt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomeLabelButt.m; sourceTree = "<group>"; };
+		187434BF20F356AA0008A24F /* CompanyRecuritDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyRecuritDetailViewController.h; sourceTree = "<group>"; };
+		187434C020F356AA0008A24F /* CompanyRecuritDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyRecuritDetailViewController.m; sourceTree = "<group>"; };
+		187434C220F358850008A24F /* NavTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavTools.h; sourceTree = "<group>"; };
+		187434C320F358850008A24F /* NavTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavTools.m; sourceTree = "<group>"; };
 		1888139220EC4F0700F832BE /* MyInfoTableFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyInfoTableFootView.h; sourceTree = "<group>"; };
 		1888139320EC4F0700F832BE /* MyInfoTableFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInfoTableFootView.m; sourceTree = "<group>"; };
 		1888139520EC50FE00F832BE /* CustomeStyleCornerButt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomeStyleCornerButt.h; sourceTree = "<group>"; };
@@ -739,6 +775,12 @@
 				1824F77C20EF44CF00E99823 /* CustomerLabelView.m */,
 				1874349120F2FBA00008A24F /* MessageSoundView.h */,
 				1874349220F2FBA00008A24F /* MessageSoundView.m */,
+				1874349420F2FE780008A24F /* StarView.h */,
+				1874349520F2FE780008A24F /* StarView.m */,
+				187434B920F333FD0008A24F /* CustomeLabelButt.h */,
+				187434BA20F333FD0008A24F /* CustomeLabelButt.m */,
+				187434C220F358850008A24F /* NavTools.h */,
+				187434C320F358850008A24F /* NavTools.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -776,6 +818,9 @@
 		1443C58720E321940009E82F /* 技能秀 */ = {
 			isa = PBXGroup;
 			children = (
+				1874349920F30A070008A24F /* V */,
+				1874349820F30A000008A24F /* M */,
+				1874349720F309FA0008A24F /* C */,
 				1443C59C20E332200009E82F /* SkillShowViewController.h */,
 				1443C59D20E332200009E82F /* SkillShowViewController.m */,
 			);
@@ -833,6 +878,7 @@
 		1443C5CC20E347510009E82F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				187434A020F327670008A24F /* 技能秀 */,
 				1824F77120EF400F00E99823 /* sound */,
 				188813BA20ECA3B900F832BE /* 登录注册 */,
 				1818E4AD20EB517B00B676C2 /* 我的 */,
@@ -1184,6 +1230,49 @@
 			path = star;
 			sourceTree = "<group>";
 		};
+		1874349720F309FA0008A24F /* C */ = {
+			isa = PBXGroup;
+			children = (
+				1874349A20F30A6D0008A24F /* SkillShowSecondViewController.h */,
+				1874349B20F30A6D0008A24F /* SkillShowSecondViewController.m */,
+				187434BF20F356AA0008A24F /* CompanyRecuritDetailViewController.h */,
+				187434C020F356AA0008A24F /* CompanyRecuritDetailViewController.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		1874349820F30A000008A24F /* M */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		1874349920F30A070008A24F /* V */ = {
+			isa = PBXGroup;
+			children = (
+				1874349D20F30B1C0008A24F /* SkillShowCommentToolView.h */,
+				1874349E20F30B1C0008A24F /* SkillShowCommentToolView.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		187434A020F327670008A24F /* 技能秀 */ = {
+			isa = PBXGroup;
+			children = (
+				187434B420F327E00008A24F /* message.png */,
+				187434B520F327E00008A24F /* message@2x.png */,
+				187434B320F327E00008A24F /* message@3x.png */,
+				187434A720F3279C0008A24F /* share.png */,
+				187434A920F3279C0008A24F /* share@2x.png */,
+				187434A820F3279C0008A24F /* share@3x.png */,
+				187434A320F327920008A24F /* clickPraise.png */,
+				187434A220F327910008A24F /* clickPraise@2x.png */,
+				187434A120F327910008A24F /* clickPraise@3x.png */,
+			);
+			path = "技能秀";
+			sourceTree = "<group>";
+		};
 		188813B620EC99DF00F832BE /* 个人资料 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1470,6 +1559,7 @@
 				1874347120F2F1BB0008A24F /* scollPicture02@3x.png in Resources */,
 				188813D220ECA40600F832BE /* sex.png in Resources */,
 				1443C50A20E204180009E82F /* LaunchScreen.storyboard in Resources */,
+				187434B720F327E00008A24F /* message.png in Resources */,
 				185368F220E9CDC40053A5D4 /* test04.png in Resources */,
 				185368F320E9CDC40053A5D4 /* test05.jpeg in Resources */,
 				186EBE2920EDDF3A00D0F54E /* job.png in Resources */,
@@ -1498,6 +1588,7 @@
 				1824F72D20EEF3A600E99823 /* userSelected@2x.png in Resources */,
 				1818E4B720EB51B300B676C2 /* set03@3x.png in Resources */,
 				1824F72620EEF38900E99823 /* orderSelected.png in Resources */,
+				187434AA20F3279D0008A24F /* share.png in Resources */,
 				1818E4BE20EB51BF00B676C2 /* set01.png in Resources */,
 				186EBE3720EDF91F00D0F54E /* videoFlag@2x.png in Resources */,
 				1443C60120E35A7D0009E82F /* weixin.png in Resources */,
@@ -1520,22 +1611,27 @@
 				186EBE1B20EDDF1300D0F54E /* experience@2x.png in Resources */,
 				1824F77720EF40C800E99823 /* SenderVoiceNodePlaying01.png in Resources */,
 				188813D020ECA40600F832BE /* sex@3x.png in Resources */,
+				187434B820F327E00008A24F /* message@2x.png in Resources */,
 				1874348820F2F6F30008A24F /* myInfoStar@3x.png in Resources */,
 				1824F73F20EEF4C600E99823 /* user@2x.png in Resources */,
 				1824F73820EEF44500E99823 /* home@3x.png in Resources */,
 				1874347020F2F1BB0008A24F /* scollPicture02@2x.png in Resources */,
 				18E2DF1B20E8C60A00FDF9C1 /* heart@2x.png in Resources */,
+				187434A420F327920008A24F /* clickPraise@3x.png in Resources */,
 				188813CA20ECA3F800F832BE /* name.png in Resources */,
 				1443C5F020E3571B0009E82F /* navLogo@3x.png in Resources */,
 				1443C60F20E35AAD0009E82F /* loginLogo@2x.png in Resources */,
 				1443C5D120E3483B0009E82F /* homeSelected@3x.png in Resources */,
 				1874348920F2F6F30008A24F /* myInfoGrayStar.png in Resources */,
 				1818E4C520EB51D900B676C2 /* set00@3x.png in Resources */,
+				187434A620F327920008A24F /* clickPraise.png in Resources */,
 				186EBE1D20EDDF1300D0F54E /* experience.png in Resources */,
 				1818E4C320EB51D900B676C2 /* set00.png in Resources */,
 				1874348D20F2F6F30008A24F /* commentStar@3x.png in Resources */,
+				187434AC20F3279D0008A24F /* share@2x.png in Resources */,
 				1824F75520EF0ED500E99823 /* addFriend.png in Resources */,
 				1824F77620EF40C800E99823 /* SenderVoiceNodePlaying03.png in Resources */,
+				187434AB20F3279D0008A24F /* share@3x.png in Resources */,
 				1824F74020EEF4C600E99823 /* user@3x.png in Resources */,
 				188813C020ECA3D600F832BE /* city@2x.png in Resources */,
 				1443C60920E35A930009E82F /* cancel@2x.png in Resources */,
@@ -1581,6 +1677,7 @@
 				1874347520F2F1BB0008A24F /* scollPicture01@2x.png in Resources */,
 				188813F520ECCC8300F832BE /* voiceGray@3x.png in Resources */,
 				186EBE3820EDF91F00D0F54E /* videoFlag@3x.png in Resources */,
+				187434B620F327E00008A24F /* message@3x.png in Resources */,
 				188813B420EC95A400F832BE /* nav@3x.png in Resources */,
 				1443C5DD20E3486E0009E82F /* xiangji.png in Resources */,
 				1443C5FB20E35A670009E82F /* QQ.png in Resources */,
@@ -1601,6 +1698,7 @@
 				1818E4CB20EB523E00B676C2 /* withDraw@3x.png in Resources */,
 				185368F120E9CDC40053A5D4 /* test06.png in Resources */,
 				1874348720F2F6F30008A24F /* commentGrayStar@3x.png in Resources */,
+				187434A520F327920008A24F /* clickPraise@2x.png in Resources */,
 				1818E4CA20EB523E00B676C2 /* withDraw@2x.png in Resources */,
 				1443C5D820E348540009E82F /* order@3x.png in Resources */,
 				1818E4D420EB57A200B676C2 /* goFlag.png in Resources */,
@@ -1707,6 +1805,7 @@
 				1443C5C820E343E50009E82F /* RDVTabBarItem.m in Sources */,
 				1818E4A920EB42A000B676C2 /* SSSearchBar.m in Sources */,
 				1443C5AA20E336740009E82F /* UIColor+Hex.m in Sources */,
+				1874349C20F30A6D0008A24F /* SkillShowSecondViewController.m in Sources */,
 				1888139420EC4F0700F832BE /* MyInfoTableFootView.m in Sources */,
 				188813AF20EC939900F832BE /* BasePersonalInfoViewController.m in Sources */,
 				18E2DF0B20E8BB9D00FDF9C1 /* JHCollectionViewCell.m in Sources */,
@@ -1728,6 +1827,7 @@
 				1818E4D020EB55D200B676C2 /* MyInfoTableViewCell.m in Sources */,
 				1818E49D20EB08AD00B676C2 /* TakeOrderTableViewCell.m in Sources */,
 				1443C50D20E204180009E82F /* main.m in Sources */,
+				1874349620F2FE780008A24F /* StarView.m in Sources */,
 				1824F76720EF106600E99823 /* OwnPersonalInfomationTopPictureGoupView.m in Sources */,
 				1853689120E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m in Sources */,
 				186EBE2C20EDE33F00D0F54E /* OwnTextView.m in Sources */,
@@ -1744,8 +1844,10 @@
 				188813EF20ECC54900F832BE /* PersonalInfoAddSoundButtView.m in Sources */,
 				18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */,
 				1818E49A20EB025A00B676C2 /* BaseCustomeTableViewController.m in Sources */,
+				187434C420F358850008A24F /* NavTools.m in Sources */,
 				188813AC20EC929D00F832BE /* PersonalInfoVideoViewController.m in Sources */,
 				1818E4DC20EB5E2E00B676C2 /* WithDrawView.m in Sources */,
+				187434BB20F333FD0008A24F /* CustomeLabelButt.m in Sources */,
 				1443C5AB20E336740009E82F /* UIViewExt.m in Sources */,
 				1824F74420EEF63300E99823 /* ChooseTechnologyRightTableViewCell.m in Sources */,
 				1443C5A120E3327B0009E82F /* MyInfoViewController.m in Sources */,
@@ -1755,6 +1857,7 @@
 				186EBE1720EDA04200D0F54E /* RdvtarbarBigView.m in Sources */,
 				1443C59820E3316C0009E82F /* OrderTakingViewController.m in Sources */,
 				186EBE3220EDF08400D0F54E /* ImageAndLabelView.m in Sources */,
+				187434C120F356AA0008A24F /* CompanyRecuritDetailViewController.m in Sources */,
 				186EBE4B20EE0C8700D0F54E /* CommitPopView.m in Sources */,
 				1443C57320E317F50009E82F /* CustomeLzhLabel.m in Sources */,
 				18E2DF0720E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.m in Sources */,
@@ -1774,6 +1877,7 @@
 				186EBE5420EE17D200D0F54E /* PersonalInfoTechnologyChooseViewController.m in Sources */,
 				185368ED20E9CB540053A5D4 /* CXCarouselView.m in Sources */,
 				185368F720E9D4D80053A5D4 /* ZHQScrollMenu.m in Sources */,
+				1874349F20F30B1C0008A24F /* SkillShowCommentToolView.m in Sources */,
 				1443C61F20E387D80009E82F /* LoginThirdGroupView.m in Sources */,
 				1443C57920E318EA0009E82F /* GetCellHeight.m in Sources */,
 			);

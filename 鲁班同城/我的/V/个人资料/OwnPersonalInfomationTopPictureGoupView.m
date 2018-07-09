@@ -29,7 +29,7 @@
         CGFloat imageDisplayWidth = frame.size.width;
         CGFloat imageDisplayheight = imageDisplayWidth / (bigImage.size.width / bigImage.size.height);
         //
-        CGFloat returnButtTopSpace = STATUSBAR_HEIGHT + 5 ;
+        //CGFloat returnButtTopSpace = STATUSBAR_HEIGHT + 5 ;
         //
         self.topBigImaView = [[UIImageView alloc]init];
         self.topBigImaView.backgroundColor = [UIColor grayColor];
@@ -37,8 +37,7 @@
         self.topBigImaView.frame = CGRectMake(0, 0, frame.size.width, imageDisplayheight);
         [self addSubview:self.topBigImaView];
         //
-        navReturnButt = [[CustomerImageButt alloc]initWithFrame:CGRectMake(SCREEN_WIDTH  * 0.04, returnButtTopSpace, 10, 19)];
-        [navReturnButt.imageView setImage:[UIImage imageNamed:@"whiteReturn"]];
+        navReturnButt = [NavTools getOwnNavStyleWhiteReturnButt];
         [self addSubview:navReturnButt];
         //
         shareButt = [[CustomerImageButt alloc]initWithFrame:CGRectMake(frame.size.width - 15 - 19, navReturnButt.top, 19, 19)];
@@ -94,7 +93,15 @@
         self.sexAndHomeLabel.frame = CGRectMake(self.userlogoImaView.left, self.userlogoImaView.bottom + 10, homeLabelWidth, homeLabelHeight);
         [self addSubview:self.sexAndHomeLabel];
         //
-        [self setFrame:CGRectMake(self.x, self.y, self.width, self.sexAndHomeLabel.top + self.sexAndHomeLabel.height + 5)];
+        UILabel *satisfyLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:2];
+        satisfyLabel.frame = CGRectMake(self.sexAndHomeLabel.right + 5, self.sexAndHomeLabel.top, 50, self.sexAndHomeLabel.height);
+        satisfyLabel.text = @"满意度";
+        [self addSubview:satisfyLabel];
+        //
+        self.starGroupView = [[StarView alloc]initWithFrame:CGRectMake(satisfyLabel.right + 10, satisfyLabel.top, frame.size.width - satisfyLabel.right - 25 , satisfyLabel.height)];
+        [self addSubview:self.starGroupView];
+        //
+        [self setFrame:CGRectMake(self.x, self.y, self.width, self.starGroupView.bottom + 5)];
     }
     return self;
 }

@@ -19,11 +19,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        
         loginButt = [UIButton buttonWithType:UIButtonTypeCustom];
         loginButt.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         self.clipsToBounds = YES;
-        loginButt.backgroundColor = color;
+        if (color == nil){
+            
+        }else{
+            self.backgroundColor = [UIColor whiteColor];
+            loginButt.backgroundColor = color;
+        }
+        
         [loginButt addTarget:self action:@selector(loginHandler) forControlEvents:UIControlEventTouchUpInside];
         [loginButt setTitle:titles forState:UIControlStateNormal];
         loginButt.titleLabel.font = fonts;

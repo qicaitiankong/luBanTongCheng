@@ -44,6 +44,7 @@
     topPartView.fenSiLabel.text = @"888粉丝";
     topPartView.concernLabel.text = @"23333关注";
     topPartView.sexAndHomeLabel.text = @"男   山东 青岛市";
+    [topPartView.starGroupView setYellowStar:5];
     WS(weakSelf);
     topPartView.navReturnButt.clickButtBlock = ^{
         [weakSelf.rdv_tabBarController setTabBarHidden:NO];

@@ -25,6 +25,22 @@
     }
     return self;
 }
+- (instancetype)initWithFrameForNavReturnButt:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        //self.backgroundColor = [UIColor whiteColor];
+        self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, 10, 19)];
+        self.imageView.center = CGPointMake(self.imageView.centerX, frame.size.height / 2);
+        [self addSubview:self.imageView];
+        //
+        UIButton *backButt = [UIButton buttonWithType:UIButtonTypeCustom];
+        backButt.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        [backButt addTarget:self action:@selector(backButtHandler) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:backButt];
+    }
+    return self;
+}
 
 - (void)backButtHandler{
     if (self.clickButtBlock){

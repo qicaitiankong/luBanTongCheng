@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomeStyleCornerButt.h"
 #import  "CustomerImageButt.h"
+#import "StarView.h"
 
 @interface OwnPersonalInfomationTopPictureGoupView : UIView
 
@@ -28,6 +29,6 @@
 
 @property (strong,nonatomic) UILabel *sexAndHomeLabel;
 
-
+@property (strong,nonatomic) StarView * starGroupView;
 
 @end

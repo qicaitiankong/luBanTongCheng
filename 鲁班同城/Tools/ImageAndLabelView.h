@@ -16,6 +16,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame image: (UIImage*)image title:(NSString*)title font:(UIFont*)font titleColor:(UIColor*)textColor;
 
-
+@property (copy,nonatomic) void (^clickBackButt)(void);
 
 @end

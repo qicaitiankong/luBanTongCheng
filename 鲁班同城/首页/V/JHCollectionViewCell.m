@@ -66,13 +66,13 @@
     .bottomEqualToView(self.topImageView);
     //
     self.firstJobInfoView.sd_layout
-    .leftEqualToView(self.contentView)
+    .leftSpaceToView(self.contentView, 50)
     .rightEqualToView(self.contentView)
     .topSpaceToView(jobInfoMasterView, 5)
     .heightRatioToView(jobInfoMasterView, 0.375);
     //
     self.secondJobInfoView.sd_layout
-    .leftEqualToView(self.contentView)
+    .leftSpaceToView(self.contentView, 50)
     .rightEqualToView(self.contentView)
     .topSpaceToView(self.firstJobInfoView, 5)
     .heightRatioToView(jobInfoMasterView, 0.375);
@@ -130,14 +130,14 @@
         .bottomEqualToView(self.topImageView);
         //
         self.firstJobInfoView.sd_resetLayout
-        .leftEqualToView(self.contentView)
+        .leftSpaceToView(self.contentView, 50)
         .rightEqualToView(self.contentView)
         .topSpaceToView(self.contentView, _model.bigImageDisplayHeight - jobInfoMasterView.height + 5)
          .heightRatioToView(jobInfoMasterView, 0.375);
         [self.firstJobInfoView LzhUpdateConstraints];
         //
         self.secondJobInfoView.sd_resetLayout
-        .leftEqualToView(self.contentView)
+        .leftSpaceToView(self.contentView, 50)
         .rightEqualToView(self.contentView)
         .topSpaceToView(self.firstJobInfoView, 5)
         .heightRatioToView(jobInfoMasterView, 0.375);

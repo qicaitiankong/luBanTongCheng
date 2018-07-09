@@ -36,10 +36,22 @@
         self.leftImageView.frame = CGRectMake(0, 5, imageWidth, imageHeight);
         
         self.rightLabel.frame = CGRectMake(self.leftImageView.right + 5, 0, labelWidth, imageHeight + 10);
+        //
+        UIButton *backButt = [UIButton buttonWithType:UIButtonTypeCustom];
+        backButt.frame = CGRectMake(0, 0, self.rightLabel.left + self.rightLabel.width, self.rightLabel.height);
+        [backButt addTarget:self action:@selector(backButtClickBlock) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:backButt];
+        //
         [self setFrame:CGRectMake(self.x, self.y, self.rightLabel.left + self.rightLabel.width, self.leftImageView.bottom + 5)];
         
     }
     return self;
+}
+
+- (void)backButtClickBlock{
+    if (self.clickBackButt){
+        self.clickBackButt();
+    }
 }
 
 

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseHiddenNaviViewController.h"
 
-@interface SkillShowViewController : UIViewController
+@interface SkillShowViewController : BaseHiddenNaviViewController
 
 @end
