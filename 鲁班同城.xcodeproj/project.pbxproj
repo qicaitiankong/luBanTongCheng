@@ -124,7 +124,6 @@
 		1824F76720EF106600E99823 /* OwnPersonalInfomationTopPictureGoupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F76620EF106600E99823 /* OwnPersonalInfomationTopPictureGoupView.m */; };
 		1824F76A20EF147F00E99823 /* CustomerImageButt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F76920EF147F00E99823 /* CustomerImageButt.m */; };
 		1824F76D20EF3AF300E99823 /* OwnPersonalInfomationPersonalIntroduceGoupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F76C20EF3AF300E99823 /* OwnPersonalInfomationPersonalIntroduceGoupView.m */; };
-		1824F77020EF3FB300E99823 /* messagwSoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F76E20EF3FB300E99823 /* messagwSoundView.m */; };
 		1824F77520EF40C800E99823 /* SenderVoiceNodePlaying02.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824F77220EF40C700E99823 /* SenderVoiceNodePlaying02.png */; };
 		1824F77620EF40C800E99823 /* SenderVoiceNodePlaying03.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824F77320EF40C700E99823 /* SenderVoiceNodePlaying03.png */; };
 		1824F77720EF40C800E99823 /* SenderVoiceNodePlaying01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824F77420EF40C800E99823 /* SenderVoiceNodePlaying01.png */; };
@@ -195,6 +194,7 @@
 		1874348E20F2F6F30008A24F /* commentStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1874348220F2F6F30008A24F /* commentStar.png */; };
 		1874348F20F2F6F30008A24F /* myInfoGrayStar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1874348320F2F6F30008A24F /* myInfoGrayStar@3x.png */; };
 		1874349020F2F6F30008A24F /* myInfoStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1874348420F2F6F30008A24F /* myInfoStar.png */; };
+		1874349320F2FBA00008A24F /* MessageSoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1874349220F2FBA00008A24F /* MessageSoundView.m */; };
 		1888139420EC4F0700F832BE /* MyInfoTableFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139320EC4F0700F832BE /* MyInfoTableFootView.m */; };
 		1888139720EC50FE00F832BE /* CustomeStyleCornerButt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139620EC50FE00F832BE /* CustomeStyleCornerButt.m */; };
 		1888139A20EC62AA00F832BE /* WxQQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139920EC62AA00F832BE /* WxQQLoginViewController.m */; };
@@ -439,8 +439,6 @@
 		1824F76920EF147F00E99823 /* CustomerImageButt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerImageButt.m; sourceTree = "<group>"; };
 		1824F76B20EF3AF300E99823 /* OwnPersonalInfomationPersonalIntroduceGoupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPersonalInfomationPersonalIntroduceGoupView.h; sourceTree = "<group>"; };
 		1824F76C20EF3AF300E99823 /* OwnPersonalInfomationPersonalIntroduceGoupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalInfomationPersonalIntroduceGoupView.m; sourceTree = "<group>"; };
-		1824F76E20EF3FB300E99823 /* messagwSoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = messagwSoundView.m; sourceTree = "<group>"; };
-		1824F76F20EF3FB300E99823 /* messagwSoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = messagwSoundView.h; sourceTree = "<group>"; };
 		1824F77220EF40C700E99823 /* SenderVoiceNodePlaying02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SenderVoiceNodePlaying02.png; sourceTree = "<group>"; };
 		1824F77320EF40C700E99823 /* SenderVoiceNodePlaying03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SenderVoiceNodePlaying03.png; sourceTree = "<group>"; };
 		1824F77420EF40C800E99823 /* SenderVoiceNodePlaying01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SenderVoiceNodePlaying01.png; sourceTree = "<group>"; };
@@ -530,6 +528,8 @@
 		1874348220F2F6F30008A24F /* commentStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentStar.png; sourceTree = "<group>"; };
 		1874348320F2F6F30008A24F /* myInfoGrayStar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myInfoGrayStar@3x.png"; sourceTree = "<group>"; };
 		1874348420F2F6F30008A24F /* myInfoStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myInfoStar.png; sourceTree = "<group>"; };
+		1874349120F2FBA00008A24F /* MessageSoundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageSoundView.h; sourceTree = "<group>"; };
+		1874349220F2FBA00008A24F /* MessageSoundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageSoundView.m; sourceTree = "<group>"; };
 		1888139220EC4F0700F832BE /* MyInfoTableFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyInfoTableFootView.h; sourceTree = "<group>"; };
 		1888139320EC4F0700F832BE /* MyInfoTableFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInfoTableFootView.m; sourceTree = "<group>"; };
 		1888139520EC50FE00F832BE /* CustomeStyleCornerButt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomeStyleCornerButt.h; sourceTree = "<group>"; };
@@ -705,8 +705,6 @@
 		1443C57020E317960009E82F /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				1824F76F20EF3FB300E99823 /* messagwSoundView.h */,
-				1824F76E20EF3FB300E99823 /* messagwSoundView.m */,
 				1443C5F420E359110009E82F /* OwnTextField.h */,
 				1443C5F520E359110009E82F /* OwnTextField.m */,
 				1443C5BF20E343A30009E82F /* RDVTabbarControl */,
@@ -739,6 +737,8 @@
 				1824F76920EF147F00E99823 /* CustomerImageButt.m */,
 				1824F77B20EF44CF00E99823 /* CustomerLabelView.h */,
 				1824F77C20EF44CF00E99823 /* CustomerLabelView.m */,
+				1874349120F2FBA00008A24F /* MessageSoundView.h */,
+				1874349220F2FBA00008A24F /* MessageSoundView.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1718,6 +1718,7 @@
 				1443C50220E204170009E82F /* ViewController.m in Sources */,
 				188813E420ECB84100F832BE /* PersonalInfoExchangeViceTextView.m in Sources */,
 				186EBE4720EE021F00D0F54E /* PersonalInfoAddPhotoFlagView.m in Sources */,
+				1874349320F2FBA00008A24F /* MessageSoundView.m in Sources */,
 				1443C5C620E343E50009E82F /* RDVTabBar.m in Sources */,
 				1824F75120EF0C6100E99823 /* BaseHiddenNavAndTabBarViewController.m in Sources */,
 				1888139A20EC62AA00F832BE /* WxQQLoginViewController.m in Sources */,
@@ -1754,7 +1755,6 @@
 				186EBE1720EDA04200D0F54E /* RdvtarbarBigView.m in Sources */,
 				1443C59820E3316C0009E82F /* OrderTakingViewController.m in Sources */,
 				186EBE3220EDF08400D0F54E /* ImageAndLabelView.m in Sources */,
-				1824F77020EF3FB300E99823 /* messagwSoundView.m in Sources */,
 				186EBE4B20EE0C8700D0F54E /* CommitPopView.m in Sources */,
 				1443C57320E317F50009E82F /* CustomeLzhLabel.m in Sources */,
 				18E2DF0720E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.m in Sources */,

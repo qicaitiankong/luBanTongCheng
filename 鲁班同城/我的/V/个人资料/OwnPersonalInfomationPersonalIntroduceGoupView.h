@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "messagwSoundView.h"
+#import "MessageSoundView.h"
 
 @interface OwnPersonalInfomationPersonalIntroduceGoupView : UIView
 
@@ -15,6 +15,6 @@
 
 @property (strong,nonatomic) UILabel *detaileLabel;
 
-@property (strong,nonatomic) messagwSoundView *soundView;
+@property (strong,nonatomic) MessageSoundView *soundView;
 
 @end

@@ -34,7 +34,7 @@
         self.detaileLabel.text = testStr;
         [self addSubview:self.detaileLabel];
         //
-        self.soundView = [[messagwSoundView alloc]initWithFrame:CGRectMake(self.detaileLabel.left, self.detaileLabel.bottom + 20, 260, 40)];
+        self.soundView = [[MessageSoundView alloc]initWithFrame:CGRectMake(self.detaileLabel.left, self.detaileLabel.bottom + 20, 260, 40)];
         [self addSubview:self.soundView];
         //
         [self setFrame:CGRectMake(self.x, self.y, self.width, self.soundView.bottom + 10)];

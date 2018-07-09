@@ -25,7 +25,7 @@
         self.topTipLabel.frame = CGRectMake(15, 20, labelWidth, 20);
         [self addSubview:self.topTipLabel];
         //
-        self.soundView = [[messagwSoundView alloc]initWithFrame:CGRectMake(self.topTipLabel.left, self.topTipLabel.bottom + 20, 260, 40)];
+        self.soundView = [[MessageSoundView alloc]initWithFrame:CGRectMake(self.topTipLabel.left, self.topTipLabel.bottom + 20, 260, 40)];
         [self addSubview:self.soundView];
         //
         NSArray *titleArr = @[@"技能名称技能",@"技能名称技能",@"技能名称技能",@"技能名称技能",@"技能名称技能",@"技能名称技能"];

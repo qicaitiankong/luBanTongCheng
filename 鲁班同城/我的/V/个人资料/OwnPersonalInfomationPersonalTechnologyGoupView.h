@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "messagwSoundView.h"
+#import "MessageSoundView.h"
 
 @interface OwnPersonalInfomationPersonalTechnologyGoupView : UIView
 @property (strong,nonatomic) UILabel *topTipLabel;
 
-@property (strong,nonatomic) messagwSoundView *soundView;
+@property (strong,nonatomic) MessageSoundView *soundView;
 
 @end
