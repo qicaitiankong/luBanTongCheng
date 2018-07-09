@@ -32,6 +32,20 @@
     return self;
 }
 
+- (void)updateOwnContsaints{
+    self.wxButt.sd_resetLayout
+    .leftSpaceToView(self, 10)
+    .heightRatioToView(self, 0.9)
+    .widthEqualToHeight()
+    .centerYEqualToView(self);
+    
+    self.qqButt.sd_resetLayout
+    .rightSpaceToView(self, 10)
+    .heightRatioToView(self, 0.9)
+    .widthEqualToHeight()
+    .centerYEqualToView(self);
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

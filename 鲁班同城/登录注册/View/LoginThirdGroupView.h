@@ -14,4 +14,7 @@
 
 @property (strong,nonatomic) UIButton *qqButt;
 
+
+- (void)updateOwnContsaints;
+
 @end

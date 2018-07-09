@@ -143,19 +143,19 @@
     .heightIs(topimageH)
     .centerXEqualToView(self.view);
     
-    tipLabel.sd_layout
+    tipLabel.sd_resetLayout
     .leftEqualToView(self.view)
     .rightEqualToView(self.view)
     .topSpaceToView(topLogoImageView, 15)
     .heightIs(16);
     //
-    firstLoginView.sd_layout
+    firstLoginView.sd_resetLayout
     .topSpaceToView(tipLabel, SCREEN_HEIGHT * 0.3)
     .widthIs(SCREEN_WIDTH * 0.72)
     .heightIs(40)
     .centerXEqualToView(self.view);
     
-    otherLoginView.sd_layout
+    otherLoginView.sd_resetLayout
     .topSpaceToView(firstLoginView, 20)
     .widthIs(SCREEN_WIDTH * 0.72)
     .heightIs(40)

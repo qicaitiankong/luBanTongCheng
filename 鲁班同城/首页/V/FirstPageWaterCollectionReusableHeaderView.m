@@ -34,7 +34,7 @@
         self.lunBoView = [CXCarouselView initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , frame.size.height * 0.697) hasTimer:YES interval:3 placeHolder:[UIImage imageNamed:@"test04"]];
         self.lunBoView.delegate = self;
         [self addSubview:self.lunBoView];
-        NSArray *array = @[@"test04",@"test05.jpeg",@"test06"];
+        NSArray *array = @[@"scollPicture01",@"scollPicture02",@"scollPicture03"];
         [self.lunBoView setupWithArray:array];
         [self addSubview:self.lunBoView];
         //

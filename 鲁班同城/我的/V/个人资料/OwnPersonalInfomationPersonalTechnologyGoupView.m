@@ -29,8 +29,8 @@
         [self addSubview:self.soundView];
         //
         NSArray *titleArr = @[@"技能名称技能",@"技能名称技能",@"技能名称技能",@"技能名称技能",@"技能名称技能",@"技能名称技能"];
-        CGFloat viewWidth = 110;
-        CGFloat height = 30;
+        CGFloat viewWidth = frame.size.width * 0.293;
+        CGFloat height = SCREEN_HEIGHT * 0.044;
         CGFloat horizontalSpace = (frame.size.width - 3 *viewWidth) / 4;
         CGFloat verticalSpace = 0;
         UIView *lastSingleView = nil;

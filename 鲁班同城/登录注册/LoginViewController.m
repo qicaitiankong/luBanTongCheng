@@ -106,7 +106,7 @@
     LoginOtherTipView *tipView = [[LoginOtherTipView alloc] initWithFrame:CGRectMake(0, 0, tipViewWidth + 100, 10)];
     [self.view addSubview:tipView];
     //
-    LoginThirdGroupView *otherLoginView = [[LoginThirdGroupView alloc] initWithFrame:CGRectMake(0, 0, 150, 35)];
+    LoginThirdGroupView *otherLoginView = [[LoginThirdGroupView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.40, SCREEN_HEIGHT * 0.052)];
     [otherLoginView.wxButt addTarget:self action:@selector(wxHandler) forControlEvents:UIControlEventTouchUpInside];
     [otherLoginView.qqButt addTarget:self action:@selector(qqHandler) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:otherLoginView];
@@ -180,8 +180,9 @@
     otherLoginView.sd_layout
     .topSpaceToView(tipView, SCREEN_HEIGHT * 0.029)
     .heightIs(SCREEN_HEIGHT * 0.052)
-    .widthIs(SCREEN_WIDTH * 0.4)
+    .widthIs(SCREEN_WIDTH * 0.533)
     .centerXEqualToView(self.view);
+    [otherLoginView updateOwnContsaints];
     
 }
 
@@ -215,6 +216,7 @@
 }
 
 - (void)qqHandler{
+    NSLog(@"点击qq登录");
     if (self.wxOrQQBackBlock){
         self.wxOrQQBackBlock(NO);
     }
