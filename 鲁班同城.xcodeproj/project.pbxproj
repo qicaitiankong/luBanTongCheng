@@ -65,6 +65,16 @@
 		1443C61920E37A3D0009E82F /* RegisterButtonStyleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61820E37A3D0009E82F /* RegisterButtonStyleView.m */; };
 		1443C61C20E384490009E82F /* LoginOtherTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61B20E384490009E82F /* LoginOtherTipView.m */; };
 		1443C61F20E387D80009E82F /* LoginThirdGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1443C61E20E387D80009E82F /* LoginThirdGroupView.m */; };
+		180609A520F446A600471E08 /* CompanyRecuritDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180609A420F446A600471E08 /* CompanyRecuritDetailHeaderView.m */; };
+		180609A920F479DB00471E08 /* CompanyCruitDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180609A820F479DB00471E08 /* CompanyCruitDetailTableViewCell.m */; };
+		180609AF20F47DD100471E08 /* DetailSmallButtView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180609AE20F47DD100471E08 /* DetailSmallButtView.m */; };
+		180609B620F481C800471E08 /* pullUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 180609B020F481C600471E08 /* pullUp.png */; };
+		180609B720F481C800471E08 /* pullUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 180609B120F481C600471E08 /* pullUp@2x.png */; };
+		180609B820F481C800471E08 /* pullUp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 180609B220F481C700471E08 /* pullUp@3x.png */; };
+		180609B920F481C800471E08 /* pullDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 180609B320F481C700471E08 /* pullDown.png */; };
+		180609BA20F481C800471E08 /* pullDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 180609B420F481C700471E08 /* pullDown@2x.png */; };
+		180609BB20F481C800471E08 /* pullDown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 180609B520F481C800471E08 /* pullDown@3x.png */; };
+		180609BE20F493BD00471E08 /* CompanyCruitDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 180609BD20F493BD00471E08 /* CompanyCruitDetailModel.m */; };
 		1818E49A20EB025A00B676C2 /* BaseCustomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E49920EB025A00B676C2 /* BaseCustomeTableViewController.m */; };
 		1818E49D20EB08AD00B676C2 /* TakeOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E49C20EB08AD00B676C2 /* TakeOrderTableViewCell.m */; };
 		1818E4A020EB092200B676C2 /* TakeOrderMainHallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E49F20EB092200B676C2 /* TakeOrderMainHallModel.m */; };
@@ -379,6 +389,20 @@
 		1443C61B20E384490009E82F /* LoginOtherTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginOtherTipView.m; sourceTree = "<group>"; };
 		1443C61D20E387D80009E82F /* LoginThirdGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginThirdGroupView.h; sourceTree = "<group>"; };
 		1443C61E20E387D80009E82F /* LoginThirdGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginThirdGroupView.m; sourceTree = "<group>"; };
+		180609A320F446A600471E08 /* CompanyRecuritDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyRecuritDetailHeaderView.h; sourceTree = "<group>"; };
+		180609A420F446A600471E08 /* CompanyRecuritDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyRecuritDetailHeaderView.m; sourceTree = "<group>"; };
+		180609A720F479DB00471E08 /* CompanyCruitDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyCruitDetailTableViewCell.h; sourceTree = "<group>"; };
+		180609A820F479DB00471E08 /* CompanyCruitDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyCruitDetailTableViewCell.m; sourceTree = "<group>"; };
+		180609AD20F47DD100471E08 /* DetailSmallButtView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailSmallButtView.h; sourceTree = "<group>"; };
+		180609AE20F47DD100471E08 /* DetailSmallButtView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailSmallButtView.m; sourceTree = "<group>"; };
+		180609B020F481C600471E08 /* pullUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pullUp.png; sourceTree = "<group>"; };
+		180609B120F481C600471E08 /* pullUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pullUp@2x.png"; sourceTree = "<group>"; };
+		180609B220F481C700471E08 /* pullUp@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pullUp@3x.png"; sourceTree = "<group>"; };
+		180609B320F481C700471E08 /* pullDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pullDown.png; sourceTree = "<group>"; };
+		180609B420F481C700471E08 /* pullDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pullDown@2x.png"; sourceTree = "<group>"; };
+		180609B520F481C800471E08 /* pullDown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pullDown@3x.png"; sourceTree = "<group>"; };
+		180609BC20F493BD00471E08 /* CompanyCruitDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyCruitDetailModel.h; sourceTree = "<group>"; };
+		180609BD20F493BD00471E08 /* CompanyCruitDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyCruitDetailModel.m; sourceTree = "<group>"; };
 		1818E49820EB025A00B676C2 /* BaseCustomeTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCustomeTableViewController.h; sourceTree = "<group>"; };
 		1818E49920EB025A00B676C2 /* BaseCustomeTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCustomeTableViewController.m; sourceTree = "<group>"; };
 		1818E49B20EB08AD00B676C2 /* TakeOrderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeOrderTableViewCell.h; sourceTree = "<group>"; };
@@ -818,6 +842,7 @@
 		1443C58720E321940009E82F /* 技能秀 */ = {
 			isa = PBXGroup;
 			children = (
+				180609A620F4798100471E08 /* Cell */,
 				1874349920F30A070008A24F /* V */,
 				1874349820F30A000008A24F /* M */,
 				1874349720F309FA0008A24F /* C */,
@@ -997,6 +1022,15 @@
 				1443C61E20E387D80009E82F /* LoginThirdGroupView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		180609A620F4798100471E08 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				180609A720F479DB00471E08 /* CompanyCruitDetailTableViewCell.h */,
+				180609A820F479DB00471E08 /* CompanyCruitDetailTableViewCell.m */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		1818E49420EB006300B676C2 /* C */ = {
@@ -1244,6 +1278,8 @@
 		1874349820F30A000008A24F /* M */ = {
 			isa = PBXGroup;
 			children = (
+				180609BC20F493BD00471E08 /* CompanyCruitDetailModel.h */,
+				180609BD20F493BD00471E08 /* CompanyCruitDetailModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -1253,6 +1289,10 @@
 			children = (
 				1874349D20F30B1C0008A24F /* SkillShowCommentToolView.h */,
 				1874349E20F30B1C0008A24F /* SkillShowCommentToolView.m */,
+				180609A320F446A600471E08 /* CompanyRecuritDetailHeaderView.h */,
+				180609A420F446A600471E08 /* CompanyRecuritDetailHeaderView.m */,
+				180609AD20F47DD100471E08 /* DetailSmallButtView.h */,
+				180609AE20F47DD100471E08 /* DetailSmallButtView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -1260,6 +1300,12 @@
 		187434A020F327670008A24F /* 技能秀 */ = {
 			isa = PBXGroup;
 			children = (
+				180609B320F481C700471E08 /* pullDown.png */,
+				180609B420F481C700471E08 /* pullDown@2x.png */,
+				180609B520F481C800471E08 /* pullDown@3x.png */,
+				180609B020F481C600471E08 /* pullUp.png */,
+				180609B120F481C600471E08 /* pullUp@2x.png */,
+				180609B220F481C700471E08 /* pullUp@3x.png */,
 				187434B420F327E00008A24F /* message.png */,
 				187434B520F327E00008A24F /* message@2x.png */,
 				187434B320F327E00008A24F /* message@3x.png */,
@@ -1556,6 +1602,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180609B720F481C800471E08 /* pullUp@2x.png in Resources */,
 				1874347120F2F1BB0008A24F /* scollPicture02@3x.png in Resources */,
 				188813D220ECA40600F832BE /* sex.png in Resources */,
 				1443C50A20E204180009E82F /* LaunchScreen.storyboard in Resources */,
@@ -1583,6 +1630,7 @@
 				188813BF20ECA3D600F832BE /* city.png in Resources */,
 				186EBE3D20EDF92E00D0F54E /* photoFlag@3x.png in Resources */,
 				1443C60D20E35AAD0009E82F /* loginLogo.png in Resources */,
+				180609B920F481C800471E08 /* pullDown.png in Resources */,
 				188813EA20ECC43C00F832BE /* voice@3x.png in Resources */,
 				1818E4BD20EB51BF00B676C2 /* set01@3x.png in Resources */,
 				1824F72D20EEF3A600E99823 /* userSelected@2x.png in Resources */,
@@ -1590,6 +1638,7 @@
 				1824F72620EEF38900E99823 /* orderSelected.png in Resources */,
 				187434AA20F3279D0008A24F /* share.png in Resources */,
 				1818E4BE20EB51BF00B676C2 /* set01.png in Resources */,
+				180609BB20F481C800471E08 /* pullDown@3x.png in Resources */,
 				186EBE3720EDF91F00D0F54E /* videoFlag@2x.png in Resources */,
 				1443C60120E35A7D0009E82F /* weixin.png in Resources */,
 				18E2DF1920E8C60A00FDF9C1 /* heart.png in Resources */,
@@ -1609,6 +1658,7 @@
 				188813A020EC714100F832BE /* weixinLogin@3x.png in Resources */,
 				1888139F20EC714100F832BE /* weixinLogin@2x.png in Resources */,
 				186EBE1B20EDDF1300D0F54E /* experience@2x.png in Resources */,
+				180609B620F481C800471E08 /* pullUp.png in Resources */,
 				1824F77720EF40C800E99823 /* SenderVoiceNodePlaying01.png in Resources */,
 				188813D020ECA40600F832BE /* sex@3x.png in Resources */,
 				187434B820F327E00008A24F /* message@2x.png in Resources */,
@@ -1676,6 +1726,7 @@
 				1824F76220EF0EEA00E99823 /* whiteReturn@3x.png in Resources */,
 				1874347520F2F1BB0008A24F /* scollPicture01@2x.png in Resources */,
 				188813F520ECCC8300F832BE /* voiceGray@3x.png in Resources */,
+				180609BA20F481C800471E08 /* pullDown@2x.png in Resources */,
 				186EBE3820EDF91F00D0F54E /* videoFlag@3x.png in Resources */,
 				187434B620F327E00008A24F /* message@3x.png in Resources */,
 				188813B420EC95A400F832BE /* nav@3x.png in Resources */,
@@ -1727,6 +1778,7 @@
 				188813CB20ECA3F800F832BE /* name@3x.png in Resources */,
 				1888139E20EC714100F832BE /* weixinLogin .png in Resources */,
 				1443C60320E35A7D0009E82F /* weixin@3x.png in Resources */,
+				180609B820F481C800471E08 /* pullUp@3x.png in Resources */,
 				1443C5DE20E3486E0009E82F /* xiangji@2x.png in Resources */,
 				1874348E20F2F6F30008A24F /* commentStar.png in Resources */,
 			);
@@ -1812,18 +1864,21 @@
 				1853689E20E9BA160053A5D4 /* UISearchBar+CustomeStyle.m in Sources */,
 				185368FE20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m in Sources */,
 				1443C61C20E384490009E82F /* LoginOtherTipView.m in Sources */,
+				180609AF20F47DD100471E08 /* DetailSmallButtView.m in Sources */,
 				1824F76A20EF147F00E99823 /* CustomerImageButt.m in Sources */,
 				185368FA20E9E9D60053A5D4 /* TraingleCategorySmallButtonView.m in Sources */,
 				1443C50220E204170009E82F /* ViewController.m in Sources */,
 				188813E420ECB84100F832BE /* PersonalInfoExchangeViceTextView.m in Sources */,
 				186EBE4720EE021F00D0F54E /* PersonalInfoAddPhotoFlagView.m in Sources */,
 				1874349320F2FBA00008A24F /* MessageSoundView.m in Sources */,
+				180609A920F479DB00471E08 /* CompanyCruitDetailTableViewCell.m in Sources */,
 				1443C5C620E343E50009E82F /* RDVTabBar.m in Sources */,
 				1824F75120EF0C6100E99823 /* BaseHiddenNavAndTabBarViewController.m in Sources */,
 				1888139A20EC62AA00F832BE /* WxQQLoginViewController.m in Sources */,
 				1443C5C720E343E50009E82F /* RDVTabBarController.m in Sources */,
 				18E2DF1E20E8C66B00FDF9C1 /* ConcernDisplayView.m in Sources */,
 				18E2DF1120E8BED300FDF9C1 /* BaseDisplayNaviViewController.m in Sources */,
+				180609BE20F493BD00471E08 /* CompanyCruitDetailModel.m in Sources */,
 				1818E4D020EB55D200B676C2 /* MyInfoTableViewCell.m in Sources */,
 				1818E49D20EB08AD00B676C2 /* TakeOrderTableViewCell.m in Sources */,
 				1443C50D20E204180009E82F /* main.m in Sources */,
@@ -1845,6 +1900,7 @@
 				18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */,
 				1818E49A20EB025A00B676C2 /* BaseCustomeTableViewController.m in Sources */,
 				187434C420F358850008A24F /* NavTools.m in Sources */,
+				180609A520F446A600471E08 /* CompanyRecuritDetailHeaderView.m in Sources */,
 				188813AC20EC929D00F832BE /* PersonalInfoVideoViewController.m in Sources */,
 				1818E4DC20EB5E2E00B676C2 /* WithDrawView.m in Sources */,
 				187434BB20F333FD0008A24F /* CustomeLabelButt.m in Sources */,
