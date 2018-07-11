@@ -9,7 +9,8 @@
 #import "OrderTakingViewController.h"
 #import "TakeOrderTableViewCell.h"
 #import "SSSearchBar.h"
-
+//
+#import "OrderTakingQuotePriceViewController.h"
 //views
 
 @interface OrderTakingViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -23,6 +24,11 @@
 @end
 
 @implementation OrderTakingViewController
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [NavTools displayTabbar:self.rdv_tabBarController];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,6 +53,8 @@
 //cell 发起按钮
 - (void)clickCellButt:(NSIndexPath*)path{
     NSLog(@"%ld",path.row);
+    OrderTakingQuotePriceViewController *quotePriceVC = [[OrderTakingQuotePriceViewController alloc]init];
+    [self.navigationController pushViewController:quotePriceVC animated:YES];
 }
 
 //view

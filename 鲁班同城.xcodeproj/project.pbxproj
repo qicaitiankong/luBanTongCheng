@@ -141,6 +141,17 @@
 		1824F77D20EF44CF00E99823 /* CustomerLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F77C20EF44CF00E99823 /* CustomerLabelView.m */; };
 		1824F78020EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F77F20EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m */; };
 		1824F78320EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F78220EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m */; };
+		1832B99120F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99020F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m */; };
+		1832B99D20F59CC400D6CE4F /* SDWeiXinPhotoContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99320F59CC300D6CE4F /* SDWeiXinPhotoContainerView.m */; };
+		1832B99E20F59CC400D6CE4F /* SDPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99720F59CC400D6CE4F /* SDPhotoBrowser.m */; };
+		1832B99F20F59CC400D6CE4F /* SDWaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99820F59CC400D6CE4F /* SDWaitingView.m */; };
+		1832B9A020F59CC400D6CE4F /* SDBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99920F59CC400D6CE4F /* SDBrowserImageView.m */; };
+		1832B9A320F5B0E900D6CE4F /* CompanyCruitDetailVedioTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B9A220F5B0E900D6CE4F /* CompanyCruitDetailVedioTableViewCell.m */; };
+		1832B9A620F5C45700D6CE4F /* UILabel+ChangeCustomeLineSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B9A520F5C45700D6CE4F /* UILabel+ChangeCustomeLineSpace.m */; };
+		1832B9A920F5D48700D6CE4F /* OrderTakingQuotePriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B9A820F5D48700D6CE4F /* OrderTakingQuotePriceViewController.m */; };
+		1832B9AC20F5DFC300D6CE4F /* TakeOrderQuotePriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B9AB20F5DFC300D6CE4F /* TakeOrderQuotePriceTableViewCell.m */; };
+		1832B9AF20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B9AE20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.m */; };
+		1832B9B220F601C300D6CE4F /* QuotePriceOnWebGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B9B120F601C300D6CE4F /* QuotePriceOnWebGroupView.m */; };
 		1853689120E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853689020E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m */; };
 		1853689520E9B57B0053A5D4 /* FirstPageSearchInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853689420E9B57B0053A5D4 /* FirstPageSearchInputView.m */; };
 		1853689920E9B8230053A5D4 /* traingle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1853689620E9B8220053A5D4 /* traingle.png */; };
@@ -489,6 +500,29 @@
 		1824F77F20EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalInfomationPersonalServiceTypeGoupView.m; sourceTree = "<group>"; };
 		1824F78120EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPersonalInfomationPersonalVideoGoupView.h; sourceTree = "<group>"; };
 		1824F78220EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalInfomationPersonalVideoGoupView.m; sourceTree = "<group>"; };
+		1832B98F20F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyCruitDetailPictureTableViewCell.h; sourceTree = "<group>"; };
+		1832B99020F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyCruitDetailPictureTableViewCell.m; sourceTree = "<group>"; };
+		1832B99320F59CC300D6CE4F /* SDWeiXinPhotoContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWeiXinPhotoContainerView.m; sourceTree = "<group>"; };
+		1832B99420F59CC300D6CE4F /* SDWeiXinPhotoContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWeiXinPhotoContainerView.h; sourceTree = "<group>"; };
+		1832B99620F59CC300D6CE4F /* SDPhotoBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowserConfig.h; sourceTree = "<group>"; };
+		1832B99720F59CC400D6CE4F /* SDPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPhotoBrowser.m; sourceTree = "<group>"; };
+		1832B99820F59CC400D6CE4F /* SDWaitingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWaitingView.m; sourceTree = "<group>"; };
+		1832B99920F59CC400D6CE4F /* SDBrowserImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBrowserImageView.m; sourceTree = "<group>"; };
+		1832B99A20F59CC400D6CE4F /* SDWaitingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWaitingView.h; sourceTree = "<group>"; };
+		1832B99B20F59CC400D6CE4F /* SDPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowser.h; sourceTree = "<group>"; };
+		1832B99C20F59CC400D6CE4F /* SDBrowserImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDBrowserImageView.h; sourceTree = "<group>"; };
+		1832B9A120F5B0E900D6CE4F /* CompanyCruitDetailVedioTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyCruitDetailVedioTableViewCell.h; sourceTree = "<group>"; };
+		1832B9A220F5B0E900D6CE4F /* CompanyCruitDetailVedioTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyCruitDetailVedioTableViewCell.m; sourceTree = "<group>"; };
+		1832B9A420F5C45700D6CE4F /* UILabel+ChangeCustomeLineSpace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+ChangeCustomeLineSpace.h"; sourceTree = "<group>"; };
+		1832B9A520F5C45700D6CE4F /* UILabel+ChangeCustomeLineSpace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ChangeCustomeLineSpace.m"; sourceTree = "<group>"; };
+		1832B9A720F5D48700D6CE4F /* OrderTakingQuotePriceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderTakingQuotePriceViewController.h; sourceTree = "<group>"; };
+		1832B9A820F5D48700D6CE4F /* OrderTakingQuotePriceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderTakingQuotePriceViewController.m; sourceTree = "<group>"; };
+		1832B9AA20F5DFC300D6CE4F /* TakeOrderQuotePriceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeOrderQuotePriceTableViewCell.h; sourceTree = "<group>"; };
+		1832B9AB20F5DFC300D6CE4F /* TakeOrderQuotePriceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeOrderQuotePriceTableViewCell.m; sourceTree = "<group>"; };
+		1832B9AD20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeOrderQuotePriceModel.h; sourceTree = "<group>"; };
+		1832B9AE20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeOrderQuotePriceModel.m; sourceTree = "<group>"; };
+		1832B9B020F601C300D6CE4F /* QuotePriceOnWebGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotePriceOnWebGroupView.h; sourceTree = "<group>"; };
+		1832B9B120F601C300D6CE4F /* QuotePriceOnWebGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotePriceOnWebGroupView.m; sourceTree = "<group>"; };
 		1853688F20E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageWaterCollectionReusableHeaderView.h; sourceTree = "<group>"; };
 		1853689020E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstPageWaterCollectionReusableHeaderView.m; sourceTree = "<group>"; };
 		1853689320E9B57B0053A5D4 /* FirstPageSearchInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageSearchInputView.h; sourceTree = "<group>"; };
@@ -881,6 +915,8 @@
 				18E2DEEE20E878CF00FDF9C1 /* UIFont+CustomerFonts.m */,
 				1853689C20E9BA160053A5D4 /* UISearchBar+CustomeStyle.h */,
 				1853689D20E9BA160053A5D4 /* UISearchBar+CustomeStyle.m */,
+				1832B9A420F5C45700D6CE4F /* UILabel+ChangeCustomeLineSpace.h */,
+				1832B9A520F5C45700D6CE4F /* UILabel+ChangeCustomeLineSpace.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1029,6 +1065,10 @@
 			children = (
 				180609A720F479DB00471E08 /* CompanyCruitDetailTableViewCell.h */,
 				180609A820F479DB00471E08 /* CompanyCruitDetailTableViewCell.m */,
+				1832B98F20F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.h */,
+				1832B99020F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m */,
+				1832B9A120F5B0E900D6CE4F /* CompanyCruitDetailVedioTableViewCell.h */,
+				1832B9A220F5B0E900D6CE4F /* CompanyCruitDetailVedioTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1038,6 +1078,8 @@
 			children = (
 				1443C59620E3316C0009E82F /* OrderTakingViewController.h */,
 				1443C59720E3316C0009E82F /* OrderTakingViewController.m */,
+				1832B9A720F5D48700D6CE4F /* OrderTakingQuotePriceViewController.h */,
+				1832B9A820F5D48700D6CE4F /* OrderTakingQuotePriceViewController.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -1047,6 +1089,10 @@
 			children = (
 				1818E49B20EB08AD00B676C2 /* TakeOrderTableViewCell.h */,
 				1818E49C20EB08AD00B676C2 /* TakeOrderTableViewCell.m */,
+				1832B9AA20F5DFC300D6CE4F /* TakeOrderQuotePriceTableViewCell.h */,
+				1832B9AB20F5DFC300D6CE4F /* TakeOrderQuotePriceTableViewCell.m */,
+				1832B9B020F601C300D6CE4F /* QuotePriceOnWebGroupView.h */,
+				1832B9B120F601C300D6CE4F /* QuotePriceOnWebGroupView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -1056,6 +1102,8 @@
 			children = (
 				1818E49E20EB092200B676C2 /* TakeOrderMainHallModel.h */,
 				1818E49F20EB092200B676C2 /* TakeOrderMainHallModel.m */,
+				1832B9AD20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.h */,
+				1832B9AE20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -1195,9 +1243,34 @@
 			path = sound;
 			sourceTree = "<group>";
 		};
+		1832B99220F59CC300D6CE4F /* PhotoContainer */ = {
+			isa = PBXGroup;
+			children = (
+				1832B99320F59CC300D6CE4F /* SDWeiXinPhotoContainerView.m */,
+				1832B99420F59CC300D6CE4F /* SDWeiXinPhotoContainerView.h */,
+			);
+			path = PhotoContainer;
+			sourceTree = "<group>";
+		};
+		1832B99520F59CC300D6CE4F /* SDPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				1832B99620F59CC300D6CE4F /* SDPhotoBrowserConfig.h */,
+				1832B99720F59CC400D6CE4F /* SDPhotoBrowser.m */,
+				1832B99820F59CC400D6CE4F /* SDWaitingView.m */,
+				1832B99920F59CC400D6CE4F /* SDBrowserImageView.m */,
+				1832B99A20F59CC400D6CE4F /* SDWaitingView.h */,
+				1832B99B20F59CC400D6CE4F /* SDPhotoBrowser.h */,
+				1832B99C20F59CC400D6CE4F /* SDBrowserImageView.h */,
+			);
+			path = SDPhotoBrowser;
+			sourceTree = "<group>";
+		};
 		1853689F20E9CAD70053A5D4 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				1832B99220F59CC300D6CE4F /* PhotoContainer */,
+				1832B99520F59CC300D6CE4F /* SDPhotoBrowser */,
 				1818E4A420EB41E400B676C2 /* SSSearchBar */,
 				185368F420E9D4A90053A5D4 /* ZHQScrollView */,
 				185368E720E9CB2A0053A5D4 /* CXCarouselView */,
@@ -1856,6 +1929,7 @@
 				1443C57620E3188E0009E82F /* LzhReturnLabelHeight.m in Sources */,
 				1443C5C820E343E50009E82F /* RDVTabBarItem.m in Sources */,
 				1818E4A920EB42A000B676C2 /* SSSearchBar.m in Sources */,
+				1832B99D20F59CC400D6CE4F /* SDWeiXinPhotoContainerView.m in Sources */,
 				1443C5AA20E336740009E82F /* UIColor+Hex.m in Sources */,
 				1874349C20F30A6D0008A24F /* SkillShowSecondViewController.m in Sources */,
 				1888139420EC4F0700F832BE /* MyInfoTableFootView.m in Sources */,
@@ -1869,6 +1943,7 @@
 				185368FA20E9E9D60053A5D4 /* TraingleCategorySmallButtonView.m in Sources */,
 				1443C50220E204170009E82F /* ViewController.m in Sources */,
 				188813E420ECB84100F832BE /* PersonalInfoExchangeViceTextView.m in Sources */,
+				1832B9B220F601C300D6CE4F /* QuotePriceOnWebGroupView.m in Sources */,
 				186EBE4720EE021F00D0F54E /* PersonalInfoAddPhotoFlagView.m in Sources */,
 				1874349320F2FBA00008A24F /* MessageSoundView.m in Sources */,
 				180609A920F479DB00471E08 /* CompanyCruitDetailTableViewCell.m in Sources */,
@@ -1876,11 +1951,13 @@
 				1824F75120EF0C6100E99823 /* BaseHiddenNavAndTabBarViewController.m in Sources */,
 				1888139A20EC62AA00F832BE /* WxQQLoginViewController.m in Sources */,
 				1443C5C720E343E50009E82F /* RDVTabBarController.m in Sources */,
+				1832B9AC20F5DFC300D6CE4F /* TakeOrderQuotePriceTableViewCell.m in Sources */,
 				18E2DF1E20E8C66B00FDF9C1 /* ConcernDisplayView.m in Sources */,
 				18E2DF1120E8BED300FDF9C1 /* BaseDisplayNaviViewController.m in Sources */,
 				180609BE20F493BD00471E08 /* CompanyCruitDetailModel.m in Sources */,
 				1818E4D020EB55D200B676C2 /* MyInfoTableViewCell.m in Sources */,
 				1818E49D20EB08AD00B676C2 /* TakeOrderTableViewCell.m in Sources */,
+				1832B99E20F59CC400D6CE4F /* SDPhotoBrowser.m in Sources */,
 				1443C50D20E204180009E82F /* main.m in Sources */,
 				1874349620F2FE780008A24F /* StarView.m in Sources */,
 				1824F76720EF106600E99823 /* OwnPersonalInfomationTopPictureGoupView.m in Sources */,
@@ -1888,17 +1965,22 @@
 				186EBE2C20EDE33F00D0F54E /* OwnTextView.m in Sources */,
 				1443C59E20E332200009E82F /* SkillShowViewController.m in Sources */,
 				1443C58020E31B2D0009E82F /* ShareHomePath.m in Sources */,
+				1832B9A320F5B0E900D6CE4F /* CompanyCruitDetailVedioTableViewCell.m in Sources */,
 				188813D520ECAFE400F832BE /* PersonalInfoInputAgeView.m in Sources */,
 				1443C58320E31BC10009E82F /* ShareNetWorkState.m in Sources */,
 				1443C57C20E3194C0009E82F /* Reachability.m in Sources */,
 				1824F76D20EF3AF300E99823 /* OwnPersonalInfomationPersonalIntroduceGoupView.m in Sources */,
 				18E2DF0E20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.m in Sources */,
+				1832B9A020F59CC400D6CE4F /* SDBrowserImageView.m in Sources */,
 				1824F77D20EF44CF00E99823 /* CustomerLabelView.m in Sources */,
+				1832B9A920F5D48700D6CE4F /* OrderTakingQuotePriceViewController.m in Sources */,
 				1443C59520E331120009E82F /* FirstPageViewController.m in Sources */,
 				1853690520EA11C10053A5D4 /* WaterCellRecuritJobView.m in Sources */,
+				1832B9AF20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.m in Sources */,
 				188813EF20ECC54900F832BE /* PersonalInfoAddSoundButtView.m in Sources */,
 				18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */,
 				1818E49A20EB025A00B676C2 /* BaseCustomeTableViewController.m in Sources */,
+				1832B99F20F59CC400D6CE4F /* SDWaitingView.m in Sources */,
 				187434C420F358850008A24F /* NavTools.m in Sources */,
 				180609A520F446A600471E08 /* CompanyRecuritDetailHeaderView.m in Sources */,
 				188813AC20EC929D00F832BE /* PersonalInfoVideoViewController.m in Sources */,
@@ -1911,6 +1993,7 @@
 				1888139720EC50FE00F832BE /* CustomeStyleCornerButt.m in Sources */,
 				1824F74720EEF66100E99823 /* ChooseTechnologyLeftTableViewCell.m in Sources */,
 				186EBE1720EDA04200D0F54E /* RdvtarbarBigView.m in Sources */,
+				1832B99120F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m in Sources */,
 				1443C59820E3316C0009E82F /* OrderTakingViewController.m in Sources */,
 				186EBE3220EDF08400D0F54E /* ImageAndLabelView.m in Sources */,
 				187434C120F356AA0008A24F /* CompanyRecuritDetailViewController.m in Sources */,
@@ -1922,6 +2005,7 @@
 				1443C61920E37A3D0009E82F /* RegisterButtonStyleView.m in Sources */,
 				1824F74E20EF090500E99823 /* OwnPersonalInfomationViewController.m in Sources */,
 				1824F78020EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m in Sources */,
+				1832B9A620F5C45700D6CE4F /* UILabel+ChangeCustomeLineSpace.m in Sources */,
 				1443C59B20E331CA0009E82F /* VideoCenterViewController.m in Sources */,
 				1824F78320EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m in Sources */,
 				1443C61520E36B4A0009E82F /* MobileCode.m in Sources */,

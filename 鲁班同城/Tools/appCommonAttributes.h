@@ -19,11 +19,13 @@
 #import "ImageAndLabelView.h"
 #import "OwnTextField.h"
 #import "NavTools.h"
+#import "UILabel+ChangeCustomeLineSpace.h"
 
 //third party class
 #import <SVProgressHUD.h>
 #import <SDWebImageDownloader.h>
 #import <SDWebImage/SDWebImageManager.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import <SDAutoLayout.h>
 #import <AFNetworking.h>
 #import <MJRefresh.h>

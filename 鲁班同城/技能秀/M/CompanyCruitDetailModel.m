@@ -15,6 +15,7 @@
     if (dict){
         
     }else{
+        model.imageUrlArr = [[NSMutableArray alloc]init];
         model.jobNameStr = @"我要找修空调的师傅1名";
         model.detailContentStr = @"这里显示详情。这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情这里显示详情。";
     }

@@ -43,6 +43,12 @@
         self.detailContentLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:12] titleColor:[UIColor colorWithHexString:@"#999999"] aligement:0];
         self.detailContentLabel.numberOfLines = 0;
         [self.contentView addSubview:self.detailContentLabel];
+        //
+        self.detailContentLabel.sd_resetLayout
+        .leftEqualToView(self.jobLabel)
+        .rightEqualToView(self.applyForJobButt)
+        .topSpaceToView(self.jobLabel, 10)
+        .autoHeightRatio(0);
     }
     return self;
 }
@@ -53,24 +59,20 @@
     }
 }
 
-
 - (void)setModel:(CompanyCruitDetailModel*)model{
     _model = model;
     
-    if (_model){
+    if (model){
         self.jobLabel.text = [model.jobNameStr copy];
         self.detailContentLabel.text = [model.detailContentStr copy];
-       
-        self.detailContentLabel.sd_resetLayout
-        .leftEqualToView(self.jobLabel)
-        .rightEqualToView(self.applyForJobButt)
-        .topSpaceToView(self.jobLabel, 10)
-        .autoHeightRatio(0);
+        [self.applyForJobButt setTitle:@"应聘" forState:UIControlStateNormal];
         if (model.isDetailDisplayState){
             [self.detailButtView setPullUpState];
+            self.detailContentLabel.hidden = NO;
             [self setupAutoHeightWithBottomView:self.detailContentLabel bottomMargin:10];
         }else{
             [self.detailButtView setPullDownState];
+            self.detailContentLabel.hidden = YES;
             [self setupAutoHeightWithBottomView:self.jobLabel bottomMargin:10];
         }
     }

@@ -8,7 +8,11 @@
 
 #import "CompanyRecuritDetailViewController.h"
 #import "CompanyRecuritDetailHeaderView.h"
+
 #import "CompanyCruitDetailTableViewCell.h"
+#import "CompanyCruitDetailPictureTableViewCell.h"
+#import "CompanyCruitDetailVedioTableViewCell.h"
+
 #import "CompanyCruitDetailModel.h"
 
 @interface CompanyRecuritDetailViewController ()<UITableViewDelegate,UITableViewDataSource>{
@@ -18,6 +22,10 @@
 @property (strong,nonatomic) UITableView *tableView;
 
 @property (strong,nonatomic) NSMutableArray *modelArr;
+
+@property (strong,nonatomic) CompanyCruitDetailModel *pictureModel;
+
+@property (strong,nonatomic) CompanyCruitDetailModel *videoModel;
 
 @end
 
@@ -34,7 +42,13 @@
 
 - (void)initOwnObjects{
     self.modelArr = [[NSMutableArray alloc]init];
-    for (int i = 0; i < 30; i ++){
+    self.pictureModel = [CompanyCruitDetailModel setModelFromDict:nil];
+    self.videoModel = [CompanyCruitDetailModel setModelFromDict:nil];
+    for (int k = 0; k < 6; k ++){
+         [self.pictureModel.imageUrlArr addObject:@"https://image.baidu.com"];
+         [self.videoModel.imageUrlArr addObject:@"https://image.baidu.com"];
+    }
+    for (int i = 0; i < 6; i ++){
         CompanyCruitDetailModel *singleModel = [CompanyCruitDetailModel setModelFromDict:nil];
         [self.modelArr addObject:singleModel];
     }
@@ -42,15 +56,9 @@
 }
 //
 - (void)clickDetailButt:(NSIndexPath*)path{
-    for (int i = 0; i < self.modelArr.count; i ++){
-        CompanyCruitDetailModel *model = self.modelArr[path.row];
-        
-        if (i == path.row){
-            model.isDetailDisplayState = !model.isDetailDisplayState;
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-            break;
-        }
-    }
+    CompanyCruitDetailModel *model = self.modelArr[path.row];
+    model.isDetailDisplayState = !model.isDetailDisplayState;
+    [self.tableView reloadData];
 }
 
 //
@@ -59,11 +67,12 @@
     headerView = [[CompanyRecuritDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 10)];
     //
     self.tableView = [[UITableView alloc] initWithFrame:size style:styles];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor whiteColor];
-//    self.tableView.tableHeaderView = self.headerView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = headerView;
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:self.tableView];
     //
     [headerView.companyLogoImageView setImage:[UIImage imageNamed:@"test01"]];
@@ -72,38 +81,104 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 3;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.modelArr.count;
+    NSInteger rows = 0;
+    switch (section) {
+        case 0:
+            rows = self.modelArr.count;
+            break;
+        case 1:
+            rows = 1;
+            break;
+        case 2:
+            rows = 1;
+            break;
+        default:
+            break;
+    }
+    return rows;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellFlag = @"cellFlag";
-    CompanyCruitDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
-    if (nil == cell){
-        cell = [[CompanyCruitDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
-        WS(weakSelf);
-        cell.cliclDetailBlock = ^(NSIndexPath *path) {
-            [weakSelf clickDetailButt:path];
-        };
+    
+    UITableViewCell *parentCell = nil;
+    switch (indexPath.section) {
+        case 0:{
+            static NSString *cellFlag = @"cellFlag";
+            CompanyCruitDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
+            if (nil == cell){
+                cell = [[CompanyCruitDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+                WS(weakSelf);
+                cell.cliclDetailBlock = ^(NSIndexPath *path) {
+                    [weakSelf clickDetailButt:path];
+                };
+            }
+            cell.indexPath = indexPath;
+            CompanyCruitDetailModel *model = self.modelArr[indexPath.row];
+            cell.model = model;
+            parentCell = cell;
+        }
+            break;
+        case 1:{
+            static NSString *cellFlag = @"cellFlag01";
+            CompanyCruitDetailVedioTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
+            if (nil == cell){
+                cell = [[CompanyCruitDetailVedioTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+            }
+            CompanyCruitDetailModel *model = self.videoModel;;
+            cell.model = model;
+            parentCell = cell;
+        }
+             break;
+        case 2:{
+            static NSString *cellFlag = @"cellFlag02";
+            CompanyCruitDetailPictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
+            if (nil == cell){
+                cell = [[CompanyCruitDetailPictureTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+            }
+            CompanyCruitDetailModel *model = self.pictureModel;;
+            cell.model = model;
+            parentCell = cell;
+        }
+             break;
+        default:
+            break;
     }
-    CompanyCruitDetailModel *model = self.modelArr[indexPath.row];
-    cell.indexPath = indexPath;
-    cell.model = model;
-    return cell;
+    
+    return parentCell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CompanyCruitDetailModel *model = self.modelArr[indexPath.row];
-    CGFloat height = [tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[CompanyCruitDetailTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+    CGFloat height = 0;
+    switch (indexPath.section) {
+        case 0:{
+            CompanyCruitDetailModel *model = self.modelArr[indexPath.row];
+            height = [tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[CompanyCruitDetailTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+        }
+            break;
+        case 1:{
+            CompanyCruitDetailModel *model = self.videoModel;
+            height = [tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[CompanyCruitDetailVedioTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+        }
+            break;
+        case 2:{
+            CompanyCruitDetailModel *model = self.pictureModel;
+            height = [tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[CompanyCruitDetailPictureTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+        }
+            break;
+        default:
+            break;
+    }
     return height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
+
 
 
 - (void)didReceiveMemoryWarning {

@@ -16,7 +16,13 @@
 
 @property (assign,nonatomic) BOOL isDetailDisplayState;
 
+//图片cell专用数组
+@property (strong,nonatomic) NSMutableArray *imageUrlArr;
+
+
 + (CompanyCruitDetailModel*)setModelFromDict:(NSDictionary*)dict;
+
+
 
 
 @end
