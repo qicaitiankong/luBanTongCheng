@@ -1,20 +1,20 @@
 //
-//  TakeOrderQuotePriceTableViewCell.m
+//  OrderTakingQuotePriceDetailTableViewCell.m
 //  鲁班同城
 //
-//  Created by apple on 2018/7/11.
-//  Copyright © 2018年 Mac. All rights reserved.
+//  Created by apple on 2018/7/12.
+//  Copyright © 2018 Mac. All rights reserved.
 //
 
-#import "TakeOrderQuotePriceTableViewCell.h"
+#import "OrderTakingQuotePriceDetailTableViewCell.h"
 
-@interface TakeOrderQuotePriceTableViewCell (){
+@interface OrderTakingQuotePriceDetailTableViewCell (){
     CGFloat leftSpace;
 }
 @end
 
+@implementation OrderTakingQuotePriceDetailTableViewCell
 
-@implementation TakeOrderQuotePriceTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -39,15 +39,8 @@
         //
         self.ticketsNumberLabel = [[CustomeLzhLabel alloc] initWithCustomerParamer:[UIFont getPingFangSCMedium:12] titleColor:[UIColor colorWithRed:51.0026/255.0 green:51.0026/255.0 blue:51.0026/255.0 alpha:1] aligement:2];
         //
-        self.picContainView = [SDWeiXinPhotoContainerView new];
-        //
-        NSArray *viewArr = @[self.personLogoImaView,self.timeLabel,self.personNameLabel,self.detailLabel,self.ticketsNumberLabel,self.praiseLabel,self.picContainView];
+        NSArray *viewArr = @[self.personLogoImaView,self.timeLabel,self.personNameLabel,self.detailLabel,self.ticketsNumberLabel,self.praiseLabel];
         [self.contentView sd_addSubviews:viewArr];
-        //
-        self.bottomGroupView = [[QuotePriceOnWebGroupView alloc]initWithFrame:CGRectMake(leftSpace, 0, SCREEN_WIDTH - 2 * leftSpace, 10)];
-        [self.contentView addSubview:self.bottomGroupView];
-        //
-        
         [self addOwnConstraints];
     }
     return self;
@@ -89,19 +82,9 @@
     .rightSpaceToView(self.ticketsNumberLabel, 10)
     .topEqualToView(self.ticketsNumberLabel)
     .heightIs(15);
-    //
-    self.picContainView.sd_layout
-    .leftEqualToView(self.personLogoImaView)
-    .topSpaceToView(self.praiseLabel, 15);
-    //
-    self.bottomGroupView.sd_layout
-    .leftEqualToView(self.personLogoImaView)
-    .topSpaceToView(self.picContainView, 10)
-    .rightSpaceToView(self.contentView, 20)
-    .heightIs(self.bottomGroupView.height);
 }
 
-- (void)setModel:(TakeOrderQuotePriceModel*)model{
+- (void)setModel:(TakeOrderQuotePriceDetailModel*)model{
     _model = model;
     if (_model){
         [self.personLogoImaView setImage:model.image];
@@ -110,8 +93,6 @@
         self.detailLabel.text = [model.detailStr copy];
         self.praiseLabel.text = [model.praiseStr copy];
         self.ticketsNumberLabel.text = [model.ticketsNumberStr copy];
-        [self.picContainView setPicPathStringsArray:model.imageUrls];
-        //
         self.ticketsNumberLabel.sd_resetLayout
         .rightEqualToView(self.detailLabel)
         .widthIs(90)
@@ -124,24 +105,10 @@
         .topEqualToView(self.ticketsNumberLabel)
         .heightIs(15);
         //
-        self.picContainView.sd_layout
-        .topSpaceToView(self.praiseLabel, 15);
-        //
-        self.bottomGroupView.sd_layout
-        .leftEqualToView(self.personLogoImaView)
-        .topSpaceToView(self.picContainView, 10)
-        .rightSpaceToView(self.contentView, leftSpace)
-        .heightIs(self.bottomGroupView.height);
-        //
-        [self setupAutoHeightWithBottomView:self.bottomGroupView bottomMargin:15];
+        [self setupAutoHeightWithBottomView:self.praiseLabel bottomMargin:15];
         
     }
 }
-
-
-
-
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];

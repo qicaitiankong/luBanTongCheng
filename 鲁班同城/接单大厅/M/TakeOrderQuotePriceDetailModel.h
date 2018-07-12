@@ -1,14 +1,14 @@
 //
-//  TakeOrderQuotePriceModel.h
+//  TakeOrderQuotePriceDetailModel.h
 //  鲁班同城
 //
-//  Created by apple on 2018/7/11.
-//  Copyright © 2018年 Mac. All rights reserved.
+//  Created by apple on 2018/7/12.
+//  Copyright © 2018 Mac. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface TakeOrderQuotePriceModel : NSObject
+@interface TakeOrderQuotePriceDetailModel : NSObject
 
 @property (strong,nonatomic) NSString *logoUrlStr;
 
@@ -23,17 +23,10 @@
 @property (strong,nonatomic) NSString *praiseStr;
 
 @property (strong,nonatomic) NSString *ticketsNumberStr;
+//电话地址备注信息
 
-@property (strong,nonatomic) NSMutableArray *imageUrls;
+@property (strong,nonatomic) NSString *personInfoTipStr;
 
-
-//抢标列表
-
-@property (strong,nonatomic) NSString *nickNameStr;
-
-@property (strong,nonatomic) NSString *quoteStateStr;
-
-+ (TakeOrderQuotePriceModel*)setModelFromDict:(NSDictionary*)dict;
-
+@property (strong,nonatomic) NSString *personInfoStr;
 
 @end

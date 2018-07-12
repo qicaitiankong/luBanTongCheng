@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SDWeiXinPhotoContainerView.h"
 #import "TakeOrderQuotePriceModel.h"
+#import "QuotePriceOnWebGroupView.h"
+
+
 
 @interface TakeOrderQuotePriceTableViewCell : UITableViewCell
 
@@ -25,6 +28,8 @@
 @property (strong,nonatomic) UILabel *ticketsNumberLabel;
 
 @property (strong,nonatomic) SDWeiXinPhotoContainerView *picContainView;
+
+@property (strong,nonatomic) QuotePriceOnWebGroupView *bottomGroupView;
 
 @property (strong,nonatomic) TakeOrderQuotePriceModel *model;
 

@@ -15,6 +15,9 @@
     if (dict){
         
     }else{
+        localModel.image = [UIImage imageNamed:@"test07.jpg"];
+        localModel.nickNameStr = @"昵称昵称昵称";
+        localModel.quoteStateStr = @"已报价";
     }
     return localModel;
 }

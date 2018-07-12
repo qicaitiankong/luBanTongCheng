@@ -26,6 +26,26 @@
     return self;
 }
 
+- (instancetype)initWithFrameForBaoJIA:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        _myTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, frame.size.width - 40, frame.size.height)];
+        [self addSubview:_myTextField];
+        _myTextField.returnKeyType = UIReturnKeyDone;
+        _myTextField.delegate = self;
+        //
+        UILabel *rightLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:1];
+        rightLabel.text = @"元";
+        rightLabel.frame = CGRectMake(frame.size.width - 40, 0, 40, frame.size.height);
+        [self addSubview:rightLabel];
+        //
+       
+    }
+    return self;
+}
+
 - (void)addOwnConstraints{
     self.myTextField.sd_layout
     .leftEqualToView(self)

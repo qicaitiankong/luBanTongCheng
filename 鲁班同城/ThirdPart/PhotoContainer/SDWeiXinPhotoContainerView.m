@@ -135,7 +135,7 @@
 
 - (CGFloat)itemWidthForPicPathArray:(NSArray *)array
 {
-    return  (SCREEN_WIDTH - 30 - 2) / 3;
+    return  (SCREEN_WIDTH - 30 - 5 * 2) / 3;
 //    if (array.count == 1) {
 //        return 70;
 //    } else {

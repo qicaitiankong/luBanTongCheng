@@ -102,6 +102,22 @@
 		1818E4D620EB57A200B676C2 /* goFlag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1818E4D320EB57A200B676C2 /* goFlag@2x.png */; };
 		1818E4D920EB5D1300B676C2 /* MyInfoTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E4D820EB5D1300B676C2 /* MyInfoTableHeaderView.m */; };
 		1818E4DC20EB5E2E00B676C2 /* WithDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E4DB20EB5E2E00B676C2 /* WithDrawView.m */; };
+		181FCBE720F7050B0044B055 /* pressSound.png in Resources */ = {isa = PBXBuildFile; fileRef = 181FCBE420F7050A0044B055 /* pressSound.png */; };
+		181FCBE820F7050B0044B055 /* pressSound@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181FCBE520F7050A0044B055 /* pressSound@3x.png */; };
+		181FCBE920F7050B0044B055 /* pressSound@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181FCBE620F7050A0044B055 /* pressSound@2x.png */; };
+		181FCBEC20F707740044B055 /* TakeOrderQuotePriceQiangBiaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181FCBEB20F707740044B055 /* TakeOrderQuotePriceQiangBiaoTableViewCell.m */; };
+		181FCBEF20F71E6E0044B055 /* TakeOrderQuotePriceSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181FCBEE20F71E6E0044B055 /* TakeOrderQuotePriceSectionView.m */; };
+		181FCBF420F727700044B055 /* quotePriceDetailBack@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181FCBF120F7276F0044B055 /* quotePriceDetailBack@3x.png */; };
+		181FCBF520F727700044B055 /* quotePriceDetailBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 181FCBF220F727700044B055 /* quotePriceDetailBack.png */; };
+		181FCBF620F727700044B055 /* quotePriceDetailBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181FCBF320F727700044B055 /* quotePriceDetailBack@2x.png */; };
+		181FCBF920F728CC0044B055 /* OrderTakingQuotePriceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181FCBF820F728CC0044B055 /* OrderTakingQuotePriceDetailViewController.m */; };
+		181FCBFC20F72D620044B055 /* OrderTakingQuotePriceDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181FCBFB20F72D620044B055 /* OrderTakingQuotePriceDetailTableViewCell.m */; };
+		181FCBFF20F72E110044B055 /* TakeOrderQuotePriceDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181FCBFE20F72E110044B055 /* TakeOrderQuotePriceDetailModel.m */; };
+		181FCC0220F737210044B055 /* TakeOrderQuotePriceDetaiSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181FCC0120F737210044B055 /* TakeOrderQuotePriceDetaiSectionView.m */; };
+		181FCC0620F73A7C0044B055 /* quotePriceTraingle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181FCC0320F73A7C0044B055 /* quotePriceTraingle@2x.png */; };
+		181FCC0720F73A7C0044B055 /* quotePriceTraingle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181FCC0420F73A7C0044B055 /* quotePriceTraingle@3x.png */; };
+		181FCC0820F73A7C0044B055 /* quotePriceTraingle.png in Resources */ = {isa = PBXBuildFile; fileRef = 181FCC0520F73A7C0044B055 /* quotePriceTraingle.png */; };
+		181FCC0B20F740DF0044B055 /* OrderTakingQuotePriceDetailTelephoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181FCC0A20F740DF0044B055 /* OrderTakingQuotePriceDetailTelephoneTableViewCell.m */; };
 		1824F72620EEF38900E99823 /* orderSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824F72320EEF38800E99823 /* orderSelected.png */; };
 		1824F72720EEF38900E99823 /* orderSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824F72420EEF38800E99823 /* orderSelected@2x.png */; };
 		1824F72820EEF38900E99823 /* orderSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824F72520EEF38800E99823 /* orderSelected@3x.png */; };
@@ -449,6 +465,29 @@
 		1818E4D820EB5D1300B676C2 /* MyInfoTableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInfoTableHeaderView.m; sourceTree = "<group>"; };
 		1818E4DA20EB5E2E00B676C2 /* WithDrawView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithDrawView.h; sourceTree = "<group>"; };
 		1818E4DB20EB5E2E00B676C2 /* WithDrawView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithDrawView.m; sourceTree = "<group>"; };
+		181FCBE420F7050A0044B055 /* pressSound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pressSound.png; sourceTree = "<group>"; };
+		181FCBE520F7050A0044B055 /* pressSound@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pressSound@3x.png"; sourceTree = "<group>"; };
+		181FCBE620F7050A0044B055 /* pressSound@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pressSound@2x.png"; sourceTree = "<group>"; };
+		181FCBEA20F707740044B055 /* TakeOrderQuotePriceQiangBiaoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeOrderQuotePriceQiangBiaoTableViewCell.h; sourceTree = "<group>"; };
+		181FCBEB20F707740044B055 /* TakeOrderQuotePriceQiangBiaoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeOrderQuotePriceQiangBiaoTableViewCell.m; sourceTree = "<group>"; };
+		181FCBED20F71E6E0044B055 /* TakeOrderQuotePriceSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeOrderQuotePriceSectionView.h; sourceTree = "<group>"; };
+		181FCBEE20F71E6E0044B055 /* TakeOrderQuotePriceSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeOrderQuotePriceSectionView.m; sourceTree = "<group>"; };
+		181FCBF120F7276F0044B055 /* quotePriceDetailBack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quotePriceDetailBack@3x.png"; sourceTree = "<group>"; };
+		181FCBF220F727700044B055 /* quotePriceDetailBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quotePriceDetailBack.png; sourceTree = "<group>"; };
+		181FCBF320F727700044B055 /* quotePriceDetailBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quotePriceDetailBack@2x.png"; sourceTree = "<group>"; };
+		181FCBF720F728CC0044B055 /* OrderTakingQuotePriceDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderTakingQuotePriceDetailViewController.h; sourceTree = "<group>"; };
+		181FCBF820F728CC0044B055 /* OrderTakingQuotePriceDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderTakingQuotePriceDetailViewController.m; sourceTree = "<group>"; };
+		181FCBFA20F72D620044B055 /* OrderTakingQuotePriceDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderTakingQuotePriceDetailTableViewCell.h; sourceTree = "<group>"; };
+		181FCBFB20F72D620044B055 /* OrderTakingQuotePriceDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderTakingQuotePriceDetailTableViewCell.m; sourceTree = "<group>"; };
+		181FCBFD20F72E110044B055 /* TakeOrderQuotePriceDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeOrderQuotePriceDetailModel.h; sourceTree = "<group>"; };
+		181FCBFE20F72E110044B055 /* TakeOrderQuotePriceDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeOrderQuotePriceDetailModel.m; sourceTree = "<group>"; };
+		181FCC0020F737210044B055 /* TakeOrderQuotePriceDetaiSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeOrderQuotePriceDetaiSectionView.h; sourceTree = "<group>"; };
+		181FCC0120F737210044B055 /* TakeOrderQuotePriceDetaiSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeOrderQuotePriceDetaiSectionView.m; sourceTree = "<group>"; };
+		181FCC0320F73A7C0044B055 /* quotePriceTraingle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quotePriceTraingle@2x.png"; sourceTree = "<group>"; };
+		181FCC0420F73A7C0044B055 /* quotePriceTraingle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quotePriceTraingle@3x.png"; sourceTree = "<group>"; };
+		181FCC0520F73A7C0044B055 /* quotePriceTraingle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quotePriceTraingle.png; sourceTree = "<group>"; };
+		181FCC0920F740DF0044B055 /* OrderTakingQuotePriceDetailTelephoneTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderTakingQuotePriceDetailTelephoneTableViewCell.h; sourceTree = "<group>"; };
+		181FCC0A20F740DF0044B055 /* OrderTakingQuotePriceDetailTelephoneTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderTakingQuotePriceDetailTelephoneTableViewCell.m; sourceTree = "<group>"; };
 		1824F72320EEF38800E99823 /* orderSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderSelected.png; sourceTree = "<group>"; };
 		1824F72420EEF38800E99823 /* orderSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orderSelected@2x.png"; sourceTree = "<group>"; };
 		1824F72520EEF38800E99823 /* orderSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orderSelected@3x.png"; sourceTree = "<group>"; };
@@ -939,6 +978,7 @@
 		1443C5CC20E347510009E82F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				181FCBF020F727260044B055 /* 接单大厅 */,
 				187434A020F327670008A24F /* 技能秀 */,
 				1824F77120EF400F00E99823 /* sound */,
 				188813BA20ECA3B900F832BE /* 登录注册 */,
@@ -1080,6 +1120,8 @@
 				1443C59720E3316C0009E82F /* OrderTakingViewController.m */,
 				1832B9A720F5D48700D6CE4F /* OrderTakingQuotePriceViewController.h */,
 				1832B9A820F5D48700D6CE4F /* OrderTakingQuotePriceViewController.m */,
+				181FCBF720F728CC0044B055 /* OrderTakingQuotePriceDetailViewController.h */,
+				181FCBF820F728CC0044B055 /* OrderTakingQuotePriceDetailViewController.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -1093,6 +1135,16 @@
 				1832B9AB20F5DFC300D6CE4F /* TakeOrderQuotePriceTableViewCell.m */,
 				1832B9B020F601C300D6CE4F /* QuotePriceOnWebGroupView.h */,
 				1832B9B120F601C300D6CE4F /* QuotePriceOnWebGroupView.m */,
+				181FCBEA20F707740044B055 /* TakeOrderQuotePriceQiangBiaoTableViewCell.h */,
+				181FCBEB20F707740044B055 /* TakeOrderQuotePriceQiangBiaoTableViewCell.m */,
+				181FCBED20F71E6E0044B055 /* TakeOrderQuotePriceSectionView.h */,
+				181FCBEE20F71E6E0044B055 /* TakeOrderQuotePriceSectionView.m */,
+				181FCBFA20F72D620044B055 /* OrderTakingQuotePriceDetailTableViewCell.h */,
+				181FCBFB20F72D620044B055 /* OrderTakingQuotePriceDetailTableViewCell.m */,
+				181FCC0020F737210044B055 /* TakeOrderQuotePriceDetaiSectionView.h */,
+				181FCC0120F737210044B055 /* TakeOrderQuotePriceDetaiSectionView.m */,
+				181FCC0920F740DF0044B055 /* OrderTakingQuotePriceDetailTelephoneTableViewCell.h */,
+				181FCC0A20F740DF0044B055 /* OrderTakingQuotePriceDetailTelephoneTableViewCell.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -1104,6 +1156,8 @@
 				1818E49F20EB092200B676C2 /* TakeOrderMainHallModel.m */,
 				1832B9AD20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.h */,
 				1832B9AE20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.m */,
+				181FCBFD20F72E110044B055 /* TakeOrderQuotePriceDetailModel.h */,
+				181FCBFE20F72E110044B055 /* TakeOrderQuotePriceDetailModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -1194,6 +1248,19 @@
 				1824F74D20EF090500E99823 /* OwnPersonalInfomationViewController.m */,
 			);
 			path = C;
+			sourceTree = "<group>";
+		};
+		181FCBF020F727260044B055 /* 接单大厅 */ = {
+			isa = PBXGroup;
+			children = (
+				181FCC0520F73A7C0044B055 /* quotePriceTraingle.png */,
+				181FCC0320F73A7C0044B055 /* quotePriceTraingle@2x.png */,
+				181FCC0420F73A7C0044B055 /* quotePriceTraingle@3x.png */,
+				181FCBF220F727700044B055 /* quotePriceDetailBack.png */,
+				181FCBF320F727700044B055 /* quotePriceDetailBack@2x.png */,
+				181FCBF120F7276F0044B055 /* quotePriceDetailBack@3x.png */,
+			);
+			path = "接单大厅";
 			sourceTree = "<group>";
 		};
 		1824F74120EEF60800E99823 /* cell */ = {
@@ -1542,6 +1609,9 @@
 		18E2DF1320E8C5C400FDF9C1 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				181FCBE420F7050A0044B055 /* pressSound.png */,
+				181FCBE620F7050A0044B055 /* pressSound@2x.png */,
+				181FCBE520F7050A0044B055 /* pressSound@3x.png */,
 				1818E4AB20EB4BD700B676C2 /* test07.jpg */,
 				185368EF20E9CDC40053A5D4 /* test04.png */,
 				185368F020E9CDC40053A5D4 /* test05.jpeg */,
@@ -1718,8 +1788,10 @@
 				18E2DF2B20E8E26D00FDF9C1 /* test02.png in Resources */,
 				18E2DEFD20E882C700FDF9C1 /* SanFranciscoDisplay-Regular-2.otf in Resources */,
 				1874347220F2F1BB0008A24F /* scollPicture03@2x.png in Resources */,
+				181FCBE720F7050B0044B055 /* pressSound.png in Resources */,
 				18E2DF1520E8C5DB00FDF9C1 /* test01@3x.png in Resources */,
 				1874348C20F2F6F30008A24F /* commentGrayStar.png in Resources */,
+				181FCBE820F7050B0044B055 /* pressSound@3x.png in Resources */,
 				1824F73220EEF3B600E99823 /* playSelected@2x.png in Resources */,
 				1824F73920EEF44500E99823 /* home.png in Resources */,
 				1443C5D220E3483B0009E82F /* homeSelected.png in Resources */,
@@ -1729,6 +1801,7 @@
 				186EBE5120EE111500D0F54E /* sucsess@3x.png in Resources */,
 				186EBE3620EDF91F00D0F54E /* videoFlag.png in Resources */,
 				188813A020EC714100F832BE /* weixinLogin@3x.png in Resources */,
+				181FCBF520F727700044B055 /* quotePriceDetailBack.png in Resources */,
 				1888139F20EC714100F832BE /* weixinLogin@2x.png in Resources */,
 				186EBE1B20EDDF1300D0F54E /* experience@2x.png in Resources */,
 				180609B620F481C800471E08 /* pullUp.png in Resources */,
@@ -1737,6 +1810,7 @@
 				187434B820F327E00008A24F /* message@2x.png in Resources */,
 				1874348820F2F6F30008A24F /* myInfoStar@3x.png in Resources */,
 				1824F73F20EEF4C600E99823 /* user@2x.png in Resources */,
+				181FCC0720F73A7C0044B055 /* quotePriceTraingle@3x.png in Resources */,
 				1824F73820EEF44500E99823 /* home@3x.png in Resources */,
 				1874347020F2F1BB0008A24F /* scollPicture02@2x.png in Resources */,
 				18E2DF1B20E8C60A00FDF9C1 /* heart@2x.png in Resources */,
@@ -1749,6 +1823,7 @@
 				1818E4C520EB51D900B676C2 /* set00@3x.png in Resources */,
 				187434A620F327920008A24F /* clickPraise.png in Resources */,
 				186EBE1D20EDDF1300D0F54E /* experience.png in Resources */,
+				181FCC0620F73A7C0044B055 /* quotePriceTraingle@2x.png in Resources */,
 				1818E4C320EB51D900B676C2 /* set00.png in Resources */,
 				1874348D20F2F6F30008A24F /* commentStar@3x.png in Resources */,
 				187434AC20F3279D0008A24F /* share@2x.png in Resources */,
@@ -1782,6 +1857,7 @@
 				1874348B20F2F6F30008A24F /* myInfoStar@2x.png in Resources */,
 				1818E4D520EB57A200B676C2 /* goFlag@3x.png in Resources */,
 				1818E4B120EB51A500B676C2 /* set02.png in Resources */,
+				181FCBF620F727700044B055 /* quotePriceDetailBack@2x.png in Resources */,
 				1824F73A20EEF44500E99823 /* home@2x.png in Resources */,
 				18E2DF0020E882C700FDF9C1 /* SanFranciscoText-Regular-19.otf in Resources */,
 				1443C5DF20E3486E0009E82F /* xiangji@3x.png in Resources */,
@@ -1801,9 +1877,11 @@
 				188813F520ECCC8300F832BE /* voiceGray@3x.png in Resources */,
 				180609BA20F481C800471E08 /* pullDown@2x.png in Resources */,
 				186EBE3820EDF91F00D0F54E /* videoFlag@3x.png in Resources */,
+				181FCBE920F7050B0044B055 /* pressSound@2x.png in Resources */,
 				187434B620F327E00008A24F /* message@3x.png in Resources */,
 				188813B420EC95A400F832BE /* nav@3x.png in Resources */,
 				1443C5DD20E3486E0009E82F /* xiangji.png in Resources */,
+				181FCBF420F727700044B055 /* quotePriceDetailBack@3x.png in Resources */,
 				1443C5FB20E35A670009E82F /* QQ.png in Resources */,
 				186EBE4F20EE111500D0F54E /* sucsess.png in Resources */,
 				1824F77520EF40C800E99823 /* SenderVoiceNodePlaying02.png in Resources */,
@@ -1843,6 +1921,7 @@
 				188813F420ECCC8300F832BE /* voiceGray.png in Resources */,
 				188813E020ECB7D900F832BE /* voiceFlag@3x.png in Resources */,
 				1874349020F2F6F30008A24F /* myInfoStar.png in Resources */,
+				181FCC0820F73A7C0044B055 /* quotePriceTraingle.png in Resources */,
 				1874347320F2F1BB0008A24F /* scollPicture01.png in Resources */,
 				186EBE2720EDDF3A00D0F54E /* job@2x.png in Resources */,
 				1443C5D320E3483B0009E82F /* homeSelected@2x.png in Resources */,
@@ -1933,6 +2012,8 @@
 				1443C5AA20E336740009E82F /* UIColor+Hex.m in Sources */,
 				1874349C20F30A6D0008A24F /* SkillShowSecondViewController.m in Sources */,
 				1888139420EC4F0700F832BE /* MyInfoTableFootView.m in Sources */,
+				181FCBEF20F71E6E0044B055 /* TakeOrderQuotePriceSectionView.m in Sources */,
+				181FCBEC20F707740044B055 /* TakeOrderQuotePriceQiangBiaoTableViewCell.m in Sources */,
 				188813AF20EC939900F832BE /* BasePersonalInfoViewController.m in Sources */,
 				18E2DF0B20E8BB9D00FDF9C1 /* JHCollectionViewCell.m in Sources */,
 				1853689E20E9BA160053A5D4 /* UISearchBar+CustomeStyle.m in Sources */,
@@ -1956,12 +2037,14 @@
 				18E2DF1120E8BED300FDF9C1 /* BaseDisplayNaviViewController.m in Sources */,
 				180609BE20F493BD00471E08 /* CompanyCruitDetailModel.m in Sources */,
 				1818E4D020EB55D200B676C2 /* MyInfoTableViewCell.m in Sources */,
+				181FCC0B20F740DF0044B055 /* OrderTakingQuotePriceDetailTelephoneTableViewCell.m in Sources */,
 				1818E49D20EB08AD00B676C2 /* TakeOrderTableViewCell.m in Sources */,
 				1832B99E20F59CC400D6CE4F /* SDPhotoBrowser.m in Sources */,
 				1443C50D20E204180009E82F /* main.m in Sources */,
 				1874349620F2FE780008A24F /* StarView.m in Sources */,
 				1824F76720EF106600E99823 /* OwnPersonalInfomationTopPictureGoupView.m in Sources */,
 				1853689120E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m in Sources */,
+				181FCBFC20F72D620044B055 /* OrderTakingQuotePriceDetailTableViewCell.m in Sources */,
 				186EBE2C20EDE33F00D0F54E /* OwnTextView.m in Sources */,
 				1443C59E20E332200009E82F /* SkillShowViewController.m in Sources */,
 				1443C58020E31B2D0009E82F /* ShareHomePath.m in Sources */,
@@ -1976,6 +2059,7 @@
 				1832B9A920F5D48700D6CE4F /* OrderTakingQuotePriceViewController.m in Sources */,
 				1443C59520E331120009E82F /* FirstPageViewController.m in Sources */,
 				1853690520EA11C10053A5D4 /* WaterCellRecuritJobView.m in Sources */,
+				181FCC0220F737210044B055 /* TakeOrderQuotePriceDetaiSectionView.m in Sources */,
 				1832B9AF20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.m in Sources */,
 				188813EF20ECC54900F832BE /* PersonalInfoAddSoundButtView.m in Sources */,
 				18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */,
@@ -1988,6 +2072,7 @@
 				187434BB20F333FD0008A24F /* CustomeLabelButt.m in Sources */,
 				1443C5AB20E336740009E82F /* UIViewExt.m in Sources */,
 				1824F74420EEF63300E99823 /* ChooseTechnologyRightTableViewCell.m in Sources */,
+				181FCBFF20F72E110044B055 /* TakeOrderQuotePriceDetailModel.m in Sources */,
 				1443C5A120E3327B0009E82F /* MyInfoViewController.m in Sources */,
 				185368EC20E9CB540053A5D4 /* NSTimer+Block.m in Sources */,
 				1888139720EC50FE00F832BE /* CustomeStyleCornerButt.m in Sources */,
@@ -2008,6 +2093,7 @@
 				1832B9A620F5C45700D6CE4F /* UILabel+ChangeCustomeLineSpace.m in Sources */,
 				1443C59B20E331CA0009E82F /* VideoCenterViewController.m in Sources */,
 				1824F78320EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m in Sources */,
+				181FCBF920F728CC0044B055 /* OrderTakingQuotePriceDetailViewController.m in Sources */,
 				1443C61520E36B4A0009E82F /* MobileCode.m in Sources */,
 				1443C5F620E359110009E82F /* OwnTextField.m in Sources */,
 				1443C5CB20E3446B0009E82F /* AppDelegate+tabbar.m in Sources */,
@@ -2190,7 +2276,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N64S25EDC3;
+				DEVELOPMENT_TEAM = KQ9BMXBVA2;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/鲁班同城/Tools/appCommonAttributes.h";
@@ -2200,7 +2286,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "luBanTongCheng.----";
+				PRODUCT_BUNDLE_IDENTIFIER = com.luban;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2212,7 +2298,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N64S25EDC3;
+				DEVELOPMENT_TEAM = KQ9BMXBVA2;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/鲁班同城/Tools/appCommonAttributes.h";
@@ -2222,7 +2308,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "luBanTongCheng.----";
+				PRODUCT_BUNDLE_IDENTIFIER = com.luban;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

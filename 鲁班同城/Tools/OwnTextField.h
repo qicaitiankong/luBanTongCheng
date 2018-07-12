@@ -12,6 +12,8 @@
 
 @property (strong,nonatomic) UITextField *myTextField;
 
+- (instancetype)initWithFrameForBaoJIA:(CGRect)frame;
+
 - (void)addOwnConstraints;
 
 

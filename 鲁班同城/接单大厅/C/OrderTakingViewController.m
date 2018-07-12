@@ -11,6 +11,7 @@
 #import "SSSearchBar.h"
 //
 #import "OrderTakingQuotePriceViewController.h"
+#import "OrderTakingQuotePriceDetailViewController.h"
 //views
 
 @interface OrderTakingViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -101,6 +102,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    OrderTakingQuotePriceDetailViewController *orderDetailVC = [[OrderTakingQuotePriceDetailViewController alloc]init];
+    [self.navigationController pushViewController:orderDetailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
