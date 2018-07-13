@@ -101,7 +101,8 @@
         imageView.backgroundColor = [UIColor colorWithHexString:@"#F5F5F5"];
         imageView.hidden = NO;
         NSURL *imageUrl = _picPathStringsArray[idx];
-        [imageView sd_setImageWithURL:imageUrl];
+        [imageView setImage:[UIImage imageNamed:@"test02"]];
+        //[imageView sd_setImageWithURL:imageUrl];
         imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
     }
     CGFloat w = perRowItemCount * itemW + (perRowItemCount - 1) * margin;
@@ -175,7 +176,8 @@
 - (void)displayCommentPictureWhenInVisual{
     for(NSInteger i = 0; i < _picPathStringsArray.count; i ++){
         UIImageView *singleImageView = self.imageViewsArray[i];
-        [singleImageView sd_setImageWithURL:[NSURL URLWithString:_picPathStringsArray[i]]];
+        [singleImageView setImage:[UIImage imageNamed:@"test02"]];
+       // [singleImageView sd_setImageWithURL:[NSURL URLWithString:_picPathStringsArray[i]]];
     }
 }
 - (void)removeCommentPictureWhenOutVisuabel{

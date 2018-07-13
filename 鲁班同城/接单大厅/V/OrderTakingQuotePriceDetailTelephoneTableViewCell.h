@@ -17,7 +17,8 @@
 
 @property (strong,nonatomic) UIButton *telephoneButt;
 
-@property (strong,nonatomic) TakeOrderQuotePriceDetailModel *model;
+@property (strong,nonatomic) TakeOrderQuotePriceDetailModel *localModel;
+
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isNeedRightButt:(BOOL)isNeed;
 

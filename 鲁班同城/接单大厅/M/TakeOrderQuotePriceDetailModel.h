@@ -29,4 +29,6 @@
 
 @property (strong,nonatomic) NSString *personInfoStr;
 
+@property (assign,nonatomic) NSInteger cellFlag;
+
 @end

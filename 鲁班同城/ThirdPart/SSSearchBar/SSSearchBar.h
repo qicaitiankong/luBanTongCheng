@@ -10,4 +10,10 @@
 
 @interface SSSearchBar : UISearchBar
 
+@property (assign,nonatomic) BOOL isNeedSearch;
+
+@property (strong,nonatomic) UITextField *textField;
+
+@property (copy,nonatomic) void (^clickTextFieldBlock)(void);
+
 @end

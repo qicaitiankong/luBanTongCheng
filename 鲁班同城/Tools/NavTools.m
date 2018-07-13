@@ -16,6 +16,12 @@
     return navReturnButt;
 }
 
++ (CustomerImageButt *)getOwnNavStyleGrayReturnButt{
+    CustomerImageButt *navReturnButt = [[CustomerImageButt alloc]initWithFrameForNavReturnButt:CGRectMake(0, STATUSBAR_HEIGHT + 10, 30, 20)];
+    [navReturnButt.imageView setImage:[UIImage imageNamed:@"grayNavReturn@2x.png"]];
+    return navReturnButt;
+}
+
 + (void)hiddenNav:(UINavigationController*)nav{
     if (nav.navigationBarHidden == NO){
         nav.navigationBarHidden = YES;

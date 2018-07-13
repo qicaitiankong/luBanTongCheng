@@ -51,6 +51,8 @@
 #define K_THEM_COLOR RGBA(51, 170, 157, 1);
 
 #define LIGHR_GRAY_COLOR_LZH RGBA(200,200,200,1);
+//没有图片是的背景色
+#define IMAGEVIEW_DEFAULT_COLOR RGBA(122.5,122.5,122.5,1);
 
 #define RED_COLOR RGBA(255,0,0,1);
 #define ORANGE_COLOR RGBA(255,165,0,1);
@@ -60,6 +62,8 @@
 #define BLUE_COLOR RGBA(0,0,255,1);
 #define PURPER_COLOR RGBA(139,0,255,1);
 #define BLACK_COLOR RGBA(76,76,76,1);
+
+
 
 //#define lzhThirdLoginAcountPath [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/lzhThirdLoginAccountInfo.plist"]
 //屏幕高度、宽度

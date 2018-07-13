@@ -33,6 +33,8 @@ static CGFloat const placeHolderFont = 15.0;
     for (UIView *view in [self.subviews lastObject].subviews) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *field = (UITextField *)view;
+            self.textField = field;
+            
             // 重设field的frame
             field.frame = CGRectMake(15.0, 0, self.frame.size.width-30.0, self.frame.size.height);
             [field setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F5"]];
@@ -56,15 +58,21 @@ static CGFloat const placeHolderFont = 15.0;
 
 // 开始编辑的时候重置为靠左
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (self.clickTextFieldBlock){
+        self.clickTextFieldBlock();
+    }
     NSLog(@"点击搜索框");
-    // 继续传递代理方法
-//    if ([self.delegate respondsToSelector:@selector(searchBarShouldBeginEditing:)]) {
-//        [self.delegate searchBarShouldBeginEditing:self];
-//    }
-//    if (@available(iOS 11.0, *)) {
-//        [self setPositionAdjustment:UIOffsetZero forSearchBarIcon:UISearchBarIconSearch];
-//    }
-    return NO;
+    if(self.isNeedSearch){
+        // 继续传递代理方法
+            if ([self.delegate respondsToSelector:@selector(searchBarShouldBeginEditing:)]) {
+                [self.delegate searchBarShouldBeginEditing:self];
+            }
+            if (@available(iOS 11.0, *)) {
+                [self setPositionAdjustment:UIOffsetZero forSearchBarIcon:UISearchBarIconSearch];
+            }
+    }
+   
+    return self.isNeedSearch;
 }
 // 结束编辑的时候设置为居中
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
@@ -74,7 +82,7 @@ static CGFloat const placeHolderFont = 15.0;
     if (@available(iOS 11.0, *)) {
         [self setPositionAdjustment:UIOffsetMake((textField.frame.size.width-self.placeholderWidth)/2, 0) forSearchBarIcon:UISearchBarIconSearch];
     }
-    return YES;
+    return self.isNeedSearch;
 }
 
 // 计算placeholder、icon、icon和placeholder间距的总宽度
@@ -85,6 +93,15 @@ static CGFloat const placeHolderFont = 15.0;
     }
     return _placeholderWidth;
 }
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self.textField resignFirstResponder];
+    return YES;
+}
+
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

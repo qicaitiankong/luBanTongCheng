@@ -13,6 +13,8 @@
 
 + (CustomerImageButt *)getOwnNavStyleWhiteReturnButt;
 
++ (CustomerImageButt *)getOwnNavStyleGrayReturnButt;
+
 + (void)hiddenNav:(UINavigationController*)nav;
 
 + (void)displayNav:(UINavigationController*)nav;

@@ -21,7 +21,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isNeedRightButt:(BOOL)isNeed{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self){
-        self.contentView.backgroundColor = [UIColor whiteColor];
+        self.contentView.backgroundColor = [UIColor redColor];
         leftLabelHeight = 15;
         //
         leftLabelWidth = [LzhReturnLabelHeight getLabelWidth:@"字字字" font:[UIFont getPingFangSCMedium:13]  targetHeight:leftLabelHeight];
@@ -42,8 +42,8 @@
         .topSpaceToView(self.contentView, 10)
         .widthIs(leftLabelWidth)
         .heightIs(leftLabelHeight);
-        //
-        //if (isNeed){
+//        //
+//        //if (isNeed){
             self.telephoneButt.sd_layout
             .rightSpaceToView(self.contentView, 15)
             .widthIs(78)
@@ -52,7 +52,7 @@
             //
             self.ownRightLabel.sd_layout
             .leftSpaceToView(self.ownLeftLabel, 10)
-            .rightSpaceToView(self.telephoneButt, 10)
+            .rightSpaceToView(self.contentView, 110)
             .topEqualToView(self.ownLeftLabel)
             .autoHeightRatio(0);
 //        }else{
@@ -67,11 +67,11 @@
     return self;
 }
 
-- (void)setModel:(TakeOrderQuotePriceDetailModel*)model{
-    _model = model;
-    if (model){
-        self.ownLeftLabel.text = [model.personInfoTipStr copy];
-        self.ownRightLabel.text = [model.personInfoStr copy];
+- (void)setLocalModel:(TakeOrderQuotePriceDetailModel*)localModel{
+    _localModel = localModel;
+    if (localModel){
+        self.ownLeftLabel.text = [localModel.personInfoTipStr copy];
+        self.ownRightLabel.text = [localModel.personInfoStr copy];
         [self setupAutoHeightWithBottomView:self.ownRightLabel bottomMargin:10];
     }
 }

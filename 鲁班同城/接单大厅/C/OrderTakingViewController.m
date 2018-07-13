@@ -12,6 +12,7 @@
 //
 #import "OrderTakingQuotePriceViewController.h"
 #import "OrderTakingQuotePriceDetailViewController.h"
+#import "SearchViewController.h"
 //views
 
 @interface OrderTakingViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -61,6 +62,11 @@
 //view
 - (void)addTableView:(CGRect)size style:(UITableViewStyle)styles{
     self.headerView = [[SSSearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.06)];
+    WS(weakSelf);
+    self.headerView.clickTextFieldBlock = ^{
+        SearchViewController *searchVC = [[SearchViewController alloc]init];
+        [weakSelf.navigationController pushViewController:searchVC animated:YES];
+    };
     self.headerView.placeholder = @"找工作上鲁班同城";
     self.tableView = [[UITableView alloc] initWithFrame:size style:styles];
     self.tableView.backgroundColor = [UIColor whiteColor];

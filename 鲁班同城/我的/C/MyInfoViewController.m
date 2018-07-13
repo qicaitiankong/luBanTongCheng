@@ -12,6 +12,10 @@
 #import "MyInfoTableFootView.h"
 //vc
 #import "OwnPersonalInfomationViewController.h"
+#import "SettingViewController.h"
+#import "MessageViewController.h"
+#import "ConcernViewController.h"
+#import "SearchViewController.h"
 
 @interface MyInfoViewController ()<UITableViewDelegate,UITableViewDataSource>{
     NSArray *cellTitleArr;
@@ -26,20 +30,31 @@
 
 @implementation MyInfoViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [NavTools displayTabbar:self.rdv_tabBarController];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [NavTools displayTabbar:self.rdv_tabBarController];
     [self initObject];
     [self addTableView:CGRectMake(0, STATUSBAR_HEIGHT, SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT) style:UITableViewStylePlain];
     //
    
-    
 }
 - (void)initObject{
     cellImageArr = [[NSMutableArray alloc] init];
-    cellTitleArr = @[@"收藏",@"搜索",@"个人资料",@"设置"];
+    cellTitleArr = @[@"消息",@"收藏",@"搜索",@"个人资料",@"设置"];
     for (int i = 0; i < cellTitleArr.count; i ++){
-        NSString *imageStr = [NSString stringWithFormat:@"set0%d",i];
+        NSString *imageStr = nil;
+        if (i == 0){
+            imageStr = @"set000";
+        }else{
+            imageStr = [NSString stringWithFormat:@"set0%d",i-1];
+        }
         UIImage *image = [UIImage imageNamed:imageStr];
         [cellImageArr addObject:image];
     }
@@ -54,10 +69,10 @@
     //
     footerView = [[MyInfoTableFootView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.195)];
     footerView.identityButtView.clickButtBlock = ^{
-        NSLog(@"切换身份");
+        //NSLog(@"切换身份");
     };
     footerView.exitLoginButtView.clickButtBlock = ^{
-        NSLog(@"退出登录");
+        //NSLog(@"退出登录");
 
     };
     //
@@ -94,16 +109,30 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     switch (indexPath.row) {
-         case 0:
+        case 0:{
+            MessageViewController *messageVC = [[MessageViewController alloc]init];
+            [self.navigationController pushViewController:messageVC  animated:YES];
+        }
             break;
-         case 1:
+        case 1:{
+            ConcernViewController *concernVC = [[ConcernViewController alloc]init];
+            [self.navigationController pushViewController:concernVC animated:YES];
+        }
             break;
         case 2:{
+            SearchViewController *searchVC = [[SearchViewController alloc]init];
+            [self.navigationController pushViewController:searchVC animated:YES];
+        }
+            break;
+        case 3:{
             OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
             [self.navigationController pushViewController:personalInfoVC animated:YES];
         }
             break;
-         case 3:
+        case 4:{
+            SettingViewController *setVC = [[SettingViewController alloc]init];
+            [self.navigationController pushViewController:setVC animated:YES];
+        }
             break;
         default:
             break;
