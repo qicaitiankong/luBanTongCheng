@@ -20,6 +20,9 @@
 #import "OwnTextField.h"
 #import "NavTools.h"
 #import "UILabel+ChangeCustomeLineSpace.h"
+#import "AppDelegate+tabbar.h"
+#import "AppDelegate.h"
+#import "lzhGetAccountInfo.h"
 
 //third party class
 #import <SVProgressHUD.h>
@@ -64,8 +67,7 @@
 #define BLACK_COLOR RGBA(76,76,76,1);
 
 
-
-//#define lzhThirdLoginAcountPath [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/lzhThirdLoginAccountInfo.plist"]
+#define kAccountPath [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/AccountInfo.plist"]
 //屏幕高度、宽度
 #define SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
@@ -86,6 +88,8 @@
 #define APP_MAIN_WINDOW [UIApplication sharedApplication].windows[0]
 //设备ID
 #define  VENDER_IDENTIFIER [[UIDevice currentDevice].identifierForVendor UUIDString]
+//身份切换存到本地的key值
+#define  IDENTITY_KEY_STRING @"identityFlag"
 
 // 获取系统版本号
 #define SysVer [[[UIDevice currentDevice] systemVersion] floatValue]

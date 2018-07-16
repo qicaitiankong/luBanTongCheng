@@ -9,10 +9,12 @@
 #import "AppDelegate+tabbar.h"
 #import "RDVTabBarItem.h"
 
+
 @implementation AppDelegate (tabbar)
 
--(void)customizeTabBarForController:(RDVTabBarController *)tabBarController{
-   UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//tabbar零工状态
+-(void)customizeTabBarForCapsualLabourController:(RDVTabBarController *)tabBarController{
+    UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     UITableView.appearance.estimatedRowHeight = 0;
     UITableView.appearance.estimatedSectionFooterHeight = 0;
     UITableView.appearance.estimatedSectionHeaderHeight = 0;
@@ -53,6 +55,49 @@
     }
 }
 
+//tabbar雇主状态
+- (void)changeToEmployerState:(RDVTabBarController*)tabbarController{
+    UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    UITableView.appearance.estimatedRowHeight = 0;
+    UITableView.appearance.estimatedSectionFooterHeight = 0;
+    UITableView.appearance.estimatedSectionHeaderHeight = 0;
+    if (FU_iPhoneX) {
+        [tabbarController.tabBar setHeight:83];
+    }else{
+        [tabbarController.tabBar setHeight:49];
+    }
+    
+    NSLog(@"切换雇主身份");
+    NSArray *tabBarItemImages = @[@"home", @"myOrder",@"xiangji",@"rank", @"user"];
+    
+    NSArray *tabBarItemSelectedImages = @[@"homeSelected", @"myOrderSelected",@"xiangjiSelected",@"rankSelected", @"userSelected"];
+    
+    NSArray *tabBarItemTitles = @[@"首页", @"我的派单",@"",@"排行榜",@"我的"];
+    UIColor *themColor = K_THEM_COLOR;
+    NSDictionary *unSelectedTitle=@{NSFontAttributeName: [UIFont systemFontOfSize:12],
+                                    NSForegroundColorAttributeName: [UIColor colorWithHexString:@"#97a9b8"]};
+    NSDictionary *selectedTitle=@{NSFontAttributeName: [UIFont systemFontOfSize:12],
+                                  NSForegroundColorAttributeName: themColor};
+    
+    NSInteger index = 0;
+    
+    for (RDVTabBarItem *item in [[tabbarController tabBar] items]) {
+        
+        //[item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
+        
+        UIImage *selectedimage = [UIImage imageNamed:tabBarItemSelectedImages[index]];
+        UIImage *unselectedimage = [UIImage imageNamed:tabBarItemImages[index]];
+        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
+        
+        item.unselectedTitleAttributes=unSelectedTitle;
+        item.selectedTitleAttributes=selectedTitle;
+        
+        [item setTitle:[tabBarItemTitles objectAtIndex:index]];
+        
+        index++;
+    }
+}
+//
 -(void)customNaviBar{
     
     NSDictionary *textAttributes = @{
@@ -84,5 +129,7 @@
     //状态条白色字体
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
+
+
 
 @end

@@ -7,13 +7,14 @@
 //
 
 #import "OrderTakingViewController.h"
+//views
 #import "TakeOrderTableViewCell.h"
 #import "SSSearchBar.h"
-//
+//vc
 #import "OrderTakingQuotePriceViewController.h"
 #import "OrderTakingQuotePriceDetailViewController.h"
 #import "SearchViewController.h"
-//views
+#import "DispatchTicketDetailViewController.h"
 
 @interface OrderTakingViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -108,8 +109,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    OrderTakingQuotePriceDetailViewController *orderDetailVC = [[OrderTakingQuotePriceDetailViewController alloc]init];
-    [self.navigationController pushViewController:orderDetailVC animated:YES];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+         DispatchTicketDetailViewController *dispatchDetailVC = [[DispatchTicketDetailViewController alloc]init];
+        [self.navigationController pushViewController:dispatchDetailVC animated:YES];
+    }else{
+        OrderTakingQuotePriceDetailViewController *orderDetailVC = [[OrderTakingQuotePriceDetailViewController alloc]init];
+        [self.navigationController pushViewController:orderDetailVC animated:YES];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

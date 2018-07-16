@@ -10,8 +10,8 @@
 
 @interface SearchBiaoQianSmallView : UIView
 
-
-
 @property (strong,nonatomic) UILabel *rightDisplayLabel;
+
+@property (copy,nonatomic) void (^backButtBlock)(NSString *title);
 
 @end

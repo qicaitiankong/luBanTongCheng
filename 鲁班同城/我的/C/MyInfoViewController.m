@@ -45,6 +45,7 @@
     //
    
 }
+
 - (void)initObject{
     cellImageArr = [[NSMutableArray alloc] init];
     cellTitleArr = @[@"消息",@"收藏",@"搜索",@"个人资料",@"设置"];
@@ -59,17 +60,39 @@
         [cellImageArr addObject:image];
     }
 }
+//切换身份
+- (void)exchangeIndentity{
+   
+    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    lzhGetAccountInfo *accountInfo = [lzhGetAccountInfo getAccount];
+    if (accountInfo.identityFlag == 0){
+        [accountInfo writeToAccount:@{IDENTITY_KEY_STRING:@1}];
+        [appDelegate setupViewControllersForEmployment];
+    }else{
+        [accountInfo writeToAccount:@{IDENTITY_KEY_STRING:@0}];
+        [appDelegate setupViewControllersForCasualLabour];
+    }
+     NSLog(@"切换身份%ld", [lzhGetAccountInfo getAccount].identityFlag);
+}
+
 
 //view
 - (void)addTableView:(CGRect)size style:(UITableViewStyle)styles{
+    WS(weakSelf);
     headerView = [[MyInfoTableHeaderView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_HEIGHT / 2)];
     headerView.userNameLabel.text = @"昵称昵称昵称";
     headerView.commissionLabel.text = @"6666";
     [headerView.userImageView setImage:[UIImage imageNamed:@"test07.jpg"]];
     //
     footerView = [[MyInfoTableFootView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.195)];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        [footerView.identityButtView.loginButt setTitle:@"切换为零工状态" forState:UIControlStateNormal];
+    }else{
+         [footerView.identityButtView.loginButt setTitle:@"切换为雇主状态" forState:UIControlStateNormal];
+    }
     footerView.identityButtView.clickButtBlock = ^{
         //NSLog(@"切换身份");
+        [weakSelf exchangeIndentity];
     };
     footerView.exitLoginButtView.clickButtBlock = ^{
         //NSLog(@"退出登录");

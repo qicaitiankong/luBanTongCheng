@@ -30,8 +30,19 @@
         self.rightDisplayLabel = [[CustomeLzhLabel alloc] initWithCustomerParamer:[UIFont getPingFangSCMedium:15] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:0];
         self.rightDisplayLabel.frame = CGRectMake(leftImageView.right + 5, 0, frame.size.width - leftImageView.right - 5, frame.size.height);
         [self addSubview:self.rightDisplayLabel];
+        //
+        UIButton *backButt = [UIButton buttonWithType:UIButtonTypeCustom];
+        backButt.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        [backButt addTarget:self action:@selector(backButtClick) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:backButt];
     }
     return self;
+}
+
+- (void)backButtClick{
+    if (self.backButtBlock){
+        self.backButtBlock(self.rightDisplayLabel.text);
+    }
 }
 
 /*

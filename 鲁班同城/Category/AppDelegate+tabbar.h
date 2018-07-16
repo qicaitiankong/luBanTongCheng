@@ -10,8 +10,11 @@
 
 @interface AppDelegate (tabbar)
 
--(void)customizeTabBarForController:(RDVTabBarController *)tabBarController;
-
 -(void)customNaviBar;
+
+- (void)changeToEmployerState:(RDVTabBarController*)tabbarController;
+
+//tabbar零工状态
+-(void)customizeTabBarForCapsualLabourController:(RDVTabBarController *)tabBarController;
 
 @end

@@ -34,14 +34,14 @@
         self.lunBoView = [CXCarouselView initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , frame.size.height * 0.697) hasTimer:YES interval:3 placeHolder:[UIImage imageNamed:@"test04"]];
         self.lunBoView.delegate = self;
         [self addSubview:self.lunBoView];
-        NSArray *array = @[@"scollPicture01",@"scollPicture02",@"scollPicture03"];
-        [self.lunBoView setupWithArray:array];
-        [self addSubview:self.lunBoView];
+        [self givePictures];
         //
         self.searchView = [[FirstPageSearchInputView alloc] init];
         self.searchView.clipsToBounds = YES;
         self.searchView.layer.cornerRadius = 5;
+        
         [self addSubview:self.searchView];
+       
         //
         self.scrollButtGroupView = [[ZHQScrollMenu alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, frame.size.height * 0.142) delegate:self];
         self.scrollButtGroupView.norMalTitleColor = [UIColor colorWithRed:131.998/255.0 green:131.998/255.0 blue:131.998/255.0 alpha:1];
@@ -59,6 +59,21 @@
         [self addSubview:self.traingleButtonGroupView];
     }
     return self;
+}
+
+- (void)givePictures{
+    NSMutableArray *imageArr = [[NSMutableArray alloc]init];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        for (int i = 0; i < 3; i ++){
+            NSString *imageStr = [NSString stringWithFormat:@"scollPicture0%d",i + 1];
+            [imageArr addObject:imageStr];
+        }
+    }else{
+        [imageArr addObject:@"scrollPictureLabour01"];
+    }
+    if (imageArr.count){
+        [self.lunBoView setupWithArray:imageArr];
+    }
 }
 
 - (void)addConstraints{

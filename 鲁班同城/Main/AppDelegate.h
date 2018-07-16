@@ -19,5 +19,11 @@
 
 - (void)displayVC;
 
+//雇主状态
+-(void)setupViewControllersForEmployment;
+//零工状态
+-(void)setupViewControllersForCasualLabour;
+
+
 @end
 

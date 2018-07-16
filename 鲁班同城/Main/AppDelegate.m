@@ -32,8 +32,11 @@
 //    [self.window makeKeyAndVisible];
     
     [self customNaviBar];
-    [self setupViewControllers];
-    [self displayVC];
+    if ([lzhGetAccountInfo getAccount].identityFlag == 0){
+        [self setupViewControllersForCasualLabour];
+    }else{
+        [self setupViewControllersForEmployment];
+    }
     
     return YES;
 }
@@ -67,10 +70,11 @@
 //
 - (void)displayVC{
      self.window.rootViewController=self.tabBarController;
+    [self.window makeKeyAndVisible];
 }
 
-//set vc
--(void)setupViewControllers{
+//默认零工状态
+-(void)setupViewControllersForCasualLabour{
     [SVProgressHUD setMaximumDismissTimeInterval:3];
     FirstPageViewController *firstVC=[[FirstPageViewController alloc]init];
     UINavigationController *firstNavi=[[UINavigationController alloc]initWithRootViewController:firstVC];
@@ -91,7 +95,43 @@
     [self.tabBarController setViewControllers:navArr];//,guessHappyNavi
     [self.tabBarController tabBar].backgroundView.backgroundColor=[UIColor whiteColor];
     self.tabBarController.selectedIndex=0;
-    [self customizeTabBarForController:self.tabBarController];
+    [self customizeTabBarForCapsualLabourController:self.tabBarController];
+    //点击中间大按钮的处理
+    WS(weakSelf);
+    self.tabBarController.clickBigButtBlock = ^{
+        UINavigationController *nav = navArr[weakSelf.tabBarController.selectedIndex];
+        weakSelf.currentSelectedNav = nav;
+        WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc] init];
+        loginVC.isWx = YES;
+        [weakSelf.currentSelectedNav pushViewController:loginVC animated:YES];
+    };
+    //
+    [self displayVC];
+}
+
+//雇主状态
+-(void)setupViewControllersForEmployment{
+    [SVProgressHUD setMaximumDismissTimeInterval:3];
+    FirstPageViewController *firstVC=[[FirstPageViewController alloc]init];
+    UINavigationController *firstNavi=[[UINavigationController alloc]initWithRootViewController:firstVC];
+    
+    OrderTakingViewController *orderTakingVC = [[OrderTakingViewController alloc] init];
+    UINavigationController *orderNavi=[[UINavigationController alloc]initWithRootViewController:orderTakingVC];
+    
+    VideoCenterViewController *videoCenterVC = [[VideoCenterViewController alloc] init];
+    UINavigationController *videoCenterNavi=[[UINavigationController alloc]initWithRootViewController:videoCenterVC];
+    
+    SkillShowViewController *skillVC = [[SkillShowViewController alloc] init];
+    UINavigationController *skillNavi=[[UINavigationController alloc]initWithRootViewController:skillVC];
+    
+    MyInfoViewController *myInfoVC = [[MyInfoViewController alloc] init];
+    UINavigationController *myInfoNavi=[[UINavigationController alloc]initWithRootViewController:myInfoVC];
+    self.tabBarController = [[RDVTabBarController alloc] init];
+    NSArray *navArr = @[firstNavi,orderNavi,videoCenterNavi,skillNavi,myInfoNavi];
+    [self.tabBarController setViewControllers:navArr];//,guessHappyNavi
+    [self.tabBarController tabBar].backgroundView.backgroundColor=[UIColor whiteColor];
+    self.tabBarController.selectedIndex= 0;
+    [self changeToEmployerState:self.tabBarController];
     
     //点击中间大按钮的处理
     WS(weakSelf);
@@ -102,7 +142,7 @@
         loginVC.isWx = YES;
         [weakSelf.currentSelectedNav pushViewController:loginVC animated:YES];
     };
-   
+    [self displayVC];
 }
 
 
