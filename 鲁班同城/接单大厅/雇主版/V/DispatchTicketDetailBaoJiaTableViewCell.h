@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "StarView.h"
 #import "DispatchTicketDetailBaoJiaModel.h"
-
+#import "DispatchOrderDetailCellSureServiceCompleteGroupView.h"
 
 @interface DispatchTicketDetailBaoJiaTableViewCell : UITableViewCell
 
@@ -25,5 +25,10 @@
 
 @property (strong,nonatomic) DispatchTicketDetailBaoJiaModel *model;
 
+@property (strong,nonatomic) NSIndexPath *path;
+
+@property (strong,nonatomic) DispatchOrderDetailCellSureServiceCompleteGroupView *bottomGroupView;
+
+@property (copy,nonatomic) void (^clickButtBlock)(NSInteger index,NSIndexPath *path);
 
 @end

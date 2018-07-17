@@ -36,9 +36,11 @@
         UIColor *buttTitleColor = titleColor;
         [loginButt setTitleColor:buttTitleColor forState:UIControlStateNormal];
         if(radius == 0){
-            loginButt.layer.cornerRadius = frame.size.height / 2;
+            self.layer.cornerRadius = frame.size.height / 2;
+        }else if(radius > 0){
+            self.layer.cornerRadius = radius;
         }else{
-            loginButt.layer.cornerRadius = radius;
+            //小于0不处理
         }
         [self addSubview:loginButt];
     }

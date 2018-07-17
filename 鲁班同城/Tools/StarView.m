@@ -8,9 +8,13 @@
 
 #import "StarView.h"
 #import <Masonry.h>
+#import "BaseImageView.h"
 
 @interface StarView (){
     NSMutableArray *starImageArr;
+    NSMutableArray *backButtArr;
+    CGFloat starWidth;
+    
 }
 @end
 
@@ -40,18 +44,84 @@
     return self;
 }
 
+//
+- (instancetype)initWithFrameCustomeStyle:(CGRect)frame starWidth:(CGFloat)width
+{
+    
+    self = [super initWithFrame:frame];
+    if (self) {
+        starWidth = width;
+        //默认不支持点击
+        self.userInteractionEnabled = NO;
+        
+        self.backgroundColor = [UIColor whiteColor];
+        starImageArr = [NSMutableArray array];
+        backButtArr = [[NSMutableArray alloc]init];
+        
+        //
+        for(NSInteger i = 0; i < 5; i ++){
+            BaseImageView *starView = [[BaseImageView alloc]init];
+            //starView.backgroundColor = [UIColor yellowColor];
+            [starView setImage:[UIImage imageNamed:@"myInfoGrayStar"]];
+            [self addSubview:starView];
+            [starImageArr addObject:starView];
+            //
+            UIButton *backButt = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self addSubview:backButt];
+            backButt.tag = i;
+            [backButt addTarget:self action:@selector(backButtHandler:) forControlEvents:UIControlEventTouchUpInside];
+            [backButtArr addObject:backButt];
+        }
+        [self lzhAddConstraints];
+    }
+    return self;
+}
+
+//
 - (void)lzhAddConstraints{
-    [starImageArr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:15 leadSpacing:0 tailSpacing:0];
+    CGFloat width = 15;
+    if (starWidth){
+        width = starWidth;
+    }
+    [starImageArr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:width leadSpacing:0 tailSpacing:0];
     [starImageArr mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(15);
+        make.height.mas_equalTo(width);
         make.centerY.mas_equalTo(self);
     }];
-    
+    //
+    [backButtArr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:width leadSpacing:0 tailSpacing:0];
+    [backButtArr mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(width);
+        make.centerY.mas_equalTo(self);
+    }];
 }
+//
+- (void)backButtHandler:(UIButton*)_b{
+    NSLog(@"星星点击");
+    BaseImageView *xinXinImageView = starImageArr[_b.tag];
+    if (NO == xinXinImageView.starSelectedFlag){
+        for (int i = 0; i <= _b.tag; i ++){
+            BaseImageView  *imageView = starImageArr[i];
+            [imageView setImage:[UIImage imageNamed:@"myInfoStar"]];
+            imageView.starSelectedFlag = YES;
+        }
+    }else{
+        for (int i = 4; i >= _b.tag; i --){
+            BaseImageView  *imageView = starImageArr[i];
+            [imageView setImage:[UIImage imageNamed:@"myInfoGrayStar"]];
+            imageView.starSelectedFlag = NO;
+        }
+    }
+}
+//
 - (void)lzhUpdateConstraints{
-    [starImageArr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:15 leadSpacing:0 tailSpacing:0];
+    CGFloat width = 15;
+    if (starWidth){
+        width = starWidth;
+    }
+    [starImageArr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:width leadSpacing:0 tailSpacing:0];
     [starImageArr mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(15);
+        make.height.mas_equalTo(width);
         make.centerY.mas_equalTo(self);
     }];
 }

@@ -14,5 +14,7 @@
 
 - (void)setYellowStar:(float)count;
 
+- (instancetype)initWithFrameCustomeStyle:(CGRect)frame starWidth:(CGFloat)width;
+
 
 @end

@@ -19,6 +19,7 @@
         model.nickNameStr = @"昵称昵称";
         model.baoJiaNameStr = @"报价： 1200元";
         model.beiZhuNameStr = @"备注： 备注说明  这里显示 包括语音";
+        model.xinxinStr = @"4.0";
     }
     return model;
 }

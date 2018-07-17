@@ -14,6 +14,7 @@
 #import "SkillShowViewController.h"
 #import "MyInfoViewController.h"
 #import "WxQQLoginViewController.h"
+#import "RankViewController.h"
 
 //category
 #import "AppDelegate+tabbar.h"
@@ -121,7 +122,7 @@
     VideoCenterViewController *videoCenterVC = [[VideoCenterViewController alloc] init];
     UINavigationController *videoCenterNavi=[[UINavigationController alloc]initWithRootViewController:videoCenterVC];
     
-    SkillShowViewController *skillVC = [[SkillShowViewController alloc] init];
+    RankViewController *skillVC = [[RankViewController alloc] init];
     UINavigationController *skillNavi=[[UINavigationController alloc]initWithRootViewController:skillVC];
     
     MyInfoViewController *myInfoVC = [[MyInfoViewController alloc] init];

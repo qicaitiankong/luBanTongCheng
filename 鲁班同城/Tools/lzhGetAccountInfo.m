@@ -13,7 +13,6 @@
 + (lzhGetAccountInfo *)getAccount{
     
     lzhGetAccountInfo *selfClass = [[lzhGetAccountInfo alloc]init];
-    
     if (selfClass){
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:kAccountPath];
         

@@ -23,6 +23,7 @@
 #import "AppDelegate+tabbar.h"
 #import "AppDelegate.h"
 #import "lzhGetAccountInfo.h"
+#import "CustomeStyleCornerButt.h"
 
 //third party class
 #import <SVProgressHUD.h>
@@ -56,7 +57,12 @@
 #define LIGHR_GRAY_COLOR_LZH RGBA(200,200,200,1);
 //没有图片是的背景色
 #define IMAGEVIEW_DEFAULT_COLOR RGBA(122.5,122.5,122.5,1);
+//主题绿
+#define SPECIAL_BLUE_COLOR     [UIColor colorWithHexString:@"#78CAC5"];
+//弹窗背景透明度
+#define POP_VIEW_ALPHA 0.65;
 
+//
 #define RED_COLOR RGBA(255,0,0,1);
 #define ORANGE_COLOR RGBA(255,165,0,1);
 #define YELLOW_COLOR RGBA(255,255,0,1);

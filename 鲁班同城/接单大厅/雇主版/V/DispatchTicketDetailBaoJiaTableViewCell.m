@@ -38,38 +38,57 @@
         //
         self.nickNameLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         //
-        self.xinxinView = [[StarView alloc]initWithFrame:CGRectMake(0, 0, 120, 25)];
+        self.xinxinView = [[StarView alloc]initWithFrameCustomeStyle:CGRectMake(0, 0, SCREEN_WIDTH * 0.213, imageViewWidth / 2) starWidth:12];
         self.xinxinView.backgroundColor = [UIColor whiteColor];
         //
          buttWidth = SCREEN_WIDTH * 0.138;
          buttHeight = buttWidth / 2;;
          buttSpace = 10;
         
-        findUpButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 0, buttWidth, buttHeight) backColor:[UIColor whiteColor] cornerRadius:5 title:@"查看" titleColor:[UIColor colorWithHexString:@"#666666"] font:[UIFont getPingFangSCMedium:12]];
+        findUpButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 0, buttWidth, buttHeight) backColor:[UIColor whiteColor] cornerRadius:5 title:@"查看" titleColor:[UIColor colorWithHexString:@"#666666"] font:[UIFont getPingFangSCMedium:10]];
         findUpButt.layer.cornerRadius = 5;
         findUpButt.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;
         findUpButt.layer.borderWidth = 1;
+        WS(weakSelf);
+        findUpButt.clickButtBlock = ^{
+            [weakSelf clickButt:0];
+        };
         //
-        communicateButt = [[ImageAndLabelView alloc]initWithFrame:CGRectMake(0, 0, findUpButt.width, findUpButt.height) image:[UIImage imageNamed:@"icon_message_white"] title:@"沟通" font:[UIFont getPingFangSCMedium:12] titleColor:[UIColor whiteColor]];
+        communicateButt = [[ImageAndLabelView alloc]initWithFrameSecondStyle:CGRectMake(0, 0, findUpButt.width, findUpButt.height) image:[UIImage imageNamed:@"icon_message_white"] title:@"沟通" font:[UIFont getPingFangSCMedium:10]  titleColor:[UIColor whiteColor] imageSize:CGSizeMake(14, 13)];
         communicateButt.backgroundColor = [UIColor colorWithHexString:@"#FF7E00"];
         communicateButt.layer.cornerRadius = 5;
         communicateButt.leftImageView.backgroundColor = communicateButt.backgroundColor;
         communicateButt.rightLabel.backgroundColor = communicateButt.backgroundColor;
-        communicateButt.leftImageView.frame = CGRectMake(1, communicateButt.leftImageView.y, 14, 13);
-        communicateButt.leftImageView.center = CGPointMake(communicateButt.leftImageView.centerX, communicateButt.height / 2);
-        communicateButt.rightLabel.frame = CGRectMake(communicateButt.leftImageView.right, 0, communicateButt.width - communicateButt.leftImageView.right, communicateButt.rightLabel.height - 10);
-        communicateButt.rightLabel.center = CGPointMake(communicateButt.rightLabel.centerX, communicateButt.height / 2);
+        communicateButt.clickBackButt  = ^{
+            [weakSelf clickButt:1];
+        };
         //
-        UIColor *employmentColor = [UIColor colorWithRed:60/255.0 green:101/255.0 blue:98.5/255.0 alpha:1];
-         employButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 0, findUpButt.width, findUpButt.height) backColor:employmentColor cornerRadius:5 title:@"雇佣" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:12]];
-        
+        UIColor *employmentColor = SPECIAL_BLUE_COLOR;
+         employButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 0, findUpButt.width, findUpButt.height) backColor:employmentColor cornerRadius:5 title:@"雇佣" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:10]];
+        employButt.clickButtBlock = ^{
+            [weakSelf clickButt:2];
+        };
         //
          self.baoJiaLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         //
          self.beizhuLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         self.beizhuLabel.numberOfLines = 0;
         //
-        NSArray *viewArr = @[self.userImageView,self.nickNameLabel,self.xinxinView,findUpButt,communicateButt,employButt,self.baoJiaLabel,self.beizhuLabel];
+        self.bottomGroupView = [[DispatchOrderDetailCellSureServiceCompleteGroupView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 2 * leftSpace, SCREEN_WIDTH * 0.106 + 100)];
+        self.bottomGroupView.messageButtView.clickBackButt = ^{
+            [weakSelf clickButt:3];
+        };
+        self.bottomGroupView.mobileButtView.clickBackButt = ^{
+            [weakSelf clickButt:4];
+        };
+        self.bottomGroupView.cancelButtView.clickBackButt = ^{
+            [weakSelf clickButt:5];
+        };
+        self.bottomGroupView.sureServiceButt.clickButtBlock = ^{
+            [weakSelf clickButt:6];
+        };
+        //
+        NSArray *viewArr = @[self.userImageView,self.nickNameLabel,self.xinxinView,findUpButt,communicateButt,employButt,self.baoJiaLabel,self.beizhuLabel,self.bottomGroupView];
         [self.contentView sd_addSubviews:viewArr];
         //
         [self addOwnConstraints];
@@ -126,7 +145,13 @@
     .rightSpaceToView(self.contentView, leftSpace)
     .topSpaceToView(self.baoJiaLabel, 20)
     .autoHeightRatio(0);
-    
+    //
+    self.bottomGroupView.sd_layout
+    .leftEqualToView(self.beizhuLabel)
+    .topSpaceToView(self.beizhuLabel, 10)
+    .rightSpaceToView(self.contentView, leftSpace)
+    .heightIs(SCREEN_WIDTH * 0.106 + 115);
+    //
 }
 
 - (void)setModel:(DispatchTicketDetailBaoJiaModel*)model{
@@ -136,7 +161,35 @@
         self.nickNameLabel.text = [model.nickNameStr copy];
         self.baoJiaLabel.text = [model.baoJiaNameStr copy];
         self.beizhuLabel.text = [model.beiZhuNameStr copy];
-        [self setupAutoHeightWithBottomView:self.beizhuLabel bottomMargin:15];
+        [self.xinxinView setYellowStar:[model.xinxinStr floatValue]];
+        //
+        self.bottomGroupView.sd_resetLayout
+        .leftEqualToView(self.beizhuLabel)
+        .topSpaceToView(self.beizhuLabel, 10)
+        .rightSpaceToView(self.contentView, leftSpace)
+        .heightIs(SCREEN_WIDTH * 0.106 + 115);
+        //
+        UIView *bottomView = nil;
+        if (model.shouldDisplayBottomView){
+            bottomView = self.bottomGroupView;
+            self.bottomGroupView.hidden = NO;
+            //
+            [self.bottomGroupView.userImageView setImage:model.userImage];
+            self.bottomGroupView.nickNameLabel.text = [model.nickNameStr copy];
+            [self.bottomGroupView.xinxinView setYellowStar:[model.xinxinStr floatValue]];
+            self.bottomGroupView.messageTipLabel.text = @"已通知师傅接单，请保持电话通畅。";
+            
+        }else{
+            bottomView = self.beizhuLabel;
+            self.bottomGroupView.hidden = YES;
+        }
+        [self setupAutoHeightWithBottomView:bottomView bottomMargin:15];
+    }
+}
+
+- (void)clickButt:(NSInteger)flag{
+    if (self.clickButtBlock){
+        self.clickButtBlock(flag,self.path);
     }
 }
 

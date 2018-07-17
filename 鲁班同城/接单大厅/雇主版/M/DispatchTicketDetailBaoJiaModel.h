@@ -20,6 +20,8 @@
 
 @property (strong,nonatomic) NSString *beiZhuNameStr;
 
+@property (assign,nonatomic) BOOL shouldDisplayBottomView;
+
 + (DispatchTicketDetailBaoJiaModel*)setModelFromDict:(NSDictionary*)dict;
 
 

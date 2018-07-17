@@ -39,7 +39,7 @@
         btn.center = CGPointMake(btn.center.x, self.bounds.size.height / 2);
         [btn setTitleColor:self.norMalTitleColor forState:UIControlStateNormal];
         [btn setTitle:buttonTitleArr[i] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:size];
+        btn.titleLabel.font = [UIFont getPingFangSCMedium:size];
         //btn.backgroundColor = [UIColor grayColor];
         //添加到界面
         [self addSubview:btn];

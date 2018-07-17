@@ -11,9 +11,16 @@
 #import "OrderTakingQuotePriceDetailTableViewCell.h"
 #import "DispatchTicketDetailBaoJiaTableViewCell.h"
 #import "DispatchTicketDetailBaoJiaTableViewSectionView.h"
+#import "OwnTextView.h"
+
 
 @interface DispatchTicketDetailViewController ()<UITableViewDelegate,UITableViewDataSource>{
     DispatchTicketDetailBaoJiaTableViewSectionView *sectionView;
+    //
+    UIButton *popBackButt;
+    UIView *baseView;
+    UIView *commentPopView;
+    //
 }
 
 @property (strong,nonatomic) TakeOrderQuotePriceDetailModel *singleModel;
@@ -66,7 +73,53 @@
     [self.tableView reloadData];
 }
 
+- (void)payHandler{
+    
+}
 
+- (void)dealButtClick:(NSInteger)flag path:(NSIndexPath*)indexPath{
+    NSLog(@"path.row=%ld",indexPath.row);
+    switch (flag) {
+        case 0:{
+            NSLog(@"查看");
+        }
+            break;
+        case 1:{
+             NSLog(@"沟通");
+        }
+            break;
+        case 2:{
+             NSLog(@"雇佣");
+            [self displayPopView];
+            DispatchTicketDetailBaoJiaModel *model = self.modelArr[indexPath.row];
+            model.shouldDisplayBottomView = YES;
+            [self.tableView reloadData];
+        }
+            break;
+        case 3:{
+            NSLog(@"发消息");
+        }
+            break;
+        case 4:{
+            NSLog(@"拨号");
+        }
+            break;
+        case 5:{
+            NSLog(@"取消");
+            DispatchTicketDetailBaoJiaModel *model = self.modelArr[indexPath.row];
+            model.shouldDisplayBottomView = NO;
+            [self.tableView reloadData];
+        }
+            break;
+        case 6:{
+             NSLog(@"确认完成");
+            [self displayCommentPopView];
+        }
+            break;
+        default:
+            break;
+    }
+}
 
 //views
 - (void)addTableView:(CGRect)size style:(UITableViewStyle)styles{
@@ -118,7 +171,13 @@
         DispatchTicketDetailBaoJiaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
         if (nil == cell){
             cell = [[DispatchTicketDetailBaoJiaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+            WS(weakSelf);
+            cell.clickButtBlock = ^(NSInteger index, NSIndexPath *path) {
+                 [weakSelf dealButtClick:index path:indexPath];
+                
+            };
         }
+        cell.path = indexPath;
         cell.model = self.modelArr[indexPath.row];
         parentCell = cell;
     }
@@ -160,8 +219,129 @@
     }
 }
 
+//pop view
+- (void)displayPopView{
+    //
+    if(nil ==  baseView){
+            UIWindow *appWindow = APP_MAIN_WINDOW;
+            popBackButt = [UIButton buttonWithType:UIButtonTypeCustom];
+            popBackButt.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            popBackButt.backgroundColor = [UIColor grayColor];
+            popBackButt.alpha = POP_VIEW_ALPHA;
+            [appWindow addSubview:popBackButt];
+            //
+            baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.741, SCREEN_WIDTH * 0.741)];
+            baseView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+            baseView.backgroundColor = [UIColor whiteColor];
+        
+            baseView.clipsToBounds = YES;
+            baseView.layer.cornerRadius = baseView.width * 0.035;
+            [appWindow addSubview:baseView];
+            //
+            UILabel *topTipLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:16] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:1];
+            topTipLabel.text = @"托管支付";
+            topTipLabel.frame = CGRectMake(0, baseView.height * 0.07, baseView.width, baseView.height * 0.1);
+            [baseView addSubview:topTipLabel];
+            //
+            UILabel *centerLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:15] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:0];
+            centerLabel.numberOfLines = 0;
+            centerLabel.text = @"为保障双方权益，请先托管资金到平台，服务完全面以后，服务商获得赏金。";
+            centerLabel.frame = CGRectMake(0, baseView.height * 0.18, baseView.width * 0.8, baseView.height * 0.35);
+            centerLabel.center = CGPointMake(baseView.width / 2, centerLabel.centerY);
+            [baseView addSubview:centerLabel];
+            //
+            CustomeStyleCornerButt *cancelButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, baseView.height * 0.8, baseView.width / 2, baseView.height * 0.2) backColor:[UIColor colorWithHexString:@"#F5F5F5"] cornerRadius:-1 title:@"取消" titleColor:[UIColor colorWithHexString:@"#999999"] font:[UIFont getPingFangSCMedium:16]];
+            WS(weakSelf);
+            cancelButt.clickButtBlock = ^{
+                [weakSelf removePopView];
+            };
+            [baseView addSubview:cancelButt];
+            //
+            UIColor *payBackCol = SPECIAL_BLUE_COLOR;
+            CustomeStyleCornerButt *payButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(cancelButt.right, baseView.height * 0.8, baseView.width / 2, baseView.height * 0.2) backColor:payBackCol cornerRadius:-1 title:@"支付" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:16]];
+            payButt.clickButtBlock = ^{
+                [weakSelf removePopView];
+            };
+            [baseView addSubview:payButt];
+            //
+    }
+}
 
+- (void)removePopView{
+    [popBackButt removeFromSuperview];
+    [baseView removeFromSuperview];
+    popBackButt = nil;
+    baseView = nil;
+}
+//评级popView
+- (void)displayCommentPopView{
+    //
+    if(nil ==  commentPopView){
+        UIWindow *appWindow = APP_MAIN_WINDOW;
+        popBackButt = [UIButton buttonWithType:UIButtonTypeCustom];
+        popBackButt.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        popBackButt.backgroundColor = [UIColor grayColor];
+        popBackButt.alpha = POP_VIEW_ALPHA;
+        [appWindow addSubview:popBackButt];
+        //
+        commentPopView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.741, SCREEN_WIDTH * 0.741)];
+        commentPopView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+        commentPopView.backgroundColor = [UIColor whiteColor];
+        
+        commentPopView.clipsToBounds = YES;
+        commentPopView.layer.cornerRadius = commentPopView.width * 0.035;
+        [appWindow addSubview:commentPopView];
+        //
+        UILabel *topTipLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:16] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:1];
+        topTipLabel.text = @"评价";
+        topTipLabel.frame = CGRectMake(0, commentPopView.height * 0.07, commentPopView.width, commentPopView.height * 0.1);
+        [commentPopView addSubview:topTipLabel];
+        //
+        UILabel *centerLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:15] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:0];
+        centerLabel.text = @"满意度";
+        centerLabel.frame = CGRectMake(0, topTipLabel.bottom +  commentPopView.height * 0.05, commentPopView.width * 0.8, commentPopView.height * 0.1);
+        centerLabel.center = CGPointMake(commentPopView.width / 2, centerLabel.centerY);
+        [commentPopView addSubview:centerLabel];
+        //
+        StarView *xinxinView = [[StarView alloc]initWithFrameCustomeStyle:CGRectMake(0, centerLabel.bottom + commentPopView.height * 0.05, commentPopView.width * 0.75, commentPopView.width * 0.125) starWidth:commentPopView.width * 0.107];
+        xinxinView.userInteractionEnabled = YES;
+        xinxinView.center = CGPointMake(commentPopView.width / 2, xinxinView.centerY);
+        [xinxinView setYellowStar:4];
+        [commentPopView addSubview:xinxinView];
+        //
+        OwnTextView *commentTextView = [[OwnTextView alloc]initWithFrame:CGRectMake(centerLabel.left, xinxinView.bottom + commentPopView.height * 0.05, commentPopView.width - 2 * centerLabel.left, commentPopView.height * 0.215)];
+        commentTextView.layer.cornerRadius = 3;
+        commentTextView.clipsToBounds = YES;
+        commentTextView.backgroundColor = [UIColor colorWithHexString:@"#E2E2E2"];
+        commentTextView.writeTextView.backgroundColor = commentTextView.backgroundColor;
+        commentTextView.writeViewPlaceHolderLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+        commentTextView.writeViewPlaceHolderLabel.font = [UIFont getPingFangSCRegular:12];
+        commentTextView.writeViewPlaceHolderLabel.text = @"服务等还满意吗？";
+        [commentPopView addSubview:commentTextView];
+        //
+        CustomeStyleCornerButt *cancelButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, commentPopView.height * 0.85, commentPopView.width / 2, commentPopView.height * 0.15) backColor:[UIColor colorWithHexString:@"#F5F5F5"] cornerRadius:-1 title:@"取消" titleColor:[UIColor colorWithHexString:@"#999999"] font:[UIFont getPingFangSCMedium:16]];
+        WS(weakSelf);
+        cancelButt.clickButtBlock = ^{
+            [weakSelf removeCommentPopView];
+        };
+        [commentPopView addSubview:cancelButt];
+        //
+        UIColor *payBackCol = SPECIAL_BLUE_COLOR;
+        CustomeStyleCornerButt *commitButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(cancelButt.right, commentPopView.height * 0.85, commentPopView.width / 2, commentPopView.height * 0.15) backColor:payBackCol cornerRadius:-1 title:@"提交" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:16]];
+        commitButt.clickButtBlock = ^{
+            [weakSelf removeCommentPopView];
+        };
+        [commentPopView addSubview:commitButt];
+        //
+    }
+}
 
+- (void)removeCommentPopView{
+    [popBackButt removeFromSuperview];
+    [commentPopView removeFromSuperview];
+    popBackButt = nil;
+    commentPopView = nil;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

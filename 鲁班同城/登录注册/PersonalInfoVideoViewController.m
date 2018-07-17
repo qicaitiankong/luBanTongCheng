@@ -74,7 +74,7 @@
         popbackButt = [UIButton buttonWithType:UIButtonTypeCustom];
         popbackButt.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         popbackButt.backgroundColor = [UIColor grayColor];
-        popbackButt.alpha = 0.65;
+        popbackButt.alpha = POP_VIEW_ALPHA;
         [popbackButt addTarget:self action:@selector(popBackButtHandler) forControlEvents:UIControlEventTouchUpInside];
         [appWindow addSubview:popbackButt];
         popView = [[CommitPopView alloc]initWithFrame:CGRectMake(0, 0, 194, 223)];
