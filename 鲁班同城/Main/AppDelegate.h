@@ -15,7 +15,9 @@
 
 @property (strong,nonatomic) RDVTabBarController *tabBarController;
 
-@property (strong,nonatomic) UINavigationController *currentSelectedNav;
+//@property (strong,nonatomic) UINavigationController *currentSelectedNav;
+
+@property (strong,nonatomic) NSArray *navArr;
 
 - (void)displayVC;
 

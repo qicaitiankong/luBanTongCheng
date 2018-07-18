@@ -157,13 +157,14 @@
 - (void)setModel:(DispatchTicketDetailBaoJiaModel*)model{
     _model = model;
     if (model){
+        
         [self.userImageView setImage:model.userImage];
         self.nickNameLabel.text = [model.nickNameStr copy];
         self.baoJiaLabel.text = [model.baoJiaNameStr copy];
         self.beizhuLabel.text = [model.beiZhuNameStr copy];
         [self.xinxinView setYellowStar:[model.xinxinStr floatValue]];
         //
-        self.bottomGroupView.sd_resetLayout
+        self.bottomGroupView.sd_layout
         .leftEqualToView(self.beizhuLabel)
         .topSpaceToView(self.beizhuLabel, 10)
         .rightSpaceToView(self.contentView, leftSpace)
@@ -182,6 +183,7 @@
         }else{
             bottomView = self.beizhuLabel;
             self.bottomGroupView.hidden = YES;
+
         }
         [self setupAutoHeightWithBottomView:bottomView bottomMargin:15];
     }
@@ -189,7 +191,7 @@
 
 - (void)clickButt:(NSInteger)flag{
     if (self.clickButtBlock){
-        self.clickButtBlock(flag,self.path);
+        self.clickButtBlock(flag,self.indexPath);
     }
 }
 

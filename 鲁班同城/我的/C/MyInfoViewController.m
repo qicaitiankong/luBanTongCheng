@@ -16,6 +16,7 @@
 #import "MessageViewController.h"
 #import "ConcernViewController.h"
 #import "SearchViewController.h"
+#import "EmploymentRecordViewController.h"
 
 @interface MyInfoViewController ()<UITableViewDelegate,UITableViewDataSource>{
     NSArray *cellTitleArr;
@@ -42,23 +43,46 @@
     [NavTools displayTabbar:self.rdv_tabBarController];
     [self initObject];
     [self addTableView:CGRectMake(0, STATUSBAR_HEIGHT, SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT) style:UITableViewStylePlain];
-    //
-   
 }
 
 - (void)initObject{
-    cellImageArr = [[NSMutableArray alloc] init];
-    cellTitleArr = @[@"消息",@"收藏",@"搜索",@"个人资料",@"设置"];
-    for (int i = 0; i < cellTitleArr.count; i ++){
-        NSString *imageStr = nil;
-        if (i == 0){
-            imageStr = @"set000";
-        }else{
-            imageStr = [NSString stringWithFormat:@"set0%d",i-1];
+     cellImageArr = [[NSMutableArray alloc] init];
+    if ([lzhGetAccountInfo getAccount].identityFlag == 0){
+        cellTitleArr = @[@"消息",@"收藏",@"搜索",@"个人资料",@"设置"];
+        for (int i = 0; i < cellTitleArr.count; i ++){
+            NSString *imageStr = nil;
+            if (i == 0){
+                imageStr = @"set000";
+            }else{
+                imageStr = [NSString stringWithFormat:@"set0%d",i-1];
+            }
+            UIImage *image = [UIImage imageNamed:imageStr];
+            [cellImageArr addObject:image];
         }
-        UIImage *image = [UIImage imageNamed:imageStr];
-        [cellImageArr addObject:image];
+    }else{
+        cellTitleArr = @[@"消息",@"雇佣记录",@"收藏",@"搜索",@"个人资料",@"设置"];
+        for (int i = 0; i < cellTitleArr.count; i ++){
+            NSString *imageStr = nil;
+            switch (i) {
+                case 0:{
+                     imageStr = @"set000";
+                }
+                    break;
+                case 1:{
+                    imageStr = @"employmentRecord";
+                }
+                    break;
+                default:{
+                    imageStr = [NSString stringWithFormat:@"set0%d",i-2];
+                }
+                    break;
+            }
+            UIImage *image = [UIImage imageNamed:imageStr];
+            [cellImageArr addObject:image];
+        }
     }
+   
+    
 }
 //切换身份
 - (void)exchangeIndentity{
@@ -131,6 +155,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    NSInteger accountFlag =  [lzhGetAccountInfo getAccount].identityFlag;
     switch (indexPath.row) {
         case 0:{
             MessageViewController *messageVC = [[MessageViewController alloc]init];
@@ -138,21 +163,49 @@
         }
             break;
         case 1:{
-            ConcernViewController *concernVC = [[ConcernViewController alloc]init];
-            [self.navigationController pushViewController:concernVC animated:YES];
+                if (accountFlag){
+                    EmploymentRecordViewController *emplomentVC = [[EmploymentRecordViewController alloc]init];
+                    [self.navigationController pushViewController:emplomentVC animated:YES];
+                }else{
+                    ConcernViewController *concernVC = [[ConcernViewController alloc]init];
+                    [self.navigationController pushViewController:concernVC animated:YES];
+                }
         }
             break;
         case 2:{
-            SearchViewController *searchVC = [[SearchViewController alloc]init];
-            [self.navigationController pushViewController:searchVC animated:YES];
+            if (accountFlag){
+                ConcernViewController *concernVC = [[ConcernViewController alloc]init];
+                [self.navigationController pushViewController:concernVC animated:YES];
+            }else{
+                SearchViewController *searchVC = [[SearchViewController alloc]init];
+                [self.navigationController pushViewController:searchVC animated:YES];
+            }
+            
         }
             break;
         case 3:{
-            OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
-            [self.navigationController pushViewController:personalInfoVC animated:YES];
+            if (accountFlag){
+                SearchViewController *searchVC = [[SearchViewController alloc]init];
+                [self.navigationController pushViewController:searchVC animated:YES];
+            }else{
+                OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
+                [self.navigationController pushViewController:personalInfoVC animated:YES];
+            }
+            
         }
             break;
         case 4:{
+            if (accountFlag){
+                OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
+                [self.navigationController pushViewController:personalInfoVC animated:YES];
+            }else{
+                SettingViewController *setVC = [[SettingViewController alloc]init];
+                [self.navigationController pushViewController:setVC animated:YES];
+            }
+           
+        }
+            break;
+        case 5:{
             SettingViewController *setVC = [[SettingViewController alloc]init];
             [self.navigationController pushViewController:setVC animated:YES];
         }

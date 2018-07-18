@@ -100,11 +100,12 @@
     //点击中间大按钮的处理
     WS(weakSelf);
     self.tabBarController.clickBigButtBlock = ^{
-        UINavigationController *nav = navArr[weakSelf.tabBarController.selectedIndex];
-        weakSelf.currentSelectedNav = nav;
-        WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc] init];
-        loginVC.isWx = YES;
-        [weakSelf.currentSelectedNav pushViewController:loginVC animated:YES];
+        UINavigationController *nav = [NavTools currentNavgation:weakSelf.tabBarController];
+        if(nav){
+            WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc] init];
+            loginVC.isWx = YES;
+            [nav pushViewController:loginVC animated:YES];
+        }
     };
     //
     [self displayVC];
@@ -128,8 +129,8 @@
     MyInfoViewController *myInfoVC = [[MyInfoViewController alloc] init];
     UINavigationController *myInfoNavi=[[UINavigationController alloc]initWithRootViewController:myInfoVC];
     self.tabBarController = [[RDVTabBarController alloc] init];
-    NSArray *navArr = @[firstNavi,orderNavi,videoCenterNavi,skillNavi,myInfoNavi];
-    [self.tabBarController setViewControllers:navArr];//,guessHappyNavi
+    self.navArr = @[firstNavi,orderNavi,videoCenterNavi,skillNavi,myInfoNavi];
+    [self.tabBarController setViewControllers:self.navArr];//,guessHappyNavi
     [self.tabBarController tabBar].backgroundView.backgroundColor=[UIColor whiteColor];
     self.tabBarController.selectedIndex= 0;
     [self changeToEmployerState:self.tabBarController];
@@ -137,11 +138,12 @@
     //点击中间大按钮的处理
     WS(weakSelf);
     self.tabBarController.clickBigButtBlock = ^{
-        UINavigationController *nav = navArr[weakSelf.tabBarController.selectedIndex];
-        weakSelf.currentSelectedNav = nav;
-        WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc] init];
-        loginVC.isWx = YES;
-        [weakSelf.currentSelectedNav pushViewController:loginVC animated:YES];
+        UINavigationController *nav = [NavTools currentNavgation:weakSelf.tabBarController];
+        if(nav){
+            WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc] init];
+            loginVC.isWx = YES;
+            [nav pushViewController:loginVC animated:YES];
+        }
     };
     [self displayVC];
 }

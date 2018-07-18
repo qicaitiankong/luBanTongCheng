@@ -22,6 +22,8 @@
 
 @property (assign,nonatomic) BOOL shouldDisplayBottomView;
 
+@property (assign,nonatomic) NSInteger modelIndex;
+
 + (DispatchTicketDetailBaoJiaModel*)setModelFromDict:(NSDictionary*)dict;
 
 

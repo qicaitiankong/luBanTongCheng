@@ -7,10 +7,14 @@
 //
 
 #import "FirstPageViewController.h"
+//
+#import "LaunchPiesViewController.h"
+
 //views
 #import "JHCollectionViewCell.h"
 #import "JHWaterfallCollectionLayout.h"
 #import "FirstPageWaterCollectionReusableHeaderView.h"
+#import "LaunchTicketOnWindowCircleButtView.h"
 
 @interface FirstPageViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,WaterFlowLayoutDelegate>{
     UICollectionView *mainCollectionView;
@@ -21,15 +25,21 @@
 @end
 
 @implementation FirstPageViewController
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [NavTools hiddenNav:self.navigationController];
+    [NavTools displayTabbar:self.rdv_tabBarController];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self createButtView];
     [self initObjects];
     [self addCollectionView];
     [self getData];
 }
-
+//
 - (void)initObjects{
     self.modelArr = [[NSMutableArray alloc] init];
 }
@@ -155,8 +165,22 @@
     
     return reusableView;
 }
-
-
+//悬浮按钮
+- (void)createButtView{
+    if([lzhGetAccountInfo getAccount].identityFlag){
+        LaunchTicketOnWindowCircleButtView *buttView = [[LaunchTicketOnWindowCircleButtView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - SCREEN_WIDTH * 0.16 - 10, SCREEN_HEIGHT - TAB_BAR_HEIGHT - SCREEN_WIDTH * 0.16 - 50, SCREEN_WIDTH * 0.16, SCREEN_WIDTH * 0.16)];
+        UIWindow *appWindow = APP_MAIN_WINDOW;
+        [appWindow addSubview:buttView];
+        buttView.layer.cornerRadius = buttView.width / 2;
+        UINavigationController *currentNav = [NavTools currentNavgation:self.rdv_tabBarController];
+        buttView.clickButtBlock = ^{
+            if (currentNav){
+                LaunchPiesViewController *lauchVC = [[LaunchPiesViewController alloc]init];
+                [currentNav pushViewController:lauchVC animated:YES];
+            }
+        };
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

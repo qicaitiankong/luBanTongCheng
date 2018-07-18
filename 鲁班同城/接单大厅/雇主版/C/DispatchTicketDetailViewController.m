@@ -67,6 +67,7 @@
     //
     for (int i = 0; i < 12; i ++){
         DispatchTicketDetailBaoJiaModel *model = [DispatchTicketDetailBaoJiaModel setModelFromDict:nil];
+        model.modelIndex = i;
         [self.modelArr addObject:model];
     }
     //
@@ -167,6 +168,7 @@
         cell.model = self.singleModel;
         parentCell = cell;
     }else if(indexPath.section == 2){
+        NSLog(@"indexPath.section == 2");
         static NSString *cellFlag = @"cellFlag2";
         DispatchTicketDetailBaoJiaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
         if (nil == cell){
@@ -177,7 +179,7 @@
                 
             };
         }
-        cell.path = indexPath;
+        cell.indexPath = indexPath;
         cell.model = self.modelArr[indexPath.row];
         parentCell = cell;
     }

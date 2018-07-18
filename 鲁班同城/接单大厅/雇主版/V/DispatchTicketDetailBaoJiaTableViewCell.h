@@ -25,7 +25,7 @@
 
 @property (strong,nonatomic) DispatchTicketDetailBaoJiaModel *model;
 
-@property (strong,nonatomic) NSIndexPath *path;
+@property (strong,nonatomic) NSIndexPath *indexPath;
 
 @property (strong,nonatomic) DispatchOrderDetailCellSureServiceCompleteGroupView *bottomGroupView;
 

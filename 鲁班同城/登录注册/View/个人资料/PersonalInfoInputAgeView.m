@@ -11,7 +11,7 @@
 @interface PersonalInfoInputAgeView (){
         UIView *bottomLineView;
         UIImageView *flagImageView;
-    UIButton *backButt;
+        UIButton *backButt;
 }
 @end
 

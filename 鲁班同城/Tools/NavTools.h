@@ -23,6 +23,6 @@
 
 + (void)displayTabbar:(RDVTabBarController*)tab;
 
-
++ (UINavigationController*)currentNavgation:(RDVTabBarController*)tabbarControler;
 
 @end

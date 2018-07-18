@@ -45,4 +45,13 @@
         [tab setTabBarHidden:NO];
     }
 }
+
++ (UINavigationController*)currentNavgation:(RDVTabBarController*)tabbarControler{
+    UINavigationController *nav = nil;
+    AppDelegate *appDele = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    nav = appDele.navArr[tabbarControler.selectedIndex];
+    return nav;
+}
+
+
 @end
