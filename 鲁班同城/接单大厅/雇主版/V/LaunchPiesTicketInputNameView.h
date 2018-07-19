@@ -17,6 +17,8 @@
 
 @property (strong,nonatomic) OwnTextField *rightTextField;
 
+@property (strong,nonatomic) UIView *bottomLineView;
+
 - (void)addOwnConstraints:(UIImage *)iconImage;
 
 - (instancetype)initWithFrame:(CGRect)frame needRightMapButt:(BOOL)needMapButt;

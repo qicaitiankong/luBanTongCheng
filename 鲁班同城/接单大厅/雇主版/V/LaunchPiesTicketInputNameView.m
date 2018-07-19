@@ -9,7 +9,7 @@
 #import "LaunchPiesTicketInputNameView.h"
 
 @interface LaunchPiesTicketInputNameView (){
-    UIView *bottomLineView;
+    
     CustomerImageButt *mapChooseButtView;
     BOOL needMapButt;
 }
@@ -17,6 +17,7 @@
 @end
 
 @implementation LaunchPiesTicketInputNameView
+@synthesize bottomLineView;
 
 - (instancetype)initWithFrame:(CGRect)frame needRightMapButt:(BOOL)needMapButt
 {

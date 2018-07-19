@@ -11,6 +11,8 @@
 #import "LaunchPiesTicketInputNameView.h"
 #import "LaunchPiesTicketChooseJobView.h"
 #import "LaunchPiesTicketYuSuanView.h"
+#import "OwnTextView.h"
+#import "CommitPopView.h"
 
 @interface LaunchPiesViewController (){
     UIScrollView *baseScrollView;
@@ -21,6 +23,10 @@
     LaunchPiesTicketChooseJobView *technologeView;
     LaunchPiesTicketYuSuanView *yuSuanView;
     LaunchPiesTicketChooseJobView *timeChooseView;
+    LaunchPiesTicketInputNameView *beiZhuView;
+    //
+    CommitPopView *popView;
+    UIButton *popbackButt;
 }
 
 @end
@@ -102,12 +108,74 @@
     timeChooseView.ageLabel.text = @"上门时间";
     timeChooseView.rightTextField.myTextField.placeholder = @"请选择";
     [baseScrollView addSubview:timeChooseView];
+    //备注
+    beiZhuView = [[LaunchPiesTicketInputNameView alloc]initWithFrame:CGRectMake(0,timeChooseView.bottom, self.view.width,singleViewHeight) needRightMapButt:NO];
+    beiZhuView.rightTextField.hidden = YES;
+    beiZhuView.bottomLineView.hidden = YES;
+    [beiZhuView addOwnConstraints:[UIImage imageNamed:@"ticket_beizhu"]];
+    beiZhuView.nameLabel.text = @"备注";
+    [baseScrollView addSubview:beiZhuView];
+    //textview baseview
+    UIView *baseTextView = [[UIView alloc]initWithFrame:CGRectMake(0, beiZhuView.bottom, baseScrollView.width, SCREEN_HEIGHT * 0.15)];
+    baseTextView.backgroundColor = [UIColor whiteColor];
+    [baseScrollView addSubview:baseTextView];
+    //textview
+    OwnTextView *beiZhuTextView = [[OwnTextView alloc]initWithFrame:CGRectMake(35, 0, baseTextView.width - 35 - 10, baseTextView.height * 0.8)];
+    beiZhuTextView.backgroundColor = [UIColor whiteColor];
+    beiZhuTextView.clipsToBounds = YES;
+    beiZhuTextView.layer.borderWidth = 1;
+    beiZhuTextView.layer.borderColor = [UIColor colorWithHexString:@"#C6C6C6"].CGColor;
+    beiZhuTextView.layer.cornerRadius = 5;
+    [baseTextView addSubview:beiZhuTextView];
+    //提交基view
+    UIView *commitButtBaseView = [[UIView alloc]initWithFrame:CGRectMake(0, baseTextView.bottom + groupViewVerticalSpace, baseScrollView.width, SCREEN_HEIGHT * 0.112)];
+    commitButtBaseView.backgroundColor = [UIColor whiteColor];
+    [baseScrollView addSubview:commitButtBaseView];
     //
-    [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, timeChooseView.bottom + 15)];
+    UIColor *commitButtBackColor = SPECIAL_BLUE_COLOR;
+    CustomeStyleCornerButt *commitButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, 0, commitButtBaseView.width - 20, commitButtBaseView.height * 0.6) backColor:commitButtBackColor cornerRadius:8 title:@"提交" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
+    commitButt.center = CGPointMake(commitButtBaseView.width / 2, commitButtBaseView.height / 2);
+    WS(weakSelf);
+    commitButt.clickButtBlock = ^{
+        [weakSelf showPopView];
+    };
+    [commitButtBaseView addSubview:commitButt];
+    //
+    [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, commitButtBaseView.bottom + 15)];
     //
     
 }
 
+
+//弹窗
+- (void)showPopView{
+    UIWindow *appWindow = APP_MAIN_WINDOW;
+    if (nil == popView){
+        popbackButt = [UIButton buttonWithType:UIButtonTypeCustom];
+        popbackButt.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        popbackButt.backgroundColor = [UIColor grayColor];
+        popbackButt.alpha = POP_VIEW_ALPHA;
+        [popbackButt addTarget:self action:@selector(popBackButtHandler) forControlEvents:UIControlEventTouchUpInside];
+        [appWindow addSubview:popbackButt];
+        popView = [[CommitPopView alloc]initWithFrame:CGRectMake(0, 0, 194, 223)];
+        popView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT  / 2);
+        [appWindow addSubview:popView];
+        WS(weakSelf);
+        popView.sureBlock = ^{
+            __strong typeof(weakSelf)sself = weakSelf;
+            [sself -> popbackButt setHidden:YES];
+            [sself -> popView setHidden:YES];
+        };
+    }else{
+        [popbackButt setHidden:NO];
+        [popView setHidden:NO];
+    }
+}
+
+- (void)popBackButtHandler{
+    [popbackButt setHidden:YES];
+    [popView setHidden:YES];
+}
 
 
 
