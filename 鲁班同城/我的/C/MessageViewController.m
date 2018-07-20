@@ -9,6 +9,7 @@
 #import "MessageViewController.h"
 #import "MessageTableViewCell.h"
 #import "MessageModel.h"
+#import "CommunicateViewController.h"
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -60,6 +61,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:size style:styles];
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -91,6 +93,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    //测试聊天
+    CommunicateViewController *communicateVC = [[CommunicateViewController alloc]init];
+    communicateVC.conversationType = 1;
+    NSString *deviceID = VENDER_IDENTIFIER;
+    NSString *lzhDeviceStr = @"6D74CBD6-1D81-45E0-B329-690CA31AF49C";
+    if([deviceID isEqualToString:lzhDeviceStr]){
+        communicateVC.targetId = @"TEST02-6D74CBD6-1D81-45E0-B329-690CA31AF49C";
+        communicateVC.title = @"test02";
+    }else{
+        communicateVC.targetId = @"LZH-6D74CBD6-1D81-45E0-B329-690CA31AF49C";
+        communicateVC.title = @"LZH";
+    }
+    
+    [self.navigationController pushViewController:communicateVC animated:YES];
 }
 
 

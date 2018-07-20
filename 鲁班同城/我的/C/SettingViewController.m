@@ -48,6 +48,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:size style:styles];
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];

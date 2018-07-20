@@ -73,6 +73,7 @@
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = headerView;
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.view addSubview:self.tableView];
     //
     [headerView.companyLogoImageView setImage:[UIImage imageNamed:@"test01"]];

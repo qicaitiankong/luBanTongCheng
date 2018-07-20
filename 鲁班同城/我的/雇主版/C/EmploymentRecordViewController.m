@@ -60,9 +60,11 @@
 - (void)addTableView:(CGRect)size style:(UITableViewStyle)styles{
     //
     sectionView = [[EmploymentRecordSectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
+    
     //
     self.tableView = [[UITableView alloc]initWithFrame:size style:styles];
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.delegate = self;

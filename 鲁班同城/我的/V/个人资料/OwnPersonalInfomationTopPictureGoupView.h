@@ -31,4 +31,7 @@
 
 @property (strong,nonatomic) StarView * starGroupView;
 
+- (instancetype)initWithFrame:(CGRect)frame vcKind:(NSInteger)rankUse;
+
+
 @end

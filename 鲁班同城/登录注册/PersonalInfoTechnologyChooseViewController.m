@@ -66,6 +66,7 @@
     self.leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, leftCellWidth, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT) style:UITableViewStylePlain];
     self.leftTableView.tag = 1;
     self.leftTableView.backgroundColor = [UIColor whiteColor];
+    self.leftTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.leftTableView.delegate = self;
     self.leftTableView.dataSource = self;
     [self.view addSubview:self.leftTableView];
@@ -75,6 +76,7 @@
     //
     self.rightTableView = [[UITableView alloc] initWithFrame:CGRectMake(spaceView.right, 0, rightCellWidth, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT) style:UITableViewStylePlain];
     self.rightTableView.tag = 2;
+    self.rightTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.rightTableView.backgroundColor = [UIColor whiteColor];
     self.rightTableView.delegate = self;
     self.rightTableView.dataSource = self;

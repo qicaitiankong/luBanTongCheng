@@ -57,7 +57,7 @@
 
 //tabbar雇主状态
 - (void)changeToEmployerState:(RDVTabBarController*)tabbarController{
-    UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//
     UITableView.appearance.estimatedRowHeight = 0;
     UITableView.appearance.estimatedSectionFooterHeight = 0;
     UITableView.appearance.estimatedSectionHeaderHeight = 0;
@@ -130,6 +130,42 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
+//
+- (void)initRongYun{
+    //{"code":200,"userId":"LZH-6D74CBD6-1D81-45E0-B329-690CA31AF49C","token":"PJrRrTh7nJRacL4o7SQE/QM84eptEeqQzvusjPmPcfElJvmCHflfoWLZ1q3BgGC6ahrnZHonjVoP2hSgMq+NbYazBdx0YwsPAW7KWxohEwKiAvFCDkNRwn7rRy0aGC7aif7C2ig+f17XMeHQIddGPQ=="}
+    //{"code":200,"userId":"TEST02-6D74CBD6-1D81-45E0-B329-690CA31AF49C","token":"JCqeQpylqZ47hXTWf8cC/Otu/eT0O8rTRLcmVsGdOnJ1lRZnIYipDWO7+ZUzBB6/ZHNqaqc9oltOwE1sJejcYpZq7SKhtI/YviUjSWld5f5N/cg+lbKuf0Sy202nnGQX4hT27O4K/vbFkfWZkKGV++n6XrSSgIDI"}
+    //
+    NSString *lzhDeviceStr = @"6D74CBD6-1D81-45E0-B329-690CA31AF49C";
+    
+    NSString *lzhToken01 = @"PJrRrTh7nJRacL4o7SQE/QM84eptEeqQzvusjPmPcfElJvmCHflfoWLZ1q3BgGC6ahrnZHonjVoP2hSgMq+NbYazBdx0YwsPAW7KWxohEwKiAvFCDkNRwn7rRy0aGC7aif7C2ig+f17XMeHQIddGPQ==";
+    NSString *lzhToken02 = @"JCqeQpylqZ47hXTWf8cC/Otu/eT0O8rTRLcmVsGdOnJ1lRZnIYipDWO7+ZUzBB6/ZHNqaqc9oltOwE1sJejcYpZq7SKhtI/YviUjSWld5f5N/cg+lbKuf0Sy202nnGQX4hT27O4K/vbFkfWZkKGV++n6XrSSgIDI";
+    NSString *deviceID = VENDER_IDENTIFIER;
+    NSString *useToken = nil;
+    if([deviceID isEqualToString:lzhDeviceStr]){
+        useToken = lzhToken01;
+        //TEST02-6D74CBD6-1D81-45E0-B329-690CA31AF49C
+    }else{
+        useToken = lzhToken02;
+        //LZH-6D74CBD6-1D81-45E0-B329-690CA31AF49C
+    }
+    //此方法的回调并非为原调用线程，您如果需要进行UI操作，请注意切换到主线程。
+    [[RCIM sharedRCIM]initWithAppKey:@"m7ua80gbmj2em"];
+    //xiaminxiamin
+    [[RCIM sharedRCIM] connectWithToken:useToken success:^(NSString *userId) {
+        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+        dispatch_async(dispatch_get_main_queue(), ^{
+           
+        });
+    } error:^(RCConnectErrorCode status) {
+         NSLog(@"登陆的错误码为:%d", status);
+    } tokenIncorrect:^{
+        //token过期或者不正确。
+        //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
+        //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
+        //在tokenIncorrectBlock的情况下，您需要请求您的服务器重新获取token并建立连接，但是注意避免无限循环，以免影响App用户体验。
+        NSLog(@"token错误");
+    }];
+}
 
 
 @end

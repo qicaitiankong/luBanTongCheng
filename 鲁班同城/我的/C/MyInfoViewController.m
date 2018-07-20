@@ -31,16 +31,26 @@
 
 @implementation MyInfoViewController
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        [self hiddenXuanFuButt];
+    }
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [NavTools displayTabbar:self.rdv_tabBarController];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        [self displayXuanFuButt];
+    }
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [NavTools displayTabbar:self.rdv_tabBarController];
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self initObject];
     [self addTableView:CGRectMake(0, STATUSBAR_HEIGHT, SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT) style:UITableViewStylePlain];
 }

@@ -24,15 +24,27 @@
 
 @implementation RankViewController
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        [self hiddenXuanFuButt];
+    }
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [NavTools displayNav:self.navigationController];
+    [NavTools displayTabbar:self.rdv_tabBarController];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        [self displayXuanFuButt];
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"排行榜";
     [NavTools displayNav:self.navigationController];
+    [NavTools displayTabbar:self.rdv_tabBarController];
     self.view.backgroundColor = [UIColor whiteColor];
     [self initOwnObjects];
     //
@@ -72,6 +84,7 @@
     [topScrollView addSubview:topLineView];
     [self.view addSubview:topScrollView];
     [topScrollView addButton:@[@"好评榜",@"接单榜"] titleFontSize:17];
+    topScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     topScrollView.lineView.frame = CGRectMake(0, topScrollView.lineView.y, self.view.width / 2, 1);
     
 }
@@ -81,6 +94,7 @@
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.view addSubview:self.tableView];
 }
 

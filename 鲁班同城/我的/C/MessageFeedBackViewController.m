@@ -37,6 +37,7 @@
 
 - (void)addViews{
     UIScrollView *baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT)];
+    baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     baseScrollView.backgroundColor = RGBA(242, 242, 242,1);
     [self.view addSubview:baseScrollView];
     //

@@ -91,6 +91,7 @@
    
     self.tableView = [[UITableView alloc] initWithFrame:size style:styles];
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.tableView.tableHeaderView = searchHeadView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

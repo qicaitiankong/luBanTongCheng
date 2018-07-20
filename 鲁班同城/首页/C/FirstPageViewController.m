@@ -25,10 +25,21 @@
 @end
 
 @implementation FirstPageViewController
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        [self hiddenXuanFuButt];
+    }
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [NavTools hiddenNav:self.navigationController];
     [NavTools displayTabbar:self.rdv_tabBarController];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        [self displayXuanFuButt];
+    }
 }
 
 - (void)viewDidLoad {
@@ -38,6 +49,7 @@
     [self initObjects];
     [self addCollectionView];
     [self getData];
+    
 }
 //
 - (void)initObjects{
@@ -83,6 +95,7 @@
     mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT + STATUSBAR_HEIGHT) collectionViewLayout:layout];
     mainCollectionView.backgroundColor = [UIColor clearColor];
     [mainCollectionView registerClass:[JHCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([JHCollectionViewCell class])];
+    mainCollectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [mainCollectionView registerClass:[FirstPageWaterCollectionReusableHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([FirstPageWaterCollectionReusableHeaderView class])];
     mainCollectionView.delegate = self;
     mainCollectionView.dataSource = self;
@@ -168,16 +181,20 @@
 //悬浮按钮
 - (void)createButtView{
     if([lzhGetAccountInfo getAccount].identityFlag){
-        LaunchTicketOnWindowCircleButtView *buttView = [[LaunchTicketOnWindowCircleButtView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - SCREEN_WIDTH * 0.16 - 10, SCREEN_HEIGHT - TAB_BAR_HEIGHT - SCREEN_WIDTH * 0.16 - 50, SCREEN_WIDTH * 0.16, SCREEN_WIDTH * 0.16)];
+        self.xuanFubuttView = [[LaunchTicketOnWindowCircleButtView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - SCREEN_WIDTH * 0.16 - 10, SCREEN_HEIGHT - TAB_BAR_HEIGHT - SCREEN_WIDTH * 0.16 - 50, SCREEN_WIDTH * 0.16, SCREEN_WIDTH * 0.16)];
         UIWindow *appWindow = APP_MAIN_WINDOW;
-        [appWindow addSubview:buttView];
-        buttView.layer.cornerRadius = buttView.width / 2;
-        UINavigationController *currentNav = [NavTools currentNavgation:self.rdv_tabBarController];
-        buttView.clickButtBlock = ^{
+        [appWindow addSubview:self.xuanFubuttView];
+        self.xuanFubuttView.layer.cornerRadius = self.xuanFubuttView.width / 2;
+        WS(weakSelf);
+        self.xuanFubuttView.clickButtBlock = ^{
+             UINavigationController *currentNav = [NavTools currentNavgation:weakSelf.rdv_tabBarController];
             if (currentNav){
                 LaunchPiesViewController *lauchVC = [[LaunchPiesViewController alloc]init];
                 [currentNav pushViewController:lauchVC animated:YES];
+            }else{
+                NSLog(@"悬浮按钮点击 当前导航栏为空");
             }
+            NSLog(@"悬浮按钮点击");
         };
     }
 }

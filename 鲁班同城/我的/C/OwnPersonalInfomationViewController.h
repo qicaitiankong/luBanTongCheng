@@ -11,5 +11,8 @@
 
 
 @interface OwnPersonalInfomationViewController : BaseHiddenNavAndTabBarViewController
+//0默认个人资料使用，否则排行榜使用
+@property (assign,nonatomic) NSInteger vcKind;
+
 
 @end

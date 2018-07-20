@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseHiddenNaviViewController.h"
-
+#import "LaunchTicketOnWindowCircleButtView.h"
 
 @interface FirstPageViewController : BaseHiddenNaviViewController
+
+@property (strong,nonatomic) LaunchTicketOnWindowCircleButtView *xuanFubuttView;
 
 @end

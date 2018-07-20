@@ -28,9 +28,19 @@
 
 @implementation OrderTakingViewController
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        [self hiddenXuanFuButt];
+    }
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [NavTools displayTabbar:self.rdv_tabBarController];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        [self displayXuanFuButt];
+    }
 }
 
 - (void)viewDidLoad {
@@ -74,6 +84,7 @@
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.view addSubview:self.tableView];
 }
 

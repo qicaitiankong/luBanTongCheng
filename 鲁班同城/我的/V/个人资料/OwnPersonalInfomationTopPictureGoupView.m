@@ -19,7 +19,7 @@
 @synthesize shareButt;
 @synthesize addFriendButt;
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame vcKind:(NSInteger)rankUse
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -55,7 +55,7 @@
         titleLabel.text = @"鲁班同城";
         [self addSubview:titleLabel];
         //
-        self.userlogoImaView = [[UIImageView alloc]initWithFrame:CGRectMake(navReturnButt.left, self.topBigImaView.bottom - 20, SCREEN_WIDTH * 0.258, SCREEN_WIDTH * 0.258)];
+        self.userlogoImaView = [[UIImageView alloc]initWithFrame:CGRectMake(5, self.topBigImaView.bottom - 20, SCREEN_WIDTH * 0.258, SCREEN_WIDTH * 0.258)];
         self.userlogoImaView.backgroundColor = [UIColor grayColor];
         self.userlogoImaView.layer.cornerRadius = self.userlogoImaView.width / 2;
         self.userlogoImaView.clipsToBounds = YES;
@@ -80,10 +80,19 @@
         //
         CGFloat editLeft = self.userlogoImaView.left + self.userlogoImaView.width + 10;
         CGFloat editWith = frame.size.width - editLeft - 15;
-        
-        CustomeStyleCornerButt *editButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(editLeft, self.fenSiLabel.bottom + 10, editWith, 30) backColor:[UIColor whiteColor] cornerRadius:15 title:@"编辑个人资料" titleColor:[UIColor colorWithHexString:@"#666666"] font:[UIFont getPingFangSCMedium:14]];
-        editButt.loginButt.layer.borderWidth = 1;
-        editButt.loginButt.layer.borderColor = [UIColor colorWithHexString:@"#E3E3E3"].CGColor;
+        //
+        NSString *editButtTitle = @"编辑个人资料";
+        if (rankUse){
+            editButtTitle = @" 通过排行榜添加";
+        }
+        //
+        CustomeStyleCornerButt *editButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(editLeft, self.fenSiLabel.bottom + 10, editWith, 30) backColor:[UIColor whiteColor] cornerRadius:15 title:editButtTitle titleColor:[UIColor colorWithHexString:@"#666666"] font:[UIFont getPingFangSCMedium:14]];
+        editButt.layer.borderWidth = 1;
+        editButt.layer.borderColor = [UIColor colorWithHexString:@"#E3E3E3"].CGColor;
+        if (rankUse){
+            [editButt.loginButt setImage:[UIImage imageNamed:@"duiHao"] forState:UIControlStateNormal];
+            editButt.userInteractionEnabled = NO;
+        }
         [self addSubview:editButt];
         //
         CGFloat homeLabelHeight = 20;

@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <RongIMLib/RongIMLib.h>
+#import <RongIMKit/RongIMKit.h>
 
 @interface AppDelegate (tabbar)
 
@@ -16,5 +18,8 @@
 
 //tabbar零工状态
 -(void)customizeTabBarForCapsualLabourController:(RDVTabBarController *)tabBarController;
+
+//
+- (void)initRongYun;
 
 @end

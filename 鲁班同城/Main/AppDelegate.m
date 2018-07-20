@@ -27,18 +27,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-//    LoginViewController *loginVC = [[LoginViewController alloc] init];
-//    self.window.rootViewController = loginVC;
-//    [self.window makeKeyAndVisible];
-    
+    [self initRongYun];
     [self customNaviBar];
     if ([lzhGetAccountInfo getAccount].identityFlag == 0){
         [self setupViewControllersForCasualLabour];
     }else{
         [self setupViewControllersForEmployment];
     }
-    
+    NSLog(@"设备序列号%@",VENDER_IDENTIFIER);
     return YES;
 }
 
@@ -68,6 +64,31 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+//
+/**
+ *此方法中要提供给融云用户的信息，建议缓存到本地，然后改方法每次从您的缓存返回
+ */
+- (void)getUserInfoWithUserId:(NSString *)userId completion:(void(^)(RCUserInfo* userInfo))completion
+{
+    //此处为了演示写了一个用户信息
+    if ([@"LZH-6D74CBD6-1D81-45E0-B329-690CA31AF49C" isEqual:userId]) {
+        RCUserInfo *user = [[RCUserInfo alloc]init];
+        user.userId = @"LZH-6D74CBD6-1D81-45E0-B329-690CA31AF49C";
+        user.name = @"LZH";
+        //user.portraitUri = @"https://ss0.baidu.com/73t1bjeh1BF3odCf/it/u=1756054607,4047938258&fm=96&s=94D712D20AA1875519EB37BE0300C008";
+
+        return completion(user);
+    }else if([@"TEST02-6D74CBD6-1D81-45E0-B329-690CA31AF49C" isEqual:userId]) {
+        RCUserInfo *user = [[RCUserInfo alloc]init];
+        user.userId = @"TEST02-6D74CBD6-1D81-45E0-B329-690CA31AF49C";
+        user.name = @"TEST02";
+        //user.portraitUri = @"https://ss0.baidu.com/73t1bjeh1BF3odCf/it/u=1756054607,4047938258&fm=96&s=94D712D20AA1875519EB37BE0300C008";
+        return completion(user);
+    }
+}
+
+//
+
 //
 - (void)displayVC{
      self.window.rootViewController=self.tabBarController;

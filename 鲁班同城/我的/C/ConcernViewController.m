@@ -8,6 +8,7 @@
 
 #import "ConcernViewController.h"
 #import "ConcernTableViewCell.h"
+#import "OwnPersonalInfomationViewController.h"
 
 @interface ConcernViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -48,6 +49,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:size style:styles];
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -79,6 +81,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    OwnPersonalInfomationViewController *rankVC = [[OwnPersonalInfomationViewController alloc]init];
+    rankVC.vcKind = 1;
+    [self.navigationController pushViewController:rankVC animated:YES];
 }
 
 

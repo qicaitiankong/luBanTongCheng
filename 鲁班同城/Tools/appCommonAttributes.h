@@ -24,6 +24,8 @@
 #import "AppDelegate.h"
 #import "lzhGetAccountInfo.h"
 #import "CustomeStyleCornerButt.h"
+#import "TDHttpTools.h"
+#import "UIViewController+XuanFuButtDIsplayAndHidden.h"
 
 //third party class
 #import <SVProgressHUD.h>

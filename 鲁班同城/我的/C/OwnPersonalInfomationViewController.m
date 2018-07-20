@@ -37,9 +37,10 @@
     //
     baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     baseScrollView.backgroundColor = [UIColor colorWithRed:245 / 255.0 green:245 / 255.0 blue:245 / 255.0 alpha:1];
+    baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.view addSubview:baseScrollView];
     //
-    topPartView = [[OwnPersonalInfomationTopPictureGoupView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 20)];
+    topPartView = [[OwnPersonalInfomationTopPictureGoupView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 20) vcKind:self.vcKind];
     [topPartView.userlogoImaView setImage:[UIImage imageNamed:@"test07.jpg"]];
     topPartView.fenSiLabel.text = @"888粉丝";
     topPartView.concernLabel.text = @"23333关注";

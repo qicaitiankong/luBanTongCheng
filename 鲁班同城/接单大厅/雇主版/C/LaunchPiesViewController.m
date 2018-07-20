@@ -45,6 +45,7 @@
     [NavTools hiddenTabbar:self.rdv_tabBarController];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"发起派单";
+    [self hiddenXuanFuButt];
     [self addViews];
 }
 
@@ -54,6 +55,7 @@
     CGFloat singleViewHeight = 50;
    //
     baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT)];
+    baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     baseScrollView.backgroundColor = [UIColor colorWithHexString:@"#DADADA"];
     [self.view addSubview:baseScrollView];
     //
