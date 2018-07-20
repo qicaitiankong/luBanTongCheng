@@ -50,7 +50,7 @@
     //
     [self addTopScrollView];
     //
-    [self addTableView:CGRectMake(0, topScrollView.bottom,self.view.width,CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT - topScrollView.height) style:UITableViewStylePlain];
+    [self addTableView:CGRectMake(0, topScrollView.bottom,self.view.width,SCREEN_HEIGHT - StatusBarAndNavigationBarHeight - topScrollView.bottom - TAB_BAR_HEIGHT) style:UITableViewStylePlain];
     //
     [self getData];
 }

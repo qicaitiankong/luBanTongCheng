@@ -15,6 +15,7 @@
 #import "OrderTakingQuotePriceDetailViewController.h"
 #import "SearchViewController.h"
 #import "DispatchTicketDetailViewController.h"
+#import "DispatchOrderMapViewController.h"
 
 @interface OrderTakingViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -66,8 +67,13 @@
 //cell 发起按钮
 - (void)clickCellButt:(NSIndexPath*)path{
     NSLog(@"%ld",path.row);
-    OrderTakingQuotePriceViewController *quotePriceVC = [[OrderTakingQuotePriceViewController alloc]init];
-    [self.navigationController pushViewController:quotePriceVC animated:YES];
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        DispatchOrderMapViewController *mapVC = [[DispatchOrderMapViewController alloc]init];
+        [self.navigationController pushViewController:mapVC animated:YES];
+    }else{
+        OrderTakingQuotePriceViewController *quotePriceVC = [[OrderTakingQuotePriceViewController alloc]init];
+        [self.navigationController pushViewController:quotePriceVC animated:YES];
+    }
 }
 
 //view

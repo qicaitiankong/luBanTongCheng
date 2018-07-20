@@ -8,7 +8,7 @@
 
 #import "FirstPageViewController.h"
 //
-#import "LaunchPiesViewController.h"
+#import "DispatchOrderMapViewController.h"
 
 //views
 #import "JHCollectionViewCell.h"
@@ -189,8 +189,8 @@
         self.xuanFubuttView.clickButtBlock = ^{
              UINavigationController *currentNav = [NavTools currentNavgation:weakSelf.rdv_tabBarController];
             if (currentNav){
-                LaunchPiesViewController *lauchVC = [[LaunchPiesViewController alloc]init];
-                [currentNav pushViewController:lauchVC animated:YES];
+                DispatchOrderMapViewController *dispatchVC = [[DispatchOrderMapViewController alloc]init];
+                [currentNav pushViewController:dispatchVC animated:YES];
             }else{
                 NSLog(@"悬浮按钮点击 当前导航栏为空");
             }

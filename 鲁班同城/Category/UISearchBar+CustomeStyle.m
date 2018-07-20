@@ -14,7 +14,12 @@
     UISearchBar *bar = [[UISearchBar alloc] init];
     bar.barTintColor = [UIColor whiteColor];
     bar.backgroundColor = [UIColor whiteColor];
-    bar.placeholder = @"找工作上鲁班同城";
+    if([lzhGetAccountInfo getAccount].identityFlag){
+        bar.placeholder = @"找零工上鲁班同城";
+
+    }else{
+        bar.placeholder = @"找工作上鲁班同城";
+    }
     bar.searchBarStyle = UISearchBarStyleDefault;
     
     //去掉上下黑线

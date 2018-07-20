@@ -22,4 +22,7 @@
 //
 - (void)initRongYun;
 
+
+- (void)initGaoDe;
+
 @end

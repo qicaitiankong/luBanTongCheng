@@ -8,13 +8,13 @@
 
 #import "AppDelegate+tabbar.h"
 #import "RDVTabBarItem.h"
-
+#import <AMapFoundationKit/AMapFoundationKit.h>
 
 @implementation AppDelegate (tabbar)
 
 //tabbar零工状态
 -(void)customizeTabBarForCapsualLabourController:(RDVTabBarController *)tabBarController{
-    UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+
     UITableView.appearance.estimatedRowHeight = 0;
     UITableView.appearance.estimatedSectionFooterHeight = 0;
     UITableView.appearance.estimatedSectionHeaderHeight = 0;
@@ -129,6 +129,11 @@
     //状态条白色字体
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
+//
+- (void)initGaoDe{
+    [AMapServices sharedServices].apiKey = @"3b98623eb868072d0d1e4876e856dbf0";
+}
+
 
 //
 - (void)initRongYun{

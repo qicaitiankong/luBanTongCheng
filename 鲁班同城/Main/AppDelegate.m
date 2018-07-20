@@ -28,6 +28,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self initRongYun];
+    [self initGaoDe];
     [self customNaviBar];
     if ([lzhGetAccountInfo getAccount].identityFlag == 0){
         [self setupViewControllersForCasualLabour];
