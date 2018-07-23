@@ -16,4 +16,6 @@
 
 @property (copy,nonatomic) void (^clickTextFieldBlock)(void);
 
+@property (copy,nonatomic) void (^searchTextFieldBlock)(NSString *targetStr);
+
 @end

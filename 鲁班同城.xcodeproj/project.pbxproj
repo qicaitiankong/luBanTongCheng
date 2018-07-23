@@ -333,6 +333,15 @@
 		186EBE5020EE111500D0F54E /* sucsess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186EBE4D20EE111500D0F54E /* sucsess@2x.png */; };
 		186EBE5120EE111500D0F54E /* sucsess@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186EBE4E20EE111500D0F54E /* sucsess@3x.png */; };
 		186EBE5420EE17D200D0F54E /* PersonalInfoTechnologyChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186EBE5320EE17D200D0F54E /* PersonalInfoTechnologyChooseViewController.m */; };
+		186FBC9F21055D3800425105 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 186FBC9E21055D3800425105 /* AMap.bundle */; };
+		186FBCA72105B92700425105 /* decrease@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186FBCA12105B91E00425105 /* decrease@2x.png */; };
+		186FBCA82105B92700425105 /* gpsStat2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186FBCA22105B92000425105 /* gpsStat2@2x.png */; };
+		186FBCA92105B92700425105 /* userPosition.png in Resources */ = {isa = PBXBuildFile; fileRef = 186FBCA32105B92100425105 /* userPosition.png */; };
+		186FBCAA2105B92700425105 /* increase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186FBCA42105B92300425105 /* increase@2x.png */; };
+		186FBCAB2105B92700425105 /* userPosition@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186FBCA52105B92500425105 /* userPosition@2x.png */; };
+		186FBCAC2105B92700425105 /* gpsStat1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186FBCA62105B92700425105 /* gpsStat1@2x.png */; };
+		186FBCB02105CC4000425105 /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 186FBCAF2105CC3F00425105 /* CommonUtility.m */; };
+		186FBCB42105CCEF00425105 /* GeocodeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 186FBCB32105CCEE00425105 /* GeocodeAnnotation.m */; };
 		1874346F20F2F1BB0008A24F /* scollPicture01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1874346620F2F1B80008A24F /* scollPicture01@3x.png */; };
 		1874347020F2F1BB0008A24F /* scollPicture02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1874346720F2F1B80008A24F /* scollPicture02@2x.png */; };
 		1874347120F2F1BB0008A24F /* scollPicture02@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1874346820F2F1BA0008A24F /* scollPicture02@3x.png */; };
@@ -925,6 +934,17 @@
 		186EBE4E20EE111500D0F54E /* sucsess@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sucsess@3x.png"; sourceTree = "<group>"; };
 		186EBE5220EE17D200D0F54E /* PersonalInfoTechnologyChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalInfoTechnologyChooseViewController.h; sourceTree = "<group>"; };
 		186EBE5320EE17D200D0F54E /* PersonalInfoTechnologyChooseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoTechnologyChooseViewController.m; sourceTree = "<group>"; };
+		186FBC9E21055D3800425105 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
+		186FBCA12105B91E00425105 /* decrease@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "decrease@2x.png"; sourceTree = "<group>"; };
+		186FBCA22105B92000425105 /* gpsStat2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gpsStat2@2x.png"; sourceTree = "<group>"; };
+		186FBCA32105B92100425105 /* userPosition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userPosition.png; sourceTree = "<group>"; };
+		186FBCA42105B92300425105 /* increase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "increase@2x.png"; sourceTree = "<group>"; };
+		186FBCA52105B92500425105 /* userPosition@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userPosition@2x.png"; sourceTree = "<group>"; };
+		186FBCA62105B92700425105 /* gpsStat1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gpsStat1@2x.png"; sourceTree = "<group>"; };
+		186FBCAE2105CC3E00425105 /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
+		186FBCAF2105CC3F00425105 /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
+		186FBCB22105CCEC00425105 /* GeocodeAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeocodeAnnotation.h; sourceTree = "<group>"; };
+		186FBCB32105CCEE00425105 /* GeocodeAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeocodeAnnotation.m; sourceTree = "<group>"; };
 		1874346620F2F1B80008A24F /* scollPicture01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scollPicture01@3x.png"; sourceTree = "<group>"; };
 		1874346720F2F1B80008A24F /* scollPicture02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scollPicture02@2x.png"; sourceTree = "<group>"; };
 		1874346820F2F1BA0008A24F /* scollPicture02@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scollPicture02@3x.png"; sourceTree = "<group>"; };
@@ -1942,6 +1962,10 @@
 		1851D924210181C9000C6306 /* GaoDe */ = {
 			isa = PBXGroup;
 			children = (
+				186FBCB12105CCC600425105 /* GeoModel */,
+				186FBCAD2105CC0E00425105 /* Utility */,
+				186FBCA02105B8C500425105 /* images */,
+				186FBC9E21055D3800425105 /* AMap.bundle */,
 				1851D93421019296000C6306 /* AMapFoundationKit.framework */,
 				1851D93521019298000C6306 /* AMapSearchKit.framework */,
 				1851D9362101929A000C6306 /* MAMapKit.framework */,
@@ -2010,6 +2034,37 @@
 				186EBE4A20EE0C8700D0F54E /* CommitPopView.m */,
 			);
 			path = "提交弹窗";
+			sourceTree = "<group>";
+		};
+		186FBCA02105B8C500425105 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				186FBCA12105B91E00425105 /* decrease@2x.png */,
+				186FBCA62105B92700425105 /* gpsStat1@2x.png */,
+				186FBCA22105B92000425105 /* gpsStat2@2x.png */,
+				186FBCA42105B92300425105 /* increase@2x.png */,
+				186FBCA32105B92100425105 /* userPosition.png */,
+				186FBCA52105B92500425105 /* userPosition@2x.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		186FBCAD2105CC0E00425105 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				186FBCAE2105CC3E00425105 /* CommonUtility.h */,
+				186FBCAF2105CC3F00425105 /* CommonUtility.m */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		186FBCB12105CCC600425105 /* GeoModel */ = {
+			isa = PBXGroup;
+			children = (
+				186FBCB22105CCEC00425105 /* GeocodeAnnotation.h */,
+				186FBCB32105CCEE00425105 /* GeocodeAnnotation.m */,
+			);
+			path = GeoModel;
 			sourceTree = "<group>";
 		};
 		1874347820F2F6DA0008A24F /* star */ = {
@@ -2522,6 +2577,7 @@
 				180609BB20F481C800471E08 /* pullDown@3x.png in Resources */,
 				186EBE3720EDF91F00D0F54E /* videoFlag@2x.png in Resources */,
 				1443C60120E35A7D0009E82F /* weixin.png in Resources */,
+				186FBCA72105B92700425105 /* decrease@2x.png in Resources */,
 				18E2DF1920E8C60A00FDF9C1 /* heart.png in Resources */,
 				18E2DF2B20E8E26D00FDF9C1 /* test02.png in Resources */,
 				18E2DEFD20E882C700FDF9C1 /* SanFranciscoDisplay-Regular-2.otf in Resources */,
@@ -2541,6 +2597,7 @@
 				1443C50720E204180009E82F /* Assets.xcassets in Resources */,
 				182284D120FF2C9F0059FB94 /* mapChoose@2x.png in Resources */,
 				1851D91E21017337000C6306 /* RCConfig.plist in Resources */,
+				186FBCA82105B92700425105 /* gpsStat2@2x.png in Resources */,
 				186EBE5120EE111500D0F54E /* sucsess@3x.png in Resources */,
 				1822849020FEE5D60059FB94 /* companyName@2x.png in Resources */,
 				1851143520FD7AA100872AC5 /* send_message@3x.png in Resources */,
@@ -2632,6 +2689,7 @@
 				1874347620F2F1BB0008A24F /* scollPicture02.png in Resources */,
 				182030E421007B830098BFCC /* duiHao@2x.png in Resources */,
 				1874348620F2F6F30008A24F /* commentStar@2x.png in Resources */,
+				186FBCAA2105B92700425105 /* increase@2x.png in Resources */,
 				188813CC20ECA3F800F832BE /* name@2x.png in Resources */,
 				1443C5FC20E35A670009E82F /* QQ@2x.png in Resources */,
 				188CB35E20FC5EFA00302C94 /* rankSelected@2x.png in Resources */,
@@ -2648,6 +2706,8 @@
 				188813E120ECB7D900F832BE /* voiceFlag.png in Resources */,
 				1851D9432101B993000C6306 /* work_person.png in Resources */,
 				1824F76220EF0EEA00E99823 /* whiteReturn@3x.png in Resources */,
+				186FBCAB2105B92700425105 /* userPosition@2x.png in Resources */,
+				186FBCA92105B92700425105 /* userPosition.png in Resources */,
 				1874347520F2F1BB0008A24F /* scollPicture01@2x.png in Resources */,
 				188813F520ECCC8300F832BE /* voiceGray@3x.png in Resources */,
 				180609BA20F481C800471E08 /* pullDown@2x.png in Resources */,
@@ -2686,6 +2746,7 @@
 				1818E4B220EB51A500B676C2 /* set02@2x.png in Resources */,
 				1874348520F2F6F30008A24F /* commentGrayStar@2x.png in Resources */,
 				188813DB20ECB7C900F832BE /* keyboard@2x.png in Resources */,
+				186FBC9F21055D3800425105 /* AMap.bundle in Resources */,
 				1818E4CB20EB523E00B676C2 /* withDraw@3x.png in Resources */,
 				185368F120E9CDC40053A5D4 /* test06.png in Resources */,
 				1874348720F2F6F30008A24F /* commentGrayStar@3x.png in Resources */,
@@ -2717,6 +2778,7 @@
 				1874347320F2F1BB0008A24F /* scollPicture01.png in Resources */,
 				186EBE2720EDDF3A00D0F54E /* job@2x.png in Resources */,
 				185ABF3E20F8771A00188520 /* searchBiaoQian@2x.png in Resources */,
+				186FBCAC2105B92700425105 /* gpsStat1@2x.png in Resources */,
 				1443C5D320E3483B0009E82F /* homeSelected@2x.png in Resources */,
 				1824F72720EEF38900E99823 /* orderSelected@2x.png in Resources */,
 				188813EC20ECC43C00F832BE /* voice@2x.png in Resources */,
@@ -2813,6 +2875,7 @@
 				185ABF1920F8352300188520 /* MessageTableViewCell.m in Sources */,
 				1818E4A920EB42A000B676C2 /* SSSearchBar.m in Sources */,
 				1832B99D20F59CC400D6CE4F /* SDWeiXinPhotoContainerView.m in Sources */,
+				186FBCB42105CCEF00425105 /* GeocodeAnnotation.m in Sources */,
 				1443C5AA20E336740009E82F /* UIColor+Hex.m in Sources */,
 				188CB34D20FC3EE400302C94 /* searchBiaoQianView.m in Sources */,
 				1874349C20F30A6D0008A24F /* SkillShowSecondViewController.m in Sources */,
@@ -2852,6 +2915,7 @@
 				18E2DF1120E8BED300FDF9C1 /* BaseDisplayNaviViewController.m in Sources */,
 				180609BE20F493BD00471E08 /* CompanyCruitDetailModel.m in Sources */,
 				1818E4D020EB55D200B676C2 /* MyInfoTableViewCell.m in Sources */,
+				186FBCB02105CC4000425105 /* CommonUtility.m in Sources */,
 				181FCC0B20F740DF0044B055 /* OrderTakingQuotePriceDetailTelephoneTableViewCell.m in Sources */,
 				1818E49D20EB08AD00B676C2 /* TakeOrderTableViewCell.m in Sources */,
 				1832B99E20F59CC400D6CE4F /* SDPhotoBrowser.m in Sources */,

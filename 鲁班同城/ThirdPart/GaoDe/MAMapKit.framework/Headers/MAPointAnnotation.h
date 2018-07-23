@@ -20,4 +20,5 @@
 ///固定屏幕点的坐标
 @property (nonatomic, assign) CGPoint lockedScreenPoint;
 
+
 @end

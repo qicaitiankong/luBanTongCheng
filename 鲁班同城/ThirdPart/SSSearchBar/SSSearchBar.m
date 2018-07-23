@@ -97,6 +97,9 @@ static CGFloat const placeHolderFont = 15.0;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self.textField resignFirstResponder];
+    if (self.searchTextFieldBlock){
+        self.searchTextFieldBlock([self.textField.text copy]);
+    }
     return YES;
 }
 
