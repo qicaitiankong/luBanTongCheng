@@ -39,7 +39,6 @@
         self.searchView = [[FirstPageSearchInputView alloc] init];
         self.searchView.clipsToBounds = YES;
         self.searchView.layer.cornerRadius = 5;
-        
         [self addSubview:self.searchView];
        
         //

@@ -15,5 +15,7 @@
 
 @property (copy,nonatomic) void (^clickLocationCity)(UIButton *targetCityButton);
 
+@property (copy,nonatomic) void (^clickTextViewBlock)(void);
+
 
 @end

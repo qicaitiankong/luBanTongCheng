@@ -9,6 +9,7 @@
 #import "FirstPageViewController.h"
 //
 #import "DispatchOrderMapViewController.h"
+#import "SearchViewController.h"
 
 //views
 #import "JHCollectionViewCell.h"
@@ -45,6 +46,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    //[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+
     [self createButtView];
     [self initObjects];
     [self addCollectionView];
@@ -165,6 +169,10 @@
         WS(weakSelf);
         header.searchView.clickLocationCity = ^(UIButton *targetCityButton) {
             [weakSelf clickLocationCity:targetCityButton];
+        };
+        header.searchView.clickTextViewBlock = ^{
+            SearchViewController *searchVC = [[SearchViewController alloc]init];
+            [weakSelf.navigationController pushViewController:searchVC animated:YES];
         };
         header.traingleButtonGroupView.traingleButtBlock = ^(NSInteger index, UILabel *targetLabel) {
             [weakSelf traingleButtonHandler:index targetLabel:targetLabel];

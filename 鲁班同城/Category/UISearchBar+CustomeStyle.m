@@ -25,7 +25,9 @@
     //去掉上下黑线
     bar.backgroundImage = [[UIImage alloc] init];
     //
+    
     UITextField*searchField = [bar valueForKey:@"_searchField"];
+    searchField.userInteractionEnabled = NO;
     [searchField setValue:[UIColor colorWithHexString:@"#7D7D7D"] forKeyPath:@"_placeholderLabel.textColor"];
      [searchField setValue:[UIFont getPingFangSCMedium:15] forKeyPath:@"_placeholderLabel.font"];
     return bar;

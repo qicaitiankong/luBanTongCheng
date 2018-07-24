@@ -12,6 +12,7 @@
     UIImageView *smallImageView;
     UIView *verticalLine;
     UIButton *cityBackButt;
+    UIButton *textViewBackButt;
 }
 
 @property (strong,nonatomic) UIButton *locationCityButt;
@@ -47,6 +48,10 @@
         self.mySearchView = [UISearchBar getFirstPageStyleSearchBar];
         [self addSubview:self.mySearchView];
         //
+        textViewBackButt = [UIButton buttonWithType:UIButtonTypeCustom];
+        [textViewBackButt addTarget:self action:@selector(textViewBackButtHandler:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:textViewBackButt];
+        //
         cityBackButt = [UIButton buttonWithType:UIButtonTypeCustom];
         [cityBackButt addTarget:self action:@selector(cityButtHandler:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:cityBackButt];
@@ -80,6 +85,12 @@
     .heightRatioToView(self, 0.8)
     .centerYEqualToView(self);
     //
+    textViewBackButt.sd_layout
+    .leftEqualToView(self.mySearchView)
+    .topEqualToView(self.mySearchView)
+    .bottomEqualToView(self.mySearchView)
+    .rightEqualToView(self.mySearchView);
+    //
     cityBackButt.sd_layout
     .leftEqualToView(self)
     .topEqualToView(self)
@@ -95,7 +106,11 @@
     }
 }
 
-
+- (void)textViewBackButtHandler:(UIButton*)_b{
+    if (self.clickTextViewBlock){
+        self.clickTextViewBlock();
+    }
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
