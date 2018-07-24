@@ -451,6 +451,8 @@
 		188CB37C20FC82FE00302C94 /* DispatchTicketDetailBaoJiaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CB37B20FC82FE00302C94 /* DispatchTicketDetailBaoJiaTableViewCell.m */; };
 		188CB37F20FC831E00302C94 /* DispatchTicketDetailBaoJiaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CB37E20FC831E00302C94 /* DispatchTicketDetailBaoJiaModel.m */; };
 		188CB38220FC99E700302C94 /* DispatchTicketDetailBaoJiaTableViewSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CB38120FC99E700302C94 /* DispatchTicketDetailBaoJiaTableViewSectionView.m */; };
+		18BD58B12106CF0000D2AC64 /* work_person2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BD58B02106CEFF00D2AC64 /* work_person2.png */; };
+		18BD58B42106FF2600D2AC64 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BD58B32106FF2600D2AC64 /* POIAnnotation.m */; };
 		18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DEEE20E878CF00FDF9C1 /* UIFont+CustomerFonts.m */; };
 		18E2DEFD20E882C700FDF9C1 /* SanFranciscoDisplay-Regular-2.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DEF920E882C600FDF9C1 /* SanFranciscoDisplay-Regular-2.otf */; };
 		18E2DEFE20E882C700FDF9C1 /* SanFranciscoDisplay-Medium-7.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18E2DEFA20E882C600FDF9C1 /* SanFranciscoDisplay-Medium-7.otf */; };
@@ -1080,6 +1082,9 @@
 		188CB37E20FC831E00302C94 /* DispatchTicketDetailBaoJiaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DispatchTicketDetailBaoJiaModel.m; sourceTree = "<group>"; };
 		188CB38020FC99E700302C94 /* DispatchTicketDetailBaoJiaTableViewSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DispatchTicketDetailBaoJiaTableViewSectionView.h; sourceTree = "<group>"; };
 		188CB38120FC99E700302C94 /* DispatchTicketDetailBaoJiaTableViewSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DispatchTicketDetailBaoJiaTableViewSectionView.m; sourceTree = "<group>"; };
+		18BD58B02106CEFF00D2AC64 /* work_person2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = work_person2.png; sourceTree = "<group>"; };
+		18BD58B22106FF2400D2AC64 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
+		18BD58B32106FF2600D2AC64 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
 		18E2DEED20E878CF00FDF9C1 /* UIFont+CustomerFonts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CustomerFonts.h"; sourceTree = "<group>"; };
 		18E2DEEE20E878CF00FDF9C1 /* UIFont+CustomerFonts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CustomerFonts.m"; sourceTree = "<group>"; };
 		18E2DEF920E882C600FDF9C1 /* SanFranciscoDisplay-Regular-2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoDisplay-Regular-2.otf"; sourceTree = "<group>"; };
@@ -1801,6 +1806,7 @@
 		1822849E20FF14F70059FB94 /* 发起派单 */ = {
 			isa = PBXGroup;
 			children = (
+				18BD58B02106CEFF00D2AC64 /* work_person2.png */,
 				1851D9422101B993000C6306 /* work_person.png */,
 				1851D93C2101AF6A000C6306 /* dispatchOnMap.png */,
 				1851D93D2101AF6C000C6306 /* dispatchOnMap@2x.png */,
@@ -2061,6 +2067,8 @@
 		186FBCB12105CCC600425105 /* GeoModel */ = {
 			isa = PBXGroup;
 			children = (
+				18BD58B22106FF2400D2AC64 /* POIAnnotation.h */,
+				18BD58B32106FF2600D2AC64 /* POIAnnotation.m */,
 				186FBCB22105CCEC00425105 /* GeocodeAnnotation.h */,
 				186FBCB32105CCEE00425105 /* GeocodeAnnotation.m */,
 			);
@@ -2714,6 +2722,7 @@
 				1851143A20FD7AA100872AC5 /* smallCancel.png in Resources */,
 				1822848F20FEE5D60059FB94 /* companyName@3x.png in Resources */,
 				185ABF3C20F8771A00188520 /* searchBiaoQian@3x.png in Resources */,
+				18BD58B12106CF0000D2AC64 /* work_person2.png in Resources */,
 				186EBE3820EDF91F00D0F54E /* videoFlag@3x.png in Resources */,
 				182284BD20FF155A0059FB94 /* ticket_beizhu@3x.png in Resources */,
 				188CB37920FC82B800302C94 /* icon_message_white.png in Resources */,
@@ -2944,6 +2953,7 @@
 				1853690520EA11C10053A5D4 /* WaterCellRecuritJobView.m in Sources */,
 				188CB37520FC7BC100302C94 /* DispatchTicketDetailViewController.m in Sources */,
 				181FCC0220F737210044B055 /* TakeOrderQuotePriceDetaiSectionView.m in Sources */,
+				18BD58B42106FF2600D2AC64 /* POIAnnotation.m in Sources */,
 				1832B9AF20F5E13B00D6CE4F /* TakeOrderQuotePriceModel.m in Sources */,
 				188813EF20ECC54900F832BE /* PersonalInfoAddSoundButtView.m in Sources */,
 				18E2DEEF20E878CF00FDF9C1 /* UIFont+CustomerFonts.m in Sources */,
