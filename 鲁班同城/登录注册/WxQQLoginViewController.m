@@ -24,6 +24,12 @@
 
 @implementation WxQQLoginViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

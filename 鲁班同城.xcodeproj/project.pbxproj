@@ -186,6 +186,7 @@
 		182284D120FF2C9F0059FB94 /* mapChoose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 182284CE20FF2C9F0059FB94 /* mapChoose@2x.png */; };
 		182284D420FF34980059FB94 /* LaunchPiesTicketChooseJobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182284D320FF34980059FB94 /* LaunchPiesTicketChooseJobView.m */; };
 		182284D720FF38CA0059FB94 /* LaunchPiesTicketYuSuanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182284D620FF38CA0059FB94 /* LaunchPiesTicketYuSuanView.m */; };
+		1824399E210847900088042C /* GetLocationICitynfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824399D210847900088042C /* GetLocationICitynfo.m */; };
 		1824F72620EEF38900E99823 /* orderSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824F72320EEF38800E99823 /* orderSelected.png */; };
 		1824F72720EEF38900E99823 /* orderSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824F72420EEF38800E99823 /* orderSelected@2x.png */; };
 		1824F72820EEF38900E99823 /* orderSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824F72520EEF38800E99823 /* orderSelected@3x.png */; };
@@ -340,7 +341,6 @@
 		186FBCAA2105B92700425105 /* increase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186FBCA42105B92300425105 /* increase@2x.png */; };
 		186FBCAB2105B92700425105 /* userPosition@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186FBCA52105B92500425105 /* userPosition@2x.png */; };
 		186FBCAC2105B92700425105 /* gpsStat1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186FBCA62105B92700425105 /* gpsStat1@2x.png */; };
-		186FBCB02105CC4000425105 /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 186FBCAF2105CC3F00425105 /* CommonUtility.m */; };
 		186FBCB42105CCEF00425105 /* GeocodeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 186FBCB32105CCEE00425105 /* GeocodeAnnotation.m */; };
 		1874346F20F2F1BB0008A24F /* scollPicture01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1874346620F2F1B80008A24F /* scollPicture01@3x.png */; };
 		1874347020F2F1BB0008A24F /* scollPicture02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1874346720F2F1B80008A24F /* scollPicture02@2x.png */; };
@@ -733,6 +733,8 @@
 		182284D320FF34980059FB94 /* LaunchPiesTicketChooseJobView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchPiesTicketChooseJobView.m; sourceTree = "<group>"; };
 		182284D520FF38CA0059FB94 /* LaunchPiesTicketYuSuanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchPiesTicketYuSuanView.h; sourceTree = "<group>"; };
 		182284D620FF38CA0059FB94 /* LaunchPiesTicketYuSuanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchPiesTicketYuSuanView.m; sourceTree = "<group>"; };
+		1824399C210847900088042C /* GetLocationICitynfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetLocationICitynfo.h; sourceTree = "<group>"; };
+		1824399D210847900088042C /* GetLocationICitynfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetLocationICitynfo.m; sourceTree = "<group>"; };
 		1824F72320EEF38800E99823 /* orderSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderSelected.png; sourceTree = "<group>"; };
 		1824F72420EEF38800E99823 /* orderSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orderSelected@2x.png"; sourceTree = "<group>"; };
 		1824F72520EEF38800E99823 /* orderSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orderSelected@3x.png"; sourceTree = "<group>"; };
@@ -943,8 +945,6 @@
 		186FBCA42105B92300425105 /* increase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "increase@2x.png"; sourceTree = "<group>"; };
 		186FBCA52105B92500425105 /* userPosition@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userPosition@2x.png"; sourceTree = "<group>"; };
 		186FBCA62105B92700425105 /* gpsStat1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gpsStat1@2x.png"; sourceTree = "<group>"; };
-		186FBCAE2105CC3E00425105 /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
-		186FBCAF2105CC3F00425105 /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
 		186FBCB22105CCEC00425105 /* GeocodeAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeocodeAnnotation.h; sourceTree = "<group>"; };
 		186FBCB32105CCEE00425105 /* GeocodeAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeocodeAnnotation.m; sourceTree = "<group>"; };
 		1874346620F2F1B80008A24F /* scollPicture01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scollPicture01@3x.png"; sourceTree = "<group>"; };
@@ -1289,6 +1289,8 @@
 				187434C320F358850008A24F /* NavTools.m */,
 				1851144220FDD01800872AC5 /* BaseImageView.h */,
 				1851144320FDD01800872AC5 /* BaseImageView.m */,
+				1824399C210847900088042C /* GetLocationICitynfo.h */,
+				1824399D210847900088042C /* GetLocationICitynfo.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -2058,8 +2060,6 @@
 		186FBCAD2105CC0E00425105 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				186FBCAE2105CC3E00425105 /* CommonUtility.h */,
-				186FBCAF2105CC3F00425105 /* CommonUtility.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -2915,6 +2915,7 @@
 				1822849A20FF0CF90059FB94 /* LaunchPiesViewController.m in Sources */,
 				1443C5C620E343E50009E82F /* RDVTabBar.m in Sources */,
 				1824F75120EF0C6100E99823 /* BaseHiddenNavAndTabBarViewController.m in Sources */,
+				1824399E210847900088042C /* GetLocationICitynfo.m in Sources */,
 				1888139A20EC62AA00F832BE /* WxQQLoginViewController.m in Sources */,
 				1443C5C720E343E50009E82F /* RDVTabBarController.m in Sources */,
 				188CB34A20FC3BEE00302C94 /* searchHeaderView.m in Sources */,
@@ -2924,7 +2925,6 @@
 				18E2DF1120E8BED300FDF9C1 /* BaseDisplayNaviViewController.m in Sources */,
 				180609BE20F493BD00471E08 /* CompanyCruitDetailModel.m in Sources */,
 				1818E4D020EB55D200B676C2 /* MyInfoTableViewCell.m in Sources */,
-				186FBCB02105CC4000425105 /* CommonUtility.m in Sources */,
 				181FCC0B20F740DF0044B055 /* OrderTakingQuotePriceDetailTelephoneTableViewCell.m in Sources */,
 				1818E49D20EB08AD00B676C2 /* TakeOrderTableViewCell.m in Sources */,
 				1832B99E20F59CC400D6CE4F /* SDPhotoBrowser.m in Sources */,

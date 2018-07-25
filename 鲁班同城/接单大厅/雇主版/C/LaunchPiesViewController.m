@@ -14,7 +14,7 @@
 #import "OwnTextView.h"
 #import "CommitPopView.h"
 
-@interface LaunchPiesViewController (){
+@interface LaunchPiesViewController ()<UIScrollViewDelegate>{
     UIScrollView *baseScrollView;
     LaunchPiesTicketInputNameView *nameView;
     LaunchPiesTicketInputNameView *mobileView;
@@ -57,6 +57,7 @@
     baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT)];
     baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     baseScrollView.backgroundColor = [UIColor colorWithHexString:@"#DADADA"];
+    baseScrollView.delegate = self;
     [self.view addSubview:baseScrollView];
     //
     nameView = [[LaunchPiesTicketInputNameView alloc]initWithFrame:CGRectMake(0, groupViewVerticalSpace, self.view.width,singleViewHeight) needRightMapButt:NO];
@@ -128,6 +129,24 @@
     beiZhuTextView.layer.borderWidth = 1;
     beiZhuTextView.layer.borderColor = [UIColor colorWithHexString:@"#C6C6C6"].CGColor;
     beiZhuTextView.layer.cornerRadius = 5;
+    WS(weakSelf);
+    CGPoint rememberContentOffset = baseScrollView.contentOffset;
+    NSLog(@"rememberContentOffset.y = %lf",rememberContentOffset.y);
+    beiZhuTextView.keyBoardChangedBlock = ^(CGFloat keyBoardHeight) {
+        __strong typeof(weakSelf) sself = weakSelf;
+        CGFloat currentContentOffsetY = sself -> baseScrollView.contentOffset.y;
+        CGFloat contentSizeHeight = sself -> baseScrollView.contentSize.height;
+        CGFloat offsetY = contentSizeHeight - currentContentOffsetY - (SCREEN_HEIGHT - StatusBarAndNavigationBarHeight - keyBoardHeight);
+        NSLog(@"offsetY = %lf",offsetY);
+        if (currentContentOffsetY >= 0){
+            sself -> baseScrollView.contentOffset = CGPointMake(rememberContentOffset.x, 280);
+        }
+    };
+    beiZhuTextView.keyBoardExistBlock = ^{
+        __strong typeof(weakSelf) sself = weakSelf;
+        sself -> baseScrollView.contentOffset = rememberContentOffset;
+       
+    };
     [baseTextView addSubview:beiZhuTextView];
     //提交基view
     UIView *commitButtBaseView = [[UIView alloc]initWithFrame:CGRectMake(0, baseTextView.bottom + groupViewVerticalSpace, baseScrollView.width, SCREEN_HEIGHT * 0.112)];
@@ -137,7 +156,6 @@
     UIColor *commitButtBackColor = SPECIAL_BLUE_COLOR;
     CustomeStyleCornerButt *commitButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, 0, commitButtBaseView.width - 20, commitButtBaseView.height * 0.6) backColor:commitButtBackColor cornerRadius:8 title:@"提交" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
     commitButt.center = CGPointMake(commitButtBaseView.width / 2, commitButtBaseView.height / 2);
-    WS(weakSelf);
     commitButt.clickButtBlock = ^{
         [weakSelf showPopView];
     };
@@ -179,7 +197,9 @@
     [popView setHidden:YES];
 }
 
-
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"scrollViewDidScroll %lf",scrollView.contentOffset.y);
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

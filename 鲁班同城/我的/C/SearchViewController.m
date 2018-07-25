@@ -36,6 +36,7 @@
     [super viewWillAppear:animated];
     [NavTools hiddenNav:self.navigationController];
     [NavTools hiddenTabbar:self.rdv_tabBarController];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
 - (void)viewDidLoad {

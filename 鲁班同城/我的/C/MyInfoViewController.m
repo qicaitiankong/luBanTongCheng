@@ -44,6 +44,7 @@
     if ([lzhGetAccountInfo getAccount].identityFlag){
         [self displayXuanFuButt];
     }
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
 - (void)viewDidLoad {

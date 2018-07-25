@@ -32,6 +32,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self addViews];
+    NSLog(@"SCREEN_HEIGHT%lf",SCREEN_HEIGHT);
 }
 
 - (void)addViews{
@@ -110,6 +111,8 @@
     [otherLoginView.wxButt addTarget:self action:@selector(wxHandler) forControlEvents:UIControlEventTouchUpInside];
     [otherLoginView.qqButt addTarget:self action:@selector(qqHandler) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:otherLoginView];
+    
+    //
     //constrain
     cancelButt.sd_layout
     .leftSpaceToView(self.view, SCREEN_WIDTH * 0.866)

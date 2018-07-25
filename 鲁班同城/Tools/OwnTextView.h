@@ -14,4 +14,9 @@
 
 @property (strong,nonatomic) UILabel * writeViewPlaceHolderLabel;
 
+@property (copy,nonatomic) void (^keyBoardChangedBlock)(CGFloat keyBoardHeight);
+
+@property (copy,nonatomic) void (^keyBoardExistBlock)(void);
+
+
 @end

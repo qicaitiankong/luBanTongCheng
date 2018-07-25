@@ -15,7 +15,6 @@
     UIButton *textViewBackButt;
 }
 
-@property (strong,nonatomic) UIButton *locationCityButt;
 
 @property (strong,nonatomic) UISearchBar *mySearchView;
 
@@ -29,7 +28,8 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         self.locationCityButt = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.locationCityButt.titleLabel.font = [UIFont getPingFangSCMedium:16];
+        self.locationCityButt.titleLabel.font = [UIFont getPingFangSCMedium:12];
+        self.locationCityButt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.locationCityButt.backgroundColor = [UIColor whiteColor];
         [self.locationCityButt setTitleColor:[UIColor colorWithRed:101.997/255.0 green:101.997/255.0 blue:101.997/255.0 alpha:1] forState:UIControlStateNormal];
         [self.locationCityButt setTitle:@"青岛" forState:UIControlStateNormal];

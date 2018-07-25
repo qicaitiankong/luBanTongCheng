@@ -42,6 +42,8 @@
     if ([lzhGetAccountInfo getAccount].identityFlag){
         [self displayXuanFuButt];
     }
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
 - (void)viewDidLoad {
@@ -84,7 +86,11 @@
         SearchViewController *searchVC = [[SearchViewController alloc]init];
         [weakSelf.navigationController pushViewController:searchVC animated:YES];
     };
-    self.headerView.placeholder = @"找工作上鲁班同城";
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        self.headerView.placeholder = @"找零工上鲁班同城";
+    }else{
+        self.headerView.placeholder = @"找工作上鲁班同城";
+    }
     self.tableView = [[UITableView alloc] initWithFrame:size style:styles];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.tableHeaderView = self.headerView;

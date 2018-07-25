@@ -11,6 +11,9 @@
 
 @interface FirstPageSearchInputView : UIView
 
+@property (strong,nonatomic) UIButton *locationCityButt;
+
+
 - (void)addConstraints;
 
 @property (copy,nonatomic) void (^clickLocationCity)(UIButton *targetCityButton);

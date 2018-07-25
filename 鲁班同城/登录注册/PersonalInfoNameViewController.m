@@ -17,6 +17,7 @@
 
 @interface PersonalInfoNameViewController (){
     PersonalInfoInputNameView *nameView;
+    UIScrollView *baseScrollView;
 }
 
 @end
@@ -37,6 +38,12 @@
 
 
 - (void)addViews{
+    //
+    baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT)];
+    baseScrollView.backgroundColor = [UIColor whiteColor];
+    baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    [self.view addSubview:baseScrollView];
+    //
     CGFloat viewHeight = SCREEN_HEIGHT * 0.074;
     PersonalInfoExchangeViceTextView *topTipView = [[PersonalInfoExchangeViceTextView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, viewHeight)];
     WS(weakSelf);
@@ -44,18 +51,18 @@
         __strong typeof(weakSelf) sself = weakSelf;
         [sself->nameView displayTextOrYuYin:isSound];
     };
-    [self.view addSubview:topTipView];
+    [baseScrollView addSubview:topTipView];
     [topTipView addOwnContraints];
     //
     nameView = [[PersonalInfoInputNameView alloc]initWithFrame:CGRectMake(0, topTipView.bottom, self.view.width,viewHeight)];
     nameView.nameLabel.text = @"姓名";
     nameView.rightTextField.myTextField.placeholder = @"请输入名字";
-    [self.view addSubview:nameView];
+    [baseScrollView addSubview:nameView];
     [nameView addOwnConstraints:[UIImage imageNamed:@"name"]];
     //
     PersonalInfoInputAgeView *ageView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, nameView.bottom, self.view.width, viewHeight)];
     ageView.ageLabel.text = @"年龄";
-    [self.view addSubview:ageView];
+    [baseScrollView addSubview:ageView];
     ageView.rightTextField.myTextField.placeholder = @"请选择年龄";
     ageView.backButtBlock = ^(UITextField *textField) {
         NSLog(@"选择年龄");
@@ -65,7 +72,7 @@
     //性别
     PersonalInfoInputAgeView *sexView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, ageView.bottom, self.view.width, viewHeight)];
     sexView.ageLabel.text = @"性别";
-    [self.view addSubview:sexView];
+    [baseScrollView addSubview:sexView];
     sexView.rightTextField.myTextField.placeholder = @"请选择性别";
     sexView.backButtBlock = ^(UITextField *textField) {
         NSLog(@"选择性别");
@@ -75,7 +82,7 @@
     //城市
     PersonalInfoInputAgeView *cityView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, sexView.bottom, self.view.width, viewHeight)];
     cityView.ageLabel.text = @"城市";
-    [self.view addSubview:cityView];
+    [baseScrollView addSubview:cityView];
     cityView.rightTextField.myTextField.placeholder = @"请选择城市";
     cityView.backButtBlock = ^(UITextField *textField) {
         NSLog(@"选择城市");
@@ -91,7 +98,9 @@
     nextButt.clickButtBlock = ^{
         [weakSelf nextHandler];
     };
-    [self.view addSubview:nextButt];
+    [baseScrollView addSubview:nextButt];
+    //
+    [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, nextButt.bottom + 30)];
     
 }
 - (void)nextHandler{

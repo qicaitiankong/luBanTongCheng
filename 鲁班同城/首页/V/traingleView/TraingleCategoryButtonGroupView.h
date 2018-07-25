@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TraingleCategorySmallButtonView.h"
 
 @interface TraingleCategoryButtonGroupView : UIView
 
 
-@property (copy,nonatomic) void (^traingleButtBlock)(NSInteger index,UILabel *targetLabel);
+@property (copy,nonatomic) void (^traingleButtBlock)(NSInteger index,TraingleCategorySmallButtonView *targetView);
 
 
 @end

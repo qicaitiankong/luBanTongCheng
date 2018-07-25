@@ -40,7 +40,6 @@
         self.searchView.clipsToBounds = YES;
         self.searchView.layer.cornerRadius = 5;
         [self addSubview:self.searchView];
-       
         //
         self.scrollButtGroupView = [[ZHQScrollMenu alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, frame.size.height * 0.142) delegate:self];
         self.scrollButtGroupView.norMalTitleColor = [UIColor colorWithRed:131.998/255.0 green:131.998/255.0 blue:131.998/255.0 alpha:1];

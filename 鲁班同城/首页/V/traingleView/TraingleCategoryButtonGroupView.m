@@ -40,7 +40,8 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         viewArr = [[NSMutableArray alloc] init];
-        
+        //self.clipsToBounds = YES;
+       // self.layer.cornerRadius = frame.size.height / 4;
         for (short index = 0; index < 4; index ++){
             TraingleCategorySmallButtonView *smallView = [[TraingleCategorySmallButtonView alloc] init];
             smallView.backButt.tag = index;
@@ -50,15 +51,13 @@
             [self addSubview:smallView];
         }
         
-        
         [self addOwnConstraints:frame.size.height];
     }
     return self;
 }
 
-
 - (void)addOwnConstraints:(CGFloat)height{
-    CGFloat buttWidth = 0.186 * SCREEN_WIDTH;
+    CGFloat buttWidth = 0.22 * SCREEN_WIDTH;
     CGFloat buttHeight  = 0.75 * height;
     CGFloat horizontalSpace = (SCREEN_WIDTH - 4 * buttWidth) / 5;
     UIView *preferView = self;
@@ -71,18 +70,23 @@
         .widthIs(buttWidth)
         .heightIs(buttHeight)
         .centerYIs(height / 2);
-        smallView.layer.cornerRadius = 3;
+        smallView.clipsToBounds = YES;
+        smallView.layer.cornerRadius = 8;
         preferView = smallView;
+        [smallView addConstraints];
         if (i == 3){
             [smallView adjustDisplayWhenIsFilterButt];
+        }else{
+            [smallView adjustConstraintsAfterGiveTitle];
         }
+        
     }
 }
 
 - (void)backButton:(UIButton*)_b{
      TraingleCategorySmallButtonView *smallView = viewArr[_b.tag];
     if (self.traingleButtBlock){
-        self.traingleButtBlock(_b.tag,smallView.leftLabel);
+        self.traingleButtBlock(_b.tag,smallView);
     }
 }
 

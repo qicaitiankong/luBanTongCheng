@@ -114,8 +114,8 @@
     MyInfoViewController *myInfoVC = [[MyInfoViewController alloc] init];
     UINavigationController *myInfoNavi=[[UINavigationController alloc]initWithRootViewController:myInfoVC];
     self.tabBarController = [[RDVTabBarController alloc] init];
-    NSArray *navArr = @[firstNavi,orderNavi,videoCenterNavi,skillNavi,myInfoNavi];
-    [self.tabBarController setViewControllers:navArr];//,guessHappyNavi
+    self.navArr = @[firstNavi,orderNavi,videoCenterNavi,skillNavi,myInfoNavi];
+    [self.tabBarController setViewControllers:self.navArr];//,guessHappyNavi
     [self.tabBarController tabBar].backgroundView.backgroundColor=[UIColor whiteColor];
     self.tabBarController.selectedIndex=0;
     [self customizeTabBarForCapsualLabourController:self.tabBarController];
@@ -127,6 +127,8 @@
             WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc] init];
             loginVC.isWx = YES;
             [nav pushViewController:loginVC animated:YES];
+        }else{
+            //NSLog(@"当前导航栏为空");
         }
     };
     //

@@ -74,7 +74,7 @@
     //动画
     [UIView animateWithDuration:0.2 animations:^{
         //把线移动到当前选中按钮下
-        lineView.center = CGPointMake(btn.centerX, lineView.centerY);
+        self->lineView.center = CGPointMake(btn.centerX, self->lineView.centerY);
         
     }];
 }

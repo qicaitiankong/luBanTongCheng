@@ -22,6 +22,7 @@
     PersonalInfoInputAgeView *experienceView;
     OwnTextView *experienceTextView;
     __block BOOL isSound;
+    UIScrollView *baseScrollView;
 }
 
 @end
@@ -43,6 +44,12 @@
 
 
 - (void)addViews{
+    //
+    baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT)];
+    baseScrollView.backgroundColor = [UIColor whiteColor];
+    baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    [self.view addSubview:baseScrollView];
+    //
     CGFloat viewHeight = SCREEN_HEIGHT * 0.074;
     PersonalInfoExchangeViceTextView *topTipView = [[PersonalInfoExchangeViceTextView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, viewHeight)];
     WS(weakSelf);
@@ -57,13 +64,13 @@
         [sself->experienceView hiddenBottomLine:isSound];
         sself->isSound  = isSound;
     };
-    [self.view addSubview:topTipView];
+    [baseScrollView addSubview:topTipView];
     [topTipView addOwnContraints];
     //技能
     technologyView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, topTipView.bottom, self.view.width, viewHeight)];
     
     technologyView.ageLabel.text = @"技能";
-    [self.view addSubview:technologyView];
+    [baseScrollView addSubview:technologyView];
     technologyView.backButtBlock = ^(UITextField *textField) {
         __strong typeof(weakSelf) sself = weakSelf;
         if(NO == sself->isSound){
@@ -76,18 +83,18 @@
     //职业类型
     jobView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, technologyView.bottom, self.view.width, viewHeight)];
     jobView.ageLabel.text = @"职业类型";
-    [self.view addSubview:jobView];
+    [baseScrollView addSubview:jobView];
     jobView.backButtBlock = ^(UITextField *textField) {
-        NSLog(@"职业类型");
+       
        // textField.text = @"男";
     };
     [jobView addOwnConstraints:[UIImage imageNamed:@"job"]];
     //工作经历
     experienceView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, jobView.bottom, self.view.width, viewHeight)];
     experienceView.ageLabel.text = @"工作经历";
-    [self.view addSubview:experienceView];
+    [baseScrollView addSubview:experienceView];
     experienceView.backButtBlock = ^(UITextField *textField) {
-        NSLog(@"工作经历");
+        
     };
     [experienceView addOwnConstraints:[UIImage imageNamed:@"experience"]];
     //
@@ -97,7 +104,21 @@
     experienceTextView.layer.borderColor = [UIColor colorWithHexString:@"#C6C6C6"].CGColor;
     experienceTextView.layer.cornerRadius = 3;
     experienceTextView.clipsToBounds = YES;
-    [self.view addSubview:experienceTextView];
+    CGPoint rememeberContentOffset = baseScrollView.contentOffset;
+    //调整basescrollview 方便输入
+    experienceTextView.keyBoardChangedBlock = ^(CGFloat keyBoardHeight) {
+        __strong typeof(weakSelf) sself = weakSelf;
+        CGFloat offssetY = (sself -> experienceTextView.bottom) -  (SCREEN_HEIGHT - StatusBarAndNavigationBarHeight - keyBoardHeight);
+        //NSLog(@"offssetY = %lf",offssetY);
+        if (offssetY > 0){
+            sself -> baseScrollView.contentOffset = CGPointMake( sself -> baseScrollView.contentOffset.x, offssetY + 5);
+        }
+    };
+    experienceTextView.keyBoardExistBlock = ^{
+         __strong typeof(weakSelf) sself = weakSelf;
+        sself -> baseScrollView.contentOffset = rememeberContentOffset;
+    };
+    [baseScrollView addSubview:experienceTextView];
     //
     CGFloat buttWidth = SCREEN_WIDTH * 0.874;
     CGFloat buttHeigt = buttWidth * 0.137;
@@ -107,8 +128,10 @@
     nextButt.clickButtBlock = ^{
         [weakSelf nextHandler];
     };
-    [self.view addSubview:nextButt];
-    
+    [baseScrollView addSubview:nextButt];
+    //
+    [baseScrollView setContentSize:CGSizeMake(self.view.width, nextButt.bottom + 30)];
+    NSLog(@"contentoffset.y=%lf",baseScrollView.contentOffset.y);
 }
 
 - (void)nextHandler{

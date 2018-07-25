@@ -10,6 +10,8 @@
 //
 #import "DispatchOrderMapViewController.h"
 #import "SearchViewController.h"
+//
+#import "GetLocationICitynfo.h"
 
 //views
 #import "JHCollectionViewCell.h"
@@ -19,6 +21,8 @@
 
 @interface FirstPageViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,WaterFlowLayoutDelegate>{
     UICollectionView *mainCollectionView;
+    GetLocationICitynfo *getLocationCity;
+    NSString *locationCityStr;
 }
 
 @property (strong,nonatomic) NSMutableArray *modelArr;
@@ -41,23 +45,45 @@
     if ([lzhGetAccountInfo getAccount].identityFlag){
         [self displayXuanFuButt];
     }
+    //
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    static BOOL isFirstCome = YES;
+    if (isFirstCome){
+        [self getLocationCity];
+        isFirstCome = NO;
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    //[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-
     [self createButtView];
     [self initObjects];
     [self addCollectionView];
     [self getData];
-    
 }
 //
 - (void)initObjects{
     self.modelArr = [[NSMutableArray alloc] init];
+    getLocationCity = [[GetLocationICitynfo alloc]init];
+    locationCityStr = @"城市";
+}
+
+//获取定位城市
+- (void)getLocationCity{
+    [getLocationCity startLocation];
+    WS(weakSelf);
+    getLocationCity.getLocationCityBlock = ^(NSString *name) {
+        if(name != nil && name.length){
+            __strong typeof(weakSelf)sself = weakSelf;
+            sself -> locationCityStr = name;
+            [sself -> mainCollectionView reloadData];
+        }
+    };
 }
 
 - (void)getData{
@@ -75,7 +101,8 @@
 }
 
 - (void)clickLocationCity:(UIButton*)targetButt{
-    [targetButt setTitle:@"李沧" forState:UIControlStateNormal];
+//    [targetButt setTitle:@"李沧李沧" forState:UIControlStateNormal];
+    [self getLocationCity];
 }
 
 -(void)carouselTouch:(CXCarouselView *)carousel atIndex:(NSUInteger)index{
@@ -86,9 +113,12 @@
     NSLog(@"分类按钮tag=%ld",tag);
 }
 
-- (void)traingleButtonHandler:(NSInteger)index targetLabel:(UILabel*)targetLabel{
+- (void)traingleButtonHandler:(NSInteger)index targetView:(TraingleCategorySmallButtonView*)targetView{
     NSLog(@"筛选按钮组点击：%ld",index);
-    //targetLabel.text = @"测试数据";
+    if (index != 3){
+        targetView.leftLabel.text = @"测试测试";
+        [targetView adjustConstraintsAfterGiveTitle];
+    }
 }
 
 //
@@ -174,9 +204,10 @@
             SearchViewController *searchVC = [[SearchViewController alloc]init];
             [weakSelf.navigationController pushViewController:searchVC animated:YES];
         };
-        header.traingleButtonGroupView.traingleButtBlock = ^(NSInteger index, UILabel *targetLabel) {
-            [weakSelf traingleButtonHandler:index targetLabel:targetLabel];
+        header.traingleButtonGroupView.traingleButtBlock = ^(NSInteger index, TraingleCategorySmallButtonView *targetView) {
+            [weakSelf traingleButtonHandler:index targetView:targetView];
         };
+        [header.searchView.locationCityButt setTitle:locationCityStr forState:UIControlStateNormal];
         //添加头视图的内容
         reusableView = header;
         [header addConstraints];
@@ -200,9 +231,9 @@
                 DispatchOrderMapViewController *dispatchVC = [[DispatchOrderMapViewController alloc]init];
                 [currentNav pushViewController:dispatchVC animated:YES];
             }else{
-                NSLog(@"悬浮按钮点击 当前导航栏为空");
+                //NSLog(@"悬浮按钮点击 当前导航栏为空");
             }
-            NSLog(@"悬浮按钮点击");
+            //NSLog(@"悬浮按钮点击");
         };
     }
 }

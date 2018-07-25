@@ -17,6 +17,7 @@
     UILabel *rightTopTipLabel;
     CommitPopView *popView;
     UIButton *popbackButt;
+    UIScrollView *baseScrollView;
 }
 
 @end
@@ -35,23 +36,29 @@
 }
 
 - (void)addViews{
+    //
+    baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT)];
+    baseScrollView.backgroundColor = [UIColor whiteColor];
+    baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    [self.view addSubview:baseScrollView];
+    //
     WS(weakSelf);
     firstImageAndLabelView = [[ImageAndLabelView alloc] initWithFrame:CGRectMake(10, 30, 10, 10) image:[UIImage imageNamed:@"videoFlag"] title:@"技能-视频秀" font:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"]];
-    [self.view addSubview:firstImageAndLabelView];
+    [baseScrollView addSubview:firstImageAndLabelView];
     //
     rightTopTipLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithRed:153.003/255.0 green:153.003/255.0 blue:153.003/255.0 alpha:1] aligement:2];
     rightTopTipLabel.frame = CGRectMake(5, firstImageAndLabelView.top, self.view.width - 10, firstImageAndLabelView.height);
     rightTopTipLabel.text = @"点击 +上传/拍摄";
-    [self.view addSubview:rightTopTipLabel];
+    [baseScrollView addSubview:rightTopTipLabel];
     //
     PersonalInfoAddPhotoFlagView *videoFlagView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(firstImageAndLabelView.left + firstImageAndLabelView.rightLabel.left, firstImageAndLabelView.bottom + 15, 130, 90)];
-    [self.view addSubview:videoFlagView];
+    [baseScrollView addSubview:videoFlagView];
     //
     ImageAndLabelView * photoImageAndLabelView = [[ImageAndLabelView alloc] initWithFrame:CGRectMake(firstImageAndLabelView.left, videoFlagView.bottom + 15, 10, 10) image:[UIImage imageNamed:@"photoFlag"] title:@"技能-图片" font:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"]];
-    [self.view addSubview:photoImageAndLabelView];
+    [baseScrollView addSubview:photoImageAndLabelView];
     //
     PersonalInfoAddPhotoFlagView *photoFlagView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(photoImageAndLabelView.left + photoImageAndLabelView.rightLabel.left, photoImageAndLabelView.bottom + 15, 130, 90)];
-    [self.view addSubview:photoFlagView];
+    [baseScrollView addSubview:photoFlagView];
     //
     CGFloat buttWidth = SCREEN_WIDTH * 0.874;
     CGFloat buttHeigt = buttWidth * 0.137;
@@ -60,7 +67,9 @@
     nextButt.clickButtBlock = ^{
         [weakSelf nextHandler];
     };
-    [self.view addSubview:nextButt];
+    [baseScrollView addSubview:nextButt];
+    //
+    [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, nextButt.bottom + 30)];
 }
 
 - (void)nextHandler{

@@ -29,6 +29,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [NavTools displayTabbar:self.rdv_tabBarController];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
 - (void)viewDidLoad {
