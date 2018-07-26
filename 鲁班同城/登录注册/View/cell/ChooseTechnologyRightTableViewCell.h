@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChooseTechnologyLeftModel.h"
 
 
 @interface ChooseTechnologyRightTableViewCell : UITableViewCell
@@ -15,6 +16,12 @@
 
 @property (strong,nonatomic) UILabel *jobNameLabel;
 
+@property (strong,nonatomic) UIImageView *rightImageView;
+
+
+@property (strong,nonatomic) ChooseTechnologyLeftModel *model;
+
+@property (strong,nonatomic) NSIndexPath *indexPath;
 
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier cellHeight:(CGFloat)height cellWidth:(CGFloat)width;

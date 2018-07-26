@@ -7,12 +7,27 @@
 //
 
 #import "LaunchPiesViewController.h"
-
+//
+#import "PersonalInfoTechnologyChooseViewController.h"
+//
+#import "ChooseTechnologyLeftModel.h"
+//
 #import "LaunchPiesTicketInputNameView.h"
 #import "LaunchPiesTicketChooseJobView.h"
 #import "LaunchPiesTicketYuSuanView.h"
 #import "OwnTextView.h"
 #import "CommitPopView.h"
+//
+struct ViewTagStruct {
+    int tag1;
+    int tag2;
+    int tag3;
+    int tag4;
+    int tag5;
+    int tag6;
+    int tag7;
+};
+struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
 
 @interface LaunchPiesViewController ()<UIScrollViewDelegate>{
     UIScrollView *baseScrollView;
@@ -24,10 +39,16 @@
     LaunchPiesTicketYuSuanView *yuSuanView;
     LaunchPiesTicketChooseJobView *timeChooseView;
     LaunchPiesTicketInputNameView *beiZhuView;
+    OwnTextView *beiZhuTextView ;
     //
     CommitPopView *popView;
     UIButton *popbackButt;
+   
 }
+
+@property (strong,nonatomic) NSString *selectedJobStr;
+
+@property (strong,nonatomic) NSString *selectedTechnoStr;
 
 @end
 
@@ -43,13 +64,88 @@
     [super viewDidLoad];
     [NavTools displayNav:self.navigationController];
     [NavTools hiddenTabbar:self.rdv_tabBarController];
+    [self initOwnobjects];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"发起派单";
     [self hiddenXuanFuButt];
     [self addViews];
 }
 
+- (void)initOwnobjects{
+    self.selectedJobStr = @"";
+    self.selectedTechnoStr = @"";
+}
+
+-(void)lauchOrder{
+    NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:2],@"userName":nameView.rightTextField.myTextField.text,@"mobile":@"13954239519",@"provinceName":@"山东省",@"cityName":@"青岛市",@"areaName":@"李沧区",@"address":@"山东青岛市",@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":@"2018-07-08",@"remark":@"备注填写备注填写",@"remarkPath":@"qwqewewew23232",@"budget":[NSNumber numberWithInt:100]};
+    
+    [TDHttpTools launchOder:paraDict success:^(id response) {
+        NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+        int status = [dict[@"status"] intValue];
+        if (status == 0){
+             [self showPopView];
+        }else if (status == 1){
+            [SVProgressHUD showInfoWithStatus:dict[@"msg"]];
+        }
+        
+    } failure:^(NSError *error) {
+        NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+        [SVProgressHUD showInfoWithStatus:errorCode];
+    }];
+    
+}
+//
+- (void)clickTextField:(UITextField*)textField{
+    WS(weakSelf);
+    switch (textField.tag) {
+        case 3:{
+            PersonalInfoTechnologyChooseViewController *chooseTechNoLogy = [[PersonalInfoTechnologyChooseViewController alloc]init];
+            chooseTechNoLogy.kindTag = 2;
+            chooseTechNoLogy.selectedBlock = ^(NSMutableArray *modelArr) {
+                __strong typeof(weakSelf) sself = weakSelf;
+                NSMutableArray *resultStrArr = [[NSMutableArray alloc]init];
+                NSMutableArray *resultIDArr = [[NSMutableArray alloc]init];
+                for (ChooseTechnologyLeftModel *model in modelArr){
+                    [resultStrArr addObject:[NSString stringWithFormat:@"%@",model.title]];
+                    [resultIDArr addObject:[NSString stringWithFormat:@"%ld",model.idFlag]];
+                }
+                NSString *resultStr = [resultStrArr componentsJoinedByString:@","];
+                sself -> jobKindView.rightTextField.myTextField.text = resultStr;
+                weakSelf.selectedJobStr = [resultIDArr componentsJoinedByString:@","];
+            };
+            [self.navigationController pushViewController:chooseTechNoLogy animated:YES];
+        }
+            break;
+        case 4:{//技能
+            PersonalInfoTechnologyChooseViewController *chooseTechNoLogy = [[PersonalInfoTechnologyChooseViewController alloc]init];
+            chooseTechNoLogy.kindTag = 1;
+            chooseTechNoLogy.selectedBlock = ^(NSMutableArray *modelArr) {
+                __strong typeof(weakSelf) sself = weakSelf;
+                NSMutableArray *resultStrArr = [[NSMutableArray alloc]init];
+                NSMutableArray *resultIDArr = [[NSMutableArray alloc]init];
+                for (ChooseTechnologyLeftModel *model in modelArr){
+                    [resultStrArr addObject:[NSString stringWithFormat:@"%@",model.title]];
+                    [resultIDArr addObject:[NSString stringWithFormat:@"%ld",model.idFlag]];
+                }
+                NSString *resultStr = [resultStrArr componentsJoinedByString:@","];
+                sself -> technologeView.rightTextField.myTextField.text = resultStr;
+                weakSelf.selectedTechnoStr = [resultIDArr componentsJoinedByString:@","];
+            };
+            [self.navigationController pushViewController:chooseTechNoLogy animated:YES];
+        }
+            break;
+        case 6:{
+            
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+//
 - (void)addViews{
+    WS(weakSelf);
     //
     CGFloat groupViewVerticalSpace = 10;
     CGFloat singleViewHeight = 50;
@@ -62,6 +158,7 @@
     //
     nameView = [[LaunchPiesTicketInputNameView alloc]initWithFrame:CGRectMake(0, groupViewVerticalSpace, self.view.width,singleViewHeight) needRightMapButt:NO];
     nameView.nameLabel.text = @"称呼";
+    nameView.rightTextField.myTextField.tag = viewTag.tag1;
     nameView.rightTextField.myTextField.placeholder = @"";
     nameView.rightTextField.userInteractionEnabled = NO;
     [nameView addOwnConstraints:[UIImage imageNamed:@"name"]];
@@ -71,12 +168,14 @@
     mobileView = [[LaunchPiesTicketInputNameView alloc]initWithFrame:CGRectMake(0, nameView.bottom, self.view.width,singleViewHeight) needRightMapButt:NO];
     mobileView.nameLabel.text = @"电话";
     mobileView.rightTextField.myTextField.placeholder = @"请输入电话";
+    mobileView.rightTextField.myTextField.tag = viewTag.tag2;
     [baseScrollView addSubview:mobileView];
     [mobileView addOwnConstraints:[UIImage imageNamed:@"ticket_mobile"]];
     [baseScrollView addSubview:mobileView];
     //
     addressView = [[LaunchPiesTicketInputNameView alloc]initWithFrame:CGRectMake(0, mobileView.bottom, self.view.width,singleViewHeight) needRightMapButt:YES];
     addressView.nameLabel.text = @"地址";
+    addressView.rightTextField.myTextField.tag = viewTag.tag3;
     addressView.rightTextField.myTextField.placeholder = @"请输入地址";
     [addressView addOwnConstraints:[UIImage imageNamed:@"ticket_address"]];
     [baseScrollView addSubview:addressView];
@@ -86,19 +185,28 @@
     [baseScrollView addSubview:addressBottomView];
     //工作类型
     jobKindView = [[LaunchPiesTicketChooseJobView alloc]initWithFrame:CGRectMake(0,addressBottomView.bottom + groupViewVerticalSpace, self.view.width,singleViewHeight)];
+    jobKindView.rightTextField.myTextField.tag = viewTag.tag4;
     [jobKindView addOwnConstraints:[UIImage imageNamed:@"ticket_jobKind"]];
     jobKindView.ageLabel.text = @"工作类型";
     jobKindView.rightTextField.myTextField.placeholder = @"请选择";
+    jobKindView.backButtBlock = ^(UITextField *textField) {
+        [weakSelf clickTextField:textField];
+    };
     [baseScrollView addSubview:jobKindView];
     //技能要求
     technologeView = [[LaunchPiesTicketChooseJobView alloc]initWithFrame:CGRectMake(0,jobKindView.bottom, self.view.width,singleViewHeight)];
     [technologeView addOwnConstraints:[UIImage imageNamed:@"tecnology"]];
+    technologeView.rightTextField.myTextField.tag = viewTag.tag5;
     technologeView.ageLabel.text = @"技能要求";
     technologeView.rightTextField.myTextField.placeholder = @"请选择";
+    technologeView.backButtBlock = ^(UITextField *textField) {
+        [weakSelf clickTextField:textField];
+    };
     [baseScrollView addSubview:technologeView];
     //
     yuSuanView = [[LaunchPiesTicketYuSuanView alloc]initWithFrame:CGRectMake(0,technologeView.bottom, self.view.width,singleViewHeight)];
     [yuSuanView addOwnConstraints:[UIImage imageNamed:@"ticket_yuSuan"]];
+    yuSuanView.rightTextField.myTextField.tag = viewTag.tag6;
     yuSuanView.nameLabel.text = @"预算";
     [baseScrollView addSubview:yuSuanView];
     //
@@ -108,6 +216,7 @@
     //
     timeChooseView = [[LaunchPiesTicketChooseJobView alloc]initWithFrame:CGRectMake(0,yuSuanBottomView.bottom + groupViewVerticalSpace, self.view.width,singleViewHeight)];
     [timeChooseView addOwnConstraints:[UIImage imageNamed:@"ticket_time"]];
+    timeChooseView.rightTextField.myTextField.tag = viewTag.tag7;
     timeChooseView.ageLabel.text = @"上门时间";
     timeChooseView.rightTextField.myTextField.placeholder = @"请选择";
     [baseScrollView addSubview:timeChooseView];
@@ -123,29 +232,32 @@
     baseTextView.backgroundColor = [UIColor whiteColor];
     [baseScrollView addSubview:baseTextView];
     //textview
-    OwnTextView *beiZhuTextView = [[OwnTextView alloc]initWithFrame:CGRectMake(35, 0, baseTextView.width - 35 - 10, baseTextView.height * 0.8)];
+    beiZhuTextView = [[OwnTextView alloc]initWithFrame:CGRectMake(35, 0, baseTextView.width - 35 - 10, baseTextView.height * 0.8)];
     beiZhuTextView.backgroundColor = [UIColor whiteColor];
     beiZhuTextView.clipsToBounds = YES;
     beiZhuTextView.layer.borderWidth = 1;
     beiZhuTextView.layer.borderColor = [UIColor colorWithHexString:@"#C6C6C6"].CGColor;
     beiZhuTextView.layer.cornerRadius = 5;
-    WS(weakSelf);
     CGPoint rememberContentOffset = baseScrollView.contentOffset;
     NSLog(@"rememberContentOffset.y = %lf",rememberContentOffset.y);
     beiZhuTextView.keyBoardChangedBlock = ^(CGFloat keyBoardHeight) {
-        __strong typeof(weakSelf) sself = weakSelf;
-        CGFloat currentContentOffsetY = sself -> baseScrollView.contentOffset.y;
-        CGFloat contentSizeHeight = sself -> baseScrollView.contentSize.height;
-        CGFloat offsetY = contentSizeHeight - currentContentOffsetY - (SCREEN_HEIGHT - StatusBarAndNavigationBarHeight - keyBoardHeight);
-        NSLog(@"offsetY = %lf",offsetY);
-        if (currentContentOffsetY >= 0){
-            sself -> baseScrollView.contentOffset = CGPointMake(rememberContentOffset.x, 280);
+         __strong typeof(weakSelf) sself = weakSelf;
+        if([sself -> beiZhuTextView.writeTextView isFirstResponder]){
+            __strong typeof(weakSelf) sself = weakSelf;
+            CGFloat currentContentOffsetY = sself -> baseScrollView.contentOffset.y;
+            CGFloat contentSizeHeight = sself -> baseScrollView.contentSize.height;
+            CGFloat offsetY = contentSizeHeight - currentContentOffsetY - (SCREEN_HEIGHT - StatusBarAndNavigationBarHeight - keyBoardHeight);
+            NSLog(@"offsetY = %lf",offsetY);
+            if (currentContentOffsetY >= 0){
+                sself -> baseScrollView.contentOffset = CGPointMake(rememberContentOffset.x, 280);
+            }
         }
+       
     };
     beiZhuTextView.keyBoardExistBlock = ^{
         __strong typeof(weakSelf) sself = weakSelf;
-        sself -> baseScrollView.contentOffset = rememberContentOffset;
-       
+            sself -> baseScrollView.contentOffset = rememberContentOffset;
+        
     };
     [baseTextView addSubview:beiZhuTextView];
     //提交基view
@@ -157,7 +269,8 @@
     CustomeStyleCornerButt *commitButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, 0, commitButtBaseView.width - 20, commitButtBaseView.height * 0.6) backColor:commitButtBackColor cornerRadius:8 title:@"提交" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
     commitButt.center = CGPointMake(commitButtBaseView.width / 2, commitButtBaseView.height / 2);
     commitButt.clickButtBlock = ^{
-        [weakSelf showPopView];
+        [weakSelf lauchOrder];
+       
     };
     [commitButtBaseView addSubview:commitButt];
     //
@@ -185,6 +298,7 @@
             __strong typeof(weakSelf)sself = weakSelf;
             [sself -> popbackButt setHidden:YES];
             [sself -> popView setHidden:YES];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
         };
     }else{
         [popbackButt setHidden:NO];

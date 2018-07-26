@@ -180,7 +180,7 @@
     self.mapView.showsScale = NO;
     self.mapView.showsCompass = NO;
     //添加大头针
-    //self.mapView.showsUserLocation = YES;
+    self.mapView.showsUserLocation = YES;
     self.mapView.userTrackingMode = 2;
     [self addLocationButt];
     //

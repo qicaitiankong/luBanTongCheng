@@ -49,11 +49,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"viewDidLoad 用户状态：%ld",[lzhGetAccountInfo getAccount].identityFlag);
     self.view.backgroundColor = [UIColor whiteColor];
     [NavTools displayTabbar:self.rdv_tabBarController];
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self initObject];
     [self addTableView:CGRectMake(0, STATUSBAR_HEIGHT, SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT) style:UITableViewStylePlain];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserTypeNoti:) name:USER_TYPE_UPDATE_NOTIFICATION_NAME object:nil];
+    
 }
 
 - (void)initObject{
@@ -100,11 +103,14 @@
    
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     lzhGetAccountInfo *accountInfo = [lzhGetAccountInfo getAccount];
+    NSDictionary *infoDict = accountInfo.infoDict;
     if (accountInfo.identityFlag == 0){
-        [accountInfo writeToAccount:@{IDENTITY_KEY_STRING:@1}];
+        [infoDict setValue:@"雇主" forKey:@"userType"];
+        [accountInfo writeToAccount:infoDict];
         [appDelegate setupViewControllersForEmployment];
     }else{
-        [accountInfo writeToAccount:@{IDENTITY_KEY_STRING:@0}];
+        [infoDict setValue:@"零工" forKey:@"userType"];
+        [accountInfo writeToAccount:infoDict];
         [appDelegate setupViewControllersForCasualLabour];
     }
      NSLog(@"切换身份%ld", [lzhGetAccountInfo getAccount].identityFlag);
@@ -228,6 +234,15 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return SCREEN_HEIGHT * 0.074;
+}
+
+- (void)updateUserTypeNoti:(NSNotificationCenter*)_n{
+    NSLog(@"通知刷新界面");
+    [self.tableView reloadData];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

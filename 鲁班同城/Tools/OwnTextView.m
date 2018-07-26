@@ -82,6 +82,7 @@
         if (weakSelf.keyBoardExistBlock){
             weakSelf.keyBoardExistBlock();
         }
+        
     };
     //
     UIView *topLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.toolView.width, 1)];

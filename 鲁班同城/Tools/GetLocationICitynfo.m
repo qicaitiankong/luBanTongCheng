@@ -70,6 +70,28 @@
 
 }
 
+//
+- (void)getLocationInfoByUserLocaotion:(CLLocation*)location{
+    CLLocation *newLocation = location;
+    CLLocationCoordinate2D oldCoordinate = newLocation.coordinate;
+    NSLog(@"首页 旧的经度：%f,旧的纬度：%f",oldCoordinate.longitude,oldCoordinate.latitude);
+    //
+    WS(weakSelf);
+    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+    __block NSString *locationCity = @"城市";
+    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        NSString *locationCity = @"";
+        for (CLPlacemark *place  in placemarks){
+            NSLog(@"locality,%@",place.locality);              // 市
+            locationCity = [place.locality copy];
+        }
+        if (weakSelf.getLocationCityDetailInfo){
+            //weakSelf.getLocationCityDetailInfo(locationCity, locationCity, <#NSString *area#>)
+        }
+    }];
+
+}
+
 
 
 @end

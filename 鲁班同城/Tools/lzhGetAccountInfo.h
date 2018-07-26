@@ -9,15 +9,19 @@
 #import <Foundation/Foundation.h>
 //获取手机账号信息
 @interface lzhGetAccountInfo : NSObject
+@property (strong,nonatomic) NSDictionary *infoDict;
+
 //0:零工， 1：雇主
 @property (assign,nonatomic) NSInteger identityFlag;
 
-@property(nonatomic,copy)NSString *PhotoUrl;
-@property(nonatomic,copy)NSString *CName;
-@property(nonatomic,copy)NSString *UserMoney;
-@property(nonatomic,copy)NSString *Certification;
-@property(nonatomic,copy)NSString *IsPayPwd;
-@property(nonatomic,copy)NSString *LoginName;
+@property(nonatomic,strong)NSString *PhotoUrl;
+
+@property(nonatomic,strong)NSString *nickName;
+
+@property(nonatomic,strong)NSString *userName;
+
+@property (strong,nonnull)  NSString *ageStr;
+
 
 + (lzhGetAccountInfo *)getAccount;
 

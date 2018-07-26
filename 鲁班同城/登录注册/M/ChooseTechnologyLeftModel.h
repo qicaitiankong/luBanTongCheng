@@ -10,6 +10,8 @@
 
 @interface ChooseTechnologyLeftModel : NSObject
 
+@property (assign,nonatomic) NSInteger idFlag;
+
 @property (strong,nonatomic) NSString *title;
 
 @property (assign,nonatomic) BOOL judgeSelected;

@@ -44,6 +44,27 @@
 
 - (void)firstLoginHandler{
     NSLog(@"firstLoginHandler");
+    [TDHttpTools loginWXWithText:@{@"weixinCode":@"1234567"} success:^(id response) {
+        NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+        int status = [dict[@"status"] intValue];
+        NSLog(@" test dict:%@",dict);
+        NSDictionary *dataDict = dict[@"data"];
+        if (status == 0){
+             NSLog(@"userType:%@",dataDict[@"userType"]);
+            //在此保存用户信息
+            [[lzhGetAccountInfo getAccount] writeToAccount:dataDict];
+            [[NSNotificationCenter defaultCenter] postNotificationName:USER_TYPE_UPDATE_NOTIFICATION_NAME object:nil userInfo:nil];
+            //通知跟新界面
+            [SVProgressHUD showSuccessWithStatus:dict[@"msg"]];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else if (status == 1){
+            [SVProgressHUD showErrorWithStatus:dict[@"msg"]];
+        }
+        
+    } failure:^(NSError *error) {
+        NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+        [SVProgressHUD showErrorWithStatus:errorCode];
+    }];
     
 }
 

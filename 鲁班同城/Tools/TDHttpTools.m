@@ -10,9 +10,7 @@
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
 
-
-//#define kSERVER_HTTP_DXE @"http://192.168.0.6:8511"
-#define kSERVER_HTTP_DXE @"http://219.147.12.202:618"
+#define kSERVER_HTTP_DXE @"http://192.168.0.112"
 
 @implementation TDHttpTools
 
@@ -215,24 +213,81 @@
             break;
     }
 }
-/**
- *  融云账号获取测试token 正式需要通过服务器获取
- *
- *
- */
 
 
 
++(void)loginWXWithText:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/loginW",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            success(response);
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+    
+}
 
 
++(void)launchOder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/publishOrder",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            success(response);
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+    
+}
 
+//工作职业列表
++(void)getJobList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/basic/getProfessionList",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            success(response);
+             [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
 
-
-
-
-
-
-
+//获取技能列表
++(void)getTechnologyList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/basic/getTechnologyList",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            success(response);
+            [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
 
 
 

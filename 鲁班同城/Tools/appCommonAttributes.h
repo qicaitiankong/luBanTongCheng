@@ -98,7 +98,8 @@
 #define  VENDER_IDENTIFIER [[UIDevice currentDevice].identifierForVendor UUIDString]
 //身份切换存到本地的key值
 #define  IDENTITY_KEY_STRING @"identityFlag"
-
+//身份切换跟新界面通知
+#define  USER_TYPE_UPDATE_NOTIFICATION_NAME @"updateUserTypeInfoNoti"
 // 获取系统版本号
 #define SysVer [[[UIDevice currentDevice] systemVersion] floatValue]
 // 改写为弱引用

@@ -12,6 +12,9 @@
 
 @property (copy,nonatomic) void (^getLocationCityBlock)(NSString *name);
 
+@property (copy,nonatomic) void (^getLocationCityDetailInfo)(NSString *provice,NSString *city,NSString *area);
+
+
 -(void)startLocation;
 
 
