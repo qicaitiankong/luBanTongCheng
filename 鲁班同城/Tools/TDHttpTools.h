@@ -49,6 +49,11 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 //获取技能列表
 +(void)getTechnologyList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
+//接单大厅
++(void)getReceiveOrderList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+//派单大厅列表
++(void)getLauchOrderList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 
 

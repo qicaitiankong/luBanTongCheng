@@ -17,7 +17,11 @@
 #import "LaunchPiesTicketYuSuanView.h"
 #import "OwnTextView.h"
 #import "CommitPopView.h"
+//third
+#import "GSPickerView.h"
+
 //
+
 struct ViewTagStruct {
     int tag1;
     int tag2;
@@ -43,13 +47,19 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
     //
     CommitPopView *popView;
     UIButton *popbackButt;
-   
+    
 }
 
 @property (strong,nonatomic) NSString *selectedJobStr;
 
 @property (strong,nonatomic) NSString *selectedTechnoStr;
 
+@property (strong,nonatomic) GetLocationICitynfo *locationInfo;
+
+@property (strong,nonatomic) GSPickerView *pickerView;
+//
+@property (strong,nonatomic) NSString *selectedTimeStr;
+//
 @end
 
 @implementation LaunchPiesViewController
@@ -74,10 +84,19 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
 - (void)initOwnobjects{
     self.selectedJobStr = @"";
     self.selectedTechnoStr = @"";
+    self.selectedTimeStr = @"";
+    self.locationInfo = [GetLocationICitynfo getLocationInfo];
 }
 
 -(void)lauchOrder{
-    NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:2],@"userName":nameView.rightTextField.myTextField.text,@"mobile":@"13954239519",@"provinceName":@"山东省",@"cityName":@"青岛市",@"areaName":@"李沧区",@"address":@"山东青岛市",@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":@"2018-07-08",@"remark":@"备注填写备注填写",@"remarkPath":@"qwqewewew23232",@"budget":[NSNumber numberWithInt:100]};
+    
+    NSInteger yuSuanMoney = 0;
+    NSString *yuSuanMoneyStr = yuSuanView.rightTextField.myTextField.text;
+    if (yuSuanMoneyStr.length != 0){
+        yuSuanMoney = [yuSuanMoneyStr integerValue];
+    }
+    
+    NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:1],@"userName":nameView.rightTextField.myTextField.text,@"mobile":mobileView.rightTextField.myTextField.text,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressView.rightTextField.myTextField.text,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuTextView.writeTextView.text,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
     
     [TDHttpTools launchOder:paraDict success:^(id response) {
         NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
@@ -135,7 +154,7 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
         }
             break;
         case 6:{
-            
+            [self addChooseTimeView];
         }
             break;
         default:
@@ -173,12 +192,17 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
     [mobileView addOwnConstraints:[UIImage imageNamed:@"ticket_mobile"]];
     [baseScrollView addSubview:mobileView];
     //
-    addressView = [[LaunchPiesTicketInputNameView alloc]initWithFrame:CGRectMake(0, mobileView.bottom, self.view.width,singleViewHeight) needRightMapButt:YES];
+    addressView = [[LaunchPiesTicketInputNameView alloc]initWithFrame:CGRectMake(0, mobileView.bottom, self.view.width,singleViewHeight + 30) needRightMapButt:YES];
     addressView.nameLabel.text = @"地址";
     addressView.rightTextField.myTextField.tag = viewTag.tag3;
     addressView.rightTextField.myTextField.placeholder = @"请输入地址";
-    [addressView addOwnConstraints:[UIImage imageNamed:@"ticket_address"]];
+    addressView.rightTextField.myTextField.text = [NSString stringWithFormat:@"%@%@%@%@",self.locationInfo.provinceStr,self.locationInfo.cityStr,self.locationInfo.areaStr,self.locationInfo.detailStreetStr];
+    //返回地图选择
+    addressView.mapChooseButtView.clickButtBlock = ^{
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
     [baseScrollView addSubview:addressView];
+     [addressView addOwnConstraints:[UIImage imageNamed:@"ticket_address"]];
     //
     UIView *addressBottomView = [[UIView alloc]initWithFrame:CGRectMake(0, addressView.bottom, self.view.width, 15)];
     addressBottomView.backgroundColor = [UIColor whiteColor];
@@ -217,6 +241,9 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
     timeChooseView = [[LaunchPiesTicketChooseJobView alloc]initWithFrame:CGRectMake(0,yuSuanBottomView.bottom + groupViewVerticalSpace, self.view.width,singleViewHeight)];
     [timeChooseView addOwnConstraints:[UIImage imageNamed:@"ticket_time"]];
     timeChooseView.rightTextField.myTextField.tag = viewTag.tag7;
+    timeChooseView.backButtBlock = ^(UITextField *textField) {
+        [weakSelf clickTextField:textField];
+    };
     timeChooseView.ageLabel.text = @"上门时间";
     timeChooseView.rightTextField.myTextField.placeholder = @"请选择";
     [baseScrollView addSubview:timeChooseView];
@@ -279,7 +306,25 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
     
 }
 
+//
+- (GSPickerView *)pickerView{
+    if (!_pickerView) {
+        _pickerView = [[GSPickerView alloc]initWithFrame:self.view.bounds];
+    }
+    return _pickerView;
+}
 
+- (void)addChooseTimeView{
+    WS(weakSelf);
+    [self.pickerView appearWithTitle:@"" pickerType:GSPickerTypeDatePicker subTitles:nil selectedStr:@"2010-1-1" sureAction:^(NSInteger path, NSString *pathStr) {
+        NSLog(@"%@",pathStr);
+        __strong typeof(weakSelf) sself = weakSelf;
+        weakSelf.selectedTimeStr = [pathStr copy];
+        sself -> timeChooseView.rightTextField.myTextField.text = weakSelf.selectedTimeStr;
+    } cancleAction:^{
+        
+    }];
+}
 //弹窗
 - (void)showPopView{
     UIWindow *appWindow = APP_MAIN_WINDOW;

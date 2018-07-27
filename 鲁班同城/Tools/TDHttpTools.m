@@ -257,7 +257,7 @@
     [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
         if (success) {
             success(response);
-             [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+             //[SVProgressHUD showSuccessWithStatus:@"获取成功"];
         }
     } failure:^(NSError *error) {
         if (failure) {
@@ -277,7 +277,31 @@
     [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
         if (success) {
             success(response);
-            [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+            //[SVProgressHUD showSuccessWithStatus:@"获取成功"];
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
+//接单大厅
++(void)getReceiveOrderList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/publishOrderList",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showWithStatus:@"获取信息失败"];
+            }
         }
     } failure:^(NSError *error) {
         if (failure) {
@@ -290,9 +314,30 @@
 }
 
 
-
-
-
+//派单大厅列表
++(void)getLauchOrderList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/myPublishOrders",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showWithStatus:@"获取信息失败"];
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
 
 
 

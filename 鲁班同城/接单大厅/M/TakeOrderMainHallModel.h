@@ -10,6 +10,10 @@
 
 
 @interface TakeOrderMainHallModel : NSObject
+//订单id
+@property (assign,nonatomic) NSInteger orderID;
+//订单号
+@property (strong,nonatomic) NSString *orderNumberStr;
 
 @property (strong,nonatomic) NSString *logoUrlStr;
 

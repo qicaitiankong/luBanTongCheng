@@ -10,20 +10,20 @@
 
 @interface LaunchPiesTicketInputNameView (){
     
-    CustomerImageButt *mapChooseButtView;
-    BOOL needMapButt;
+    BOOL needRightMapButt;
 }
 
 @end
 
 @implementation LaunchPiesTicketInputNameView
 @synthesize bottomLineView;
+@synthesize mapChooseButtView;
 
 - (instancetype)initWithFrame:(CGRect)frame needRightMapButt:(BOOL)needMapButt
 {
     self = [super initWithFrame:frame];
     if (self) {
-        needMapButt = needMapButt;
+        needRightMapButt = needMapButt;
         self.backgroundColor = [UIColor whiteColor];
         
         self.leftImageView = [[UIImageView alloc] init];
@@ -37,18 +37,21 @@
         self.rightTextField.myTextField.backgroundColor = [UIColor whiteColor];
         self.rightTextField.myTextField.font = [UIFont getPingFangSCMedium:14];
         [self addSubview:self.rightTextField];
+         self.rightTextField.myTextField.backgroundColor = [UIColor whiteColor];
         //
         bottomLineView = [[UIView alloc] init];
         bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#C6C6C6"];
         [self addSubview:bottomLineView];
         //
         if (needMapButt){
+           self.rightTextField.myTextField. adjustsFontSizeToFitWidth = YES;
             mapChooseButtView = [[CustomerImageButt alloc]initWithFrame:CGRectMake(frame.size.width - 15 - 90, 0, 90, 25)];
             mapChooseButtView.center = CGPointMake(mapChooseButtView.centerX, frame.size.height / 2);
             [mapChooseButtView.imageView setImage:[UIImage imageNamed:@"mapChoose"]];
             [self addSubview:mapChooseButtView];
-        }else{
             mapChooseButtView.hidden = NO;
+        }else{
+            mapChooseButtView.hidden = YES;
         }
     }
     return self;
@@ -76,17 +79,18 @@
     .heightIs(leftImageViewHeight)
     .topEqualToView(self.leftImageView);
     
-    if(needMapButt){
+    if(needRightMapButt){
         self.rightTextField.sd_layout
         .leftSpaceToView(self.nameLabel, 10)
-        .rightSpaceToView(self, 110)
+        .rightSpaceToView(mapChooseButtView, 10)
         .centerYEqualToView(self)
         .heightRatioToView(self, 0.6);
         [self.rightTextField addOwnConstraints];
+       
         //
         bottomLineView.sd_layout
         .leftEqualToView(self.nameLabel)
-        .rightSpaceToView(self, 110)
+        .rightSpaceToView(self, 10)
         .bottomSpaceToView(self, 0)
         .heightIs(1);
     }else{
@@ -95,7 +99,7 @@
         .rightSpaceToView(self, 10)
         .centerYEqualToView(self)
         .heightRatioToView(self, 0.6);
-        
+
         [self.rightTextField addOwnConstraints];
         bottomLineView.sd_layout
         .leftEqualToView(self.nameLabel)

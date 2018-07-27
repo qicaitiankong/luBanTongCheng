@@ -32,7 +32,7 @@
         self.locationCityButt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.locationCityButt.backgroundColor = [UIColor whiteColor];
         [self.locationCityButt setTitleColor:[UIColor colorWithRed:101.997/255.0 green:101.997/255.0 blue:101.997/255.0 alpha:1] forState:UIControlStateNormal];
-        [self.locationCityButt setTitle:@"青岛" forState:UIControlStateNormal];
+        [self.locationCityButt setTitle:@"城市" forState:UIControlStateNormal];
         
         [self addSubview:self.locationCityButt];
         //

@@ -17,13 +17,19 @@
 #import "DispatchTicketDetailViewController.h"
 #import "DispatchOrderMapViewController.h"
 
-@interface OrderTakingViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface OrderTakingViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    __block BOOL isRefresh;//刷新标记
+    __block BOOL isLoad;//加载标记
+    
+}
 
 @property (strong,nonatomic) UITableView *tableView;
 
 @property (strong,nonatomic) NSMutableArray *modelArr;
 
 @property (strong,nonatomic) SSSearchBar *headerView;
+
+@property (assign,nonatomic) int page;
 
 @end
 
@@ -52,18 +58,131 @@
     [self initObjects];
     
     [self addTableView:CGRectMake(0, STATUSBAR_HEIGHT, SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT) style:UITableViewStylePlain];
-    [self getData];
+    [self getData:1];
+    
+    //
+    WS(weakSelf);
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        __strong typeof(weakSelf) sself = weakSelf;
+        sself -> isRefresh = YES;
+        //
+        if([ShareNetWorkState getNetState] == NO){
+            [SVProgressHUD showErrorWithStatus:@"刷新失败，请检查网络"];
+            [weakSelf stopRefreshOrLoad];
+        }else{
+            weakSelf.page = 1;
+            [weakSelf getData:weakSelf.page];
+        }
+    }];
+    //
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        __strong typeof(weakSelf) sself = weakSelf;
+        sself -> isLoad = YES;
+        //
+        if([ShareNetWorkState getNetState] == NO){
+            [SVProgressHUD showErrorWithStatus:@"加载失败，请检查网络"];
+            [weakSelf stopRefreshOrLoad];
+        }else{
+            weakSelf.page ++;
+            [weakSelf getData:weakSelf.page];
+        }
+    }];
+    
 }
-- (void)initObjects{
-    self.modelArr = [[NSMutableArray alloc] init];
+
+//停止刷新加载
+- (void)stopRefreshOrLoad{
+    if (isRefresh){
+        [self.tableView.mj_header endRefreshing];
+        isRefresh = NO;
+    }
+    if (isLoad){
+        [self.tableView.mj_footer endRefreshing];
+        isLoad = NO;
+    }
 }
 //
-- (void)getData{
-    for (int i = 0; i < 20; i ++){
-        TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:nil];
-        [self.modelArr addObject:model];
+
+
+
+- (void)initObjects{
+    self.modelArr = [[NSMutableArray alloc] init];
+    self.page = 1;
+}
+//
+- (void)getData:(int)page{
+    if ([lzhGetAccountInfo getAccount].identityFlag == 0){//零工
+        NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:3],@"page":[NSNumber numberWithInt:page],@"size":[NSNumber numberWithInt:10]};
+        [TDHttpTools getReceiveOrderList:paraDict success:^(id response) {
+            NSDictionary *dict = response;
+            if ([dict allKeys].count){
+                NSLog(@"%@",dict);
+                NSDictionary *dataDict = dict[@"data"];
+                NSArray *dataArr = dataDict[@"list"];
+                if (dataArr.count){
+                    if (NO == self -> isLoad){
+                        [self.modelArr removeAllObjects];
+                    }
+                    for (NSDictionary *singleDict in dataArr){
+                        TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:singleDict];
+                        [self.modelArr addObject:model];
+                    }
+                    [self.tableView reloadData];
+                }else{
+                    if (self->isLoad && self.page > 1){
+                        self.page --;
+                    }
+                }
+            }else{
+                if (self->isLoad && self.page > 1){
+                    self.page --;
+                }
+            }
+            [self stopRefreshOrLoad];
+        } failure:^(NSError *error) {
+            if (self->isLoad && self.page > 1){
+                self.page --;
+            }
+            [self stopRefreshOrLoad];
+            
+        }];
+        
+    }else{//雇主
+        NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:1],@"page":[NSNumber numberWithInt:page],@"size":[NSNumber numberWithInt:10]};
+        [TDHttpTools getLauchOrderList:paraDict success:^(id response) {
+            NSDictionary *dict = response;
+            if ([dict allKeys].count){
+                NSLog(@"%@",dict);
+                NSDictionary *dataDict = dict[@"data"];
+                NSArray *dataArr = dataDict[@"list"];
+                if (dataArr.count){
+                    if (NO == self -> isLoad){
+                        [self.modelArr removeAllObjects];
+                    }
+                    for (NSDictionary *singleDict in dataArr){
+                        TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:singleDict];
+                        [self.modelArr addObject:model];
+                    }
+                    [self.tableView reloadData];
+                }else{
+                    if (self->isLoad && self.page > 1){
+                        self.page --;
+                    }
+                }
+            }else{
+                if (self->isLoad && self.page > 1){
+                    self.page --;
+                }
+            }
+            [self stopRefreshOrLoad];
+        } failure:^(NSError *error) {
+            if (self->isLoad && self.page > 1){
+                self.page --;
+            }
+            [self stopRefreshOrLoad];
+            
+        }];
     }
-    [self.tableView reloadData];
 }
 //events
 //cell 发起按钮
@@ -93,6 +212,7 @@
     }
     self.tableView = [[UITableView alloc] initWithFrame:size style:styles];
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

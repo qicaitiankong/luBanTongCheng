@@ -26,6 +26,8 @@
 #import "CustomeStyleCornerButt.h"
 #import "TDHttpTools.h"
 #import "UIViewController+XuanFuButtDIsplayAndHidden.h"
+#import "GetLocationICitynfo.h"
+#import "ShareNetWorkState.h"
 
 //third party class
 #import <SVProgressHUD.h>
@@ -58,7 +60,7 @@
 
 #define LIGHR_GRAY_COLOR_LZH RGBA(200,200,200,1);
 //没有图片是的背景色
-#define IMAGEVIEW_DEFAULT_COLOR RGBA(122.5,122.5,122.5,1);
+#define IMAGEVIEW_DEFAULT_COLOR RGBA(245,245,245,1);
 //主题绿
 #define SPECIAL_BLUE_COLOR     [UIColor colorWithHexString:@"#78CAC5"];
 //弹窗背景透明度
@@ -76,6 +78,9 @@
 
 
 #define kAccountPath [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/AccountInfo.plist"]
+
+#define kLocationAccountInfoPath [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/LocationInfo.plist"]
+
 //屏幕高度、宽度
 #define SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width

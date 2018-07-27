@@ -226,6 +226,7 @@
 		1824F77D20EF44CF00E99823 /* CustomerLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F77C20EF44CF00E99823 /* CustomerLabelView.m */; };
 		1824F78020EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F77F20EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m */; };
 		1824F78320EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F78220EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m */; };
+		18264E5F210AED5F001B793B /* GSPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18264E5E210AED5F001B793B /* GSPickerView.m */; };
 		1832B99120F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99020F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m */; };
 		1832B99D20F59CC400D6CE4F /* SDWeiXinPhotoContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99320F59CC300D6CE4F /* SDWeiXinPhotoContainerView.m */; };
 		1832B99E20F59CC400D6CE4F /* SDPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99720F59CC400D6CE4F /* SDPhotoBrowser.m */; };
@@ -787,6 +788,8 @@
 		1824F77F20EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalInfomationPersonalServiceTypeGoupView.m; sourceTree = "<group>"; };
 		1824F78120EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPersonalInfomationPersonalVideoGoupView.h; sourceTree = "<group>"; };
 		1824F78220EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalInfomationPersonalVideoGoupView.m; sourceTree = "<group>"; };
+		18264E5D210AED5F001B793B /* GSPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPickerView.h; sourceTree = "<group>"; };
+		18264E5E210AED5F001B793B /* GSPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPickerView.m; sourceTree = "<group>"; };
 		1832B98F20F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyCruitDetailPictureTableViewCell.h; sourceTree = "<group>"; };
 		1832B99020F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyCruitDetailPictureTableViewCell.m; sourceTree = "<group>"; };
 		1832B99320F59CC300D6CE4F /* SDWeiXinPhotoContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWeiXinPhotoContainerView.m; sourceTree = "<group>"; };
@@ -1888,6 +1891,15 @@
 			path = sound;
 			sourceTree = "<group>";
 		};
+		18264E5C210AED5F001B793B /* GSPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				18264E5D210AED5F001B793B /* GSPickerView.h */,
+				18264E5E210AED5F001B793B /* GSPickerView.m */,
+			);
+			path = GSPickerView;
+			sourceTree = "<group>";
+		};
 		1832B99220F59CC300D6CE4F /* PhotoContainer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1987,6 +1999,7 @@
 		1853689F20E9CAD70053A5D4 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				18264E5C210AED5F001B793B /* GSPickerView */,
 				1851D924210181C9000C6306 /* GaoDe */,
 				18203080210028F40098BFCC /* rongYun */,
 				1832B99220F59CC300D6CE4F /* PhotoContainer */,
@@ -2995,6 +3008,7 @@
 				185ABF2C20F850E600188520 /* MessageFeedBackViewController.m in Sources */,
 				1443C4FF20E204170009E82F /* AppDelegate.m in Sources */,
 				1443C61920E37A3D0009E82F /* RegisterButtonStyleView.m in Sources */,
+				18264E5F210AED5F001B793B /* GSPickerView.m in Sources */,
 				188CB37C20FC82FE00302C94 /* DispatchTicketDetailBaoJiaTableViewCell.m in Sources */,
 				1824F74E20EF090500E99823 /* OwnPersonalInfomationViewController.m in Sources */,
 				1824F78020EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m in Sources */,

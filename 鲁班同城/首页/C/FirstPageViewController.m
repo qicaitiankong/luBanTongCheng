@@ -21,8 +21,7 @@
 
 @interface FirstPageViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,WaterFlowLayoutDelegate>{
     UICollectionView *mainCollectionView;
-    GetLocationICitynfo *getLocationCity;
-    NSString *locationCityStr;
+    
 }
 
 @property (strong,nonatomic) NSMutableArray *modelArr;
@@ -69,22 +68,22 @@
 //
 - (void)initObjects{
     self.modelArr = [[NSMutableArray alloc] init];
-    getLocationCity = [[GetLocationICitynfo alloc]init];
-    locationCityStr = @"城市";
 }
 
 //获取定位城市
 - (void)getLocationCity{
-    [getLocationCity startLocation];
+    GetLocationICitynfo *locationInfo =  [[GetLocationICitynfo alloc]init];
+    [locationInfo startLocation];
     WS(weakSelf);
-    getLocationCity.getLocationCityBlock = ^(NSString *name) {
-        if(name != nil && name.length){
-            __strong typeof(weakSelf)sself = weakSelf;
-            sself -> locationCityStr = name;
-            [sself -> mainCollectionView reloadData];
-        }
+    locationInfo.getLocationInfoBlock = ^{
+        [weakSelf refreshLocationCityDisplay];
     };
 }
+
+- (void)refreshLocationCityDisplay{
+    [mainCollectionView reloadData];
+}
+
 
 - (void)getData{
     for (int index = 0; index < 20; index ++){
@@ -207,7 +206,7 @@
         header.traingleButtonGroupView.traingleButtBlock = ^(NSInteger index, TraingleCategorySmallButtonView *targetView) {
             [weakSelf traingleButtonHandler:index targetView:targetView];
         };
-        [header.searchView.locationCityButt setTitle:locationCityStr forState:UIControlStateNormal];
+        [header.searchView.locationCityButt setTitle:[GetLocationICitynfo getLocationInfo].cityStr forState:UIControlStateNormal];
         //添加头视图的内容
         reusableView = header;
         [header addConstraints];

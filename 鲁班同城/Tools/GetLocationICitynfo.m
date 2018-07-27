@@ -21,6 +21,25 @@
 
 @implementation GetLocationICitynfo
 
++ (GetLocationICitynfo*)getLocationInfo{
+    GetLocationICitynfo *locationInfo = [[GetLocationICitynfo alloc]init];
+    if (locationInfo){
+        //NSDictionary *locationDict = @{@"country":country,@"provice":proviceStr,@"city":locationCity,@"area":area,@"street":street,@"detailStreet":name};
+        NSDictionary *locationDict = [NSDictionary dictionaryWithContentsOfFile:kLocationAccountInfoPath];
+        if (locationDict && [locationDict allKeys].count){
+            locationInfo.countryStr = [locationDict[@"country"] copy];
+            
+            locationInfo.provinceStr = [locationDict[@"provice"] copy];
+            locationInfo.cityStr = [locationDict[@"city"] copy];
+            locationInfo.areaStr = [locationDict[@"area"] copy];
+            locationInfo.streetStr = [locationDict[@"street"] copy];
+            locationInfo.detailStreetStr = [locationDict[@"detailStreet"] copy];
+        }
+    }
+    return locationInfo;
+}
+
+
 //开始定位
 
 -(void)startLocation{
@@ -57,19 +76,58 @@
     //
     WS(weakSelf);
     CLGeocoder *geocoder = [[CLGeocoder alloc]init];
-    __block NSString *locationCity = @"城市";
+     __block NSString *country = @"";
+    __block NSString *locationCity = @"";
+     __block NSString *proviceStr = @"";
+    __block NSString *area = @"";
+    __block NSString *street = @"";
+    __block NSString *subStreet = @"";
+    __block NSString *name = @"";
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         for (CLPlacemark *place  in placemarks){
              NSLog(@"locality,%@",place.locality);              // 市
-            locationCity = [place.locality copy];
+           
+            if (!locationCity) {
+                //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
+                
+                locationCity = [place.administrativeArea copy];
+            }else{
+                 locationCity = [place.locality copy];
+            }
+            
+            if (place.country){
+                country = [place.country copy];
+            }
+            
+            if (place.administrativeArea){
+                proviceStr = [place.administrativeArea copy];
+            }
+            if (place.subLocality){
+                area = [place.subLocality copy];
+            }
+            if (place.thoroughfare){
+                street = [place.thoroughfare copy];
+            }
+            if (subStreet){
+                subStreet = [place.subThoroughfare copy];
+            }
+            if (place.name){
+                name = [place.name copy];
+            }
+            NSDictionary *locationDict = @{@"country":country,@"provice":proviceStr,@"city":locationCity,@"area":area,@"street":street,@"detailStreet":name};
+            BOOL suc = [locationDict writeToFile:kLocationAccountInfoPath atomically:YES];
+            if (suc){
+                NSLog(@"定位信息写入plist成功");
+            }else{
+                 NSLog(@"定位信息写入plist失败");
+            }
         }
-        if (weakSelf.getLocationCityBlock){
-            weakSelf.getLocationCityBlock(locationCity);
+        if (weakSelf.getLocationInfoBlock){
+            weakSelf.getLocationInfoBlock();
         }
     }];
 
 }
-
 //
 - (void)getLocationInfoByUserLocaotion:(CLLocation*)location{
     CLLocation *newLocation = location;
@@ -78,15 +136,53 @@
     //
     WS(weakSelf);
     CLGeocoder *geocoder = [[CLGeocoder alloc]init];
-    __block NSString *locationCity = @"城市";
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        NSString *country = @"";
         NSString *locationCity = @"";
+        NSString *proviceStr = @"";
+        NSString *area = @"";
+        NSString *street = @"";
+        NSString *subStreet = @"";
+        NSString *name = @"";
         for (CLPlacemark *place  in placemarks){
-            NSLog(@"locality,%@",place.locality);              // 市
-            locationCity = [place.locality copy];
+            if (!locationCity) {
+                //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
+                
+                locationCity = [place.administrativeArea copy];
+            }else{
+                locationCity = [place.locality copy];
+            }
+            //
+            if (place.country){
+                country = [place.country copy];
+            }
+            
+            if (place.administrativeArea){
+               proviceStr = [place.administrativeArea copy];
+            }
+            if (place.subLocality){
+                area = [place.subLocality copy];
+            }
+            if (place.thoroughfare){
+               street = [place.thoroughfare copy];
+            }
+            if (subStreet){
+                subStreet = [place.subThoroughfare copy];
+            }
+            if (place.name){
+                name = [place.name copy];
+            }
+            NSLog(@"name=%@",name);
         }
-        if (weakSelf.getLocationCityDetailInfo){
-            //weakSelf.getLocationCityDetailInfo(locationCity, locationCity, <#NSString *area#>)
+        NSDictionary *locationDict = @{@"country":country,@"provice":proviceStr,@"city":locationCity,@"area":area,@"street":name,@"detailStreet":name};
+        BOOL suc = [locationDict writeToFile:kLocationAccountInfoPath atomically:YES];
+        if (suc){
+            NSLog(@"定位信息写入plist成功");
+        }else{
+            NSLog(@"定位信息写入plist失败");
+        }
+        if (weakSelf.getLocationInfoBlock){
+            weakSelf.getLocationInfoBlock();
         }
     }];
 

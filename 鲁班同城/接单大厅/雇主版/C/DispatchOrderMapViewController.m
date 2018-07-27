@@ -12,7 +12,8 @@
 #import <AMapSearchKit/AMapSearchKit.h>
 #import "GeocodeAnnotation.h"
 #import "POIAnnotation.h"
-
+//
+#import "GetLocationICitynfo.h"
 //
 #import "LaunchPiesViewController.h"
 #import "searchHeaderView.h"
@@ -20,6 +21,8 @@
 @interface DispatchOrderMapViewController ()<MAMapViewDelegate,AMapSearchDelegate>{
     //当前用户的真实定位位置
     CLLocation *location;
+    //定位具体位置
+    NSString *locationDetailStr;
     //搜索框
     searchHeaderView *searchView;
     //搜素搜返回信息
@@ -39,6 +42,8 @@
 @property(nonatomic,strong) CLLocationManager*locationManager;
 
 @property (nonatomic, strong) UIButton *gpsButton;
+
+@property (strong,nonatomic) GetLocationICitynfo *detailLocationInfo;
 
 @end
 
@@ -74,16 +79,21 @@
     self.dispatchOrderImage = [UIImage imageNamed:@"dispatchOnMap"];
     searchAPI = [[AMapSearchAPI alloc]init];
     searchAPI.delegate = self;
+    self.detailLocationInfo = [[GetLocationICitynfo alloc]init];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    location =  self.mapView.userLocation.location;
     //NSLog(@"定位位置：location.altitude%lf,location.coordinate%lf",location.coordinate.latitude,location.coordinate.longitude);
     if (self.annotations.count == 0){
+        WS(weakSelf);
+        location =  self.mapView.userLocation.location;
+        
         [self addAnnotations:location.coordinate];
         //[self.mapView showAnnotations:self.annotations animated:YES];
         [self.mapView setZoomLevel:zoomLevel];
+        //跟新用户定位信息
+        [self.detailLocationInfo getLocationInfoByUserLocaotion:location];
     }
 }
 //logic
@@ -310,8 +320,14 @@
     if (wasUserAction){
         //平移式自动生成标注显示
         [self addAnnotations:self.mapView.centerCoordinate];
+        //用户选择了位置信息跟新本地plist文件
+        CLLocation *centerLocation = [[CLLocation alloc]initWithLatitude:self.mapView.centerCoordinate.latitude longitude:self.mapView.centerCoordinate.longitude];
+        [[GetLocationICitynfo getLocationInfo] getLocationInfoByUserLocaotion:centerLocation];
+        
     }
 }
+
+
 
 -(void)mapView:(MAMapView *)mapView mapDidZoomByUser:(BOOL)wasUserAction{
 }
@@ -399,11 +415,7 @@
     }
 }
 //地图视角居中显示
-//-(void)centerMapViewSetting{
-//    if(self.mapView.userLocation.updating && self.mapView.userLocation.location) {
-//        [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
-//    }
-//}
+
 
 /*!
  @brief 拖动annotation view时view的状态变化，ios3.2以后支持

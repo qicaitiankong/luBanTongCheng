@@ -22,7 +22,8 @@
         self.contentView.backgroundColor = [UIColor whiteColor];
         //
         self.personLogoImaView = [[UIImageView alloc] init];
-        self.personLogoImaView.backgroundColor = [UIColor grayColor];
+        UIColor *defaultColor = IMAGEVIEW_DEFAULT_COLOR;
+        self.personLogoImaView.backgroundColor = defaultColor;
         self.personLogoImaView.layer.cornerRadius = SCREEN_HEIGHT * 0.104 / 2;
         self.personLogoImaView.clipsToBounds = YES;
         //
@@ -59,7 +60,7 @@
     .heightIs(SCREEN_HEIGHT * 0.104);
     
     self.timeLabel.sd_layout
-    .widthIs(60)
+    .widthIs(80)
     .rightSpaceToView(self.contentView, 18)
     .topSpaceToView(self.contentView, 20 + 5)
     .heightIs(10);
@@ -98,12 +99,17 @@
 - (void)setModel:(TakeOrderMainHallModel*)model{
     _model = model;
     if (_model){
-        [self.personLogoImaView setImage:model.image];
+        UIImage *image = [[UIImage alloc]init];
+        [self.personLogoImaView setImage:image];
+        if(model.logoUrlStr.length){
+            [self.personLogoImaView sd_setImageWithURL:[NSURL URLWithString:model.logoUrlStr]];
+        }
+        
         self.personNameLabel.text = [model.personNameStr copy];
         self.timeLabel.text = [model.timeStr copy];
         self.detailLabel.text = [model.detailStr copy];
-        self.praiseLabel.text = [model.praiseStr copy];
-        self.ticketsNumberLabel.text = [model.ticketsNumberStr copy];
+        self.praiseLabel.text = [NSString stringWithFormat:@"赏金：%@",model.praiseStr];
+        self.ticketsNumberLabel.text = [NSString stringWithFormat:@"抢单名额 %@ / 10",model.ticketsNumberStr];
         if (model.kindFlag == 1){
             [ticketButt setTitle:@"抢单" forState:UIControlStateNormal];
             ticketButt.backgroundColor = [UIColor colorWithHexString:@"#FF7E00"];

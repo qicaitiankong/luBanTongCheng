@@ -10,12 +10,31 @@
 
 @interface GetLocationICitynfo : NSObject
 
-@property (copy,nonatomic) void (^getLocationCityBlock)(NSString *name);
+@property (strong,nonatomic) NSString *countryStr;
 
-@property (copy,nonatomic) void (^getLocationCityDetailInfo)(NSString *provice,NSString *city,NSString *area);
+@property (strong,nonatomic) NSString *provinceStr;
 
+@property (strong,nonatomic) NSString *cityStr;
 
+@property (strong,nonatomic) NSString *areaStr;
+
+@property (strong,nonatomic) NSString *streetStr;
+
+@property (strong,nonatomic) NSString *detailStreetStr;
+
+@property (copy,nonatomic) void (^getLocationInfoBlock)(void);
+
+//定位用户位置
 -(void)startLocation;
+
+//获取定位信息
++ (GetLocationICitynfo*)getLocationInfo;
+
+
+//通过CLLocation跟新用户选择的地点具体信息
+- (void)getLocationInfoByUserLocaotion:(CLLocation*)location;
+
+
 
 
 @end
