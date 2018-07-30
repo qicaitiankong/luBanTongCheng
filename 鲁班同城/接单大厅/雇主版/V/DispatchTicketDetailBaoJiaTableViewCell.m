@@ -158,10 +158,10 @@
     _model = model;
     if (model){
         
-        [self.userImageView setImage:model.userImage];
+        [self.userImageView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrlStr]];
         self.nickNameLabel.text = [model.nickNameStr copy];
-        self.baoJiaLabel.text = [model.baoJiaNameStr copy];
-        self.beizhuLabel.text = [model.beiZhuNameStr copy];
+        self.baoJiaLabel.text = [NSString stringWithFormat:@"报价：%@元",model.baoJiaNameStr];
+        self.beizhuLabel.text = [NSString stringWithFormat:@"备注：%@",model.beiZhuNameStr];
         [self.xinxinView setYellowStar:[model.xinxinStr floatValue]];
         //
         self.bottomGroupView.sd_layout
@@ -175,7 +175,7 @@
             bottomView = self.bottomGroupView;
             self.bottomGroupView.hidden = NO;
             //
-            [self.bottomGroupView.userImageView setImage:model.userImage];
+            [self.bottomGroupView.userImageView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrlStr]];
             self.bottomGroupView.nickNameLabel.text = [model.nickNameStr copy];
             [self.bottomGroupView.xinxinView setYellowStar:[model.xinxinStr floatValue]];
             self.bottomGroupView.messageTipLabel.text = @"已通知师傅接单，请保持电话通畅。";

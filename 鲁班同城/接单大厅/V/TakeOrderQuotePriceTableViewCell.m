@@ -10,16 +10,18 @@
 
 @interface TakeOrderQuotePriceTableViewCell (){
     CGFloat leftSpace;
+    BOOL isBaoJiaXiangQing;
 }
 @end
 
 
 @implementation TakeOrderQuotePriceTableViewCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier kindFlag:(BOOL)isBaoJiaDetail{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self){
         leftSpace = 15;
+        isBaoJiaXiangQing = isBaoJiaDetail;
         self.contentView.backgroundColor = [UIColor whiteColor];
         //
         self.personLogoImaView = [[UIImageView alloc] init];
@@ -44,10 +46,10 @@
         NSArray *viewArr = @[self.personLogoImaView,self.timeLabel,self.personNameLabel,self.detailLabel,self.ticketsNumberLabel,self.praiseLabel,self.picContainView];
         [self.contentView sd_addSubviews:viewArr];
         //
-        self.bottomGroupView = [[QuotePriceOnWebGroupView alloc]initWithFrame:CGRectMake(leftSpace, 0, SCREEN_WIDTH - 2 * leftSpace, 10)];
-        [self.contentView addSubview:self.bottomGroupView];
-        //
-        
+        if (isBaoJiaDetail){
+            self.bottomGroupView = [[QuotePriceOnWebGroupView alloc]initWithFrame:CGRectMake(leftSpace, 0, SCREEN_WIDTH - 2 * leftSpace, 10)];
+            [self.contentView addSubview:self.bottomGroupView];
+        }
         [self addOwnConstraints];
     }
     return self;
@@ -94,11 +96,14 @@
     .leftEqualToView(self.personLogoImaView)
     .topSpaceToView(self.praiseLabel, 15);
     //
-    self.bottomGroupView.sd_layout
-    .leftEqualToView(self.personLogoImaView)
-    .topSpaceToView(self.picContainView, 10)
-    .rightSpaceToView(self.contentView, 20)
-    .heightIs(self.bottomGroupView.height);
+    if (isBaoJiaXiangQing){
+        self.bottomGroupView.sd_layout
+        .leftEqualToView(self.personLogoImaView)
+        .topSpaceToView(self.picContainView, 10)
+        .rightSpaceToView(self.contentView, 20)
+        .heightIs(self.bottomGroupView.height);
+    }
+    
 }
 
 - (void)setModel:(TakeOrderQuotePriceModel*)model{
@@ -108,8 +113,8 @@
         self.personNameLabel.text = [model.personNameStr copy];
         self.timeLabel.text = [model.timeStr copy];
         self.detailLabel.text = [model.detailStr copy];
-        self.praiseLabel.text = [model.praiseStr copy];
-        self.ticketsNumberLabel.text = [model.ticketsNumberStr copy];
+        self.praiseLabel.text = [NSString stringWithFormat:@"赏金： %@",model.praiseStr];
+        self.ticketsNumberLabel.text = [NSString stringWithFormat:@"抢单名额 %@",model.ticketsNumberStr];
         [self.picContainView setPicPathStringsArray:model.imageUrls];
         //
         self.ticketsNumberLabel.sd_resetLayout
@@ -127,13 +132,21 @@
         self.picContainView.sd_layout
         .topSpaceToView(self.praiseLabel, 15);
         //
-        self.bottomGroupView.sd_layout
-        .leftEqualToView(self.personLogoImaView)
-        .topSpaceToView(self.picContainView, 10)
-        .rightSpaceToView(self.contentView, leftSpace)
-        .heightIs(self.bottomGroupView.height);
+        UIView *botView = nil;
         //
-        [self setupAutoHeightWithBottomView:self.bottomGroupView bottomMargin:15];
+        if (isBaoJiaXiangQing){
+            self.bottomGroupView.sd_layout
+            .leftEqualToView(self.personLogoImaView)
+            .topSpaceToView(self.picContainView, 10)
+            .rightSpaceToView(self.contentView, leftSpace)
+            .heightIs(self.bottomGroupView.height);
+            botView = self.bottomGroupView;
+        }else{
+            botView = self.bottomGroupView;
+        }
+        
+        //
+        [self setupAutoHeightWithBottomView:botView bottomMargin:15];
         
     }
 }

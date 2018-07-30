@@ -11,6 +11,7 @@
 
 @interface OrderTakingQuotePriceViewController : BaseDisplayNaviViewController
 
-
+//yes：报价详情， no:报价页面
+@property (assign,nonatomic) BOOL isBapJiaDetail;
 
 @end

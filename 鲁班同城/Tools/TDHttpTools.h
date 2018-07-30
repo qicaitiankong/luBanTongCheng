@@ -38,6 +38,9 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 
 
 +(void)loginWXWithText:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+//
+//获取用户信息
++(void)getUserInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 //派单
 +(void)launchOder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
@@ -55,7 +58,10 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 //派单大厅列表
 +(void)getLauchOrderList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
+//雇主派单详情
++(void)getEmployerLauchPieDetail:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
-
+//零工接单详情
++(void)getCasualTakeOrderDetail:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 @end

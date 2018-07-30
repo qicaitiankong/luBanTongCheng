@@ -58,21 +58,39 @@
 }
 
 - (void)getData{
-    self.singleModel = [[TakeOrderQuotePriceDetailModel alloc] init];
-    self.singleModel.image = [UIImage imageNamed:@"test07.jpg"];
-    self.singleModel.timeStr = @"2018-6-6";
-    self.singleModel.personNameStr = @"发起人名称";
-    self.singleModel.detailStr = @"详细要求：工作要求详细要求：工作要求详细要求工作要求详细要求工作要求详细要求工作要求详细要求。";
-    self.singleModel.praiseStr = @"成交价格：99+";
-    self.singleModel.ticketsNumberStr = @"抢单名额 3/10";
     //
-    for (int i = 0; i < 12; i ++){
-        DispatchTicketDetailBaoJiaModel *model = [DispatchTicketDetailBaoJiaModel setModelFromDict:nil];
-        model.modelIndex = i;
-        [self.modelArr addObject:model];
+    if (self.orderIdStr.length){
+        NSDictionary *paraDict = @{@"orderId":self.orderIdStr};
+        [TDHttpTools getEmployerLauchPieDetail:paraDict success:^(id response) {
+            NSDictionary *dict = response;
+            NSLog(@"派单详情雇主版 dict=%@",dict);
+            NSDictionary *dataDict = dict[@"data"];
+            self.singleModel = [[TakeOrderQuotePriceDetailModel alloc] init];
+            self.singleModel.personNameStr = @"我发起的订单";
+            self.singleModel.logoUrlStr = [dataDict[@"headImg"] copy];
+            self.singleModel.timeStr = [dataDict[@"createTime"] copy];;
+            self.singleModel.praiseStr = [dataDict[@"budget"] copy];
+            self.singleModel.detailStr = [dataDict[@"remark"] copy];
+            NSInteger receviceNum =  [dataDict[@"receiveNum"] integerValue];
+            self.singleModel.ticketsNumberStr =[NSString stringWithFormat:@"%ld",receviceNum];
+            //
+            NSArray *bottomDataArr = dataDict[@"receiveList"];
+            if (bottomDataArr.count){
+                for (int i = 0; i < bottomDataArr.count; i ++){
+                    NSDictionary *botDict  =  bottomDataArr[i];
+                    DispatchTicketDetailBaoJiaModel *model = [DispatchTicketDetailBaoJiaModel setModelFromDict:botDict];
+                    model.modelIndex = i;
+                    [self.modelArr addObject:model];
+                }
+            }
+             [self.tableView reloadData];
+        } failure:^(NSError *error) {
+            
+        }];
+        
     }
-    //
-    [self.tableView reloadData];
+   
+    
 }
 
 - (void)payHandler{
@@ -172,6 +190,7 @@
     }
     return rows;
 }
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *parentCell = nil;

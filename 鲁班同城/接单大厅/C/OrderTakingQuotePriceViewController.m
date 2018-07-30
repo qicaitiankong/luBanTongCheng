@@ -50,6 +50,7 @@
 }
 
 - (void)getData{
+    
     self.singleModel = [[TakeOrderQuotePriceModel alloc] init];
     self.singleModel.image = [UIImage imageNamed:@"test07.jpg"];
     self.singleModel.timeStr = @"2018-6-6";
@@ -58,7 +59,7 @@
     self.singleModel.praiseStr = @"成交价格：99+";
     self.singleModel.ticketsNumberStr = @"抢单名额 3/10";
     self.singleModel.imageUrls = [[NSMutableArray alloc]init];
-    for(int k = 0; k < 6; k ++){
+    for(int k = 0; k < 3; k ++){
         [self.singleModel.imageUrls addObject:@"https://image.baidu.com/search/detail?"];
     }
     //
@@ -107,7 +108,7 @@
             static NSString *cellFlag = @"cellFlag";
             TakeOrderQuotePriceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
             if (nil == cell){
-                cell = [[TakeOrderQuotePriceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+                cell = [[TakeOrderQuotePriceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag kindFlag:self.isBapJiaDetail];
             }
         
             cell.model = self.singleModel;

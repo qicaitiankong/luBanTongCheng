@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OwnTextView.h"
 
 @interface QuotePriceOnWebGroupView : UIView
 

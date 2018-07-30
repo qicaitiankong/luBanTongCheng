@@ -13,6 +13,7 @@
     BOOL needRightMapButt;
 }
 
+
 @end
 
 @implementation LaunchPiesTicketInputNameView
@@ -33,26 +34,33 @@
         self.nameLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:0];
         [self addSubview:self.nameLabel];
         
-        self.rightTextField = [[OwnTextField alloc] initWithFrame:CGRectMake(0, 0, 40, frame.size.height)];
-        self.rightTextField.myTextField.backgroundColor = [UIColor whiteColor];
-        self.rightTextField.myTextField.font = [UIFont getPingFangSCMedium:14];
-        [self addSubview:self.rightTextField];
-         self.rightTextField.myTextField.backgroundColor = [UIColor whiteColor];
-        //
-        bottomLineView = [[UIView alloc] init];
-        bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#C6C6C6"];
-        [self addSubview:bottomLineView];
+       
         //
         if (needMapButt){
-           self.rightTextField.myTextField. adjustsFontSizeToFitWidth = YES;
             mapChooseButtView = [[CustomerImageButt alloc]initWithFrame:CGRectMake(frame.size.width - 15 - 90, 0, 90, 25)];
             mapChooseButtView.center = CGPointMake(mapChooseButtView.centerX, frame.size.height / 2);
             [mapChooseButtView.imageView setImage:[UIImage imageNamed:@"mapChoose"]];
             [self addSubview:mapChooseButtView];
             mapChooseButtView.hidden = NO;
+            //
+            self.rightTextView = [[OwnTextView alloc] initWithFrame:CGRectMake(0, 0,frame.size.width - 10, frame.size.height)];
+            self.rightTextView.writeTextView.backgroundColor = [UIColor whiteColor];
+            self.rightTextView.writeTextView.font = [UIFont getPingFangSCMedium:14];
+            [self addSubview:self.rightTextView];
+        self.rightTextView.writeTextView.backgroundColor = [UIColor whiteColor];
         }else{
             mapChooseButtView.hidden = YES;
+            self.rightTextField = [[OwnTextField alloc] initWithFrame:CGRectMake(0, 0, 40, frame.size.height)];
+            self.rightTextField.myTextField.backgroundColor = [UIColor whiteColor];
+            self.rightTextField.myTextField.font = [UIFont getPingFangSCMedium:14];
+            [self addSubview:self.rightTextField];
+            self.rightTextField.myTextField.backgroundColor = [UIColor whiteColor];
         }
+        //
+        bottomLineView = [[UIView alloc] init];
+        bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#C6C6C6"];
+        [self addSubview:bottomLineView];
+        //
     }
     return self;
 }
@@ -80,13 +88,12 @@
     .topEqualToView(self.leftImageView);
     
     if(needRightMapButt){
-        self.rightTextField.sd_layout
+        self.rightTextView.sd_resetLayout
         .leftSpaceToView(self.nameLabel, 10)
         .rightSpaceToView(mapChooseButtView, 10)
         .centerYEqualToView(self)
         .heightRatioToView(self, 0.6);
-        [self.rightTextField addOwnConstraints];
-       
+        [self.rightTextView adjustOwnSubViewFrame];
         //
         bottomLineView.sd_layout
         .leftEqualToView(self.nameLabel)

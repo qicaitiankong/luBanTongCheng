@@ -381,6 +381,10 @@
 		187434BB20F333FD0008A24F /* CustomeLabelButt.m in Sources */ = {isa = PBXBuildFile; fileRef = 187434BA20F333FD0008A24F /* CustomeLabelButt.m */; };
 		187434C120F356AA0008A24F /* CompanyRecuritDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187434C020F356AA0008A24F /* CompanyRecuritDetailViewController.m */; };
 		187434C420F358850008A24F /* NavTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 187434C320F358850008A24F /* NavTools.m */; };
+		187892DB210EA1C5002A5798 /* KeyboardToolsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892DA210EA1C5002A5798 /* KeyboardToolsView.m */; };
+		187892DE210EE1D9002A5798 /* TelephoneNumberTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892DD210EE1D9002A5798 /* TelephoneNumberTools.m */; };
+		187892E1210EFB72002A5798 /* NSString+OwnDealNullStr.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892E0210EFB72002A5798 /* NSString+OwnDealNullStr.m */; };
+		187892E4210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892E3210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m */; };
 		1888139420EC4F0700F832BE /* MyInfoTableFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139320EC4F0700F832BE /* MyInfoTableFootView.m */; };
 		1888139720EC50FE00F832BE /* CustomeStyleCornerButt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139620EC50FE00F832BE /* CustomeStyleCornerButt.m */; };
 		1888139A20EC62AA00F832BE /* WxQQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139920EC62AA00F832BE /* WxQQLoginViewController.m */; };
@@ -996,6 +1000,14 @@
 		187434C020F356AA0008A24F /* CompanyRecuritDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyRecuritDetailViewController.m; sourceTree = "<group>"; };
 		187434C220F358850008A24F /* NavTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavTools.h; sourceTree = "<group>"; };
 		187434C320F358850008A24F /* NavTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavTools.m; sourceTree = "<group>"; };
+		187892D9210EA1C5002A5798 /* KeyboardToolsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardToolsView.h; sourceTree = "<group>"; };
+		187892DA210EA1C5002A5798 /* KeyboardToolsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardToolsView.m; sourceTree = "<group>"; };
+		187892DC210EE1D9002A5798 /* TelephoneNumberTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TelephoneNumberTools.h; sourceTree = "<group>"; };
+		187892DD210EE1D9002A5798 /* TelephoneNumberTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TelephoneNumberTools.m; sourceTree = "<group>"; };
+		187892DF210EFB72002A5798 /* NSString+OwnDealNullStr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+OwnDealNullStr.h"; sourceTree = "<group>"; };
+		187892E0210EFB72002A5798 /* NSString+OwnDealNullStr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+OwnDealNullStr.m"; sourceTree = "<group>"; };
+		187892E2210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+OwnDealServerNumber.h"; sourceTree = "<group>"; };
+		187892E3210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+OwnDealServerNumber.m"; sourceTree = "<group>"; };
 		1888139220EC4F0700F832BE /* MyInfoTableFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyInfoTableFootView.h; sourceTree = "<group>"; };
 		1888139320EC4F0700F832BE /* MyInfoTableFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInfoTableFootView.m; sourceTree = "<group>"; };
 		1888139520EC50FE00F832BE /* CustomeStyleCornerButt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomeStyleCornerButt.h; sourceTree = "<group>"; };
@@ -1296,6 +1308,10 @@
 				1851144320FDD01800872AC5 /* BaseImageView.m */,
 				1824399C210847900088042C /* GetLocationICitynfo.h */,
 				1824399D210847900088042C /* GetLocationICitynfo.m */,
+				187892D9210EA1C5002A5798 /* KeyboardToolsView.h */,
+				187892DA210EA1C5002A5798 /* KeyboardToolsView.m */,
+				187892DC210EE1D9002A5798 /* TelephoneNumberTools.h */,
+				187892DD210EE1D9002A5798 /* TelephoneNumberTools.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1380,6 +1396,10 @@
 				1832B9A520F5C45700D6CE4F /* UILabel+ChangeCustomeLineSpace.m */,
 				182030DD21006CEC0098BFCC /* UIViewController+XuanFuButtDIsplayAndHidden.h */,
 				182030DE21006CEC0098BFCC /* UIViewController+XuanFuButtDIsplayAndHidden.m */,
+				187892DF210EFB72002A5798 /* NSString+OwnDealNullStr.h */,
+				187892E0210EFB72002A5798 /* NSString+OwnDealNullStr.m */,
+				187892E2210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.h */,
+				187892E3210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2913,8 +2933,10 @@
 				181FCBEC20F707740044B055 /* TakeOrderQuotePriceQiangBiaoTableViewCell.m in Sources */,
 				1822849D20FF0FE50059FB94 /* LaunchPiesTicketInputNameView.m in Sources */,
 				188813AF20EC939900F832BE /* BasePersonalInfoViewController.m in Sources */,
+				187892E1210EFB72002A5798 /* NSString+OwnDealNullStr.m in Sources */,
 				18E2DF0B20E8BB9D00FDF9C1 /* JHCollectionViewCell.m in Sources */,
 				1853689E20E9BA160053A5D4 /* UISearchBar+CustomeStyle.m in Sources */,
+				187892DE210EE1D9002A5798 /* TelephoneNumberTools.m in Sources */,
 				185ABF1320F82CC700188520 /* SettingTableViewCell.m in Sources */,
 				185368FE20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m in Sources */,
 				1443C61C20E384490009E82F /* LoginOtherTipView.m in Sources */,
@@ -2992,7 +3014,9 @@
 				1443C5A120E3327B0009E82F /* MyInfoViewController.m in Sources */,
 				185368EC20E9CB540053A5D4 /* NSTimer+Block.m in Sources */,
 				1888139720EC50FE00F832BE /* CustomeStyleCornerButt.m in Sources */,
+				187892DB210EA1C5002A5798 /* KeyboardToolsView.m in Sources */,
 				1851143E20FD7B5300872AC5 /* DispatchOrderDetailCellSureServiceCompleteGroupView.m in Sources */,
+				187892E4210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m in Sources */,
 				1851145120FDD62700872AC5 /* RankTableViewCell.m in Sources */,
 				1824F74720EEF66100E99823 /* ChooseTechnologyLeftTableViewCell.m in Sources */,
 				186EBE1720EDA04200D0F54E /* RdvtarbarBigView.m in Sources */,

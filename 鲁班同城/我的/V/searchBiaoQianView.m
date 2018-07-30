@@ -22,8 +22,14 @@
             CGFloat centerHorizotalSpace = (frame.size.width - 3 * viewWidth - 2 * leftBeginSpace) / 3;
             CGFloat centerVerticalSpace = 10;
         UIView *lastView = nil;
+        WS(weakSelf);
             for (int i = 0; i < 6; i ++){
                 SearchBiaoQianSmallView *biaoQianView = [[SearchBiaoQianSmallView alloc]initWithFrame:CGRectMake(leftBeginSpace + (i % 3) *(viewWidth + centerHorizotalSpace), topBeginSpace + (i / 3) * (viewHeight + centerVerticalSpace) , viewWidth, viewHeight)];
+                biaoQianView.backButtBlock = ^(NSString *title) {
+                    if (weakSelf.flagViewBlock){
+                        weakSelf.flagViewBlock(title);
+                    }
+                };
                 biaoQianView.rightDisplayLabel.text = @"关键词";
                 [self addSubview:biaoQianView];
                 lastView = biaoQianView;

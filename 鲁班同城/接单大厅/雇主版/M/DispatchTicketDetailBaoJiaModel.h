@@ -10,7 +10,7 @@
 
 @interface DispatchTicketDetailBaoJiaModel : NSObject
 
-@property (strong,nonatomic) UIImage *userImage;
+@property (strong,nonatomic) NSString *pictureUrlStr;
 
 @property (strong,nonatomic) NSString *nickNameStr;
 
@@ -19,6 +19,9 @@
 @property (strong,nonatomic) NSString *baoJiaNameStr;
 
 @property (strong,nonatomic) NSString *beiZhuNameStr;
+
+@property (strong,nonatomic) NSString *mobileStr;
+
 
 @property (assign,nonatomic) BOOL shouldDisplayBottomView;
 

@@ -14,6 +14,9 @@
 //0:零工， 1：雇主
 @property (assign,nonatomic) NSInteger identityFlag;
 
+@property (assign,nonatomic) NSNumber *userID;
+
+
 @property(nonatomic,strong)NSString *PhotoUrl;
 
 @property(nonatomic,strong)NSString *nickName;
@@ -22,6 +25,13 @@
 
 @property (strong,nonnull)  NSString *ageStr;
 
+@property(nonatomic,strong)NSString *mobile;
+
+@property(nonatomic,strong)NSString *sexStr;
+
+@property (assign,nonatomic) NSInteger fansCount;
+
+@property (assign,nonatomic) NSInteger fousCount;
 
 + (lzhGetAccountInfo *)getAccount;
 

@@ -32,6 +32,11 @@
 
 @property (strong,nonatomic) UITableView *tableView;
 
+@property (strong,nonatomic) NSString *addressStr;
+
+@property (strong,nonatomic) NSString *telephoneStr;
+
+@property (strong,nonatomic) NSString *beiZhuStr;
 
 @end
 
@@ -57,17 +62,54 @@
 }
 
 - (void)initOwnObjects{
+    self.telephoneStr = @"";
+    self.addressStr = @"";
+    self.beiZhuStr = @"";
 }
 
+- (void)dealTelephone{
+    if ([TelephoneNumberTools isMobile:telephoneSectionView.ownRightLabel.text]){
+        if (telephoneSectionView.ownRightLabel.text.length){
+            NSMutableString * string = [[NSMutableString alloc] initWithFormat:@"tel:%@",telephoneSectionView.ownRightLabel.text];
+            UIWebView * callWebview = [[UIWebView alloc] init];
+            [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:string]]];
+            [self.view addSubview:callWebview];
+        }
+    }else{
+        [SVProgressHUD showWithStatus:@"手机格式有问题"];
+    }
+}
+
+
 - (void)getData{
-    self.singleModel = [[TakeOrderQuotePriceDetailModel alloc] init];
-    self.singleModel.image = [UIImage imageNamed:@"test07.jpg"];
-    self.singleModel.timeStr = @"2018-6-6";
-    self.singleModel.personNameStr = @"发起人名称";
-    self.singleModel.detailStr = @"详细要求：工作要求详细要求：工作要求详细要求工作要求详细要求工作要求详细要求工作要求详细要求。";
-    self.singleModel.praiseStr = @"成交价格：99+";
-    self.singleModel.ticketsNumberStr = @"抢单名额 3/10";
-    [self.tableView reloadData];
+    if (self.orderIdStr.length){
+        NSDictionary *paraDict = @{@"orderId":self.orderIdStr,@"userId":[NSNumber numberWithInteger:3]};
+        
+        [TDHttpTools getCasualTakeOrderDetail:paraDict success:^(id response) {
+            NSDictionary *dict = response;
+            NSLog(@"接单详情零工版 dict=%@",dict);
+            NSDictionary *dataDict = dict[@"data"];
+            self.singleModel = [[TakeOrderQuotePriceDetailModel alloc] init];
+            NSString *headImageStr = dataDict[@"headImg"];
+            if ([headImageStr isKindOfClass:[NSNull class]]){
+                self.singleModel.logoUrlStr = @"";
+            }else{
+                self.singleModel.logoUrlStr = [dataDict[@"headImg"] copy];
+            }
+            self.singleModel.timeStr = [dataDict[@"createTime"] copy];;
+            self.singleModel.praiseStr = [dataDict[@"budget"] copy];
+            self.singleModel.personNameStr = [dataDict[@"userName"] copy];
+            self.singleModel.detailStr = [dataDict[@"remark"] copy];
+            NSInteger receviceNum =  [dataDict[@"receiveNum"] integerValue];
+            self.singleModel.ticketsNumberStr =[NSString stringWithFormat:@"%ld",receviceNum];
+            self.addressStr = [dataDict[@"address"] copy];
+            self.telephoneStr = [dataDict[@"mobile"] copy];
+            self.beiZhuStr = [dataDict[@"remark"] copy];
+            [self.tableView reloadData];
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 - (void)takeOrderClick{
@@ -80,9 +122,10 @@
 - (void)addTableView:(CGRect)size style:(UITableViewStyle)styles{
     UIImage *backImage = [UIImage imageNamed:@"quotePriceDetailBack"];
     CGFloat imageDisplayHeight = self.view.width / (backImage.size.width / backImage.size.height);
+    WS(weakSelf);
     //
     sectionView = [[TakeOrderQuotePriceDetaiSectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, imageDisplayHeight + 30) backImageHeight:imageDisplayHeight image:backImage];
-    sectionView.topDisplayLabel.text = @"恭喜被雇主选中";
+    sectionView.topDisplayLabel.text = @"";
     sectionView.botDisplayLabel.text = @"雇主联系方式";
     //
     tipSectionLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor whiteColor] aligement:1];
@@ -92,6 +135,9 @@
     //
     telephoneSectionView = [[OrderTakingQuotePriceDetailTelephoneView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 50) isNeedRightButt:YES];
     telephoneSectionView.ownLeftLabel.text =@"电话：";
+    telephoneSectionView.clickTelephoneBlock = ^{
+        [weakSelf dealTelephone];
+    };
     [telephoneSectionView.telephoneButt setImage:[UIImage imageNamed:@"telephone"] forState:UIControlStateNormal];
     //
     addressSectionView = [[OrderTakingQuotePriceDetailTelephoneView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 50) isNeedRightButt:YES];
@@ -197,15 +243,15 @@
             view = sectionView;
             break;
         case 2:
-            telephoneSectionView.ownRightLabel.text = @"13956789236";
+            telephoneSectionView.ownRightLabel.text = self.telephoneStr;
             view = telephoneSectionView;
             break;
         case 3:
-            addressSectionView.ownRightLabel.text = @"青岛市-李沧区\n某某路12号12单元12户";
+            addressSectionView.ownRightLabel.text = self.addressStr;
             view = addressSectionView;
             break;
         case 4:
-            beiZhuSectionView.ownRightLabel.text = @"注意事项需要准备什么注意事项需要准备，什么注意事项需要准备什么。";
+            beiZhuSectionView.ownRightLabel.text = self.beiZhuStr;
             view = beiZhuSectionView;
             break;
         case 5:

@@ -23,7 +23,7 @@
         self.contentView.backgroundColor = [UIColor whiteColor];
         //
         self.personLogoImaView = [[UIImageView alloc] init];
-        self.personLogoImaView.backgroundColor = [UIColor grayColor];
+        self.personLogoImaView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
         self.personLogoImaView.layer.cornerRadius = SCREEN_HEIGHT * 0.104 / 2;
         self.personLogoImaView.clipsToBounds = YES;
         //
@@ -54,7 +54,7 @@
     .heightIs(SCREEN_HEIGHT * 0.104);
     
     self.timeLabel.sd_layout
-    .widthIs(60)
+    .widthIs(80)
     .rightSpaceToView(self.contentView, leftSpace)
     .topSpaceToView(self.contentView, 20 + 5)
     .heightIs(10);
@@ -82,17 +82,21 @@
     .rightSpaceToView(self.ticketsNumberLabel, 10)
     .topEqualToView(self.ticketsNumberLabel)
     .heightIs(15);
+    
 }
 
 - (void)setModel:(TakeOrderQuotePriceDetailModel*)model{
     _model = model;
     if (_model){
-        [self.personLogoImaView setImage:model.image];
+        if (model.logoUrlStr.length){
+            [self.personLogoImaView sd_setImageWithURL:[NSURL URLWithString:model.logoUrlStr]];
+        }
         self.personNameLabel.text = [model.personNameStr copy];
         self.timeLabel.text = [model.timeStr copy];
         self.detailLabel.text = [model.detailStr copy];
-        self.praiseLabel.text = [model.praiseStr copy];
-        self.ticketsNumberLabel.text = [model.ticketsNumberStr copy];
+        self.praiseLabel.text = [NSString stringWithFormat:@"赏金：%@元",model.praiseStr];
+        self.ticketsNumberLabel.text = [NSString stringWithFormat:@"抢单名额:%@",model.ticketsNumberStr];
+        
         self.ticketsNumberLabel.sd_resetLayout
         .rightEqualToView(self.detailLabel)
         .widthIs(90)

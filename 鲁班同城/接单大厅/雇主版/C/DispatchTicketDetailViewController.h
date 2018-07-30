@@ -10,4 +10,6 @@
 
 @interface DispatchTicketDetailViewController : UIViewController
 
+@property (strong,nonatomic) NSString *orderIdStr;
+
 @end

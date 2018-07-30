@@ -196,7 +196,7 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
     addressView.nameLabel.text = @"地址";
     addressView.rightTextField.myTextField.tag = viewTag.tag3;
     addressView.rightTextField.myTextField.placeholder = @"请输入地址";
-    addressView.rightTextField.myTextField.text = [NSString stringWithFormat:@"%@%@%@%@",self.locationInfo.provinceStr,self.locationInfo.cityStr,self.locationInfo.areaStr,self.locationInfo.detailStreetStr];
+    addressView.rightTextView.writeTextView.text = [NSString stringWithFormat:@"%@%@%@%@",self.locationInfo.provinceStr,self.locationInfo.cityStr,self.locationInfo.areaStr,self.locationInfo.detailStreetStr];
     //返回地图选择
     addressView.mapChooseButtView.clickButtBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];

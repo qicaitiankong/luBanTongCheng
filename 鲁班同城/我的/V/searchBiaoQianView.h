@@ -11,4 +11,6 @@
 
 @interface searchBiaoQianView : UIView
 
+@property (copy,nonatomic) void (^flagViewBlock)(NSString *flagStr);
+
 @end

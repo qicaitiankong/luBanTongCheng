@@ -25,8 +25,24 @@ static CGFloat const placeHolderFont = 15.0;
 
 @implementation SSSearchBar
 
+
+- (void)createToolsView{
+    if (self.toolsView == nil){
+        self.toolsView = [[KeyboardToolsView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50) title:@"取消"];
+        WS(weakSelf);
+        self.toolsView.exixtButt.clickButtBlock = ^{
+            
+            [weakSelf.textField resignFirstResponder];
+        };
+    }
+   
+}
+
+
 - (void)layoutSubviews {
     [super layoutSubviews];
+    //
+    [self createToolsView];
     // 设置背景图片
     UIImage *backImage = [UIImage imageWithColor:[UIColor whiteColor]];
     [self setBackgroundImage:backImage];
@@ -34,7 +50,6 @@ static CGFloat const placeHolderFont = 15.0;
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *field = (UITextField *)view;
             self.textField = field;
-            
             // 重设field的frame
             field.frame = CGRectMake(15.0, 0, self.frame.size.width-30.0, self.frame.size.height);
             [field setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F5"]];
@@ -44,6 +59,7 @@ static CGFloat const placeHolderFont = 15.0;
             field.layer.cornerRadius = 3.0f;
             //field.clipsToBounds = YES;
              field.layer.masksToBounds = YES;
+            field.inputAccessoryView = self.toolsView;
             // 设置占位文字字体颜色
             [field setValue:[UIColor colorWithHexString:@"#7D7D7D"] forKeyPath:@"_placeholderLabel.textColor"];
             [field setValue:[UIFont getPingFangSCMedium:15] forKeyPath:@"_placeholderLabel.font"];

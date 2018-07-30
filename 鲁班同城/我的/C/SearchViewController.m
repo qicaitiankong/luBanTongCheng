@@ -21,12 +21,19 @@
     searchHeaderView *searchHeadView;
     searchBiaoQianView *searchFlagView;
     UIView *biaoQianView;
+    //
+    __block BOOL isRefresh;//刷新标记
+    __block BOOL isLoad;//加载标记
 }
 
 
 @property (strong,nonatomic) UITableView *tableView;
 
 @property (strong,nonatomic) NSMutableArray *modelArr;
+
+@property (assign,nonatomic) int page;
+
+@property (strong,nonatomic) NSString *searchStr;
 
 @end
 
@@ -50,19 +57,133 @@
     [self initOwnObjects];
     //
     [self addTableView:CGRectMake(0, STATUSBAR_HEIGHT, SCREEN_WIDTH, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT + NAVIGATION_HEIGHT) style:UITableViewStylePlain];
-    [self getData];
+    //
+    WS(weakSelf);
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        __strong typeof(weakSelf) sself = weakSelf;
+        sself -> isRefresh = YES;
+        //
+        if([ShareNetWorkState getNetState] == NO){
+            [SVProgressHUD showErrorWithStatus:@"刷新失败，请检查网络"];
+            [weakSelf stopRefreshOrLoad];
+        }else{
+            weakSelf.page = 1;
+            [weakSelf getData:self.page searchStr:self.searchStr];
+        }
+    }];
+    //
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        __strong typeof(weakSelf) sself = weakSelf;
+        //
+        if([ShareNetWorkState getNetState] == NO){
+            sself -> isLoad = YES;
+            [SVProgressHUD showErrorWithStatus:@"加载失败，请检查网络"];
+            [weakSelf stopRefreshOrLoad];
+        }else{
+            if (sself -> isLoad == NO){//上次加载结束后本次加载才有效
+                weakSelf.page ++;
+                sself -> isLoad = YES;
+                [weakSelf getData:self.page searchStr:self.searchStr];
+            }
+           
+        }
+    }];
 }
 
 - (void)initOwnObjects{
     self.modelArr = [[NSMutableArray alloc]init];
+    self.page = 1;
+    self.searchStr = @"";
 }
 
-- (void)getData{
-    for (int i = 0; i < 20; i ++){
-        TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:nil];
-        [self.modelArr addObject:model];
+//停止刷新加载
+- (void)stopRefreshOrLoad{
+    if (isRefresh){
+        [self.tableView.mj_header endRefreshing];
+        isRefresh = NO;
     }
-    [self.tableView reloadData];
+    if (isLoad){
+        [self.tableView.mj_footer endRefreshing];
+        isLoad = NO;
+    }
+}
+
+
+- (void)getData:(int)page searchStr:(NSString*)keyStr{
+    WS(weakSelf);
+    if ([lzhGetAccountInfo getAccount].identityFlag == 0){//零工
+        NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:3],@"page":[NSNumber numberWithInt:page],@"size":[NSNumber numberWithInt:10],@"key":keyStr};
+        [TDHttpTools getReceiveOrderList:paraDict success:^(id response) {
+            NSDictionary *dict = response;
+            if ([dict allKeys].count){
+                NSLog(@"%@",dict);
+                NSDictionary *dataDict = dict[@"data"];
+                NSArray *dataArr = dataDict[@"list"];
+                if (dataArr.count){
+                    __strong typeof(weakSelf) sself  = weakSelf;
+                    if(sself -> isLoad == NO){
+                        [self.modelArr removeAllObjects];
+                    }
+                    for (NSDictionary *singleDict in dataArr){
+                        TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:singleDict];
+                        [self.modelArr addObject:model];
+                    }
+                    [self.tableView reloadData];
+                }else{
+                    if (self->isLoad && self.page > 1){
+                        self.page --;
+                    }
+                }
+            }else{
+                if (self->isLoad && self.page > 1){
+                    self.page --;
+                }
+            }
+            [self stopRefreshOrLoad];
+        } failure:^(NSError *error) {
+            if (self->isLoad && self.page > 1){
+                self.page --;
+            }
+            [self stopRefreshOrLoad];
+            
+        }];
+        
+    }else{//雇主
+        NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:1],@"page":[NSNumber numberWithInt:page],@"size":[NSNumber numberWithInt:10],@"key":keyStr};
+        [TDHttpTools getLauchOrderList:paraDict success:^(id response) {
+            NSDictionary *dict = response;
+            if ([dict allKeys].count){
+                NSLog(@"%@",dict);
+                NSDictionary *dataDict = dict[@"data"];
+                NSArray *dataArr = dataDict[@"list"];
+                if (dataArr.count){
+                    if (NO == self -> isLoad){
+                        [self.modelArr removeAllObjects];
+                    }
+                    for (NSDictionary *singleDict in dataArr){
+                        TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:singleDict];
+                        [self.modelArr addObject:model];
+                    }
+                    [self.tableView reloadData];
+                }else{
+                    if (self->isLoad && self.page > 1){
+                        self.page --;
+                    }
+                }
+            }else{
+                if (self->isLoad && self.page > 1){
+                    self.page --;
+                }
+            }
+            [self stopRefreshOrLoad];
+        } failure:^(NSError *error) {
+            if (self->isLoad && self.page > 1){
+                self.page --;
+            }
+            [self stopRefreshOrLoad];
+            
+        }];
+    }
 }
 
 - (void)addViews{
@@ -73,11 +194,31 @@
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     searchHeadView.searchView.placeholder = @"输入搜索内容";
-    searchHeadView.searchView.clickTextFieldBlock = ^{
+    searchHeadView.searchView.searchTextFieldBlock = ^(NSString *targetStr) {
+        __strong typeof(weakSelf) sself = weakSelf;
+        if ((sself -> isRefresh == NO) && (sself -> isLoad == NO)){
+            weakSelf.searchStr = targetStr;
+            weakSelf.page = 1;
+            [weakSelf getData:weakSelf.page searchStr:weakSelf.searchStr];
+        }
         
     };
     //
     searchFlagView = [[searchBiaoQianView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 10)];
+    searchFlagView.flagViewBlock = ^(NSString *flagStr) {
+        __strong typeof(weakSelf) sself = weakSelf;
+        if ([sself -> searchHeadView.searchView.textField isFirstResponder]){
+            [sself -> searchHeadView.searchView.textField resignFirstResponder];
+        }
+        sself -> searchHeadView.searchView.textField.text = flagStr;
+       
+        if ((sself -> isRefresh == NO) && (sself -> isLoad == NO)){
+            
+            weakSelf.searchStr = flagStr;
+            weakSelf.page = 1;
+            [weakSelf getData:weakSelf.page searchStr:weakSelf.searchStr];
+        }
+    };
 }
 
 //cell 发起按钮
@@ -96,6 +237,7 @@
     self.tableView.tableHeaderView = searchHeadView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:self.tableView];
 }
 

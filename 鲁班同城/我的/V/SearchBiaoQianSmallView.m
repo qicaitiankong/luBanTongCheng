@@ -41,7 +41,7 @@
 
 - (void)backButtClick{
     if (self.backButtBlock){
-        self.backButtBlock(self.rightDisplayLabel.text);
+        self.backButtBlock([self.rightDisplayLabel.text copy]);
     }
 }
 

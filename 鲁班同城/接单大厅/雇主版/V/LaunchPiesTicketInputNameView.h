@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "OwnTextView.h"
 
 @interface LaunchPiesTicketInputNameView : UIView
 
@@ -16,6 +16,8 @@
 @property (strong,nonatomic) UILabel *nameLabel;
 
 @property (strong,nonatomic) OwnTextField *rightTextField;
+
+@property (strong,nonatomic) OwnTextView *rightTextView;
 
 @property (strong,nonatomic)  CustomerImageButt *mapChooseButtView;
 

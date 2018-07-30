@@ -28,6 +28,9 @@
 #import "UIViewController+XuanFuButtDIsplayAndHidden.h"
 #import "GetLocationICitynfo.h"
 #import "ShareNetWorkState.h"
+#import "TelephoneNumberTools.h"
+#import "NSString+OwnDealNullStr.h"
+#import "NSNumber+OwnDealServerNumber.h"
 
 //third party class
 #import <SVProgressHUD.h>

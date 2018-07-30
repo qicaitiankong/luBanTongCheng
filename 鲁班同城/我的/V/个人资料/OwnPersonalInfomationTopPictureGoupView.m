@@ -56,7 +56,7 @@
         [self addSubview:titleLabel];
         //
         self.userlogoImaView = [[UIImageView alloc]initWithFrame:CGRectMake(5, self.topBigImaView.bottom - 20, SCREEN_WIDTH * 0.258, SCREEN_WIDTH * 0.258)];
-        self.userlogoImaView.backgroundColor = [UIColor grayColor];
+        self.userlogoImaView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
         self.userlogoImaView.layer.cornerRadius = self.userlogoImaView.width / 2;
         self.userlogoImaView.clipsToBounds = YES;
         [self addSubview:self.userlogoImaView];

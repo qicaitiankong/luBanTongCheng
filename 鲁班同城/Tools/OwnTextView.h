@@ -18,5 +18,7 @@
 
 @property (copy,nonatomic) void (^keyBoardExistBlock)(void);
 
+- (void)adjustOwnSubViewFrame;
+
 
 @end

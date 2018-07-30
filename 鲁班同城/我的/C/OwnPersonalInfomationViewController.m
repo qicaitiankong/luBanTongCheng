@@ -13,6 +13,7 @@
 #import "OwnPersonalInfomationPersonalServiceTypeGoupView.h"
 #import "OwnPersonalInfomationPersonalVideoGoupView.h"
 
+
 @interface OwnPersonalInfomationViewController (){
     UIScrollView *baseScrollView;
     OwnPersonalInfomationTopPictureGoupView *topPartView;
@@ -22,6 +23,16 @@
     OwnPersonalInfomationPersonalVideoGoupView *videoView;
     OwnPersonalInfomationPersonalVideoGoupView *pictureView;
 }
+//
+@property (strong,nonatomic) NSMutableArray *personalTechnologyArr;
+//
+@property (strong,nonatomic) NSMutableArray *personalJobArr;
+//
+@property (strong,nonatomic) NSMutableArray *personalVideoArr;
+//
+@property (strong,nonatomic) NSMutableArray *personalPictureArr;
+
+@property (assign,nonatomic) NSInteger starCount;
 
 @end
 
@@ -30,7 +41,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self initOwnObjects];
     [self addViews];
+    //
+    [self getUserInfo];
+}
+
+- (void)initOwnObjects{
+    self.personalTechnologyArr = [[NSMutableArray alloc]init];
+    self.personalJobArr = [[NSMutableArray alloc]init];
+    self.personalVideoArr = [[NSMutableArray alloc]init];
+    self.personalPictureArr = [[NSMutableArray alloc]init];
 }
 
 - (void)addViews{
@@ -41,11 +62,11 @@
     [self.view addSubview:baseScrollView];
     //
     topPartView = [[OwnPersonalInfomationTopPictureGoupView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 20) vcKind:self.vcKind];
-    [topPartView.userlogoImaView setImage:[UIImage imageNamed:@"test07.jpg"]];
-    topPartView.fenSiLabel.text = @"888粉丝";
-    topPartView.concernLabel.text = @"23333关注";
-    topPartView.sexAndHomeLabel.text = @"男   山东 青岛市";
-    [topPartView.starGroupView setYellowStar:5];
+    
+    topPartView.fenSiLabel.text = @"粉丝";
+    topPartView.concernLabel.text = @"关注";
+    topPartView.sexAndHomeLabel.text = @"";
+    [topPartView.starGroupView setYellowStar:0];
     WS(weakSelf);
     topPartView.navReturnButt.clickButtBlock = ^{
         [weakSelf.rdv_tabBarController setTabBarHidden:NO];
@@ -76,6 +97,71 @@
     //
     [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, pictureView.bottom + 20)];
 }
+//
+- (void)getUserInfo{
+    NSDictionary *praDict = @{@"userId":[lzhGetAccountInfo getAccount].userID};
+    WS(weakSelf);
+    [TDHttpTools getUserInfo:praDict success:^(id response) {
+        NSDictionary *dataDict = response[@"data"];
+        if ([dataDict allKeys].count){
+            //写入plist
+            [weakSelf makeDictToWritePlist:dataDict];
+            NSNumber *starNumber = [NSNumber getResultNumberBySeverStr:dataDict[@"score"]];
+            weakSelf.starCount = [starNumber integerValue];
+            
+
+            //
+//            NSArray *techArr = dataDict[@"technologys"];
+//            NSArray *jobArr = dataDict[@"professions"];
+//            NSArray *videoArr = dataDict[@"technologysVideo"];
+//            NSArray *picArr = dataDict[@"technologysPic"];
+//            if (techArr.count){
+//                [weakSelf.personalTechnologyArr addObjectsFromArray:techArr];
+//            }
+//            if (jobArr.count){
+//                [weakSelf.personalJobArr addObjectsFromArray:jobArr];
+//            }
+//            if (videoArr.count){
+//                [weakSelf.personalVideoArr addObjectsFromArray:videoArr];
+//            }
+//            if (picArr.count){
+//                [weakSelf.personalPictureArr addObjectsFromArray:picArr];
+//            }
+            //界面赋值
+             [weakSelf giveValueToView];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)giveValueToView{
+    NSURL *imageUrl = [NSURL URLWithString:[lzhGetAccountInfo getAccount].PhotoUrl];
+    [topPartView.userlogoImaView sd_setImageWithURL:imageUrl];
+    topPartView.fenSiLabel.text =[NSString stringWithFormat:@"%ld粉丝",[lzhGetAccountInfo getAccount].fansCount];
+    topPartView.concernLabel.text = [NSString stringWithFormat:@"%ld关注",[lzhGetAccountInfo getAccount].fousCount];
+    topPartView.sexAndHomeLabel.text = [NSString stringWithFormat:@"%@ %@ %@",[lzhGetAccountInfo getAccount].sexStr,[GetLocationICitynfo getLocationInfo].provinceStr,[GetLocationICitynfo getLocationInfo].cityStr];
+    [topPartView.starGroupView setYellowStar:self.starCount];
+}
+
+
+- (void)makeDictToWritePlist:(NSDictionary*)dict{
+    //
+    NSString *userName = [dict[@"username"] copy];
+    NSString *realName = [dict[@"realName"] copy];
+    NSString *gender = [dict[@"gender"] copy];
+    NSString *headImg = [dict[@"headImg"] copy];
+    NSString *mobile = [dict[@"mobile"] copy];
+    NSString *userType = [dict[@"userType"] copy];
+    NSNumber *age = dict[@"age"];
+    NSNumber *focusNum = dict[@"focusNum"];
+    NSNumber *fansNum = dict[@"fansNum"];
+    NSNumber *userID = dict[@"id"];
+    //
+    NSDictionary *makeDict = @{@"userName":userName,@"realName":realName,@"gender":gender,@"age":age,@"headImg":headImg,@"mobile":mobile,@"userType":userType,@"userId":userID,@"focusNum":focusNum,@"fansNum":fansNum};
+    [[lzhGetAccountInfo getAccount] writeToAccount:makeDict];
+}
+
 
 
 - (void)didReceiveMemoryWarning {

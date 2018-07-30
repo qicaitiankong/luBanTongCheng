@@ -14,33 +14,79 @@
     
     lzhGetAccountInfo *selfClass = [[lzhGetAccountInfo alloc]init];
     if (selfClass){
-        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:kAccountPath];
-        selfClass.infoDict = dic;
-        NSLog(@" getAccount 时  dict:%@",dic);
-        if ([dic allKeys].count) {
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:kAccountPath];
+        selfClass.infoDict = dict;
+        NSLog(@" getAccount 时  dict:%@",dict);
+        if ([dict allKeys].count) {
            
-            if ([[dic allKeys] containsObject:@"userType"]){
-                 NSString *userType = [dic[@"userType"] copy];
+            if ([[dict allKeys] containsObject:@"userType"]){
+                 NSString *userType = [dict[@"userType"] copy];
                 if ([userType isEqualToString:@"雇主"]){
                     selfClass.identityFlag = 1;
                 }else if ([userType isEqualToString:@"零工"]){
                     selfClass.identityFlag = 0;
                 }
+                //
             }else{
                 selfClass.identityFlag = 0;
             }
-            //
-            if ([selfClass.nickName isKindOfClass:[NSNull class]]){
-                selfClass.nickName = @"昵称1";
+            NSNumber *userID = nil;
+            NSString *realName = @"";
+            NSString *nickName = @"";
+            NSString *mobile = @"";
+            NSString *headImg = @"";
+            NSString *gender = @"";
+            NSNumber *fansNum = [NSNumber numberWithInteger:0];
+            NSNumber *focusNum = [NSNumber numberWithInteger:0];
+            NSNumber *ageNum = [NSNumber numberWithInteger:0];
+            if ([[dict allKeys] containsObject:@"realName"]){
+                realName = dict[@"realName"];
+                selfClass.userName = [realName copy];
+            }else{
+            }
+            if ([[dict allKeys] containsObject:@"nickName"]){
+                nickName = dict[@"nickName"];
+                selfClass.nickName = [nickName copy];
 
             }else{
-                selfClass.nickName = [dic[@"username"] copy];
-
             }
-            
-            
-            
-            
+            if ([[dict allKeys] containsObject:@"mobile"]){
+                mobile = dict[@"mobile"];
+                selfClass.mobile = [mobile copy];
+
+            }else{
+            }
+            if ([[dict allKeys] containsObject:@"headImg"]){
+                headImg = dict[@"headImg"];
+                selfClass.PhotoUrl = [headImg copy];
+            }else{
+            }
+            if ([[dict allKeys] containsObject:@"gender"]){
+                gender = dict[@"gender"];
+                selfClass.sexStr = [gender copy];
+            }else{
+            }
+            if ([[dict allKeys] containsObject:@"fansNum"]){
+                fansNum = dict[@"fansNum"];
+                selfClass.fansCount = [fansNum integerValue];
+            }else{
+            }
+            if ([[dict allKeys] containsObject:@"focusNum"]){
+                focusNum = dict[@"focusNum"];
+                selfClass.fousCount = [focusNum integerValue];
+            }else{
+            }
+            if ([[dict allKeys] containsObject:@"age"]){
+                ageNum = dict[@"age"];
+                selfClass.ageStr = [ageNum stringValue];
+
+            }else{
+            }
+            if ([[dict allKeys] containsObject:@"userID"]){
+                userID = dict[@"userID"];
+                selfClass.userID = userID;
+            }else{
+            }
         }
         
     }
@@ -49,7 +95,67 @@
 
 
 - (void)writeToAccount:(NSDictionary*)dict{
-     NSDictionary *newDict = @{@"userType":dict[@"userType"]};
+//    age = "<null>";
+//    fansNum = 0;
+//    focusNum = 0;
+//    gender = "\U7537";
+//    headImg = "<null>";
+//    id = 8;
+//    mobile = "<null>";
+//    realName = "<null>";
+//    realNamePath = "<null>";
+//    state = 0;
+//    userType = "\U96c7\U4e3b";
+//    username = "<null>";
+    NSString *userType = dict[@"userType"];
+    NSNumber *userID = nil;
+    NSString *realName = @"";
+    NSString *nickName = @"";
+    NSString *mobile = @"";
+    NSString *headImg = @"";
+    NSString *gender = @"";
+    NSNumber *fansNum = [NSNumber numberWithInteger:0];
+    NSNumber *focusNum = [NSNumber numberWithInteger:0];
+    NSNumber *ageNum = [NSNumber numberWithInteger:0];
+    //方便测试写死了，以后改成id获取
+    if ([userType isEqualToString:@"雇主"]){
+        userID = [NSNumber numberWithInteger:1];
+    }else if (([userType isEqualToString:@"零工"])){
+         userID = [NSNumber numberWithInteger:3];
+    }
+    if ([[dict allKeys] containsObject:@"realName"]){
+        realName = [NSString getResultStrBySeverStr:dict[@"realName"]];
+    }else{
+    }
+    if ([[dict allKeys] containsObject:@"nickName"]){
+        nickName = [NSString getResultStrBySeverStr:dict[@"nickName"]];
+    }else{
+    }
+    if ([[dict allKeys] containsObject:@"mobile"]){
+        mobile = [NSString getResultStrBySeverStr:dict[@"mobile"]];
+    }else{
+    }
+    if ([[dict allKeys] containsObject:@"headImg"]){
+        headImg = [NSString getResultStrBySeverStr:dict[@"headImg"]];
+    }else{
+    }
+    if ([[dict allKeys] containsObject:@"gender"]){
+        gender = [NSString getResultStrBySeverStr:dict[@"gender"]];
+    }else{
+    }
+    if ([[dict allKeys] containsObject:@"fansNum"]){
+        fansNum = [NSNumber getResultNumberBySeverStr:dict[@"fansNum"]];
+    }else{
+    }
+    if ([[dict allKeys] containsObject:@"focusNum"]){
+        focusNum = [NSNumber getResultNumberBySeverStr:dict[@"focusNum"]];
+    }else{
+    }
+    if ([[dict allKeys] containsObject:@"age"]){
+        ageNum = [NSNumber getResultNumberBySeverStr:dict[@"age"]];
+    }else{
+    }
+    NSDictionary *newDict = @{@"userType":userType,@"userID":userID,@"userName":realName,@"nickName":nickName,@"gender":gender,@"age":ageNum,@"headImg":headImg,@"mobile":mobile,@"focusNum":focusNum,@"fansNum":fansNum};
     BOOL suc = [newDict writeToFile:kAccountPath atomically:YES];
    
     if (suc){

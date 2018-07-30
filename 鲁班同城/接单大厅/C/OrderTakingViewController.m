@@ -20,7 +20,6 @@
 @interface OrderTakingViewController ()<UITableViewDelegate,UITableViewDataSource>{
     __block BOOL isRefresh;//刷新标记
     __block BOOL isLoad;//加载标记
-    
 }
 
 @property (strong,nonatomic) UITableView *tableView;
@@ -77,14 +76,19 @@
     //
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         __strong typeof(weakSelf) sself = weakSelf;
-        sself -> isLoad = YES;
+        
         //
         if([ShareNetWorkState getNetState] == NO){
+            sself -> isLoad = YES;
             [SVProgressHUD showErrorWithStatus:@"加载失败，请检查网络"];
             [weakSelf stopRefreshOrLoad];
         }else{
-            weakSelf.page ++;
-            [weakSelf getData:weakSelf.page];
+            if (sself -> isLoad == NO){
+                weakSelf.page ++;
+                sself -> isLoad = YES;
+                [weakSelf getData:weakSelf.page];
+            }
+           
         }
     }];
     
@@ -254,9 +258,13 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if ([lzhGetAccountInfo getAccount].identityFlag){
          DispatchTicketDetailViewController *dispatchDetailVC = [[DispatchTicketDetailViewController alloc]init];
+         TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
+        dispatchDetailVC.orderIdStr = [NSString stringWithFormat:@"%ld",model.orderID];
         [self.navigationController pushViewController:dispatchDetailVC animated:YES];
     }else{
         OrderTakingQuotePriceDetailViewController *orderDetailVC = [[OrderTakingQuotePriceDetailViewController alloc]init];
+        TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
+        orderDetailVC.orderIdStr = [NSString stringWithFormat:@"%ld",model.orderID];
         [self.navigationController pushViewController:orderDetailVC animated:YES];
     }
     

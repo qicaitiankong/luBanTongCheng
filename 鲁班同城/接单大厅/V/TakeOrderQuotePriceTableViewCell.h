@@ -32,5 +32,7 @@
 @property (strong,nonatomic) QuotePriceOnWebGroupView *bottomGroupView;
 
 @property (strong,nonatomic) TakeOrderQuotePriceModel *model;
+//isBaoJiaDetail:是报价用还是报价详情用
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier kindFlag:(BOOL)isBaoJiaDetail;
 
 @end

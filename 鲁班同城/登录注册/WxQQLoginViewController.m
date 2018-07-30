@@ -51,6 +51,18 @@
         NSDictionary *dataDict = dict[@"data"];
         if (status == 0){
              NSLog(@"userType:%@",dataDict[@"userType"]);
+            // age = "<null>";
+//            fansNum = 0;
+//            focusNum = 0;
+//            gender = "\U7537";
+//            headImg = "<null>";
+//            id = 8;
+//            mobile = "<null>";
+//            realName = "<null>";
+//            realNamePath = "<null>";
+//            state = 0;
+//            userType = "\U96c7\U4e3b";
+//            username = "<null>";
             //在此保存用户信息
             [[lzhGetAccountInfo getAccount] writeToAccount:dataDict];
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_TYPE_UPDATE_NOTIFICATION_NAME object:nil userInfo:nil];

@@ -231,7 +231,30 @@
     }];
     
 }
-
+//获取用户信息
++(void)getUserInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/userInfo",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showWithStatus:@"获取信息失败"];
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
 
 +(void)launchOder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
     NSDictionary *params = paraDict;
@@ -338,11 +361,56 @@
     }];
     
 }
+//雇主派单详情
++(void)getEmployerLauchPieDetail:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/orderInfoHirer",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showWithStatus:@"获取信息失败"];
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
 
 
-
-
-
+//零工接单详情
++(void)getCasualTakeOrderDetail:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/orderInfoWorker",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showWithStatus:@"获取信息失败"];
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
 
 
 

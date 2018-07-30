@@ -12,8 +12,7 @@
 @interface QuotePriceOnWebGroupView (){
     UIButton *soundButtView;
     OwnTextField *moneyTextfield;
-    UITextView *beiZhuTextView;
-    
+    OwnTextView *beiZhuTextView;
 }
 @end
 
@@ -58,7 +57,7 @@
         beiZhuTipLabel.text = @"备注";
         [self addSubview:beiZhuTipLabel];
         //
-        beiZhuTextView = [[UITextView alloc]initWithFrame:CGRectMake(moneyTextfield.left, beiZhuTipLabel.top, moneyTextfield.width, 80)];
+        beiZhuTextView = [[OwnTextView alloc]initWithFrame:CGRectMake(moneyTextfield.left, beiZhuTipLabel.top, moneyTextfield.width, 80)];
         beiZhuTextView.backgroundColor = [UIColor whiteColor];
         beiZhuTextView.layer.borderWidth = 1;
         beiZhuTextView.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;

@@ -95,9 +95,9 @@
             [cellImageArr addObject:image];
         }
     }
-   
-    
 }
+//
+
 //切换身份
 - (void)exchangeIndentity{
    

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KeyboardToolsView.h"
 
 @interface SSSearchBar : UISearchBar
 
@@ -18,4 +19,5 @@
 
 @property (copy,nonatomic) void (^searchTextFieldBlock)(NSString *targetStr);
 
+@property (strong,nonatomic) KeyboardToolsView *toolsView;
 @end
