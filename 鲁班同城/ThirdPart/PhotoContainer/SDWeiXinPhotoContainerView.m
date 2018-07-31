@@ -45,6 +45,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         [self setup];
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -55,6 +56,7 @@
     
     for (int i = 0; i < 9; i++) {
         UIImageView *imageView = [UIImageView new];
+        imageView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
         [self addSubview:imageView];
         imageView.userInteractionEnabled = YES;
         imageView.tag = i;
@@ -98,10 +100,10 @@
         long columnIndex = idx % perRowItemCount;
         long rowIndex = idx / perRowItemCount;
         UIImageView *imageView = [_imageViewsArray objectAtIndex:idx];
-        imageView.backgroundColor = [UIColor colorWithHexString:@"#F5F5F5"];
+        imageView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
         imageView.hidden = NO;
         NSURL *imageUrl = _picPathStringsArray[idx];
-        [imageView setImage:[UIImage imageNamed:@"test02"]];
+        //[imageView setImage:[UIImage imageNamed:@"test02"]];
         //[imageView sd_setImageWithURL:imageUrl];
         imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
     }
@@ -138,7 +140,7 @@
 {
     return  (SCREEN_WIDTH - 30 - 5 * 2) / 3;
 //    if (array.count == 1) {
-//        return 70;
+        //return 70;
 //    } else {
 //        CGFloat w = [UIScreen mainScreen].bounds.size.width > 320 ? 80 : 70;
 //        return w;

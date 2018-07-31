@@ -15,11 +15,23 @@
     if ([targetStr isKindOfClass:[NSNull class]]){
         dealStr = @"";
     }else if (dealStr.length){
-        dealStr = targetStr;
+        dealStr = [targetStr copy];
     }else{
         dealStr = @"";
     }
     return dealStr;
 }
+
++(BOOL)isPureInt:(NSString*)string{
+    
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    
+    int val;
+    
+    return[scan scanInt:&val] && [scan isAtEnd];
+    
+}
+
+
 
 @end

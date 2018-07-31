@@ -106,9 +106,6 @@
     }
 }
 //
-
-
-
 - (void)initObjects{
     self.modelArr = [[NSMutableArray alloc] init];
     self.page = 1;
@@ -116,7 +113,7 @@
 //
 - (void)getData:(int)page{
     if ([lzhGetAccountInfo getAccount].identityFlag == 0){//零工
-        NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:3],@"page":[NSNumber numberWithInt:page],@"size":[NSNumber numberWithInt:10]};
+        NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"page":[NSNumber numberWithInt:page],@"pageSize":@10};
         [TDHttpTools getReceiveOrderList:paraDict success:^(id response) {
             NSDictionary *dict = response;
             if ([dict allKeys].count){
@@ -152,7 +149,7 @@
         }];
         
     }else{//雇主
-        NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:1],@"page":[NSNumber numberWithInt:page],@"size":[NSNumber numberWithInt:10]};
+        NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"page":[NSNumber numberWithInt:page],@"pageSize":@10};
         [TDHttpTools getLauchOrderList:paraDict success:^(id response) {
             NSDictionary *dict = response;
             if ([dict allKeys].count){
@@ -193,10 +190,15 @@
 - (void)clickCellButt:(NSIndexPath*)path{
     NSLog(@"%ld",path.row);
     if ([lzhGetAccountInfo getAccount].identityFlag){
-        DispatchOrderMapViewController *mapVC = [[DispatchOrderMapViewController alloc]init];
-        [self.navigationController pushViewController:mapVC animated:YES];
+        DispatchTicketDetailViewController *dispatchDetailVC = [[DispatchTicketDetailViewController alloc]init];
+        TakeOrderMainHallModel *model = self.modelArr[path.row];
+        dispatchDetailVC.orderIdStr = [NSString stringWithFormat:@"%ld",model.orderID];
+        [self.navigationController pushViewController:dispatchDetailVC animated:YES];
     }else{
         OrderTakingQuotePriceViewController *quotePriceVC = [[OrderTakingQuotePriceViewController alloc]init];
+        TakeOrderMainHallModel *model = self.modelArr[path.row];
+        quotePriceVC.isBapJiaDetail = YES;
+        quotePriceVC.orderId = model.orderID;
         [self.navigationController pushViewController:quotePriceVC animated:YES];
     }
 }
@@ -256,15 +258,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if ([lzhGetAccountInfo getAccount].identityFlag){
+    if ([lzhGetAccountInfo getAccount].identityFlag){//雇主
          DispatchTicketDetailViewController *dispatchDetailVC = [[DispatchTicketDetailViewController alloc]init];
          TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
         dispatchDetailVC.orderIdStr = [NSString stringWithFormat:@"%ld",model.orderID];
         [self.navigationController pushViewController:dispatchDetailVC animated:YES];
-    }else{
+    }else{//零工
         OrderTakingQuotePriceDetailViewController *orderDetailVC = [[OrderTakingQuotePriceDetailViewController alloc]init];
         TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
-        orderDetailVC.orderIdStr = [NSString stringWithFormat:@"%ld",model.orderID];
+        orderDetailVC.orderId = model.orderID;
         [self.navigationController pushViewController:orderDetailVC animated:YES];
     }
     

@@ -10,6 +10,8 @@
 
 @interface StarView : UIView
 
+@property (assign,nonatomic) NSInteger starCount;
+
 - (void)lzhUpdateConstraints;
 
 - (void)setYellowStar:(float)count;

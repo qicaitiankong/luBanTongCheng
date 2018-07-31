@@ -11,7 +11,7 @@
 
 @interface OrderTakingQuotePriceDetailViewController : BaseDisplayNaviViewController
 
-@property (strong,nonatomic) NSString *orderIdStr;
+@property (assign,nonatomic) NSInteger orderId;
 
 
 

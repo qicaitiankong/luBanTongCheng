@@ -20,18 +20,21 @@
 //        remark = fbvdsv;
 //        remarkPath = "<null>";
 //        score = 0;
-        model.pictureUrlStr = [dict[@"headImg"] copy];
+        model.pictureUrlStr = [NSString getResultStrBySeverStr:dict[@"headImg"]];
         
-        model.nickNameStr = [dict[@"realName"] copy];
-        model.mobileStr = [dict[@"mobile"] copy];
-        NSInteger baoJia = [dict[@"quote"] integerValue];
-        NSInteger score = [dict[@"score"] integerValue];
+        model.nickNameStr = [NSString getResultStrBySeverStr:dict[@"realName"]];
+        model.mobileStr = [NSString getResultStrBySeverStr:dict[@"mobile"]];
+        
+        NSNumber *baojiaNum = [NSNumber getResultNumberBySeverStr:dict[@"quote"]];
+        NSInteger baoJia = [baojiaNum integerValue];
+        NSNumber *scoreNum = [NSNumber getResultNumberBySeverStr:dict[@"score"]];
+        NSInteger score = [scoreNum integerValue];
         if (score < 1){
             score = 1;
         }
         model.baoJiaNameStr = [NSString stringWithFormat:@"%ld",baoJia];
         model.xinxinStr = [NSString stringWithFormat:@"%ld",score];
-        model.beiZhuNameStr = [dict[@"remark"] copy];;
+        model.beiZhuNameStr =  [NSString getResultStrBySeverStr:dict[@"remark"]];
     }else{
     }
     return model;

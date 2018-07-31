@@ -11,13 +11,14 @@
 
 @interface QuotePriceOnWebGroupView (){
     UIButton *soundButtView;
-    OwnTextField *moneyTextfield;
-    OwnTextView *beiZhuTextView;
 }
 @end
 
 
 @implementation QuotePriceOnWebGroupView
+@synthesize takeOrderButt;
+@synthesize moneyTextfield;
+@synthesize beiZhuTextView;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -65,7 +66,7 @@
 
         [self addSubview:beiZhuTextView];
         //
-        CustomeStyleCornerButt *takeOrderButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, beiZhuTextView.bottom + 10, frame.size.width, 45) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:8 title:@"接单报价" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
+        takeOrderButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, beiZhuTextView.bottom + 10, frame.size.width, 45) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:8 title:@"接单报价" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
         [self addSubview:takeOrderButt];
         //
         [self setFrame:CGRectMake(self.x, self.y, self.width, takeOrderButt.bottom + 10)];

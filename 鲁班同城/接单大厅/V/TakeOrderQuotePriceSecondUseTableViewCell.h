@@ -1,19 +1,16 @@
 //
-//  TakeOrderQuotePriceTableViewCell.h
+//  TakeOrderQuotePriceSecondUseTableViewCell.h
 //  鲁班同城
 //
-//  Created by apple on 2018/7/11.
+//  Created by apple on 2018/7/31.
 //  Copyright © 2018年 Mac. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "SDWeiXinPhotoContainerView.h"
 #import "TakeOrderQuotePriceModel.h"
-#import "QuotePriceOnWebGroupView.h"
 
-
-
-@interface TakeOrderQuotePriceTableViewCell : UITableViewCell
+@interface TakeOrderQuotePriceSecondUseTableViewCell : UITableViewCell
 
 @property (strong,nonatomic) UIImageView *personLogoImaView;
 
@@ -29,9 +26,6 @@
 
 @property (strong,nonatomic) SDWeiXinPhotoContainerView *picContainView;
 
-@property (strong,nonatomic) QuotePriceOnWebGroupView *bottomGroupView;
-
 @property (strong,nonatomic) TakeOrderQuotePriceModel *model;
-//isBaoJiaDetail:是报价用还是报价详情用
 
 @end

@@ -98,18 +98,28 @@
 //
 - (void)backButtHandler:(UIButton*)_b{
     NSLog(@"星星点击");
+    self.starCount = 0;
     BaseImageView *xinXinImageView = starImageArr[_b.tag];
     if (NO == xinXinImageView.starSelectedFlag){
         for (int i = 0; i <= _b.tag; i ++){
             BaseImageView  *imageView = starImageArr[i];
             [imageView setImage:[UIImage imageNamed:@"myInfoStar"]];
             imageView.starSelectedFlag = YES;
+            
         }
     }else{
         for (int i = 4; i >= _b.tag; i --){
             BaseImageView  *imageView = starImageArr[i];
-            [imageView setImage:[UIImage imageNamed:@"myInfoGrayStar"]];
-            imageView.starSelectedFlag = NO;
+            
+            if(_b.tag != 0){
+                [imageView setImage:[UIImage imageNamed:@"myInfoGrayStar"]];
+                imageView.starSelectedFlag = NO;
+            }
+        }
+    }
+    for (BaseImageView  *imageView in starImageArr){
+        if (imageView.starSelectedFlag){
+            self.starCount += 1;
         }
     }
 }

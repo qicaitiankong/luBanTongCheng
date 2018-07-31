@@ -13,7 +13,6 @@
 #import "OrderTakingQuotePriceDetailTelephoneView.h"
 
 
-
 #import "OrderTakingQuotePriceViewController.h"
 
 
@@ -26,6 +25,9 @@
     OrderTakingQuotePriceDetailTelephoneView *beiZhuSectionView;
     
     UILabel *tipSectionLabel;
+    
+    //
+    UIButton *bottomOrderButt;
 }
 
 @property (strong,nonatomic) TakeOrderQuotePriceDetailModel *singleModel;
@@ -37,6 +39,11 @@
 @property (strong,nonatomic) NSString *telephoneStr;
 
 @property (strong,nonatomic) NSString *beiZhuStr;
+//我是否该派单雇佣
+@property (assign,nonatomic) BOOL isHiredMe;
+//我能否接单
+@property (assign,nonatomic) BOOL canTakeOrder;
+
 
 @end
 
@@ -65,6 +72,8 @@
     self.telephoneStr = @"";
     self.addressStr = @"";
     self.beiZhuStr = @"";
+    self.singleModel = [[TakeOrderQuotePriceDetailModel alloc]init];
+    
 }
 
 - (void)dealTelephone{
@@ -74,48 +83,83 @@
             UIWebView * callWebview = [[UIWebView alloc] init];
             [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:string]]];
             [self.view addSubview:callWebview];
+        }else{
+            [SVProgressHUD showInfoWithStatus:@"手机格式有问题"];
         }
     }else{
-        [SVProgressHUD showWithStatus:@"手机格式有问题"];
+        [SVProgressHUD showInfoWithStatus:@"手机格式有问题"];
     }
 }
 
 
 - (void)getData{
-    if (self.orderIdStr.length){
-        NSDictionary *paraDict = @{@"orderId":self.orderIdStr,@"userId":[NSNumber numberWithInteger:3]};
-        
+
+//    "isReceived": true, 当前用户有没有接过该派单
+//    "isHiredMe": true, 当前用户(我)有没有被雇佣
+//    "mobile": "17096177665",
+//    "address": "详细地址",
+//    "canReceive": false,//接单列表用到的，能否接单
+//    "isHired": true,//针对该派单
+//    "hiredName": "李四",
+//    "state": "已雇佣",//针对该派单
+   
+        //msgId:用于接单成功后发过来的通知消息标记已读未读
+        //NSInteger orderID = self.orderId
+        //order id 写死了1 后期改过来
+    
+        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:1],@"userId":[lzhGetAccountInfo getAccount].userID,@"msgId":[NSNumber numberWithInteger:1]};
+        //WS(weakSelf);
         [TDHttpTools getCasualTakeOrderDetail:paraDict success:^(id response) {
             NSDictionary *dict = response;
             NSLog(@"接单详情零工版 dict=%@",dict);
             NSDictionary *dataDict = dict[@"data"];
-            self.singleModel = [[TakeOrderQuotePriceDetailModel alloc] init];
             NSString *headImageStr = dataDict[@"headImg"];
             if ([headImageStr isKindOfClass:[NSNull class]]){
                 self.singleModel.logoUrlStr = @"";
             }else{
                 self.singleModel.logoUrlStr = [dataDict[@"headImg"] copy];
             }
-            self.singleModel.timeStr = [dataDict[@"createTime"] copy];;
-            self.singleModel.praiseStr = [dataDict[@"budget"] copy];
-            self.singleModel.personNameStr = [dataDict[@"userName"] copy];
-            self.singleModel.detailStr = [dataDict[@"remark"] copy];
-            NSInteger receviceNum =  [dataDict[@"receiveNum"] integerValue];
-            self.singleModel.ticketsNumberStr =[NSString stringWithFormat:@"%ld",receviceNum];
-            self.addressStr = [dataDict[@"address"] copy];
-            self.telephoneStr = [dataDict[@"mobile"] copy];
-            self.beiZhuStr = [dataDict[@"remark"] copy];
+            self.singleModel.timeStr = [NSString getResultStrBySeverStr:dataDict[@"createTime"]] ;
+            self.singleModel.praiseStr = [NSString getResultStrBySeverStr:dataDict[@"budget"]];
+            self.singleModel.personNameStr = [NSString getResultStrBySeverStr:dataDict[@"userName"]];
+            self.singleModel.detailStr = [NSString getResultStrBySeverStr:dataDict[@"remark"]];
+            NSNumber *receviceNum = [NSNumber getResultNumberBySeverStr:dataDict[@"receiveNum"]];
+            self.singleModel.ticketsNumberStr =[receviceNum stringValue];
+            self.addressStr =  [NSString getResultStrBySeverStr:dataDict[@"address"]];
+            self.telephoneStr = [NSString getResultStrBySeverStr:dataDict[@"mobile"]];
+            self.beiZhuStr = [NSString getResultStrBySeverStr:dataDict[@"remark"]];
+            self.isHiredMe = dataDict[@"isHiredMe"];
+            self.canTakeOrder = dataDict[@"canTakeOrder"];
+            __strong typeof(self)sself = self;
+            //如果我被雇佣，则修改显示
+            if (self.isHiredMe){
+                sself -> sectionView.topDisplayLabel.text = @"恭喜被雇主选中";
+            }
+            if (self.canTakeOrder){
+                [sself -> bottomOrderButt setTitle:@"接单" forState:UIControlStateNormal];
+            }else{
+                [sself -> bottomOrderButt setTitle:@"查看" forState:UIControlStateNormal];
+            }
             [self.tableView reloadData];
         } failure:^(NSError *error) {
             
         }];
-    }
 }
 
 - (void)takeOrderClick{
-    NSLog(@"接单");
-    OrderTakingQuotePriceViewController *baoJiaVC = [[OrderTakingQuotePriceViewController alloc]init];
-    [self.navigationController pushViewController:baoJiaVC animated:YES];
+    NSLog(@"接单或查看接单详情");
+    if(self.canTakeOrder){
+        OrderTakingQuotePriceViewController *baoJiaVC = [[OrderTakingQuotePriceViewController alloc]init];
+        baoJiaVC.orderId = self.orderId;
+        baoJiaVC.isBapJiaDetail = NO;
+        [self.navigationController pushViewController:baoJiaVC animated:YES];
+    }else{
+        OrderTakingQuotePriceViewController *baoJiaVC = [[OrderTakingQuotePriceViewController alloc]init];
+        baoJiaVC.orderId = self.orderId;
+        baoJiaVC.isBapJiaDetail = YES;
+        [self.navigationController pushViewController:baoJiaVC animated:YES];
+    }
+   
 }
 
 //views
@@ -171,6 +215,7 @@
     [giveButt addSubview:buttLine];
     //
     UIButton *orderButt = [UIButton buttonWithType:UIButtonTypeCustom];
+    bottomOrderButt = orderButt;
     orderButt.backgroundColor = [UIColor colorWithHexString:@"#FF7E00"];
     orderButt.frame = CGRectMake(giveButt.right, giveButt.top, self.view.width / 2, giveButt.height);
     orderButt.titleLabel.font = [UIFont getPingFangSCMedium:16];
@@ -243,11 +288,23 @@
             view = sectionView;
             break;
         case 2:
-            telephoneSectionView.ownRightLabel.text = self.telephoneStr;
+            if(self.isHiredMe){
+                telephoneSectionView.ownRightLabel.text = self.telephoneStr;
+                telephoneSectionView.telephoneButt.hidden = NO;
+            }else{
+                telephoneSectionView.ownRightLabel.text = @"***********";
+                telephoneSectionView.telephoneButt.hidden = YES;
+            }
             view = telephoneSectionView;
             break;
         case 3:
-            addressSectionView.ownRightLabel.text = self.addressStr;
+            if(self.isHiredMe){
+                 addressSectionView.ownRightLabel.text = self.addressStr;
+                addressSectionView.telephoneButt.hidden = YES;
+            }else{
+                addressSectionView.ownRightLabel.text = @"********";
+                addressSectionView.telephoneButt.hidden = YES;
+            }
             view = addressSectionView;
             break;
         case 4:

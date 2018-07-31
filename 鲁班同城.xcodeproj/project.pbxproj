@@ -289,6 +289,7 @@
 		185368FA20E9E9D60053A5D4 /* TraingleCategorySmallButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185368F920E9E9D60053A5D4 /* TraingleCategorySmallButtonView.m */; };
 		185368FE20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185368FD20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m */; };
 		1853690520EA11C10053A5D4 /* WaterCellRecuritJobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853690420EA11C10053A5D4 /* WaterCellRecuritJobView.m */; };
+		1858552521100A2A0044BE64 /* TakeOrderQuotePriceSecondUseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1858552421100A2A0044BE64 /* TakeOrderQuotePriceSecondUseTableViewCell.m */; };
 		185ABF1020F82C9A00188520 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185ABF0F20F82C9A00188520 /* SettingViewController.m */; };
 		185ABF1320F82CC700188520 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185ABF1220F82CC700188520 /* SettingTableViewCell.m */; };
 		185ABF1620F8350400188520 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185ABF1520F8350400188520 /* MessageViewController.m */; };
@@ -884,6 +885,8 @@
 		185368FD20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TraingleCategoryButtonGroupView.m; sourceTree = "<group>"; };
 		1853690320EA11C10053A5D4 /* WaterCellRecuritJobView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaterCellRecuritJobView.h; sourceTree = "<group>"; };
 		1853690420EA11C10053A5D4 /* WaterCellRecuritJobView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaterCellRecuritJobView.m; sourceTree = "<group>"; };
+		1858552321100A2A0044BE64 /* TakeOrderQuotePriceSecondUseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeOrderQuotePriceSecondUseTableViewCell.h; sourceTree = "<group>"; };
+		1858552421100A2A0044BE64 /* TakeOrderQuotePriceSecondUseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeOrderQuotePriceSecondUseTableViewCell.m; sourceTree = "<group>"; };
 		185ABF0E20F82C9A00188520 /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		185ABF0F20F82C9A00188520 /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		185ABF1120F82CC700188520 /* SettingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingTableViewCell.h; sourceTree = "<group>"; };
@@ -1606,6 +1609,8 @@
 				181FCC0A20F740DF0044B055 /* OrderTakingQuotePriceDetailTelephoneTableViewCell.m */,
 				188CB33320FC211A00302C94 /* OrderTakingQuotePriceDetailTelephoneView.h */,
 				188CB33420FC211A00302C94 /* OrderTakingQuotePriceDetailTelephoneView.m */,
+				1858552321100A2A0044BE64 /* TakeOrderQuotePriceSecondUseTableViewCell.h */,
+				1858552421100A2A0044BE64 /* TakeOrderQuotePriceSecondUseTableViewCell.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -3025,6 +3030,7 @@
 				186EBE3220EDF08400D0F54E /* ImageAndLabelView.m in Sources */,
 				187434C120F356AA0008A24F /* CompanyRecuritDetailViewController.m in Sources */,
 				186EBE4B20EE0C8700D0F54E /* CommitPopView.m in Sources */,
+				1858552521100A2A0044BE64 /* TakeOrderQuotePriceSecondUseTableViewCell.m in Sources */,
 				1443C57320E317F50009E82F /* CustomeLzhLabel.m in Sources */,
 				18E2DF0720E8BAFE00FDF9C1 /* JHWaterfallCollectionLayout.m in Sources */,
 				188813A620EC924C00F832BE /* PersonalInfoNameViewController.m in Sources */,

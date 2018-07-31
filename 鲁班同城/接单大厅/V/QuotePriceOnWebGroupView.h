@@ -11,6 +11,11 @@
 
 @interface QuotePriceOnWebGroupView : UIView
 
+@property (copy,nonatomic) CustomeStyleCornerButt *takeOrderButt;
+
+@property (strong,nonatomic)  OwnTextField *moneyTextfield;
+
+@property (strong,nonatomic) OwnTextView *beiZhuTextView;
 
 
 @end

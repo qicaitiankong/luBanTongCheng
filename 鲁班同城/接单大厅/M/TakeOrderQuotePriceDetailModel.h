@@ -10,6 +10,8 @@
 
 @interface TakeOrderQuotePriceDetailModel : NSObject
 
+@property (assign,nonatomic) NSInteger orderId;
+
 @property (strong,nonatomic) NSString *logoUrlStr;
 
 @property (strong,nonatomic) UIImage *image;

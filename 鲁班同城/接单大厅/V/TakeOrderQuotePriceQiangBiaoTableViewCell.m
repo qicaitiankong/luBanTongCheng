@@ -16,7 +16,7 @@
     if (self){
         self.contentView.backgroundColor = [UIColor whiteColor];
         self.userImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 0, height / 2, height / 2)];
-        self.userImageView.backgroundColor = [UIColor grayColor];
+        self.userImageView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
         self.userImageView.layer.cornerRadius = self.userImageView.height / 2;
         self.userImageView.clipsToBounds = YES;
         self.userImageView.center = CGPointMake(self.userImageView.centerX, height / 2);

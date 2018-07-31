@@ -21,6 +21,8 @@
     UIButton *popBackButt;
     UIView *baseView;
     UIView *commentPopView;
+    StarView *xinxinView;
+    OwnTextView *commentTextView;
     //
 }
 
@@ -60,18 +62,19 @@
 - (void)getData{
     //
     if (self.orderIdStr.length){
-        NSDictionary *paraDict = @{@"orderId":self.orderIdStr};
+        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:1]};
         [TDHttpTools getEmployerLauchPieDetail:paraDict success:^(id response) {
             NSDictionary *dict = response;
             NSLog(@"派单详情雇主版 dict=%@",dict);
             NSDictionary *dataDict = dict[@"data"];
             self.singleModel = [[TakeOrderQuotePriceDetailModel alloc] init];
             self.singleModel.personNameStr = @"我发起的订单";
-            self.singleModel.logoUrlStr = [dataDict[@"headImg"] copy];
-            self.singleModel.timeStr = [dataDict[@"createTime"] copy];;
-            self.singleModel.praiseStr = [dataDict[@"budget"] copy];
-            self.singleModel.detailStr = [dataDict[@"remark"] copy];
-            NSInteger receviceNum =  [dataDict[@"receiveNum"] integerValue];
+            self.singleModel.logoUrlStr = [NSString getResultStrBySeverStr:dataDict[@"headImg"]];
+            self.singleModel.timeStr = [NSString getResultStrBySeverStr:dataDict[@"createTime"]];
+            self.singleModel.praiseStr = [NSString getResultStrBySeverStr:dataDict[@"budget"]];
+            self.singleModel.detailStr = [NSString getResultStrBySeverStr:dataDict[@"remark"]];
+            NSNumber *receiveNum = [NSNumber getResultNumberBySeverStr: dataDict[@"receiveNum"]];
+            NSInteger receviceNum =  [receiveNum integerValue];
             self.singleModel.ticketsNumberStr =[NSString stringWithFormat:@"%ld",receviceNum];
             //
             NSArray *bottomDataArr = dataDict[@"receiveList"];
@@ -96,6 +99,27 @@
 - (void)payHandler{
     
 }
+
+- (void)employeerEmploy{
+    [TDHttpTools EmplyeerEmploy:@{@"receiveOrderId":[NSNumber numberWithInteger:5]} success:^(id response) {
+        NSLog(@"雇佣：%@",response);
+        [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)commentRequest{
+    NSInteger orderID =  [self.orderIdStr integerValue];
+    NSLog(@"星星数量 %ld",xinxinView.starCount);
+    [TDHttpTools EmplyeerComment:@{@"orderId":[NSNumber numberWithInteger:6],@"score":[NSNumber numberWithInteger:xinxinView.starCount],@"remark":[NSString getResultStrBySeverStr:commentTextView.writeTextView.text]} success:^(id response) {
+        NSLog(@"评价：%@",response);
+        [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 - (void)dealButtClick:(NSInteger)flag path:(NSIndexPath*)indexPath{
     NSLog(@"path.row=%ld",indexPath.row);
@@ -127,6 +151,8 @@
             DispatchTicketDetailBaoJiaModel *model = self.modelArr[indexPath.row];
             model.shouldDisplayBottomView = YES;
             [self.tableView reloadData];
+            //
+            [self employeerEmploy];
         }
             break;
         case 3:{
@@ -340,13 +366,13 @@
         centerLabel.center = CGPointMake(commentPopView.width / 2, centerLabel.centerY);
         [commentPopView addSubview:centerLabel];
         //
-        StarView *xinxinView = [[StarView alloc]initWithFrameCustomeStyle:CGRectMake(0, centerLabel.bottom + commentPopView.height * 0.05, commentPopView.width * 0.75, commentPopView.width * 0.125) starWidth:commentPopView.width * 0.107];
+         xinxinView = [[StarView alloc]initWithFrameCustomeStyle:CGRectMake(0, centerLabel.bottom + commentPopView.height * 0.05, commentPopView.width * 0.75, commentPopView.width * 0.125) starWidth:commentPopView.width * 0.107];
         xinxinView.userInteractionEnabled = YES;
         xinxinView.center = CGPointMake(commentPopView.width / 2, xinxinView.centerY);
         [xinxinView setYellowStar:4];
         [commentPopView addSubview:xinxinView];
         //
-        OwnTextView *commentTextView = [[OwnTextView alloc]initWithFrame:CGRectMake(centerLabel.left, xinxinView.bottom + commentPopView.height * 0.05, commentPopView.width - 2 * centerLabel.left, commentPopView.height * 0.215)];
+        commentTextView = [[OwnTextView alloc]initWithFrame:CGRectMake(centerLabel.left, xinxinView.bottom + commentPopView.height * 0.05, commentPopView.width - 2 * centerLabel.left, commentPopView.height * 0.215)];
         commentTextView.layer.cornerRadius = 3;
         commentTextView.clipsToBounds = YES;
         commentTextView.backgroundColor = [UIColor colorWithHexString:@"#E2E2E2"];
@@ -367,6 +393,7 @@
         CustomeStyleCornerButt *commitButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(cancelButt.right, commentPopView.height * 0.85, commentPopView.width / 2, commentPopView.height * 0.15) backColor:payBackCol cornerRadius:-1 title:@"提交" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:16]];
         commitButt.clickButtBlock = ^{
             [weakSelf removeCommentPopView];
+            [weakSelf commentRequest];
         };
         [commentPopView addSubview:commitButt];
         //

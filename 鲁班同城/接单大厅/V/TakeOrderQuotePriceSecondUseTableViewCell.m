@@ -1,21 +1,21 @@
 //
-//  TakeOrderQuotePriceTableViewCell.m
+//  TakeOrderQuotePriceSecondUseTableViewCell.m
 //  鲁班同城
 //
-//  Created by apple on 2018/7/11.
+//  Created by apple on 2018/7/31.
 //  Copyright © 2018年 Mac. All rights reserved.
 //
 
-#import "TakeOrderQuotePriceTableViewCell.h"
+#import "TakeOrderQuotePriceSecondUseTableViewCell.h"
 
-@interface TakeOrderQuotePriceTableViewCell (){
+@interface TakeOrderQuotePriceSecondUseTableViewCell (){
     CGFloat leftSpace;
     CGFloat bottomGroupViewHeight;
 }
+
 @end
 
-
-@implementation TakeOrderQuotePriceTableViewCell
+@implementation TakeOrderQuotePriceSecondUseTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -44,12 +44,7 @@
         //
         NSArray *viewArr = @[self.personLogoImaView,self.timeLabel,self.personNameLabel,self.detailLabel,self.ticketsNumberLabel,self.praiseLabel,self.picContainView];
         [self.contentView sd_addSubviews:viewArr];
-        //
-        //if (isBaoJiaDetail == NO){
-            self.bottomGroupView = [[QuotePriceOnWebGroupView alloc]initWithFrame:CGRectMake(leftSpace, 0, SCREEN_WIDTH - 2 * leftSpace, 10)];
-            [self.contentView addSubview:self.bottomGroupView];
-        bottomGroupViewHeight = self.bottomGroupView.height;
-        //}
+       
         [self addOwnConstraints];
     }
     return self;
@@ -96,66 +91,43 @@
     .leftEqualToView(self.personLogoImaView)
     .topSpaceToView(self.praiseLabel, 15);
     //
-    self.bottomGroupView.sd_layout
-        .leftEqualToView(self.personLogoImaView)
-        .topSpaceToView(self.picContainView, 10)
-        .rightSpaceToView(self.contentView, 20)
-        .heightIs(bottomGroupViewHeight);
-//
 }
 
 - (void)setModel:(TakeOrderQuotePriceModel*)model{
     _model = model;
     if (_model){
-        [self.personLogoImaView setImage:model.image];
-        self.personNameLabel.text = [model.personNameStr copy];
-        self.timeLabel.text = [model.timeStr copy];
-        self.detailLabel.text = [model.detailStr copy];
+        [self.personLogoImaView sd_setImageWithURL:[NSURL URLWithString:model.logoUrlStr]];
+        self.personNameLabel.text = model.personNameStr;
+        NSLog(@"!!!!!!!!!!model.timeStr=%@",model.timeStr);
+        self.timeLabel.text = model.timeStr;
+        self.detailLabel.text = [NSString stringWithFormat:@"详细要求：%@",model.detailStr];
         self.praiseLabel.text = [NSString stringWithFormat:@"成交价格： %@",model.praiseStr];
         self.ticketsNumberLabel.text = [NSString stringWithFormat:@"抢单名额 %@",model.ticketsNumberStr];
-        [self.picContainView setPicPathStringsArray:model.imageUrls];
+       
+        self.picContainView.backgroundColor = [UIColor redColor];
         //
-        
-        self.ticketsNumberLabel.sd_resetLayout
-        .rightEqualToView(self.detailLabel)
-        .widthIs(90)
-        .topSpaceToView(self.detailLabel, 15)
-        .heightIs(15);
-        
-        self.praiseLabel.sd_resetLayout
-        .leftEqualToView(self.detailLabel)
-        .rightSpaceToView(self.ticketsNumberLabel, 10)
-        .topEqualToView(self.ticketsNumberLabel)
-        .heightIs(15);
-
-        
+        self.ticketsNumberLabel.sd_layout
+        .topSpaceToView(self.detailLabel, 15);
+       
+        self.praiseLabel.sd_layout
+        .topEqualToView(self.ticketsNumberLabel);
         //
-        UIView *botView = nil;
-        //
+        UIView *botView = self.picContainView;
         if (model.imageUrls.count){
+            NSLog(@"!!!!!!!!!model.imageUrls.count = %ld",model.imageUrls.count);
+             [self.picContainView setPicPathStringsArray:model.imageUrls];
             self.picContainView.sd_layout
             .topSpaceToView(self.praiseLabel, 15);
             //
-            self.bottomGroupView.sd_resetLayout
-            .leftEqualToView(self.personLogoImaView)
-            .topSpaceToView(self.picContainView, 10)
-            .rightSpaceToView(self.contentView, leftSpace)
-            .heightIs(bottomGroupViewHeight);
-            botView = self.bottomGroupView;
-
+            botView = self.picContainView;
         }else{
-            self.bottomGroupView.sd_resetLayout
-            .leftEqualToView(self.personLogoImaView)
-            .topSpaceToView(self.praiseLabel, 10)
-            .rightSpaceToView(self.contentView, leftSpace)
-            .heightIs(bottomGroupViewHeight);
-            botView = self.bottomGroupView;
+            botView = self.praiseLabel;
         }
         //
         [self setupAutoHeightWithBottomView:botView bottomMargin:15];
-        
     }
 }
+
 
 
 - (void)awakeFromNib {
