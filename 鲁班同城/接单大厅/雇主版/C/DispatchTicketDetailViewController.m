@@ -61,8 +61,7 @@
 
 - (void)getData{
     //
-    if (self.orderIdStr.length){
-        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:1]};
+        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId]};
         [TDHttpTools getEmployerLauchPieDetail:paraDict success:^(id response) {
             NSDictionary *dict = response;
             NSLog(@"派单详情雇主版 dict=%@",dict);
@@ -90,8 +89,6 @@
         } failure:^(NSError *error) {
             
         }];
-        
-    }
    
     
 }
@@ -110,9 +107,8 @@
 }
 
 - (void)commentRequest{
-    NSInteger orderID =  [self.orderIdStr integerValue];
     NSLog(@"星星数量 %ld",xinxinView.starCount);
-    [TDHttpTools EmplyeerComment:@{@"orderId":[NSNumber numberWithInteger:6],@"score":[NSNumber numberWithInteger:xinxinView.starCount],@"remark":[NSString getResultStrBySeverStr:commentTextView.writeTextView.text]} success:^(id response) {
+    [TDHttpTools EmplyeerComment:@{@"orderId":[NSNumber numberWithInteger:self.orderId],@"score":[NSNumber numberWithInteger:xinxinView.starCount],@"remark":[NSString getResultStrBySeverStr:commentTextView.writeTextView.text]} success:^(id response) {
         NSLog(@"评价：%@",response);
         [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
     } failure:^(NSError *error) {

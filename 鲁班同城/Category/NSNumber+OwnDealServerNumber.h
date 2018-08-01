@@ -12,4 +12,7 @@
 //处理后台int数据可能为空的情况
 + (NSNumber*)getResultNumberBySeverStr:(NSNumber*)targetNumber;
 
+//处理后台bool数据可能为空的情况
++ (NSNumber*)getResultBoolNumberBySeverStr:(NSNumber*)targetNumber;
+
 @end

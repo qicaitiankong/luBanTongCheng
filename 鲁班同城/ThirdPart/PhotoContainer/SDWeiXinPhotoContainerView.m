@@ -103,7 +103,7 @@
         imageView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
         imageView.hidden = NO;
         NSURL *imageUrl = _picPathStringsArray[idx];
-        //[imageView setImage:[UIImage imageNamed:@"test02"]];
+        [imageView setImage:[UIImage imageNamed:@"test02"]];
         //[imageView sd_setImageWithURL:imageUrl];
         imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
     }
@@ -138,7 +138,7 @@
 
 - (CGFloat)itemWidthForPicPathArray:(NSArray *)array
 {
-    return  (SCREEN_WIDTH - 30 - 5 * 2) / 3;
+    return  IMAGE_VIEW_HEIGHT;
 //    if (array.count == 1) {
         //return 70;
 //    } else {
@@ -149,13 +149,13 @@
 
 - (NSInteger)perRowItemCountForPicPathArray:(NSArray *)array
 {
-    if (array.count < 3) {
-        return array.count;
-    } else if (array.count <= 4) {
-        return 2;
-    } else {
+//    if (array.count < 3) {
+//        return array.count;
+//    } else if (array.count <= 4) {
+//        return 2;
+//    } else {
         return 3;
-    }
+    //}
 }
 
 

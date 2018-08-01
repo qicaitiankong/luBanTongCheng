@@ -12,4 +12,8 @@
 
 @property (strong,nonatomic) UILabel *topTipLabel;
 
+
+- (void)giveOwnValue:(NSArray*)titlesArr;
+
+
 @end

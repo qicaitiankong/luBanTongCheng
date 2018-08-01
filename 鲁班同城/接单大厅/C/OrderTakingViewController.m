@@ -96,6 +96,7 @@
 
 //停止刷新加载
 - (void)stopRefreshOrLoad{
+    
     if (isRefresh){
         [self.tableView.mj_header endRefreshing];
         isRefresh = NO;
@@ -115,45 +116,47 @@
     if ([lzhGetAccountInfo getAccount].identityFlag == 0){//零工
         NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"page":[NSNumber numberWithInt:page],@"pageSize":@10};
         [TDHttpTools getReceiveOrderList:paraDict success:^(id response) {
-            NSDictionary *dict = response;
-            if ([dict allKeys].count){
-                NSLog(@"%@",dict);
-                NSDictionary *dataDict = dict[@"data"];
-                NSArray *dataArr = dataDict[@"list"];
-                if (dataArr.count){
-                    if (NO == self -> isLoad){
-                        [self.modelArr removeAllObjects];
+                    NSDictionary *dict = response;
+            NSLog(@"零工接单大厅%@",dict);
+
+                    if ([dict allKeys].count){
+                        NSDictionary *dataDict = dict[@"data"];
+                        NSArray *dataArr = dataDict[@"list"];
+                        if (dataArr.count){
+                            if (NO == self -> isLoad){
+                                [self.modelArr removeAllObjects];
+                            }
+                            for (NSDictionary *singleDict in dataArr){
+                                TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:singleDict];
+                                [self.modelArr addObject:model];
+                            }
+                            [self.tableView reloadData];
+                        }else{
+                            if (self->isLoad && self.page > 1){
+                                self.page --;
+                            }
+                        }
+                    }else{
+                        if (self->isLoad && self.page > 1){
+                            self.page --;
+                        }
                     }
-                    for (NSDictionary *singleDict in dataArr){
-                        TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:singleDict];
-                        [self.modelArr addObject:model];
-                    }
-                    [self.tableView reloadData];
-                }else{
-                    if (self->isLoad && self.page > 1){
-                        self.page --;
-                    }
-                }
-            }else{
-                if (self->isLoad && self.page > 1){
-                    self.page --;
-                }
-            }
             [self stopRefreshOrLoad];
         } failure:^(NSError *error) {
             if (self->isLoad && self.page > 1){
                 self.page --;
             }
             [self stopRefreshOrLoad];
-            
+            NSLog(@"零工接单大厅");
         }];
         
     }else{//雇主
         NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"page":[NSNumber numberWithInt:page],@"pageSize":@10};
         [TDHttpTools getLauchOrderList:paraDict success:^(id response) {
             NSDictionary *dict = response;
+             NSLog(@"雇主接单大厅%@",dict);
             if ([dict allKeys].count){
-                NSLog(@"%@",dict);
+               
                 NSDictionary *dataDict = dict[@"data"];
                 NSArray *dataArr = dataDict[@"list"];
                 if (dataArr.count){
@@ -192,13 +195,24 @@
     if ([lzhGetAccountInfo getAccount].identityFlag){
         DispatchTicketDetailViewController *dispatchDetailVC = [[DispatchTicketDetailViewController alloc]init];
         TakeOrderMainHallModel *model = self.modelArr[path.row];
-        dispatchDetailVC.orderIdStr = [NSString stringWithFormat:@"%ld",model.orderID];
+        dispatchDetailVC.orderId = model.orderID;
         [self.navigationController pushViewController:dispatchDetailVC animated:YES];
     }else{
         OrderTakingQuotePriceViewController *quotePriceVC = [[OrderTakingQuotePriceViewController alloc]init];
         TakeOrderMainHallModel *model = self.modelArr[path.row];
-        quotePriceVC.isBapJiaDetail = YES;
+        if (model.canReceive){
+            quotePriceVC.isBapJiaDetail = NO;
+        }else{
+            quotePriceVC.isBapJiaDetail = YES;
+        }
         quotePriceVC.orderId = model.orderID;
+        //刷新接单列表数据
+        WS(weakSelf);
+        quotePriceVC.refreshDataAfterTakeOrderBlock = ^{
+            weakSelf.page = 1;
+            [weakSelf.modelArr removeAllObjects];
+            [weakSelf getData:weakSelf.page];
+        };
         [self.navigationController pushViewController:quotePriceVC animated:YES];
     }
 }
@@ -261,7 +275,7 @@
     if ([lzhGetAccountInfo getAccount].identityFlag){//雇主
          DispatchTicketDetailViewController *dispatchDetailVC = [[DispatchTicketDetailViewController alloc]init];
          TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
-        dispatchDetailVC.orderIdStr = [NSString stringWithFormat:@"%ld",model.orderID];
+        dispatchDetailVC.orderId = model.orderID;
         [self.navigationController pushViewController:dispatchDetailVC animated:YES];
     }else{//零工
         OrderTakingQuotePriceDetailViewController *orderDetailVC = [[OrderTakingQuotePriceDetailViewController alloc]init];

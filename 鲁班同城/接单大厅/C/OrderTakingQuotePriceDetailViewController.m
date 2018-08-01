@@ -39,11 +39,11 @@
 @property (strong,nonatomic) NSString *telephoneStr;
 
 @property (strong,nonatomic) NSString *beiZhuStr;
-//我是否该派单雇佣
+//我是否被该派单雇佣
 @property (assign,nonatomic) BOOL isHiredMe;
+
 //我能否接单
 @property (assign,nonatomic) BOOL canTakeOrder;
-
 
 @end
 
@@ -107,7 +107,7 @@
         //NSInteger orderID = self.orderId
         //order id 写死了1 后期改过来
     
-        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:1],@"userId":[lzhGetAccountInfo getAccount].userID,@"msgId":[NSNumber numberWithInteger:1]};
+        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"userId":[lzhGetAccountInfo getAccount].userID,@"msgId":[NSNumber numberWithInteger:1]};
         //WS(weakSelf);
         [TDHttpTools getCasualTakeOrderDetail:paraDict success:^(id response) {
             NSDictionary *dict = response;
@@ -128,8 +128,8 @@
             self.addressStr =  [NSString getResultStrBySeverStr:dataDict[@"address"]];
             self.telephoneStr = [NSString getResultStrBySeverStr:dataDict[@"mobile"]];
             self.beiZhuStr = [NSString getResultStrBySeverStr:dataDict[@"remark"]];
-            self.isHiredMe = dataDict[@"isHiredMe"];
-            self.canTakeOrder = dataDict[@"canTakeOrder"];
+            self.isHiredMe = [dataDict[@"isHiredMe"] boolValue];
+            self.canTakeOrder = [dataDict[@"canReceive"] boolValue];
             __strong typeof(self)sself = self;
             //如果我被雇佣，则修改显示
             if (self.isHiredMe){
@@ -142,7 +142,6 @@
             }
             [self.tableView reloadData];
         } failure:^(NSError *error) {
-            
         }];
 }
 

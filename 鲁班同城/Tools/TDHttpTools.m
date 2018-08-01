@@ -231,8 +231,8 @@
     }];
     
 }
-//获取用户信息
-+(void)getUserInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+//获取零工用户信息
++(void)getCapsualUserInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
     NSDictionary *params = paraDict;
     
     NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/userInfo",kSERVER_HTTP_DXE];
@@ -244,6 +244,7 @@
                 success(dict);
             }else if (status == 1){
                 [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
             }
         }
     } failure:^(NSError *error) {
@@ -256,21 +257,6 @@
     
 }
 
-+(void)launchOder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
-    NSDictionary *params = paraDict;
-    
-    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/publishOrder",kSERVER_HTTP_DXE];
-    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
-        if (success) {
-            success(response);
-        }
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-    }];
-    
-}
 
 //工作职业列表
 +(void)getJobList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
@@ -322,6 +308,7 @@
                 success(dict);
             }else if (status == 1){
                 [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
             }
         }
     } failure:^(NSError *error) {
@@ -335,54 +322,6 @@
 }
 
 
-//派单大厅列表
-+(void)getLauchOrderList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
-    NSDictionary *params = paraDict;
-    
-    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/myPublishOrders",kSERVER_HTTP_DXE];
-    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
-        if (success) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
-            int status = [dict[@"status"] intValue];
-            if (status == 0){
-                success(dict);
-            }else if (status == 1){
-                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
-            }
-        }
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
-            [SVProgressHUD showErrorWithStatus:errorCode];
-        }
-    }];
-    
-}
-//雇主派单详情
-+(void)getEmployerLauchPieDetail:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
-    NSDictionary *params = paraDict;
-    
-    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/orderInfoHirer",kSERVER_HTTP_DXE];
-    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
-        if (success) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
-            int status = [dict[@"status"] intValue];
-            if (status == 0){
-                success(dict);
-            }else if (status == 1){
-                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
-            }
-        }
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
-            [SVProgressHUD showErrorWithStatus:errorCode];
-        }
-    }];
-    
-}
 
 
 //零工接单详情
@@ -398,6 +337,7 @@
                 success(dict);
             }else if (status == 1){
                 [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
             }
         }
     } failure:^(NSError *error) {
@@ -422,7 +362,8 @@
             if (status == 0){
                 success(dict);
             }else if (status == 1){
-                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                [SVProgressHUD showInfoWithStatus:dict[@"msg"]];
+                failure(nil);
             }
         }
     } failure:^(NSError *error) {
@@ -433,7 +374,13 @@
         }
     }];
 }
-//
+
+
+
+
+//雇主接口
+
+
 //雇佣
 +(void)EmplyeerEmploy:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
     NSDictionary *params = paraDict;
@@ -447,6 +394,7 @@
                 success(dict);
             }else if (status == 1){
                 [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
             }
         }
     } failure:^(NSError *error) {
@@ -470,6 +418,7 @@
                 success(dict);
             }else if (status == 1){
                 [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
             }
         }
     } failure:^(NSError *error) {
@@ -480,4 +429,97 @@
         }
     }];
 }
+
+//派单大厅列表
++(void)getLauchOrderList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/myPublishOrders",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
+
+//雇主派单详情
++(void)getEmployerLauchPieDetail:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/orderInfoHirer",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
+//派单
++(void)launchOder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/publishOrder",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            success(response);
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+//我的
++(void)getEmployerMyPage:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/hireMy",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
+
+
 @end

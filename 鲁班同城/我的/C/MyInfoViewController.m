@@ -27,6 +27,8 @@
 
 @property (strong,nonatomic) UITableView *tableView;
 
+@property (strong,nonatomic) NSDictionary *userInfoDict;
+
 @end
 
 @implementation MyInfoViewController
@@ -57,7 +59,35 @@
     [self addTableView:CGRectMake(0, STATUSBAR_HEIGHT, SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT) style:UITableViewStylePlain];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserTypeNoti:) name:USER_TYPE_UPDATE_NOTIFICATION_NAME object:nil];
     
+    [self getData];
+    
 }
+
+//
+- (void)getData{
+    WS(weakSelf);
+    if ([lzhGetAccountInfo getAccount].identityFlag){
+        [TDHttpTools getEmployerMyPage:@{@"userId":[lzhGetAccountInfo getAccount].userID} success:^(id response) {
+            
+            self.userInfoDict = response;
+            [self.tableView reloadData];
+            //
+            [weakSelf giveValue];
+            //
+        } failure:^(NSError *error) {
+            
+        }];
+    }else{
+        
+    }
+}
+- (void)giveValue{
+    NSURL *picUrl = [NSURL URLWithString:self.userInfoDict[@"headImg"]];
+    [headerView.userImageView sd_setImageWithURL:picUrl];
+    headerView.userNameLabel.text = self.userInfoDict[@"userName"];
+}
+
+
 
 - (void)initObject{
      cellImageArr = [[NSMutableArray alloc] init];
@@ -170,6 +200,7 @@
     [cell.rightLabel setText:title];
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSInteger accountFlag =  [lzhGetAccountInfo getAccount].identityFlag;
@@ -206,6 +237,7 @@
                 [self.navigationController pushViewController:searchVC animated:YES];
             }else{
                 OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
+                 personalInfoVC.targetUserID = [lzhGetAccountInfo getAccount].userID;
                 [self.navigationController pushViewController:personalInfoVC animated:YES];
             }
             
@@ -214,6 +246,7 @@
         case 4:{
             if (accountFlag){
                 OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
+                personalInfoVC.targetUserID = [lzhGetAccountInfo getAccount].userID;
                 [self.navigationController pushViewController:personalInfoVC animated:YES];
             }else{
                 SettingViewController *setVC = [[SettingViewController alloc]init];

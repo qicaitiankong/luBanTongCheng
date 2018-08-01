@@ -91,12 +91,42 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
 -(void)lauchOrder{
     
     NSInteger yuSuanMoney = 0;
-    NSString *yuSuanMoneyStr = yuSuanView.rightTextField.myTextField.text;
-    if (yuSuanMoneyStr.length != 0){
-        yuSuanMoney = [yuSuanMoneyStr integerValue];
+    NSString *mobileStr =    mobileView.rightTextField.myTextField.text;
+    NSString *addressStr =    addressView.rightTextView.writeTextView.text;
+    NSString *beiZhuStr =   [NSString getResultStrBySeverStr:beiZhuTextView.writeTextView.text] ;
+    NSString *yuSuanMoneyStr =  yuSuanView.rightTextField.myTextField.text;
+    //
+    if (mobileStr.length == 0){
+        [SVProgressHUD showInfoWithStatus:@"请输入手机号码"];
+        return;
     }
     
-    NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:1],@"userName":nameView.rightTextField.myTextField.text,@"mobile":mobileView.rightTextField.myTextField.text,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressView.rightTextField.myTextField.text,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuTextView.writeTextView.text,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
+    if (addressStr.length == 0){
+        [SVProgressHUD showInfoWithStatus:@"请输入地址"];
+        return;
+    }
+    if (self.selectedJobStr.length == 0){
+        [SVProgressHUD showInfoWithStatus:@"请选择工作类型"];
+        return;
+    }
+    if (self.selectedTechnoStr.length == 0){
+        [SVProgressHUD showInfoWithStatus:@"请选择技能"];
+        return;
+    }
+    //
+    if (yuSuanMoneyStr.length != 0){
+        yuSuanMoney = [yuSuanMoneyStr integerValue];
+    }else{
+        [SVProgressHUD showInfoWithStatus:@"请输入金额"];
+        return;
+    }
+    
+    if (self.selectedTimeStr.length == 0){
+        [SVProgressHUD showInfoWithStatus:@"请选择时间"];
+        return;
+    }
+    
+    NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:1],@"userName":nameView.rightTextField.myTextField.text,@"mobile":mobileStr,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressStr,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuStr,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
     
     [TDHttpTools launchOder:paraDict success:^(id response) {
         NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];

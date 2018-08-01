@@ -17,4 +17,7 @@
 
 @property (strong,nonatomic) MessageSoundView *soundView;
 
+- (void)giveOwnValue:(NSString*)detaileStr;
+
+
 @end

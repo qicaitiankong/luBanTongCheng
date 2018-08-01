@@ -16,7 +16,7 @@
     if (self){
         self.backgroundColor = [UIColor whiteColor];
         self.userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, frame.size.height * 0.05, frame.size.height * 0.36, frame.size.height * 0.36)];
-        self.userImageView.backgroundColor = [UIColor grayColor];
+        self.userImageView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
         self.userImageView.center = CGPointMake(frame.size.width / 2, self.userImageView.centerY);
         self.userImageView.layer.cornerRadius = self.userImageView.width / 2;
         self.userImageView.clipsToBounds = YES;

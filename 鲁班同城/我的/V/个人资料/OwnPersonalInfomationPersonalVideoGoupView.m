@@ -20,24 +20,26 @@
         self.topTipLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCBold:16] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         self.topTipLabel.frame = CGRectMake(15, 20, labelWidth, 20);
         [self addSubview:self.topTipLabel];
-        //
-        CGFloat beginLeftSpace = 15;
-        CGFloat horizontalSpace = 5;
-        CGFloat beginTopSpace = self.topTipLabel.bottom +  15;
-        CGFloat verticalSpace = 5;
-        CGFloat viewWidth = (frame.size.width - 2 * beginLeftSpace - 2 * horizontalSpace) / 3 ;
-        UIView *lastView = nil;
-        for (int k = 0; k < 6; k ++){
-            CustomerImageButt *imageButt = [[CustomerImageButt alloc]initWithFrame:CGRectMake(beginLeftSpace + (k % 3) * (horizontalSpace + viewWidth), beginTopSpace + (k / 3) * (verticalSpace + viewWidth), viewWidth, viewWidth)];
-            imageButt.imageView.backgroundColor = [UIColor colorWithHexString:@"#F5F5F5"];
-            [self addSubview:imageButt];
-            if (k == 5){
-                lastView = imageButt;
-            }
-        }
-         [self setFrame:CGRectMake(self.x, self.y, self.width, lastView.bottom + 10)];
+         UIView *lastView = nil;
+        self.picContainView = [SDWeiXinPhotoContainerView new];
+        [self addSubview:self.picContainView];
+        
+        self.picContainView.sd_layout
+        .leftSpaceToView(self, 15)
+        .topSpaceToView(self.topTipLabel, 15);
+        
+        lastView = self.picContainView;
+         [self setFrame:CGRectMake(self.x, self.y, self.width, lastView.bottom)];
     }
     return self;
 }
+
+- (void)givePictureArr:(NSArray*)arr{
+    [self.picContainView setPicPathStringsArray:arr];
+    
+    //[self setupAutoHeightWithBottomView:self.picContainView bottomMargin:10];
+    
+}
+
 
 @end

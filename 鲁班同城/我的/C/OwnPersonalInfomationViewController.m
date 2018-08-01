@@ -22,6 +22,8 @@
     OwnPersonalInfomationPersonalServiceTypeGoupView *serviceTypeView;
     OwnPersonalInfomationPersonalVideoGoupView *videoView;
     OwnPersonalInfomationPersonalVideoGoupView *pictureView;
+    //图片控件高度，先最多显示3张，高度写死
+    CGFloat pictureViewGroupHeight;
 }
 //
 @property (strong,nonatomic) NSMutableArray *personalTechnologyArr;
@@ -52,6 +54,7 @@
     self.personalJobArr = [[NSMutableArray alloc]init];
     self.personalVideoArr = [[NSMutableArray alloc]init];
     self.personalPictureArr = [[NSMutableArray alloc]init];
+    pictureViewGroupHeight = IMAGE_VIEW_HEIGHT + 5 + 55;
 }
 
 - (void)addViews{
@@ -87,11 +90,11 @@
     serviceTypeView.topTipLabel.text = @"服务类型";
     [baseScrollView addSubview:serviceTypeView];
     //
-    videoView = [[OwnPersonalInfomationPersonalVideoGoupView alloc]initWithFrame:CGRectMake(0, serviceTypeView.bottom + 15, baseScrollView.width, 20)];
+    videoView = [[OwnPersonalInfomationPersonalVideoGoupView alloc]initWithFrame:CGRectMake(0, serviceTypeView.bottom + 15, baseScrollView.width, pictureViewGroupHeight)];
     videoView.topTipLabel.text = @"技能-视频秀";
     [baseScrollView addSubview:videoView];
     //
-    pictureView = [[OwnPersonalInfomationPersonalVideoGoupView alloc]initWithFrame:CGRectMake(0, videoView.bottom + 15, baseScrollView.width, 20)];
+    pictureView = [[OwnPersonalInfomationPersonalVideoGoupView alloc]initWithFrame:CGRectMake(0, videoView.bottom + 15, baseScrollView.width, pictureViewGroupHeight)];
     pictureView.topTipLabel.text = @"技能-图片秀";
     [baseScrollView addSubview:pictureView];
     //
@@ -99,40 +102,44 @@
 }
 //
 - (void)getUserInfo{
-    NSDictionary *praDict = @{@"userId":[lzhGetAccountInfo getAccount].userID};
-    WS(weakSelf);
-    [TDHttpTools getUserInfo:praDict success:^(id response) {
-        NSDictionary *dataDict = response[@"data"];
-        if ([dataDict allKeys].count){
-            //写入plist
-            [weakSelf makeDictToWritePlist:dataDict];
-            NSNumber *starNumber = [NSNumber getResultNumberBySeverStr:dataDict[@"score"]];
-            weakSelf.starCount = [starNumber integerValue];
-            
-
-            //
-//            NSArray *techArr = dataDict[@"technologys"];
-//            NSArray *jobArr = dataDict[@"professions"];
-//            NSArray *videoArr = dataDict[@"technologysVideo"];
-//            NSArray *picArr = dataDict[@"technologysPic"];
-//            if (techArr.count){
-//                [weakSelf.personalTechnologyArr addObjectsFromArray:techArr];
-//            }
-//            if (jobArr.count){
-//                [weakSelf.personalJobArr addObjectsFromArray:jobArr];
-//            }
-//            if (videoArr.count){
-//                [weakSelf.personalVideoArr addObjectsFromArray:videoArr];
-//            }
-//            if (picArr.count){
-//                [weakSelf.personalPictureArr addObjectsFromArray:picArr];
-//            }
-            //界面赋值
-             [weakSelf giveValueToView];
-        }
-    } failure:^(NSError *error) {
+    //零工
+    if ([lzhGetAccountInfo getAccount].identityFlag == 0){
+                NSDictionary *praDict = @{@"userId":self.targetUserID};
+                WS(weakSelf);
+                 [weakSelf giveValueToView];
+                [TDHttpTools getCapsualUserInfo:praDict success:^(id response) {
+                    NSDictionary *dataDict = response[@"data"];
+                    NSLog(@"零工用户信息:%@",dataDict);
+                    if ([dataDict allKeys].count){
+                        //写入plist
+                        NSNumber *starNumber = [NSNumber getResultNumberBySeverStr:dataDict[@"score"]];
+                        weakSelf.starCount = [starNumber integerValue];
+                    
+                        NSArray *techArr = dataDict[@"technologys"];
+                        NSArray *jobArr = dataDict[@"professions"];
+                        NSArray *videoArr = dataDict[@"technologysVideo"];
+                        NSArray *picArr = dataDict[@"technologysPic"];
+                        if (techArr.count){
+                            [weakSelf.personalTechnologyArr addObjectsFromArray:techArr];
+                        }
+                        if (jobArr.count){
+                            [weakSelf.personalJobArr addObjectsFromArray:jobArr];
+                        }
+                        if (videoArr.count){
+                            [weakSelf.personalVideoArr addObjectsFromArray:videoArr];
+                        }
+                        if (picArr.count){
+                            [weakSelf.personalPictureArr addObjectsFromArray:picArr];
+                        }
+                        //界面赋值
+                        [self giveValueToView];
+                    }
+                } failure:^(NSError *error) {
+                    
+                }];
+    }else if ([lzhGetAccountInfo getAccount].identityFlag == 1){//雇主
         
-    }];
+    }
 }
 
 - (void)giveValueToView{
@@ -142,25 +149,77 @@
     topPartView.concernLabel.text = [NSString stringWithFormat:@"%ld关注",[lzhGetAccountInfo getAccount].fousCount];
     topPartView.sexAndHomeLabel.text = [NSString stringWithFormat:@"%@ %@ %@",[lzhGetAccountInfo getAccount].sexStr,[GetLocationICitynfo getLocationInfo].provinceStr,[GetLocationICitynfo getLocationInfo].cityStr];
     [topPartView.starGroupView setYellowStar:self.starCount];
+    //个人介绍
+    [personalIntroduceView giveOwnValue:@"个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍"];
+    //技术
+    NSMutableArray *targetTechnologyArr = [self getTargetTechnologyArr:self.personalTechnologyArr];
+    [personalTechnologyView giveOwnValue:targetTechnologyArr];
+    personalTechnologyView.frame = CGRectMake(personalTechnologyView.x, personalIntroduceView.bottom + 15, personalTechnologyView.width, personalTechnologyView.height);
+    
+    //服务类型
+    NSMutableArray *targetJobArr = [self getTargetTechnologyArr:self.personalJobArr];
+    [serviceTypeView giveOwnValue:targetJobArr];
+    serviceTypeView.frame = CGRectMake(serviceTypeView.x, personalTechnologyView.bottom + 15, serviceTypeView.width, serviceTypeView.height);
+    //视屏
+    [videoView givePictureArr:self.personalVideoArr];
+    videoView.frame = CGRectMake(videoView.x, serviceTypeView.bottom + 15, videoView.width, pictureViewGroupHeight);
+   //图片
+    [pictureView givePictureArr:self.personalPictureArr];
+    
+    pictureView.frame = CGRectMake(pictureView.x, videoView.bottom + 15, pictureView.width, pictureViewGroupHeight);
+    //
+    UIView *botView = pictureView;
+     [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, botView.bottom + 10)];
+    //没图片没视屏
+//    if (self.personalPictureArr.count == 0 && self.personalVideoArr.count == 0){
+//        NSLog(@"没图片没视屏");
+//        botView = serviceTypeView;
+//        videoView.hidden =YES;
+//        pictureView.hidden = YES;
+//         [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, botView.bottom + 10)];
+//    //有图片没视频
+//    }else if (self.personalPictureArr.count != 0){
+//         NSLog(@"有图片没视频");
+//        videoView.hidden = YES;
+//        pictureView.frame = CGRectMake(0, serviceTypeView.bottom + 15, baseScrollView.width, pictureViewGroupHeight);
+//        [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, serviceTypeView.bottom + 15 + pictureViewGroupHeight +10)];
+//    }else if(self.personalVideoArr.count != 0){   //有视屏没图片
+//         NSLog(@"有视屏没图片");
+//        pictureView.hidden = YES;
+//        [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, serviceTypeView.bottom + 15 + pictureViewGroupHeight +10)];
+//    }else{
+//        //有图片有视屏
+//        NSLog(@"有图片有视屏");
+//
+//    }
+    
+}
+//将获取的技术，工作等数组数据解析为需要的字符串数组
+- (NSMutableArray*)getTargetTechnologyArr:(NSArray*)originArr{
+    NSMutableArray *localTechnologyArr = [[NSMutableArray alloc]init];
+    for (NSDictionary *localDict in originArr){
+        [localTechnologyArr addObject:localDict[@"name"]];
+    }
+    return localTechnologyArr;
 }
 
 
-- (void)makeDictToWritePlist:(NSDictionary*)dict{
-    //
-    NSString *userName = [dict[@"username"] copy];
-    NSString *realName = [dict[@"realName"] copy];
-    NSString *gender = [dict[@"gender"] copy];
-    NSString *headImg = [dict[@"headImg"] copy];
-    NSString *mobile = [dict[@"mobile"] copy];
-    NSString *userType = [dict[@"userType"] copy];
-    NSNumber *age = dict[@"age"];
-    NSNumber *focusNum = dict[@"focusNum"];
-    NSNumber *fansNum = dict[@"fansNum"];
-    NSNumber *userID = dict[@"id"];
-    //
-    NSDictionary *makeDict = @{@"userName":userName,@"realName":realName,@"gender":gender,@"age":age,@"headImg":headImg,@"mobile":mobile,@"userType":userType,@"userId":userID,@"focusNum":focusNum,@"fansNum":fansNum};
-    [[lzhGetAccountInfo getAccount] writeToAccount:makeDict];
-}
+//- (void)makeDictToWritePlist:(NSDictionary*)dict{
+//    //
+//    NSString *userName =  [NSString getResultStrBySeverStr:dict[@"username"]];
+//    NSString *realName = [NSString getResultStrBySeverStr: dict[@"realName"]];
+//    NSString *gender = [NSString getResultStrBySeverStr: dict[@"gender"]];
+//    NSString *headImg = [NSString getResultStrBySeverStr: dict[@"headImg"]];
+//    NSString *mobile = [NSString getResultStrBySeverStr: dict[@"mobile"]];
+//    NSString *userType = [NSString getResultStrBySeverStr: dict[@"userType"]];
+//    NSNumber *age = [NSNumber getResultNumberBySeverStr: dict[@"age"]];
+//    NSNumber *focusNum = [NSNumber getResultNumberBySeverStr:dict[@"focusNum"]];
+//    NSNumber *fansNum = [NSNumber getResultNumberBySeverStr:dict[@"fansNum"]];
+//    NSNumber *userID = [NSNumber getResultNumberBySeverStr:dict[@"id"]];
+//    //
+//    NSDictionary *makeDict = @{@"userName":userName,@"realName":realName,@"gender":gender,@"age":age,@"headImg":headImg,@"mobile":mobile,@"userType":userType,@"userId":userID,@"focusNum":focusNum,@"fansNum":fansNum};
+//    [[lzhGetAccountInfo getAccount] writeToAccount:makeDict];
+//}
 
 
 

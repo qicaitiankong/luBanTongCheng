@@ -103,9 +103,7 @@
         self.detailLabel.text = [NSString stringWithFormat:@"详细要求：%@",model.detailStr];
         self.praiseLabel.text = [NSString stringWithFormat:@"成交价格： %@",model.praiseStr];
         self.ticketsNumberLabel.text = [NSString stringWithFormat:@"抢单名额 %@",model.ticketsNumberStr];
-       
-        self.picContainView.backgroundColor = [UIColor redColor];
-        //
+               //
         self.ticketsNumberLabel.sd_layout
         .topSpaceToView(self.detailLabel, 15);
        
@@ -113,11 +111,10 @@
         .topEqualToView(self.ticketsNumberLabel);
         //
         UIView *botView = self.picContainView;
+        [self.picContainView setPicPathStringsArray:model.imageUrls];
+
         if (model.imageUrls.count){
             NSLog(@"!!!!!!!!!model.imageUrls.count = %ld",model.imageUrls.count);
-             [self.picContainView setPicPathStringsArray:model.imageUrls];
-            self.picContainView.sd_layout
-            .topSpaceToView(self.praiseLabel, 15);
             //
             botView = self.picContainView;
         }else{

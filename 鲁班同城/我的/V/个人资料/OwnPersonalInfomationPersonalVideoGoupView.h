@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SDWeiXinPhotoContainerView.h"
+
 
 @interface OwnPersonalInfomationPersonalVideoGoupView : UIView
 
 @property (strong,nonatomic) UILabel *topTipLabel;
+
+@property (strong,nonatomic) SDWeiXinPhotoContainerView *picContainView;
+
+- (void)givePictureArr:(NSArray*)arr;
 
 
 @end

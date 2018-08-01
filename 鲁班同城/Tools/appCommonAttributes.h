@@ -88,6 +88,10 @@
 #define SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
+//九宫格单个图片高度
+#define IMAGE_VIEW_HEIGHT (SCREEN_WIDTH - 30 - 5 * 2) / 3
+
+
 #define  FU_iPhoneX (SCREEN_WIDTH == 375.f && SCREEN_HEIGHT == 812.f ? YES : NO)
 
 #define  StatusBarAndNavigationBarHeight  (FU_iPhoneX ? 88.f : 64.f)

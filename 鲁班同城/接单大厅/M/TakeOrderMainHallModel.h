@@ -29,7 +29,13 @@
 
 @property (strong,nonatomic) NSString *ticketsNumberStr;
 //1:抢单，2:查看
-@property (assign,nonatomic) NSInteger kindFlag;
+//@property (assign,nonatomic) NSInteger kindFlag;
+//能否接单（抢单）。true：能。false：不能。
+@property (assign,nonatomic) BOOL canReceive;
+////当前用户有没有被雇佣
+@property (assign,nonatomic) BOOL isHiredMe;
+
+
 
 + (TakeOrderMainHallModel*)setModelFromDict:(NSDictionary*)dict;
 

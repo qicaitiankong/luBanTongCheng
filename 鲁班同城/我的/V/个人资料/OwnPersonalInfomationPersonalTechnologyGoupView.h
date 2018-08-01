@@ -12,6 +12,9 @@
 @interface OwnPersonalInfomationPersonalTechnologyGoupView : UIView
 @property (strong,nonatomic) UILabel *topTipLabel;
 
-@property (strong,nonatomic) MessageSoundView *soundView;
+//@property (strong,nonatomic) MessageSoundView *soundView;
+
+
+- (void)giveOwnValue:(NSArray*)titlesArr;
 
 @end

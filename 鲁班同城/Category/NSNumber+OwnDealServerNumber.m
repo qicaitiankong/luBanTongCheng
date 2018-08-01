@@ -19,5 +19,16 @@
     }
     return resultNum;
 }
+//
++ (NSNumber*)getResultBoolNumberBySeverStr:(NSNumber*)targetNumber{
+    NSNumber *resultNum = targetNumber;
+    if ([resultNum isKindOfClass:[NSNull class]]){
+        resultNum = [NSNumber numberWithBool:NO];
+    }else{
+        resultNum = targetNumber;
+    }
+    return resultNum;
+}
+
 
 @end

@@ -62,7 +62,7 @@
         //msgId:用于接单成功后发过来的通知消息标记已读未读
         //NSInteger orderID = [self.orderIdStr integerValue];
         //order id 写死了1 后期改过来
-        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:1],@"userId":[lzhGetAccountInfo getAccount].userID,@"msgId":[NSNumber numberWithInteger:1]};
+        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"userId":[lzhGetAccountInfo getAccount].userID,@"msgId":[NSNumber numberWithInteger:1]};
         [TDHttpTools getCasualTakeOrderDetail:paraDict success:^(id response) {
             NSDictionary *dict = response;
             NSLog(@"接单详情零工版 dict=%@",dict);
@@ -85,6 +85,7 @@
             for(int k = 0; k < 3; k ++){
                 [self.singleModel.imageUrls addObject:@"https://image.baidu.com/search/detail?"];
             }
+            
             NSArray *qiangBiaoArr = dataDict[@"list"];
             for (NSDictionary *localDict in qiangBiaoArr){
                 TakeOrderQuotePriceModel *localModel = [TakeOrderQuotePriceModel setModelFromDict:localDict];
@@ -116,6 +117,12 @@
     [TDHttpTools CasualTakeOrder:paraDict success:^(id response) {
         NSDictionary *webDict = response;
         NSLog(@"webDict:%@",webDict);
+        [SVProgressHUD showSuccessWithStatus:webDict[@"msg"]];
+        //回到列零工列表刷新界面
+        if (self.refreshDataAfterTakeOrderBlock){
+            self.refreshDataAfterTakeOrderBlock();
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
         
     }];
@@ -153,37 +160,39 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *parentCell = nil;
     if (indexPath.section == 0){
-            static NSString *cellFlag = @"cellFlag";
-            parentCell =  [tableView dequeueReusableCellWithIdentifier:cellFlag];
-            if (nil == parentCell){
+        static NSString *cellFlag = @"cellFlag";
                 if (self.isBapJiaDetail){//报价详情
-                    
-                    TakeOrderQuotePriceSecondUseTableViewCell *cell = [[TakeOrderQuotePriceSecondUseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
-                    cell.model = self.singleModel;
-                    parentCell = cell;
+                    TakeOrderQuotePriceSecondUseTableViewCell *firstCell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
+                    if (nil == firstCell){
+                        firstCell = [[TakeOrderQuotePriceSecondUseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+                    }
+                    firstCell.model = self.singleModel;
+                    parentCell = firstCell;
                 }else{//报价
                     WS(weakSelf);
-                    TakeOrderQuotePriceTableViewCell *cell = [[TakeOrderQuotePriceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
-                    //指定控件
-                    weakSelf.moneyField = cell.bottomGroupView.moneyTextfield.myTextField;
-                    weakSelf.beiZhuTextView = cell.bottomGroupView.beiZhuTextView.writeTextView;
-                    cell.bottomGroupView.takeOrderButt.clickButtBlock = ^{
-                        [weakSelf takeOrderHandler];
+                    TakeOrderQuotePriceTableViewCell *secondCell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
+                    if (nil == secondCell){
+                        secondCell = [[TakeOrderQuotePriceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+                        //指定控件
+                        weakSelf.moneyField = secondCell.bottomGroupView.moneyTextfield.myTextField;
+                        weakSelf.beiZhuTextView = secondCell.bottomGroupView.beiZhuTextView.writeTextView;
+                        secondCell.bottomGroupView.takeOrderButt.clickButtBlock = ^{
+                            [weakSelf takeOrderHandler];
                         };
-                    cell.model = self.singleModel;
-                    parentCell = cell;
+                    }
+                    
+                    secondCell.model = self.singleModel;
+                    parentCell = secondCell;
                 }
-                
-            }
         
     }else{
         static NSString *cellFlag = @"cellFlag02";
-        TakeOrderQuotePriceQiangBiaoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
-        if (nil == cell){
-            cell = [[TakeOrderQuotePriceQiangBiaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag cellHeight:SCREEN_HEIGHT * 0.12];
+        TakeOrderQuotePriceQiangBiaoTableViewCell *thirdCell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
+        if (nil == thirdCell){
+            thirdCell = [[TakeOrderQuotePriceQiangBiaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag cellHeight:SCREEN_HEIGHT * 0.12];
         }
-        cell.model = self.modelArr[indexPath.row];
-        parentCell = cell;
+        thirdCell.model = self.modelArr[indexPath.row];
+        parentCell = thirdCell;
     }
     return parentCell;
 }
