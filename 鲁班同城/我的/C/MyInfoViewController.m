@@ -130,20 +130,36 @@
 
 //切换身份
 - (void)exchangeIndentity{
+    NSLog(@"??????????userid=%ld",[[lzhGetAccountInfo getAccount].userID integerValue]);
+    [TDHttpTools exchangeUserIdentity:@{@"userId":[lzhGetAccountInfo getAccount].userID} success:^(id response) {
+        [SVProgressHUD showInfoWithStatus:response[@"msg"]];
+        NSLog(@"!!!!!!!!!!dict=%@ 后台切换为了%@",response,response[@"data"]);
+        AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        lzhGetAccountInfo *accountInfo = [lzhGetAccountInfo getAccount];
+        
+        NSDictionary *dataDict = response[@"data"];
+        NSInteger identityFlagNum = [dataDict[@"userType"] integerValue];
+        NSDictionary *infoDict = accountInfo.infoDict;
+        if (identityFlagNum == 1){//已经切换为了零工
+            [infoDict setValue:@"雇主" forKey:@"userType"];
+            
+            [accountInfo writeToAccount:infoDict];
+            [appDelegate setupViewControllersForEmployment];
+            
+        }else if (identityFlagNum == 2){//已经切换为了雇主
+            //
+            [infoDict setValue:@"零工" forKey:@"userType"];
+            [accountInfo writeToAccount:infoDict];
+            [appDelegate setupViewControllersForCasualLabour];
+        }
+        //NSLog(@"切换身份%ld", [lzhGetAccountInfo getAccount].identityFlag);
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+    
    
-    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    lzhGetAccountInfo *accountInfo = [lzhGetAccountInfo getAccount];
-    NSDictionary *infoDict = accountInfo.infoDict;
-    if (accountInfo.identityFlag == 0){
-        [infoDict setValue:@"雇主" forKey:@"userType"];
-        [accountInfo writeToAccount:infoDict];
-        [appDelegate setupViewControllersForEmployment];
-    }else{
-        [infoDict setValue:@"零工" forKey:@"userType"];
-        [accountInfo writeToAccount:infoDict];
-        [appDelegate setupViewControllersForCasualLabour];
-    }
-     NSLog(@"切换身份%ld", [lzhGetAccountInfo getAccount].identityFlag);
 }
 
 

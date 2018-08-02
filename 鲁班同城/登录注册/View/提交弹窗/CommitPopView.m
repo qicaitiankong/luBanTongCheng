@@ -9,6 +9,7 @@
 #import "CommitPopView.h"
 
 @implementation CommitPopView
+@synthesize tipLabel;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -24,7 +25,7 @@
         [self addSubview:logoImageView];
         //
         CGRect labelRect = CGRectMake(0, logoImageView.bottom + 17, frame.size.width, 16);
-        UILabel *tipLabel = [[CustomeLzhLabel alloc] initWithCustomerParamer:[UIFont getPingFangSCBold:16] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:1];
+         tipLabel = [[CustomeLzhLabel alloc] initWithCustomerParamer:[UIFont getPingFangSCBold:16] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:1];
         tipLabel.text = @"提交成功";
         tipLabel.frame = labelRect;
         [self addSubview:tipLabel];

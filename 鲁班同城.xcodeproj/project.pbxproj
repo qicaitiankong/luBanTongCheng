@@ -309,6 +309,7 @@
 		185ABF3C20F8771A00188520 /* searchBiaoQian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185ABF3920F8771900188520 /* searchBiaoQian@3x.png */; };
 		185ABF3D20F8771A00188520 /* searchBiaoQian.png in Resources */ = {isa = PBXBuildFile; fileRef = 185ABF3A20F8771900188520 /* searchBiaoQian.png */; };
 		185ABF3E20F8771A00188520 /* searchBiaoQian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185ABF3B20F8771900188520 /* searchBiaoQian@2x.png */; };
+		185D39E42112D95E008E224F /* OwnPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D39E32112D95E008E224F /* OwnPopView.m */; };
 		186037322109C5CD002B5FDD /* rightSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 186037312109C5CD002B5FDD /* rightSelected.png */; };
 		186EBE1720EDA04200D0F54E /* RdvtarbarBigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186EBE1620EDA04200D0F54E /* RdvtarbarBigView.m */; };
 		186EBE1B20EDDF1300D0F54E /* experience@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186EBE1820EDDF1200D0F54E /* experience@2x.png */; };
@@ -916,6 +917,8 @@
 		185ABF3920F8771900188520 /* searchBiaoQian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchBiaoQian@3x.png"; sourceTree = "<group>"; };
 		185ABF3A20F8771900188520 /* searchBiaoQian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchBiaoQian.png; sourceTree = "<group>"; };
 		185ABF3B20F8771900188520 /* searchBiaoQian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchBiaoQian@2x.png"; sourceTree = "<group>"; };
+		185D39E22112D95E008E224F /* OwnPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPopView.h; sourceTree = "<group>"; };
+		185D39E32112D95E008E224F /* OwnPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPopView.m; sourceTree = "<group>"; };
 		186037312109C5CD002B5FDD /* rightSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightSelected.png; sourceTree = "<group>"; };
 		186EBE1520EDA04200D0F54E /* RdvtarbarBigView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RdvtarbarBigView.h; sourceTree = "<group>"; };
 		186EBE1620EDA04200D0F54E /* RdvtarbarBigView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RdvtarbarBigView.m; sourceTree = "<group>"; };
@@ -1315,6 +1318,8 @@
 				187892DA210EA1C5002A5798 /* KeyboardToolsView.m */,
 				187892DC210EE1D9002A5798 /* TelephoneNumberTools.h */,
 				187892DD210EE1D9002A5798 /* TelephoneNumberTools.m */,
+				185D39E22112D95E008E224F /* OwnPopView.h */,
+				185D39E32112D95E008E224F /* OwnPopView.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -2994,6 +2999,7 @@
 				1824F77D20EF44CF00E99823 /* CustomerLabelView.m in Sources */,
 				1832B9A920F5D48700D6CE4F /* OrderTakingQuotePriceViewController.m in Sources */,
 				1443C59520E331120009E82F /* FirstPageViewController.m in Sources */,
+				185D39E42112D95E008E224F /* OwnPopView.m in Sources */,
 				1853690520EA11C10053A5D4 /* WaterCellRecuritJobView.m in Sources */,
 				188CB37520FC7BC100302C94 /* DispatchTicketDetailViewController.m in Sources */,
 				181FCC0220F737210044B055 /* TakeOrderQuotePriceDetaiSectionView.m in Sources */,

@@ -29,14 +29,13 @@
         .topSpaceToView(self.topTipLabel, 15);
         
         lastView = self.picContainView;
-         [self setFrame:CGRectMake(self.x, self.y, self.width, lastView.bottom)];
+         [self setFrame:CGRectMake(self.x, self.y, self.width, self.topTipLabel.bottom + 10)];
     }
     return self;
 }
 
 - (void)givePictureArr:(NSArray*)arr{
     [self.picContainView setPicPathStringsArray:arr];
-    
     //[self setupAutoHeightWithBottomView:self.picContainView bottomMargin:10];
     
 }

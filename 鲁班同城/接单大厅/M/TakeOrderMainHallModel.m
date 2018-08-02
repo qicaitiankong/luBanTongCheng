@@ -32,6 +32,12 @@
         localModel.orderNumberStr = [dict[@"orderSn"] copy];
         localModel.canReceive = [[NSNumber getResultBoolNumberBySeverStr:dict[@"canReceive"]] boolValue];
         localModel.isHiredMe = [[NSNumber getResultBoolNumberBySeverStr:dict[@"isHiredMe"]] boolValue];
+        if ([dict[@"state"] isKindOfClass:[NSNull class]]){
+            localModel.orderState = -1;
+        }else{
+            localModel.orderState = [dict[@"state"] integerValue];
+        }
+        
     }else{
     }
     return localModel;

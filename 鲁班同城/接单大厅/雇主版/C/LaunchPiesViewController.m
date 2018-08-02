@@ -126,7 +126,7 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
         return;
     }
     
-    NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:1],@"userName":nameView.rightTextField.myTextField.text,@"mobile":mobileStr,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressStr,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuStr,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
+    NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"userName":nameView.rightTextField.myTextField.text,@"mobile":mobileStr,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressStr,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuStr,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
     
     [TDHttpTools launchOder:paraDict success:^(id response) {
         NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];

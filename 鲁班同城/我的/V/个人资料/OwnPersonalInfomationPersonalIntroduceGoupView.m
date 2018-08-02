@@ -26,7 +26,7 @@
          self.topTipLabel.frame = CGRectMake(15, 20, labelWidth, 20);
         [self addSubview:self.topTipLabel];
         //
-        NSString *testStr = @"个人介绍";
+        NSString *testStr = @"";
         CGFloat labelHeight = [LzhReturnLabelHeight getLabelHeight:testStr font:[UIFont getPingFangSCMedium:16] width:labelWidth];
         self.detaileLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:0];
         self.detaileLabel.frame = CGRectMake(self.topTipLabel.left, self.topTipLabel.bottom + 20, labelWidth, labelHeight);
@@ -36,13 +36,16 @@
         //
         self.soundView = [[MessageSoundView alloc]initWithFrame:CGRectMake(self.detaileLabel.left, self.detaileLabel.bottom + 20, 260, 40)];
         [self addSubview:self.soundView];
+        self.soundView.hidden = YES;
         //
-        [self setFrame:CGRectMake(self.x, self.y, self.width, self.soundView.bottom + 10)];
+        [self setFrame:CGRectMake(self.x, self.y, self.width, self.topTipLabel.bottom + 10)];
     }
     return self;
 }
 
 - (void)giveOwnValue:(NSString*)detaileStr{
+    self.soundView.hidden = NO;
+    
     NSString *testStr = detaileStr;
     CGFloat labelHeight = [LzhReturnLabelHeight getLabelHeight:testStr font:[UIFont getPingFangSCMedium:16] width:labelWidth];
     self.detaileLabel.frame = CGRectMake(self.topTipLabel.left, self.topTipLabel.bottom + 20, labelWidth, labelHeight);

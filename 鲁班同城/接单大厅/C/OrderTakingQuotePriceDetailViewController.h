@@ -12,8 +12,10 @@
 @interface OrderTakingQuotePriceDetailViewController : BaseDisplayNaviViewController
 
 @property (assign,nonatomic) NSInteger orderId;
+//单子状态(针对于该派单的而不是当前用户的)
+@property (assign,nonatomic) NSInteger stateFlag;
 
-
+@property (copy,nonatomic) void (^refreshDataAfterTakeOrderBlock)(void);
 
 
 @end

@@ -61,6 +61,7 @@
 
 - (void)getData{
     //
+    NSLog(@"\n\n???????????????派单详情雇主版orderid=%ld \n\n",self.orderId);
         NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId]};
         [TDHttpTools getEmployerLauchPieDetail:paraDict success:^(id response) {
             NSDictionary *dict = response;
@@ -90,15 +91,15 @@
             
         }];
    
-    
 }
 
 - (void)payHandler{
     
 }
 
-- (void)employeerEmploy{
-    [TDHttpTools EmplyeerEmploy:@{@"receiveOrderId":[NSNumber numberWithInteger:5]} success:^(id response) {
+- (void)employeerEmploy:(NSIndexPath*)path{
+    DispatchTicketDetailBaoJiaModel *model = self.modelArr[path.row];
+    [TDHttpTools EmplyeerEmploy:@{@"receiveOrderId":model.receiveOrderIdNum} success:^(id response) {
         NSLog(@"雇佣：%@",response);
         [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
     } failure:^(NSError *error) {
@@ -116,12 +117,14 @@
     }];
 }
 
-
 - (void)dealButtClick:(NSInteger)flag path:(NSIndexPath*)indexPath{
     NSLog(@"path.row=%ld",indexPath.row);
     switch (flag) {
         case 0:{
             NSLog(@"查看");
+            DispatchTicketDetailBaoJiaModel *model = self.modelArr[indexPath.row];
+            model.shouldDisplayBottomView = YES;
+            [self.tableView reloadData];
         }
             break;
         case 1:{
@@ -144,11 +147,8 @@
         case 2:{
              NSLog(@"雇佣");
             [self displayPopView];
-            DispatchTicketDetailBaoJiaModel *model = self.modelArr[indexPath.row];
-            model.shouldDisplayBottomView = YES;
-            [self.tableView reloadData];
             //
-            [self employeerEmploy];
+            [self employeerEmploy:indexPath];
         }
             break;
         case 3:{

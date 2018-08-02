@@ -31,7 +31,7 @@
     CGFloat height = SCREEN_HEIGHT * 0.044;
     CGFloat horizontalSpace = (self.width - 3 *viewWidth) / 4;
     CGFloat verticalSpace = 0;
-    UIView *lastSingleView = nil;
+    UIView *lastSingleView = self.topTipLabel;
     for (int k = 0; k < localTitleArr.count; k ++){
         verticalSpace = self.topTipLabel.bottom + 15 + (k / 3) * 15 + height * (k / 3);
         CustomerLabelView *singleView = [[CustomerLabelView alloc]initWithFrame:CGRectMake(horizontalSpace * (k % 3 + 1) + viewWidth * (k % 3),verticalSpace , viewWidth, height)];

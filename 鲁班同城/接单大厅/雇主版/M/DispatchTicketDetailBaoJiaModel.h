@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface DispatchTicketDetailBaoJiaModel : NSObject
+//接单（抢单）记录的id
+@property (strong,nonatomic) NSNumber *receiveOrderIdNum;
 
 @property (strong,nonatomic) NSString *pictureUrlStr;
 

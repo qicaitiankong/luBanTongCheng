@@ -25,9 +25,10 @@
     OrderTakingQuotePriceDetailTelephoneView *beiZhuSectionView;
     
     UILabel *tipSectionLabel;
-    
     //
     UIButton *bottomOrderButt;
+    
+    UIView *bottomButtView;
 }
 
 @property (strong,nonatomic) TakeOrderQuotePriceDetailModel *singleModel;
@@ -41,9 +42,8 @@
 @property (strong,nonatomic) NSString *beiZhuStr;
 //我是否被该派单雇佣
 @property (assign,nonatomic) BOOL isHiredMe;
-
-//我能否接单
-@property (assign,nonatomic) BOOL canTakeOrder;
+//能否确认接单和确认取消接单
+@property (assign,nonatomic) BOOL canSureTakeOrder;
 
 @end
 
@@ -59,12 +59,13 @@
     [super viewDidLoad];
     [NavTools hiddenTabbar:self.rdv_tabBarController];
     //
-    self.title = @"详情";
+    self.title = @"接单";
     self.view.backgroundColor = [UIColor whiteColor];
     [self initOwnObjects];
     //
      [self addTableView:CGRectMake(0, 0,self.view.width,CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT - 50) style:UITableViewStylePlain];
     [self addBottomButtView];
+    
     [self getData];
 }
 
@@ -73,8 +74,67 @@
     self.addressStr = @"";
     self.beiZhuStr = @"";
     self.singleModel = [[TakeOrderQuotePriceDetailModel alloc]init];
-    
+
 }
+//
+- (void)dealOrderSate{
+    NSLog(@"!!!!!!!!!self.stateFlag=%ld",self.stateFlag);
+    //针对于该派单的而不是当前用户的
+    switch (self.stateFlag) {
+        case 0://派单中
+        {
+            [self updateOwnViewDisplayByOrderState:@"" bottomOrderStr:@""];
+        }
+            break;
+        case 1:{//接单人满
+            [self updateOwnViewDisplayByOrderState:@"接单人满" bottomOrderStr:@""];
+        }
+            break;
+        case 2:{//已付款
+            [self updateOwnViewDisplayByOrderState:@"" bottomOrderStr:@""];
+        }
+            break;
+        case 3:{//已雇佣
+            [self updateOwnViewDisplayByOrderState:@"" bottomOrderStr:@"接单"];
+        }
+            break;
+        case 4:{//已退款
+            [self updateOwnViewDisplayByOrderState:@"" bottomOrderStr:@""];
+        }
+            break;
+        case 5:{//已接单
+             [self updateOwnViewDisplayByOrderState:@"" bottomOrderStr:@""];
+        }
+            break;
+        case 6:{//已完成
+            [self updateOwnViewDisplayByOrderState:@"" bottomOrderStr:@""];
+        }
+            break;
+        case 7:{//已取消
+            [self updateOwnViewDisplayByOrderState:@"" bottomOrderStr:@""];
+        }
+            break;
+        default:{
+            [self updateOwnViewDisplayByOrderState:@"" bottomOrderStr:@""];
+        }
+            break;
+    }
+    [self.tableView reloadData];
+}
+
+- (void)updateOwnViewDisplayByOrderState:(NSString*)topDisplayStr bottomOrderStr:(NSString*)bottomStr{
+    if (self.isHiredMe){
+         sectionView.topDisplayLabel.text = @"恭喜你已被雇主选中";
+    }
+    //能够确认接单
+    if (self.canSureTakeOrder){
+        bottomButtView.hidden = NO;
+       
+    }else{
+         bottomButtView.hidden = YES;
+    }
+}
+
 
 - (void)dealTelephone{
     if ([TelephoneNumberTools isMobile:telephoneSectionView.ownRightLabel.text]){
@@ -129,37 +189,39 @@
             self.telephoneStr = [NSString getResultStrBySeverStr:dataDict[@"mobile"]];
             self.beiZhuStr = [NSString getResultStrBySeverStr:dataDict[@"remark"]];
             self.isHiredMe = [dataDict[@"isHiredMe"] boolValue];
-            self.canTakeOrder = [dataDict[@"canReceive"] boolValue];
-            __strong typeof(self)sself = self;
-            //如果我被雇佣，则修改显示
-            if (self.isHiredMe){
-                sself -> sectionView.topDisplayLabel.text = @"恭喜被雇主选中";
-            }
-            if (self.canTakeOrder){
-                [sself -> bottomOrderButt setTitle:@"接单" forState:UIControlStateNormal];
-            }else{
-                [sself -> bottomOrderButt setTitle:@"查看" forState:UIControlStateNormal];
-            }
+            self.canSureTakeOrder = [[NSNumber getResultNumberBySeverStr:dataDict[@"canEnter"]] boolValue];
+            [self dealOrderSate];
             [self.tableView reloadData];
         } failure:^(NSError *error) {
         }];
 }
-
+//确认接单
 - (void)takeOrderClick{
-    NSLog(@"接单或查看接单详情");
-    if(self.canTakeOrder){
-        OrderTakingQuotePriceViewController *baoJiaVC = [[OrderTakingQuotePriceViewController alloc]init];
-        baoJiaVC.orderId = self.orderId;
-        baoJiaVC.isBapJiaDetail = NO;
-        [self.navigationController pushViewController:baoJiaVC animated:YES];
-    }else{
-        OrderTakingQuotePriceViewController *baoJiaVC = [[OrderTakingQuotePriceViewController alloc]init];
-        baoJiaVC.orderId = self.orderId;
-        baoJiaVC.isBapJiaDetail = YES;
-        [self.navigationController pushViewController:baoJiaVC animated:YES];
-    }
-   
+    NSLog(@"接单");
+    
+    [TDHttpTools CasualSureTakeOrder:@{@"userId":[lzhGetAccountInfo getAccount].userID,@"orderId":[NSNumber numberWithInteger:self.orderId]} success:^(id response) {
+        [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
+        if (self.refreshDataAfterTakeOrderBlock){
+            self.refreshDataAfterTakeOrderBlock();
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
+//放弃接单
+- (void)giveHandler{
+    [TDHttpTools casualCancelTakeOrder:@{@"userId":[lzhGetAccountInfo getAccount].userID,@"orderId":[NSNumber numberWithInteger:self.orderId]} success:^(id response) {
+        [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
+        if (self.refreshDataAfterTakeOrderBlock){
+            self.refreshDataAfterTakeOrderBlock();
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 //views
 - (void)addTableView:(CGRect)size style:(UITableViewStyle)styles{
@@ -200,14 +262,18 @@
 }
 
 - (void)addBottomButtView{
+     bottomButtView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - StatusBarAndNavigationBarHeight  - 50, self.view.width, 50)];
+    [self.view addSubview:bottomButtView];
+    //
     UIButton *giveButt = [UIButton buttonWithType:UIButtonTypeCustom];
     giveButt.backgroundColor = [UIColor whiteColor];
-    giveButt.frame = CGRectMake(0, SCREEN_HEIGHT - StatusBarAndNavigationBarHeight  - 50, self.view.width / 2, 50);
+    giveButt.frame = CGRectMake(0, 0, bottomButtView.width / 2, bottomButtView.height);
     giveButt.titleLabel.font = [UIFont getPingFangSCMedium:16];
     [giveButt setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+    [giveButt addTarget:self action:@selector(giveHandler) forControlEvents:UIControlEventTouchUpInside];
     [giveButt setTitle:@"放弃" forState:UIControlStateNormal];
     
-    [self.view addSubview:giveButt];
+    [bottomButtView addSubview:giveButt];
     //
     UIView *buttLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, giveButt.width, 1)];
     buttLine.backgroundColor = [UIColor colorWithHexString:@"#999999"];
@@ -216,12 +282,12 @@
     UIButton *orderButt = [UIButton buttonWithType:UIButtonTypeCustom];
     bottomOrderButt = orderButt;
     orderButt.backgroundColor = [UIColor colorWithHexString:@"#FF7E00"];
-    orderButt.frame = CGRectMake(giveButt.right, giveButt.top, self.view.width / 2, giveButt.height);
+    orderButt.frame = CGRectMake(giveButt.right, giveButt.top, bottomButtView.width / 2, giveButt.height);
     orderButt.titleLabel.font = [UIFont getPingFangSCMedium:16];
     [orderButt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [orderButt addTarget:self action:@selector(takeOrderClick) forControlEvents:UIControlEventTouchUpInside];
     [orderButt setTitle:@"接单" forState:UIControlStateNormal];
-    [self.view addSubview:orderButt];
+    [bottomButtView addSubview:orderButt];
     //
 }
 
@@ -287,23 +353,17 @@
             view = sectionView;
             break;
         case 2:
+            telephoneSectionView.ownRightLabel.text = self.telephoneStr;
             if(self.isHiredMe){
-                telephoneSectionView.ownRightLabel.text = self.telephoneStr;
                 telephoneSectionView.telephoneButt.hidden = NO;
             }else{
-                telephoneSectionView.ownRightLabel.text = @"***********";
                 telephoneSectionView.telephoneButt.hidden = YES;
             }
             view = telephoneSectionView;
             break;
         case 3:
-            if(self.isHiredMe){
-                 addressSectionView.ownRightLabel.text = self.addressStr;
-                addressSectionView.telephoneButt.hidden = YES;
-            }else{
-                addressSectionView.ownRightLabel.text = @"********";
-                addressSectionView.telephoneButt.hidden = YES;
-            }
+            addressSectionView.telephoneButt.hidden = YES;
+            addressSectionView.ownRightLabel.text = self.addressStr;
             view = addressSectionView;
             break;
         case 4:

@@ -12,5 +12,6 @@
 
 @property (copy,nonatomic) void (^sureBlock)(void);
 
+@property (strong,nonatomic) UILabel *tipLabel;
 
 @end

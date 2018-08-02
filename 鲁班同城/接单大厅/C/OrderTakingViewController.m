@@ -197,23 +197,49 @@
         TakeOrderMainHallModel *model = self.modelArr[path.row];
         dispatchDetailVC.orderId = model.orderID;
         [self.navigationController pushViewController:dispatchDetailVC animated:YES];
-    }else{
-        OrderTakingQuotePriceViewController *quotePriceVC = [[OrderTakingQuotePriceViewController alloc]init];
+    }else{//零工
         TakeOrderMainHallModel *model = self.modelArr[path.row];
-        if (model.canReceive){
+        if (model.canReceive){//抢单
+            OrderTakingQuotePriceViewController *quotePriceVC = [[OrderTakingQuotePriceViewController alloc]init];
             quotePriceVC.isBapJiaDetail = NO;
-        }else{
-            quotePriceVC.isBapJiaDetail = YES;
+            quotePriceVC.orderId = model.orderID;
+            //刷新接单列表数据
+            WS(weakSelf);
+            quotePriceVC.refreshDataAfterTakeOrderBlock = ^{
+                weakSelf.page = 1;
+                [weakSelf.modelArr removeAllObjects];
+                 [weakSelf.tableView reloadData];
+                [weakSelf getData:weakSelf.page];
+            };
+            [self.navigationController pushViewController:quotePriceVC animated:YES];
+        }else{//查看
+            if(model.isHiredMe){//跳恭喜雇佣界面
+                OrderTakingQuotePriceDetailViewController *gongXiVC = [[ OrderTakingQuotePriceDetailViewController alloc]init];
+                gongXiVC.orderId = model.orderID;
+                gongXiVC.stateFlag = model.orderState;
+                WS(weakSelf);
+                gongXiVC.refreshDataAfterTakeOrderBlock = ^{
+                    weakSelf.page = 1;
+                    [weakSelf.modelArr removeAllObjects];
+                    [weakSelf.tableView reloadData];
+                    [weakSelf getData:weakSelf.page];
+                };
+                [self.navigationController pushViewController:gongXiVC animated:YES];
+            }else{//跳报价详情界面
+                OrderTakingQuotePriceViewController *orderDetailVC = [[OrderTakingQuotePriceViewController alloc]init];
+                orderDetailVC.isBapJiaDetail = YES;
+                orderDetailVC.orderId = model.orderID;
+                WS(weakSelf);
+                orderDetailVC.refreshDataAfterTakeOrderBlock = ^{
+                    weakSelf.page = 1;
+                    [weakSelf.modelArr removeAllObjects];
+                    [weakSelf.tableView reloadData];
+                    [weakSelf getData:weakSelf.page];
+                };
+                [self.navigationController pushViewController:orderDetailVC animated:YES];
+                
+            }
         }
-        quotePriceVC.orderId = model.orderID;
-        //刷新接单列表数据
-        WS(weakSelf);
-        quotePriceVC.refreshDataAfterTakeOrderBlock = ^{
-            weakSelf.page = 1;
-            [weakSelf.modelArr removeAllObjects];
-            [weakSelf getData:weakSelf.page];
-        };
-        [self.navigationController pushViewController:quotePriceVC animated:YES];
     }
 }
 
@@ -272,17 +298,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if ([lzhGetAccountInfo getAccount].identityFlag){//雇主
-         DispatchTicketDetailViewController *dispatchDetailVC = [[DispatchTicketDetailViewController alloc]init];
-         TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
-        dispatchDetailVC.orderId = model.orderID;
-        [self.navigationController pushViewController:dispatchDetailVC animated:YES];
-    }else{//零工
-        OrderTakingQuotePriceDetailViewController *orderDetailVC = [[OrderTakingQuotePriceDetailViewController alloc]init];
-        TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
-        orderDetailVC.orderId = model.orderID;
-        [self.navigationController pushViewController:orderDetailVC animated:YES];
-    }
+//    if ([lzhGetAccountInfo getAccount].identityFlag){//雇主
+//         DispatchTicketDetailViewController *dispatchDetailVC = [[DispatchTicketDetailViewController alloc]init];
+//         TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
+//        dispatchDetailVC.orderId = model.orderID;
+//        [self.navigationController pushViewController:dispatchDetailVC animated:YES];
+//    }else{//零工
+//        OrderTakingQuotePriceDetailViewController *orderDetailVC = [[OrderTakingQuotePriceDetailViewController alloc]init];
+//        TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
+//        orderDetailVC.orderId = model.orderID;
+//        [self.navigationController pushViewController:orderDetailVC animated:YES];
+//    }
     
 }
 

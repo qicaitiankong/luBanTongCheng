@@ -43,6 +43,8 @@
     [NavTools displayTabbar:self.rdv_tabBarController];
     if ([lzhGetAccountInfo getAccount].identityFlag){
         [self displayXuanFuButt];
+    }else{
+        [self hiddenXuanFuButt];
     }
     //
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;

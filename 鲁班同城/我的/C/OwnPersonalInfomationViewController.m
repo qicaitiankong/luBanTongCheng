@@ -82,19 +82,19 @@
     personalIntroduceView.topTipLabel.text = @"个人介绍";
     [baseScrollView addSubview:personalIntroduceView];
     //
-    personalTechnologyView = [[OwnPersonalInfomationPersonalTechnologyGoupView alloc]initWithFrame:CGRectMake(0, personalIntroduceView.bottom + 15, baseScrollView.width, 20)];
+    personalTechnologyView = [[OwnPersonalInfomationPersonalTechnologyGoupView alloc]initWithFrame:CGRectMake(0, personalIntroduceView.bottom + 15, baseScrollView.width, 50)];
     personalTechnologyView.topTipLabel.text = @"个人技能";
     [baseScrollView addSubview:personalTechnologyView];
     //
-    serviceTypeView = [[OwnPersonalInfomationPersonalServiceTypeGoupView alloc]initWithFrame:CGRectMake(0, personalTechnologyView.bottom + 15, baseScrollView.width, 20)];
+    serviceTypeView = [[OwnPersonalInfomationPersonalServiceTypeGoupView alloc]initWithFrame:CGRectMake(0, personalTechnologyView.bottom + 15, baseScrollView.width, 50)];
     serviceTypeView.topTipLabel.text = @"服务类型";
     [baseScrollView addSubview:serviceTypeView];
     //
-    videoView = [[OwnPersonalInfomationPersonalVideoGoupView alloc]initWithFrame:CGRectMake(0, serviceTypeView.bottom + 15, baseScrollView.width, pictureViewGroupHeight)];
+    videoView = [[OwnPersonalInfomationPersonalVideoGoupView alloc]initWithFrame:CGRectMake(0, serviceTypeView.bottom + 15, baseScrollView.width, 55)];
     videoView.topTipLabel.text = @"技能-视频秀";
     [baseScrollView addSubview:videoView];
     //
-    pictureView = [[OwnPersonalInfomationPersonalVideoGoupView alloc]initWithFrame:CGRectMake(0, videoView.bottom + 15, baseScrollView.width, pictureViewGroupHeight)];
+    pictureView = [[OwnPersonalInfomationPersonalVideoGoupView alloc]initWithFrame:CGRectMake(0, videoView.bottom + 15, baseScrollView.width, 55)];
     pictureView.topTipLabel.text = @"技能-图片秀";
     [baseScrollView addSubview:pictureView];
     //

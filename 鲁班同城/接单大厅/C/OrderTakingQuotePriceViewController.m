@@ -41,7 +41,13 @@
     //
     [NavTools hiddenTabbar:self.rdv_tabBarController];
     //
-    self.title = @"报价";
+    if(self.isBapJiaDetail){
+        self.title = @"报价详情";
+
+    }else{
+        self.title = @"报价";
+
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     //
     [self initOwnObjects];
@@ -65,9 +71,10 @@
         NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"userId":[lzhGetAccountInfo getAccount].userID,@"msgId":[NSNumber numberWithInteger:1]};
         [TDHttpTools getCasualTakeOrderDetail:paraDict success:^(id response) {
             NSDictionary *dict = response;
+            
             NSLog(@"接单详情零工版 dict=%@",dict);
             NSDictionary *dataDict = dict[@"data"];
-            
+            [SVProgressHUD showInfoWithStatus:[NSString getResultStrBySeverStr:dataDict[@"reason"]]];
             if ([dataDict[@"createTime"] isKindOfClass:[NSString class]]){
                 NSLog(@"!!!!!!!!!!!createTime为NSString");
             }
@@ -114,7 +121,7 @@
         }
     }
     NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"orderId":[NSNumber numberWithInteger:self.orderId],@"price":[NSNumber numberWithInteger:[moneyStr integerValue]],@"remark":beiZhuStr};
-    [TDHttpTools CasualTakeOrder:paraDict success:^(id response) {
+    [TDHttpTools CasualScramebleTakeOrder:paraDict success:^(id response) {
         NSDictionary *webDict = response;
         NSLog(@"webDict:%@",webDict);
         [SVProgressHUD showSuccessWithStatus:webDict[@"msg"]];

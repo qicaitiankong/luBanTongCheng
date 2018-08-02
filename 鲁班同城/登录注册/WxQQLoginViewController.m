@@ -44,7 +44,7 @@
 
 - (void)firstLoginHandler{
     NSLog(@"firstLoginHandler");
-    [TDHttpTools loginWXWithText:@{@"weixinCode":@"1234567"} success:^(id response) {
+    [TDHttpTools loginWXWithText:@{@"weixinCode":@"20192268"} success:^(id response) {
         NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
         int status = [dict[@"status"] intValue];
         NSLog(@" test dict:%@",dict);
@@ -65,6 +65,8 @@
 //            username = "<null>";
             //在此保存用户信息
             [[lzhGetAccountInfo getAccount] writeToAccount:dataDict];
+            
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_TYPE_UPDATE_NOTIFICATION_NAME object:nil userInfo:nil];
             //通知跟新界面
             [SVProgressHUD showSuccessWithStatus:dict[@"msg"]];

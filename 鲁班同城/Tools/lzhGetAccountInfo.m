@@ -118,10 +118,15 @@
     NSNumber *focusNum = [NSNumber numberWithInteger:0];
     NSNumber *ageNum = [NSNumber numberWithInteger:0];
     //方便测试写死了，以后改成id获取
+    if ([[dict allKeys] containsObject:@"id"]){//针对于登入保存
+         userID = dict[@"id"];
+    }else{
+        userID = [lzhGetAccountInfo getAccount].userID;
+    }
+   
     if ([userType isEqualToString:@"雇主"]){
-        userID = [NSNumber numberWithInteger:1];
+        
     }else if (([userType isEqualToString:@"零工"])){
-         userID = [NSNumber numberWithInteger:3];
     }
     if ([[dict allKeys] containsObject:@"realName"]){
         realName = [NSString getResultStrBySeverStr:dict[@"realName"]];

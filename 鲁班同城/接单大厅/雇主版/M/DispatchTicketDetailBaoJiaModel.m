@@ -20,6 +20,10 @@
 //        remark = fbvdsv;
 //        remarkPath = "<null>";
 //        score = 0;
+        if ([[dict allKeys] containsObject:@"receiveOrderId"]){
+             model.receiveOrderIdNum = [NSNumber getResultNumberBySeverStr:dict[@"receiveOrderId"]];
+        }
+       
         model.pictureUrlStr = [NSString getResultStrBySeverStr:dict[@"headImg"]];
         
         model.nickNameStr = [NSString getResultStrBySeverStr:dict[@"realName"]];

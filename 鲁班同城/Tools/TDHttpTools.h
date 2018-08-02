@@ -38,6 +38,12 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 
 
 +(void)loginWXWithText:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+//切换用户身份
++(void)exchangeUserIdentity:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+
+
 //
 //获取零工用户信息
 +(void)getCapsualUserInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
@@ -59,14 +65,20 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 //零工接单详情
 +(void)getCasualTakeOrderDetail:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
-//零工接单
-+(void)CasualTakeOrder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+//零工抢单
++(void)CasualScramebleTakeOrder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+//零工确认接单
++(void)CasualSureTakeOrder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+//零工取消接单
++(void)casualCancelTakeOrder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 
 
 
+//雇主接口
 
-//
 //雇佣
 +(void)EmplyeerEmploy:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
