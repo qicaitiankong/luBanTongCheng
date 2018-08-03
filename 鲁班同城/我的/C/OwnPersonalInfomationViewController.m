@@ -12,7 +12,7 @@
 #import "OwnPersonalInfomationPersonalTechnologyGoupView.h"
 #import "OwnPersonalInfomationPersonalServiceTypeGoupView.h"
 #import "OwnPersonalInfomationPersonalVideoGoupView.h"
-
+#import "PersonalInfoNameViewController.h"
 
 @interface OwnPersonalInfomationViewController (){
     UIScrollView *baseScrollView;
@@ -76,6 +76,10 @@
         [weakSelf.navigationController popViewControllerAnimated:YES];
         
     };
+    topPartView.editButt.clickButtBlock = ^{
+        PersonalInfoNameViewController *nameEditVC = [[PersonalInfoNameViewController alloc]init];
+        [weakSelf.navigationController pushViewController:nameEditVC animated:YES];
+    };
     [baseScrollView addSubview:topPartView];
     //
     personalIntroduceView = [[OwnPersonalInfomationPersonalIntroduceGoupView alloc]initWithFrame:CGRectMake(0, topPartView.bottom + 15, baseScrollView.width, 20)];
@@ -104,7 +108,13 @@
 - (void)getUserInfo{
     //零工
     if ([lzhGetAccountInfo getAccount].identityFlag == 0){
-                NSDictionary *praDict = @{@"userId":self.targetUserID};
+        NSDictionary *praDict =nil;
+        if ([self.targetUserID integerValue] == -1){//自己信息
+            praDict = @{@"myUserId":[lzhGetAccountInfo getAccount].userID};
+        }else{//其他零工信息
+            praDict = @{@"userId":self.targetUserID,@"myUserId":[lzhGetAccountInfo getAccount].userID};
+        }
+        
                 WS(weakSelf);
                  [weakSelf giveValueToView];
                 [TDHttpTools getCapsualUserInfo:praDict success:^(id response) {

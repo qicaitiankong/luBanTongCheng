@@ -7,6 +7,12 @@
 //
 
 #import "OrderTakingQuotePriceDetailTelephoneView.h"
+@interface OrderTakingQuotePriceDetailTelephoneView (){
+    UIView *bottomLineView;
+
+}
+@end
+
 @implementation OrderTakingQuotePriceDetailTelephoneView
 CGFloat leftLabelWidth;
 CGFloat leftLabelHeight;
@@ -50,33 +56,26 @@ CGFloat rightLabelHeight;
             rightLabelHeight = self.ownRightLabel.height;
         }
         //
-        UIView *bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - 1, frame.size.width, 1)];
+         bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - 1, frame.size.width, 1)];
         bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#DADADA"];
         [self addSubview:bottomLineView];
     }
     return self;
 }
 
-- (void)adjustViewHeigthByContent:(NSString*)str{
-//    self.ownRightLabel.text = [str copy];
-//    //
-//    CGFloat newHieght = [LzhReturnLabelHeight getLabelHeight:str font:[UIFont getPingFangSCMedium:13] width:rightLabelWidth];
-//    //
-//    [self.ownRightLabel sizeThatFits:CGSizeMake(rightLabelWidth, newHieght)];
-//     self.ownLeftLabel.center = CGPointMake(self.ownLeftLabel.centerX, self.height / 2);
-//
-//     self.ownRightLabel.center = CGPointMake(self.ownRightLabel.centerX, self.height / 2);
-//    self.telephoneButt.center = CGPointMake(self.telephoneButt.centerX, self.height / 2);
-//    [self setFrame:CGRectMake(self.x, self.y, self.width, self.ownRightLabel.bottom)];
+
+- (void)adjustOwnDisplay:(NSString*)text{
+    if(text.length){
+        NSLog(@"重新调整约束");
+        CGFloat textHeight = [LzhReturnLabelHeight getLabelHeight:text font:self.ownRightLabel.font width:self.ownRightLabel.width];
+        
+        self.ownRightLabel.frame = CGRectMake(self.ownRightLabel.x, 10, self.ownRightLabel.width, textHeight);
+        self.ownLeftLabel.center = CGPointMake(self.ownLeftLabel.centerX, self.ownRightLabel.centerY);
+        [self setFrame:CGRectMake(0, 0, self.width, self.ownRightLabel.bottom + 10)];
+        
+        bottomLineView.frame =  CGRectMake(0, self.height - 1, self.width, 1);
+    }
 }
-
-
-
-//-(void)layoutSubviews{
-//    [super layoutSubviews];
-//
-//    ////
-//}
 
 
 - (void)clickTelephoneHandler{

@@ -20,7 +20,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame isNeedRightButt:(BOOL)need;
 
-- (void)adjustViewHeigthByContent:(NSString*)str;
+- (void)adjustOwnDisplay:(NSString*)text;
 
 
 @end

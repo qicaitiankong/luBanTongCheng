@@ -16,20 +16,23 @@
     if (selfClass){
         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:kAccountPath];
         selfClass.infoDict = dict;
-        NSLog(@" getAccount 时  dict:%@",dict);
+      
         if ([dict allKeys].count) {
            
             if ([[dict allKeys] containsObject:@"userType"]){
-                 NSString *userType = [dict[@"userType"] copy];
-                if ([userType isEqualToString:@"雇主"]){
+                 NSNumber *userType = dict[@"userType"];
+                //后台是用1：零工 2：雇主
+                //我本地：0:零工， 1:雇主
+                if ([userType integerValue] == 2){
                     selfClass.identityFlag = 1;
-                }else if ([userType isEqualToString:@"零工"]){
+                }else if ([userType integerValue] == 1){
                     selfClass.identityFlag = 0;
                 }
                 //
-            }else{
-                selfClass.identityFlag = 0;
+            }else{//设置默认是零工还是雇主
+                selfClass.identityFlag = 2;
             }
+              NSLog(@" getAccount 时  dict:%@",dict);
             NSNumber *userID = nil;
             NSString *realName = @"";
             NSString *nickName = @"";
@@ -107,7 +110,7 @@
 //    state = 0;
 //    userType = "\U96c7\U4e3b";
 //    username = "<null>";
-    NSString *userType = dict[@"userType"];
+    NSNumber *userType = dict[@"userType"];
     NSNumber *userID = nil;
     NSString *realName = @"";
     NSString *nickName = @"";
@@ -124,10 +127,6 @@
         userID = [lzhGetAccountInfo getAccount].userID;
     }
    
-    if ([userType isEqualToString:@"雇主"]){
-        
-    }else if (([userType isEqualToString:@"零工"])){
-    }
     if ([[dict allKeys] containsObject:@"realName"]){
         realName = [NSString getResultStrBySeverStr:dict[@"realName"]];
     }else{

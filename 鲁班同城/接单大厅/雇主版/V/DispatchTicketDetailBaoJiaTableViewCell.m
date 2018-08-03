@@ -160,6 +160,16 @@
         
         [self.userImageView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrlStr]];
         self.nickNameLabel.text = [model.nickNameStr copy];
+        if([model.heIsHired boolValue]){
+            model.shouldDisplayBottomView = YES;
+            
+            [employButt.loginButt setTitle:@"已雇佣" forState:UIControlStateNormal];
+            employButt.userInteractionEnabled = NO;
+        }else{
+            model.shouldDisplayBottomView = NO;
+             [employButt.loginButt setTitle:@"雇佣" forState:UIControlStateNormal];
+            employButt.userInteractionEnabled = YES;
+        }
         self.baoJiaLabel.text = [NSString stringWithFormat:@"报价：%@元",model.baoJiaNameStr];
         self.beizhuLabel.text = [NSString stringWithFormat:@"备注：%@",model.beiZhuNameStr];
         [self.xinxinView setYellowStar:[model.xinxinStr floatValue]];

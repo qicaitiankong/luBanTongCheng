@@ -18,25 +18,35 @@
         self.backgroundColor = [UIColor whiteColor];
         self.layer.cornerRadius = 5;
         //
-        UIImageView *logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 34, 43, 43)];
+        UIImageView *logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height * 0.05, frame.size.height * 0.15, frame.size.height * 0.15)];
         logoImageView.center = CGPointMake(frame.size.width / 2, logoImageView.centerY);
         logoImageView.backgroundColor = [UIColor whiteColor];
         [logoImageView setImage:[UIImage imageNamed:@"sucsess"]];
         [self addSubview:logoImageView];
         //
-        CGRect labelRect = CGRectMake(0, logoImageView.bottom + 17, frame.size.width, 16);
+        CGRect labelRect = CGRectMake(0, logoImageView.bottom + frame.size.height * 0.1 , frame.size.width * 0.9, frame.size.height * 0.3);
+        
          tipLabel = [[CustomeLzhLabel alloc] initWithCustomerParamer:[UIFont getPingFangSCBold:16] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:1];
+        tipLabel.numberOfLines = 0;
         tipLabel.text = @"提交成功";
         tipLabel.frame = labelRect;
+         tipLabel.center = CGPointMake(frame.size.width / 2, tipLabel.centerY);
         [self addSubview:tipLabel];
         //
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, tipLabel.bottom + 30, frame.size.width, 1)];
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, tipLabel.bottom + frame.size.height * 0.1, frame.size.width, 1)];
         lineView.backgroundColor = [UIColor colorWithRed:99/255.0 green:99/255.0 blue:99/255.0 alpha:1];
         [self addSubview:lineView];
         //
         UIButton *sureButt = [UIButton buttonWithType:UIButtonTypeCustom];
         sureButt.backgroundColor = [UIColor whiteColor];
-        sureButt.frame = CGRectMake(0, lineView.bottom + 30, 60, 30);
+        
+        if (frame.size.height *  0.2 <= 30){
+            sureButt.frame = CGRectMake(0, lineView.bottom + frame.size.height * 0.1, frame.size.height *  0.4, frame.size.height *  0.2);
+        }else{
+            sureButt.frame = CGRectMake(0, lineView.bottom + frame.size.height * 0.1, 60, 30);
+        }
+        
+        
         sureButt.center = CGPointMake(frame.size.width / 2, sureButt.centerY);
         sureButt.layer.cornerRadius = 5;
         sureButt.layer.borderWidth = 2;

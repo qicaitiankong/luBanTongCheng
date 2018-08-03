@@ -17,7 +17,7 @@
     CGFloat leftCellWidth;
     CGFloat rightCellWidth;
     CGFloat spaceViewWidth;
-
+    UIView *spaceView;
 }
 
 @property (strong,nonatomic) UITableView *leftTableView;
@@ -41,7 +41,6 @@
 
     }else{
         self.title = @"工作列表";
-
     }
     [self initOwnObjects];
     WS(weakSelf);
@@ -60,6 +59,8 @@
     };
     [self addViews];
     //
+    [self hiddenTableView];
+    //
     [self getFirstLevelData:YES];
 }
 
@@ -72,8 +73,20 @@
     rightCellHeight = 50;
     leftCellWidth = SCREEN_WIDTH * 0.293;
     rightCellWidth = SCREEN_WIDTH - leftCellWidth - spaceViewWidth;
-   
 }
+
+- (void)hiddenTableView{
+    self.leftTableView.hidden = YES;
+    self.rightTableView.hidden = YES;
+    spaceView.hidden = YES;
+}
+
+- (void)displayTableView{
+    self.leftTableView.hidden = NO;
+    self.rightTableView.hidden = NO;
+    spaceView.hidden = NO;
+}
+
 //获取一级列表数据 isSecondLevelUseItsResult:二级列表是否需要使用一集列表的值
 - (void)getFirstLevelData:(BOOL) isSecondLevelUseItsResult{
     if (self.kindTag == 1){//技能
@@ -84,6 +97,10 @@
                     if (status == 0){
                         NSLog(@"%@",dict);
                         NSArray *dataArr = dict[@"data"];
+                        if (dataArr.count){
+                            //tableview 显示打开
+                            [self displayTableView];
+                        }
                         for (NSDictionary *modelDict in dataArr){
                             ChooseTechnologyLeftModel *localModel = [[ChooseTechnologyLeftModel alloc]init];
                             localModel.title = [modelDict[@"name"] copy];
@@ -111,6 +128,10 @@
                 if (status == 0){
                     NSLog(@"%@",dict);
                     NSArray *dataArr = dict[@"data"];
+                    if (dataArr.count){
+                        //tableview 显示打开
+                        [self displayTableView];
+                    }
                     for (NSDictionary *modelDict in dataArr){
                         ChooseTechnologyLeftModel *localModel = [[ChooseTechnologyLeftModel alloc]init];
                         localModel.title = [modelDict[@"name"] copy];
@@ -200,7 +221,7 @@
     self.leftTableView.delegate = self;
     self.leftTableView.dataSource = self;
     [self.view addSubview:self.leftTableView];
-    UIView *spaceView = [[UIView alloc]initWithFrame:CGRectMake(self.leftTableView.right, 0, spaceViewWidth, self.leftTableView.height)];
+    spaceView = [[UIView alloc]initWithFrame:CGRectMake(self.leftTableView.right, 0, spaceViewWidth, self.leftTableView.height)];
     spaceView.backgroundColor = [UIColor colorWithHexString:@"#78CAC5"];
     [self.view addSubview:spaceView];
     //
@@ -215,6 +236,7 @@
     //
     [self.leftTableView reloadData];
     [self.rightTableView reloadData];
+    //
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

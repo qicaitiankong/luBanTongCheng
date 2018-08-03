@@ -21,6 +21,8 @@
 
 @property (strong,nonatomic) CustomerImageButt *shareButt;
 
+@property (strong,nonatomic) CustomeStyleCornerButt *editButt;
+
 @property (strong,nonatomic) UIImageView *userlogoImaView;
 
 @property (strong,nonatomic) UILabel *fenSiLabel;

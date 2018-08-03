@@ -18,6 +18,9 @@
     CommitPopView *popView;
     UIButton *popbackButt;
     UIScrollView *baseScrollView;
+    UIScrollView *pictureBaseScrollView;
+    UIScrollView *videoBaseScrollView;
+
 }
 
 @end
@@ -51,10 +54,19 @@
     rightTopTipLabel.text = @"点击 +上传/拍摄";
     [baseScrollView addSubview:rightTopTipLabel];
     //
-    PersonalInfoAddPhotoFlagView *videoFlagView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(firstImageAndLabelView.left + firstImageAndLabelView.rightLabel.left, firstImageAndLabelView.bottom + 15, 130, 90)];
-    [baseScrollView addSubview:videoFlagView];
+    videoBaseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, rightTopTipLabel.bottom + 15, self.view.width, 90)];
+    videoBaseScrollView.backgroundColor = [UIColor whiteColor];
+    [baseScrollView addSubview:videoBaseScrollView];
+    
+    for (int i = 0; i < 3; i ++){
+        PersonalInfoAddPhotoFlagView *videoFlagView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(130 * i, 0, 130, 90)];
+        [videoBaseScrollView addSubview:videoFlagView];
+    }
+    
+    videoBaseScrollView.contentSize = CGSizeMake(130 * 3, videoBaseScrollView.height);
+    [baseScrollView addSubview:videoBaseScrollView];
     //
-    ImageAndLabelView * photoImageAndLabelView = [[ImageAndLabelView alloc] initWithFrame:CGRectMake(firstImageAndLabelView.left, videoFlagView.bottom + 15, 10, 10) image:[UIImage imageNamed:@"photoFlag"] title:@"技能-图片" font:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"]];
+    ImageAndLabelView * photoImageAndLabelView = [[ImageAndLabelView alloc] initWithFrame:CGRectMake(firstImageAndLabelView.left, videoBaseScrollView.bottom + 15, 10, 10) image:[UIImage imageNamed:@"photoFlag"] title:@"技能-图片" font:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"]];
     [baseScrollView addSubview:photoImageAndLabelView];
     //
     PersonalInfoAddPhotoFlagView *photoFlagView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(photoImageAndLabelView.left + photoImageAndLabelView.rightLabel.left, photoImageAndLabelView.bottom + 15, 130, 90)];

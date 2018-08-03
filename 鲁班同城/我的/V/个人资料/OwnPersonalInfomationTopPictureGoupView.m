@@ -18,6 +18,7 @@
 @synthesize navReturnButt;
 @synthesize shareButt;
 @synthesize addFriendButt;
+@synthesize editButt;
 
 - (instancetype)initWithFrame:(CGRect)frame vcKind:(NSInteger)rankUse
 {
@@ -86,7 +87,7 @@
             editButtTitle = @" 通过排行榜添加";
         }
         //
-        CustomeStyleCornerButt *editButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(editLeft, self.fenSiLabel.bottom + 10, editWith, 30) backColor:[UIColor whiteColor] cornerRadius:15 title:editButtTitle titleColor:[UIColor colorWithHexString:@"#666666"] font:[UIFont getPingFangSCMedium:14]];
+        editButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(editLeft, self.fenSiLabel.bottom + 10, editWith, 30) backColor:[UIColor whiteColor] cornerRadius:15 title:editButtTitle titleColor:[UIColor colorWithHexString:@"#666666"] font:[UIFont getPingFangSCMedium:14]];
         editButt.layer.borderWidth = 1;
         editButt.layer.borderColor = [UIColor colorWithHexString:@"#E3E3E3"].CGColor;
         if (rankUse){

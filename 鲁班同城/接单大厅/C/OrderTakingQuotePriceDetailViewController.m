@@ -123,16 +123,26 @@
 }
 
 - (void)updateOwnViewDisplayByOrderState:(NSString*)topDisplayStr bottomOrderStr:(NSString*)bottomStr{
-    if (self.isHiredMe){
-         sectionView.topDisplayLabel.text = @"恭喜你已被雇主选中";
-    }
+   
     //能够确认接单
     if (self.canSureTakeOrder){
         bottomButtView.hidden = NO;
-       
+        self.tableView.frame = CGRectMake(0, 0,self.view.width,CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT - bottomButtView.height);
     }else{
-         bottomButtView.hidden = YES;
+        bottomButtView.hidden = YES;
+        self.tableView.frame = CGRectMake(0, 0,self.view.width,CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT);
     }
+    
+    //如果雇主确定已经完成，并且雇佣的是我
+    if (self.isHiredMe  && self.stateFlag == 6){
+         sectionView.topDisplayLabel.text = @"你已经完成该派单";
+        return;
+    }
+    //如果已经雇佣并且是我
+    if (self.isHiredMe){
+        sectionView.topDisplayLabel.text = @"恭喜你已被雇主选中";
+    }
+    
 }
 
 
@@ -170,6 +180,7 @@
         NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"userId":[lzhGetAccountInfo getAccount].userID,@"msgId":[NSNumber numberWithInteger:1]};
         //WS(weakSelf);
         [TDHttpTools getCasualTakeOrderDetail:paraDict success:^(id response) {
+            
             NSDictionary *dict = response;
             NSLog(@"接单详情零工版 dict=%@",dict);
             NSDictionary *dataDict = dict[@"data"];
@@ -263,6 +274,8 @@
 
 - (void)addBottomButtView{
      bottomButtView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - StatusBarAndNavigationBarHeight  - 50, self.view.width, 50)];
+    //默认隐藏
+    bottomButtView.hidden = YES;
     [self.view addSubview:bottomButtView];
     //
     UIButton *giveButt = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -288,6 +301,7 @@
     [orderButt addTarget:self action:@selector(takeOrderClick) forControlEvents:UIControlEventTouchUpInside];
     [orderButt setTitle:@"接单" forState:UIControlStateNormal];
     [bottomButtView addSubview:orderButt];
+    
     //
 }
 
@@ -368,6 +382,7 @@
             break;
         case 4:
             beiZhuSectionView.ownRightLabel.text = self.beiZhuStr;
+            
             view = beiZhuSectionView;
             break;
         case 5:
@@ -393,9 +408,11 @@
             height = telephoneSectionView.height;
             break;
         case 3:
+            [addressSectionView adjustOwnDisplay:self.addressStr];
             height = addressSectionView.height;
             break;
         case 4:
+             [beiZhuSectionView adjustOwnDisplay:self.beiZhuStr];
             height = beiZhuSectionView.height;
             break;
         case 5:

@@ -309,6 +309,12 @@
 		185ABF3C20F8771A00188520 /* searchBiaoQian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185ABF3920F8771900188520 /* searchBiaoQian@3x.png */; };
 		185ABF3D20F8771A00188520 /* searchBiaoQian.png in Resources */ = {isa = PBXBuildFile; fileRef = 185ABF3A20F8771900188520 /* searchBiaoQian.png */; };
 		185ABF3E20F8771A00188520 /* searchBiaoQian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185ABF3B20F8771900188520 /* searchBiaoQian@2x.png */; };
+		185BDBA42114400C00F18CD5 /* YAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BDB9E2114400200F18CD5 /* YAddressPickerView.m */; };
+		185BDBA52114400C00F18CD5 /* ProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BDB9F2114400400F18CD5 /* ProvinceModel.m */; };
+		185BDBA62114400C00F18CD5 /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 185BDBA22114400A00F18CD5 /* city.json */; };
+		185BDBA72114400C00F18CD5 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BDBA32114400C00F18CD5 /* CityModel.m */; };
+		185BDBAB2114443500F18CD5 /* THChooseSexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BDBA92114443300F18CD5 /* THChooseSexView.m */; };
+		185BDBAF2114496000F18CD5 /* THScrollChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BDBAD2114495F00F18CD5 /* THScrollChooseView.m */; };
 		185D39E42112D95E008E224F /* OwnPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D39E32112D95E008E224F /* OwnPopView.m */; };
 		186037322109C5CD002B5FDD /* rightSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 186037312109C5CD002B5FDD /* rightSelected.png */; };
 		186EBE1720EDA04200D0F54E /* RdvtarbarBigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186EBE1620EDA04200D0F54E /* RdvtarbarBigView.m */; };
@@ -917,6 +923,17 @@
 		185ABF3920F8771900188520 /* searchBiaoQian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchBiaoQian@3x.png"; sourceTree = "<group>"; };
 		185ABF3A20F8771900188520 /* searchBiaoQian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchBiaoQian.png; sourceTree = "<group>"; };
 		185ABF3B20F8771900188520 /* searchBiaoQian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchBiaoQian@2x.png"; sourceTree = "<group>"; };
+		185BDB9D2114400000F18CD5 /* YAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YAddressPickerView.h; sourceTree = "<group>"; };
+		185BDB9E2114400200F18CD5 /* YAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAddressPickerView.m; sourceTree = "<group>"; };
+		185BDB9F2114400400F18CD5 /* ProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvinceModel.m; sourceTree = "<group>"; };
+		185BDBA02114400600F18CD5 /* ProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvinceModel.h; sourceTree = "<group>"; };
+		185BDBA12114400800F18CD5 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
+		185BDBA22114400A00F18CD5 /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
+		185BDBA32114400C00F18CD5 /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
+		185BDBA92114443300F18CD5 /* THChooseSexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THChooseSexView.m; sourceTree = "<group>"; };
+		185BDBAA2114443500F18CD5 /* THChooseSexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THChooseSexView.h; sourceTree = "<group>"; };
+		185BDBAD2114495F00F18CD5 /* THScrollChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THScrollChooseView.m; sourceTree = "<group>"; };
+		185BDBAE2114495F00F18CD5 /* THScrollChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THScrollChooseView.h; sourceTree = "<group>"; };
 		185D39E22112D95E008E224F /* OwnPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPopView.h; sourceTree = "<group>"; };
 		185D39E32112D95E008E224F /* OwnPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPopView.m; sourceTree = "<group>"; };
 		186037312109C5CD002B5FDD /* rightSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightSelected.png; sourceTree = "<group>"; };
@@ -2029,6 +2046,9 @@
 		1853689F20E9CAD70053A5D4 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				185BDBAC2114495F00F18CD5 /* 滚轮选择器 */,
+				185BDBA82114440D00F18CD5 /* sex choose */,
+				185BDB772114382600F18CD5 /* YZLcityChoose */,
 				18264E5C210AED5F001B793B /* GSPickerView */,
 				1851D924210181C9000C6306 /* GaoDe */,
 				18203080210028F40098BFCC /* rongYun */,
@@ -2079,6 +2099,38 @@
 				185ABF1B20F83D3200188520 /* MessageModel.m */,
 			);
 			path = M;
+			sourceTree = "<group>";
+		};
+		185BDB772114382600F18CD5 /* YZLcityChoose */ = {
+			isa = PBXGroup;
+			children = (
+				185BDBA22114400A00F18CD5 /* city.json */,
+				185BDBA12114400800F18CD5 /* CityModel.h */,
+				185BDBA32114400C00F18CD5 /* CityModel.m */,
+				185BDBA02114400600F18CD5 /* ProvinceModel.h */,
+				185BDB9F2114400400F18CD5 /* ProvinceModel.m */,
+				185BDB9D2114400000F18CD5 /* YAddressPickerView.h */,
+				185BDB9E2114400200F18CD5 /* YAddressPickerView.m */,
+			);
+			path = YZLcityChoose;
+			sourceTree = "<group>";
+		};
+		185BDBA82114440D00F18CD5 /* sex choose */ = {
+			isa = PBXGroup;
+			children = (
+				185BDBAA2114443500F18CD5 /* THChooseSexView.h */,
+				185BDBA92114443300F18CD5 /* THChooseSexView.m */,
+			);
+			path = "sex choose";
+			sourceTree = "<group>";
+		};
+		185BDBAC2114495F00F18CD5 /* 滚轮选择器 */ = {
+			isa = PBXGroup;
+			children = (
+				185BDBAD2114495F00F18CD5 /* THScrollChooseView.m */,
+				185BDBAE2114495F00F18CD5 /* THScrollChooseView.h */,
+			);
+			path = "滚轮选择器";
 			sourceTree = "<group>";
 		};
 		186EBE4820EE0C5700D0F54E /* 提交弹窗 */ = {
@@ -2624,6 +2676,7 @@
 				1851D93F2101AF6F000C6306 /* dispatchOnMap.png in Resources */,
 				182030E521007B830098BFCC /* duiHao.png in Resources */,
 				1824F72620EEF38900E99823 /* orderSelected.png in Resources */,
+				185BDBA62114400C00F18CD5 /* city.json in Resources */,
 				187434AA20F3279D0008A24F /* share.png in Resources */,
 				1818E4BE20EB51BF00B676C2 /* set01.png in Resources */,
 				182284C120FF155A0059FB94 /* ticket_time@3x.png in Resources */,
@@ -2962,7 +3015,9 @@
 				1851144420FDD01800872AC5 /* BaseImageView.m in Sources */,
 				180609A920F479DB00471E08 /* CompanyCruitDetailTableViewCell.m in Sources */,
 				1822849A20FF0CF90059FB94 /* LaunchPiesViewController.m in Sources */,
+				185BDBA72114400C00F18CD5 /* CityModel.m in Sources */,
 				1443C5C620E343E50009E82F /* RDVTabBar.m in Sources */,
+				185BDBA42114400C00F18CD5 /* YAddressPickerView.m in Sources */,
 				1824F75120EF0C6100E99823 /* BaseHiddenNavAndTabBarViewController.m in Sources */,
 				1824399E210847900088042C /* GetLocationICitynfo.m in Sources */,
 				1888139A20EC62AA00F832BE /* WxQQLoginViewController.m in Sources */,
@@ -2980,6 +3035,7 @@
 				1443C50D20E204180009E82F /* main.m in Sources */,
 				185ABF1620F8350400188520 /* MessageViewController.m in Sources */,
 				1874349620F2FE780008A24F /* StarView.m in Sources */,
+				185BDBAB2114443500F18CD5 /* THChooseSexView.m in Sources */,
 				1824F76720EF106600E99823 /* OwnPersonalInfomationTopPictureGoupView.m in Sources */,
 				1853689120E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m in Sources */,
 				181FCBFC20F72D620044B055 /* OrderTakingQuotePriceDetailTableViewCell.m in Sources */,
@@ -2993,6 +3049,7 @@
 				1824F76D20EF3AF300E99823 /* OwnPersonalInfomationPersonalIntroduceGoupView.m in Sources */,
 				185ABF1C20F83D3200188520 /* MessageModel.m in Sources */,
 				188CB37F20FC831E00302C94 /* DispatchTicketDetailBaoJiaModel.m in Sources */,
+				185BDBAF2114496000F18CD5 /* THScrollChooseView.m in Sources */,
 				18E2DF0E20E8BEBE00FDF9C1 /* BaseHiddenNaviViewController.m in Sources */,
 				1832B9A020F59CC400D6CE4F /* SDBrowserImageView.m in Sources */,
 				1822847720FECF210059FB94 /* EmploymentRecordViewController.m in Sources */,
@@ -3042,6 +3099,7 @@
 				188813A620EC924C00F832BE /* PersonalInfoNameViewController.m in Sources */,
 				185ABF3820F8763F00188520 /* SearchBiaoQianSmallView.m in Sources */,
 				185ABF2C20F850E600188520 /* MessageFeedBackViewController.m in Sources */,
+				185BDBA52114400C00F18CD5 /* ProvinceModel.m in Sources */,
 				1443C4FF20E204170009E82F /* AppDelegate.m in Sources */,
 				1443C61920E37A3D0009E82F /* RegisterButtonStyleView.m in Sources */,
 				18264E5F210AED5F001B793B /* GSPickerView.m in Sources */,

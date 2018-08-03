@@ -92,10 +92,15 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
     
     NSInteger yuSuanMoney = 0;
     NSString *mobileStr =    mobileView.rightTextField.myTextField.text;
+     NSString *nameStr =    nameView.rightTextField.myTextField.text;
     NSString *addressStr =    addressView.rightTextView.writeTextView.text;
     NSString *beiZhuStr =   [NSString getResultStrBySeverStr:beiZhuTextView.writeTextView.text] ;
     NSString *yuSuanMoneyStr =  yuSuanView.rightTextField.myTextField.text;
     //
+    if (nameStr.length == 0){
+        [SVProgressHUD showInfoWithStatus:@"请输入称呼"];
+        return;
+    }
     if (mobileStr.length == 0){
         [SVProgressHUD showInfoWithStatus:@"请输入手机号码"];
         return;
@@ -126,7 +131,7 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
         return;
     }
     
-    NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"userName":nameView.rightTextField.myTextField.text,@"mobile":mobileStr,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressStr,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuStr,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
+    NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"userName":nameStr,@"mobile":mobileStr,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressStr,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuStr,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
     
     [TDHttpTools launchOder:paraDict success:^(id response) {
         NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
@@ -208,10 +213,8 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
     nameView = [[LaunchPiesTicketInputNameView alloc]initWithFrame:CGRectMake(0, groupViewVerticalSpace, self.view.width,singleViewHeight) needRightMapButt:NO];
     nameView.nameLabel.text = @"称呼";
     nameView.rightTextField.myTextField.tag = viewTag.tag1;
-    nameView.rightTextField.myTextField.placeholder = @"";
-    nameView.rightTextField.userInteractionEnabled = NO;
+    nameView.rightTextField.myTextField.placeholder = @"请输入称呼";
     [nameView addOwnConstraints:[UIImage imageNamed:@"name"]];
-    nameView.rightTextField.myTextField.text = @"鲁班同城";
     [baseScrollView addSubview:nameView];
     //
     mobileView = [[LaunchPiesTicketInputNameView alloc]initWithFrame:CGRectMake(0, nameView.bottom, self.view.width,singleViewHeight) needRightMapButt:NO];

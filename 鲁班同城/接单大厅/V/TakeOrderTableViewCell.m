@@ -109,7 +109,7 @@
         self.timeLabel.text = [model.timeStr copy];
         self.detailLabel.text = [model.detailStr copy];
         self.praiseLabel.text = [NSString stringWithFormat:@"赏金：%@",model.praiseStr];
-        self.ticketsNumberLabel.text = [NSString stringWithFormat:@"%ld 抢单名额 %@ / 10",model.orderID,model.ticketsNumberStr];
+        self.ticketsNumberLabel.text = [NSString stringWithFormat:@"抢单名额 %@ ",model.ticketsNumberStr];
         if (model.canReceive){
             [ticketButt setTitle:@"抢单" forState:UIControlStateNormal];
             ticketButt.backgroundColor = [UIColor colorWithHexString:@"#FF7E00"];

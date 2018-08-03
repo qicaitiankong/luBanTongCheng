@@ -23,7 +23,12 @@
         if ([[dict allKeys] containsObject:@"receiveOrderId"]){
              model.receiveOrderIdNum = [NSNumber getResultNumberBySeverStr:dict[@"receiveOrderId"]];
         }
-       
+        if ([[dict allKeys] containsObject:@"userId"]){
+            model.baoJiaUserIdNum = [NSNumber getResultNumberBySeverStr:dict[@"userId"]];
+        }
+        if ([[dict allKeys] containsObject:@"heIsHired"]){
+            model.heIsHired = [NSNumber getResultNumberBySeverStr:dict[@"heIsHired"]];
+        }
         model.pictureUrlStr = [NSString getResultStrBySeverStr:dict[@"headImg"]];
         
         model.nickNameStr = [NSString getResultStrBySeverStr:dict[@"realName"]];

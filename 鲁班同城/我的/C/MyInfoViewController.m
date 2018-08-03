@@ -45,6 +45,8 @@
     [NavTools displayTabbar:self.rdv_tabBarController];
     if ([lzhGetAccountInfo getAccount].identityFlag){
         [self displayXuanFuButt];
+    }else{
+        [self hiddenXuanFuButt];
     }
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
@@ -141,18 +143,18 @@
         NSInteger identityFlagNum = [dataDict[@"userType"] integerValue];
         NSDictionary *infoDict = accountInfo.infoDict;
         if (identityFlagNum == 1){//已经切换为了零工
-            [infoDict setValue:@"雇主" forKey:@"userType"];
-            
+            [infoDict setValue:@1 forKey:@"userType"];
             [accountInfo writeToAccount:infoDict];
-            [appDelegate setupViewControllersForEmployment];
+            [appDelegate setupViewControllersForCasualLabour];
             
         }else if (identityFlagNum == 2){//已经切换为了雇主
             //
-            [infoDict setValue:@"零工" forKey:@"userType"];
+            [infoDict setValue:@2 forKey:@"userType"];
             [accountInfo writeToAccount:infoDict];
-            [appDelegate setupViewControllersForCasualLabour];
+            [appDelegate setupViewControllersForEmployment];
+            
         }
-        //NSLog(@"切换身份%ld", [lzhGetAccountInfo getAccount].identityFlag);
+        NSLog(@"打印切换身份%ld", [lzhGetAccountInfo getAccount].identityFlag);
     } failure:^(NSError *error) {
         
     }];
@@ -253,7 +255,7 @@
                 [self.navigationController pushViewController:searchVC animated:YES];
             }else{
                 OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
-                 personalInfoVC.targetUserID = [lzhGetAccountInfo getAccount].userID;
+                 personalInfoVC.targetUserID = [NSNumber numberWithInt:-1];
                 [self.navigationController pushViewController:personalInfoVC animated:YES];
             }
             
@@ -261,9 +263,9 @@
             break;
         case 4:{
             if (accountFlag){
-                OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
-                personalInfoVC.targetUserID = [lzhGetAccountInfo getAccount].userID;
-                [self.navigationController pushViewController:personalInfoVC animated:YES];
+//                OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
+//                personalInfoVC.targetUserID = [lzhGetAccountInfo getAccount].userID;
+//                [self.navigationController pushViewController:personalInfoVC animated:YES];
             }else{
                 SettingViewController *setVC = [[SettingViewController alloc]init];
                 [self.navigationController pushViewController:setVC animated:YES];

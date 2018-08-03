@@ -8,17 +8,31 @@
 
 #import "PersonalInfoNameViewController.h"
 //
+#import "PersonalInfoWorkViewController.h"
+
+//v
 #import "PersonalInfoInputAgeView.h"
 #import "PersonalInfoExchangeViceTextView.h"
 #import "CustomeStyleCornerButt.h"
 #import "PersonalInfoInputNameView.h"
 
-#import "PersonalInfoWorkViewController.h"
+#import "YAddressPickerView.h"
+#import "THChooseSexView.h"
+#import "THScrollChooseView.h"
 
-@interface PersonalInfoNameViewController (){
+@interface PersonalInfoNameViewController ()<AddressViewDelegate>{
     PersonalInfoInputNameView *nameView;
     UIScrollView *baseScrollView;
+    UITextField *addressTextField;
+    UITextField *sexTextField;
+    UITextField *ageTextField;
+
 }
+
+
+@property (nonatomic, strong) YAddressPickerView *addressView;
+
+@property (strong,nonatomic) NSMutableArray *ageArr;
 
 @end
 
@@ -34,8 +48,53 @@
     self.rightBarbuttBlock = ^{
         
     };
+    //
+    _addressView = [[YAddressPickerView alloc]init];
+    _addressView.delegate = self;
+    [self.view addSubview:_addressView];
+}
+//性别选择
+- (void)chooseSex{
+    WS(weakSelf);
+    THChooseSexView *sheetView = [[THChooseSexView alloc]initWithTitle:@"" buttons:@[@"男",@"女",@"取消"] buttonClick:^(THChooseSexView *chooseSexView, NSInteger buttonIndex) {
+        __strong typeof(weakSelf) sself = weakSelf;
+        if (buttonIndex < 2){
+            NSString *sexStr = (buttonIndex == 0) ? @"男":@"女";
+            sself -> sexTextField.text = sexStr;
+        }
+    }];
+    [sheetView showView];
+}
+//
+- (NSMutableArray*)ageArr{
+    if (_ageArr == nil){
+        _ageArr = [[NSMutableArray alloc]init];
+        for (int age = 18; age < 80; age ++){
+            [_ageArr addObject:[NSString stringWithFormat:@"%d",age]];
+        }
+    }
+    return _ageArr;
+}
+//年龄选择
+- (void)showAgeChooseView{
+      WS(weakSelf);
+    THScrollChooseView *scrollChooseView = [[THScrollChooseView alloc] initWithQuestionArray:self.ageArr withDefaultDesc:@"30"];
+    [scrollChooseView showView];
+    scrollChooseView.confirmBlock = ^(NSInteger selectedQuestion) {
+        __strong typeof(weakSelf) sself = weakSelf;
+         sself -> ageTextField.text = self.ageArr[selectedQuestion];
+    };
 }
 
+//地区选择
+- (void)completingTheSelection:(NSString *)province city:(NSString *)city area:(NSString *)area{
+   
+    addressTextField.text = [NSString stringWithFormat:@"%@ %@ %@",province,city,area];
+}
+//地区取消选择
+-(void)cancelOnclick{
+    [self.addressView hide];
+}
 
 - (void)addViews{
     //
@@ -61,32 +120,36 @@
     [nameView addOwnConstraints:[UIImage imageNamed:@"name"]];
     //
     PersonalInfoInputAgeView *ageView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, nameView.bottom, self.view.width, viewHeight)];
+    ageTextField = ageView.rightTextField.myTextField;
     ageView.ageLabel.text = @"年龄";
     [baseScrollView addSubview:ageView];
     ageView.rightTextField.myTextField.placeholder = @"请选择年龄";
     ageView.backButtBlock = ^(UITextField *textField) {
         NSLog(@"选择年龄");
-        textField.text = @"20";
+        [weakSelf showAgeChooseView];
     };
     [ageView addOwnConstraints:[UIImage imageNamed:@"age"]];
     //性别
     PersonalInfoInputAgeView *sexView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, ageView.bottom, self.view.width, viewHeight)];
+    sexTextField = sexView.rightTextField.myTextField;
     sexView.ageLabel.text = @"性别";
     [baseScrollView addSubview:sexView];
     sexView.rightTextField.myTextField.placeholder = @"请选择性别";
     sexView.backButtBlock = ^(UITextField *textField) {
         NSLog(@"选择性别");
-        textField.text = @"男";
+        [weakSelf chooseSex];
+        
     };
     [sexView addOwnConstraints:[UIImage imageNamed:@"sex"]];
     //城市
     PersonalInfoInputAgeView *cityView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, sexView.bottom, self.view.width, viewHeight)];
+    addressTextField = cityView.rightTextField.myTextField;
     cityView.ageLabel.text = @"城市";
     [baseScrollView addSubview:cityView];
     cityView.rightTextField.myTextField.placeholder = @"请选择城市";
     cityView.backButtBlock = ^(UITextField *textField) {
         NSLog(@"选择城市");
-        textField.text = @"青岛";
+        [weakSelf.addressView show];
     };
     [cityView addOwnConstraints:[UIImage imageNamed:@"city"]];
     //

@@ -14,6 +14,7 @@
 #import "OwnTextView.h"
 //
 #import "CommunicateViewController.h"
+#import "OwnPersonalInfomationViewController.h"
 
 @interface DispatchTicketDetailViewController ()<UITableViewDelegate,UITableViewDataSource>{
     DispatchTicketDetailBaoJiaTableViewSectionView *sectionView;
@@ -52,6 +53,7 @@
     [self initOwnObjects];
     //
     [self addTableView:CGRectMake(0, 0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT) style:UITableViewStylePlain];
+    
     [self getData];
 }
 
@@ -86,6 +88,7 @@
                     [self.modelArr addObject:model];
                 }
             }
+            self.tableView.hidden = NO;
              [self.tableView reloadData];
         } failure:^(NSError *error) {
             
@@ -99,12 +102,17 @@
 
 - (void)employeerEmploy:(NSIndexPath*)path{
     DispatchTicketDetailBaoJiaModel *model = self.modelArr[path.row];
-    [TDHttpTools EmplyeerEmploy:@{@"receiveOrderId":model.receiveOrderIdNum} success:^(id response) {
-        NSLog(@"雇佣：%@",response);
-        [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
-    } failure:^(NSError *error) {
-        
-    }];
+    if (NO == [model.heIsHired boolValue]){//没有被雇佣再雇佣
+        [TDHttpTools EmplyeerEmploy:@{@"receiveOrderId":model.receiveOrderIdNum} success:^(id response) {
+            NSLog(@"雇佣：%@",response);
+            DispatchTicketDetailBaoJiaModel *model = self.modelArr[path.row];
+            model.heIsHired = [NSNumber numberWithBool:YES];
+            [self.tableView reloadData];
+            [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 - (void)commentRequest{
@@ -112,6 +120,7 @@
     [TDHttpTools EmplyeerComment:@{@"orderId":[NSNumber numberWithInteger:self.orderId],@"score":[NSNumber numberWithInteger:xinxinView.starCount],@"remark":[NSString getResultStrBySeverStr:commentTextView.writeTextView.text]} success:^(id response) {
         NSLog(@"评价：%@",response);
         [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
+        [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
         
     }];
@@ -123,8 +132,9 @@
         case 0:{
             NSLog(@"查看");
             DispatchTicketDetailBaoJiaModel *model = self.modelArr[indexPath.row];
-            model.shouldDisplayBottomView = YES;
-            [self.tableView reloadData];
+            OwnPersonalInfomationViewController *infomationVC = [[OwnPersonalInfomationViewController alloc]init];
+            infomationVC.targetUserID = model.baoJiaUserIdNum;
+            [self.navigationController pushViewController:infomationVC animated:YES];
         }
             break;
         case 1:{
@@ -146,7 +156,7 @@
             break;
         case 2:{
              NSLog(@"雇佣");
-            [self displayPopView];
+            //[self displayPopView];
             //
             [self employeerEmploy:indexPath];
         }
@@ -190,6 +200,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
+    //默认隐藏
+    self.tableView.hidden = YES;
 }
 
 
@@ -259,7 +271,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -344,7 +356,7 @@
         [appWindow addSubview:popBackButt];
         //
         commentPopView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.741, SCREEN_WIDTH * 0.741)];
-        commentPopView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+        commentPopView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 150);
         commentPopView.backgroundColor = [UIColor whiteColor];
         
         commentPopView.clipsToBounds = YES;
@@ -377,6 +389,7 @@
         commentTextView.writeViewPlaceHolderLabel.font = [UIFont getPingFangSCRegular:12];
         commentTextView.writeViewPlaceHolderLabel.text = @"服务等还满意吗？";
         [commentPopView addSubview:commentTextView];
+        [commentTextView.writeTextView becomeFirstResponder];
         //
         CustomeStyleCornerButt *cancelButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, commentPopView.height * 0.85, commentPopView.width / 2, commentPopView.height * 0.15) backColor:[UIColor colorWithHexString:@"#F5F5F5"] cornerRadius:-1 title:@"取消" titleColor:[UIColor colorWithHexString:@"#999999"] font:[UIFont getPingFangSCMedium:16]];
         WS(weakSelf);

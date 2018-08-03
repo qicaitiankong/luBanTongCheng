@@ -11,9 +11,13 @@
 #import "TakeOrderQuotePriceSecondUseTableViewCell.h"
 #import "TakeOrderQuotePriceQiangBiaoTableViewCell.h"
 #import "TakeOrderQuotePriceSectionView.h"
+#import "CommitPopView.h"
 
 @interface OrderTakingQuotePriceViewController ()<UITableViewDelegate,UITableViewDataSource>{
     TakeOrderQuotePriceSectionView *sectionView;
+    //
+    CommitPopView *popView;
+    UIButton *popbackButt;
 }
 
 @property (strong,nonatomic) UITableView *tableView;
@@ -42,7 +46,7 @@
     [NavTools hiddenTabbar:self.rdv_tabBarController];
     //
     if(self.isBapJiaDetail){
-        self.title = @"报价详情";
+        self.title = @"详情";
 
     }else{
         self.title = @"报价";
@@ -74,11 +78,10 @@
             
             NSLog(@"接单详情零工版 dict=%@",dict);
             NSDictionary *dataDict = dict[@"data"];
-            [SVProgressHUD showInfoWithStatus:[NSString getResultStrBySeverStr:dataDict[@"reason"]]];
-            if ([dataDict[@"createTime"] isKindOfClass:[NSString class]]){
-                NSLog(@"!!!!!!!!!!!createTime为NSString");
+            NSString *reasonStr = [NSString getResultStrBySeverStr: dataDict[@"reason"]];
+            if (reasonStr.length){
+                [self showPopView:reasonStr];
             }
-            
             self.singleModel.logoUrlStr = [NSString getResultStrBySeverStr:dataDict[@"headImg"]];
             self.singleModel.timeStr = [NSString getResultStrBySeverStr:dataDict[@"createTime"]] ;
             self.singleModel.praiseStr = [NSString getResultStrBySeverStr:dataDict[@"budget"]];
@@ -242,7 +245,37 @@
         return sectionView.height;
     }
 }
+//
 
+//弹窗
+- (void)showPopView:(NSString*)messageStr{
+    UIWindow *appWindow = APP_MAIN_WINDOW;
+    if (nil == popView){
+        popbackButt = [UIButton buttonWithType:UIButtonTypeCustom];
+        popbackButt.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        popbackButt.backgroundColor = [UIColor grayColor];
+        popbackButt.alpha = POP_VIEW_ALPHA;
+        //[popbackButt addTarget:self action:@selector(popBackButtHandler) forControlEvents:UIControlEventTouchUpInside];
+        [appWindow addSubview:popbackButt];
+        popView = [[CommitPopView alloc]initWithFrame:CGRectMake(0, 0, 194, 223)];
+        popView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT  / 2);
+        [appWindow addSubview:popView];
+        WS(weakSelf);
+        popView.sureBlock = ^{
+            __strong typeof(weakSelf)sself = weakSelf;
+            [sself -> popbackButt setHidden:YES];
+            [sself -> popView setHidden:YES];
+        };
+    }else{
+        [popbackButt setHidden:NO];
+        [popView setHidden:NO];
+    }
+     popView.tipLabel.text = messageStr;
+}
+
+
+
+//
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

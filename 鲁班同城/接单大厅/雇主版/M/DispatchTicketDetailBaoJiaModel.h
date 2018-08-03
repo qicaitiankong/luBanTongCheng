@@ -11,6 +11,11 @@
 @interface DispatchTicketDetailBaoJiaModel : NSObject
 //接单（抢单）记录的id
 @property (strong,nonatomic) NSNumber *receiveOrderIdNum;
+//报价用户的userid
+@property (strong,nonatomic) NSNumber *baoJiaUserIdNum;
+//报价用户是否被雇佣
+@property (strong,nonatomic) NSNumber *heIsHired;
+
 
 @property (strong,nonatomic) NSString *pictureUrlStr;
 
