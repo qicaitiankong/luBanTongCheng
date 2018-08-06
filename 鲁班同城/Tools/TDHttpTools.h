@@ -74,6 +74,12 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 //零工取消接单
 +(void)casualCancelTakeOrder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
+//零工修改个人信息
++(void)casualChangeOwnInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+
+
+
 
 
 

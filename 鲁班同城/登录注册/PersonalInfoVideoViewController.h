@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "BasePersonalInfoViewController.h"
+#import "TakePhotoBaseViewController.h"
+#import "OwnPersonalInfoModel.h"
 
-@interface PersonalInfoVideoViewController : BasePersonalInfoViewController
+@interface PersonalInfoVideoViewController : TakePhotoBaseViewController
+
+//修改前的模型
+@property (strong,nonatomic) OwnPersonalInfoModel *orinalInfoModel;
+
+//修改中存储的模型
+@property (strong,nonatomic) OwnPersonalInfoModel *amendingInfoModel;
 
 @end

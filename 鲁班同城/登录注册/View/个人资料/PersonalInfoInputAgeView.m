@@ -10,12 +10,14 @@
 
 @interface PersonalInfoInputAgeView (){
         UIView *bottomLineView;
-        UIImageView *flagImageView;
+       
         UIButton *backButt;
 }
 @end
 
 @implementation PersonalInfoInputAgeView
+
+@synthesize flagImageView;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

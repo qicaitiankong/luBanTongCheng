@@ -22,6 +22,8 @@
 
 @property (copy,nonatomic) void (^backButtBlock)(UITextField *textField);
 
+@property (strong,nonatomic) UIImageView *flagImageView;
+
 - (void)addOwnConstraints:(UIImage *)iconImage;
 
 - (void)displayTextOrYuYin:(BOOL)isYuYin;

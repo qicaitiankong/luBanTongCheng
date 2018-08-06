@@ -10,18 +10,28 @@
 #import "PersonalInfoAddPhotoFlagView.h"
 #import "CustomeStyleCornerButt.h"
 #import "CommitPopView.h"
+#import "OwnPersonalInfoSelectPictureCellTableViewCell.h"
 
-@interface PersonalInfoVideoViewController (){
-    ImageAndLabelView *firstImageAndLabelView;
+#import "OwnPersonalInfoSectionView.h"
+
+@interface PersonalInfoVideoViewController ()<UITableViewDelegate,UITableViewDataSource>{
     ImageAndLabelView *seondImageAndLabelView;
-    UILabel *rightTopTipLabel;
+    
     CommitPopView *popView;
     UIButton *popbackButt;
-    UIScrollView *baseScrollView;
-    UIScrollView *pictureBaseScrollView;
-    UIScrollView *videoBaseScrollView;
-
+    
+    OwnPersonalInfoSectionView *firstSectionView;
+    OwnPersonalInfoSectionView *secondSectionView;
+    UIView *completeView;
+    
+    NSIndexPath *currentClickpath;
 }
+
+@property (strong,nonatomic) UITableView *tableView;
+
+@property (strong,nonatomic) OwnPersonalInfoChoosePictureModel *videoModel;
+
+@property (strong,nonatomic) OwnPersonalInfoChoosePictureModel *pictureModel;
 
 @end
 
@@ -30,62 +40,212 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self initNavStyle];
+    //图片选取回调
+    WS(weakSelf);
+    self.selectedImageBlock = ^(NSString *pictureBase64str, UIImage *selectedPicture) {
+        NSLog(@"!!!!!!!!!!!!!!选取图片%@ %@",selectedPicture,pictureBase64str);
+        [weakSelf setPictureWhenChooseCpmplete:pictureBase64str image:selectedPicture];
+    };
     //WS(weakSelf);
-    self.leftBarbuttBlock = ^{
-    };
-    self.rightBarbuttBlock = ^{
-    };
-    [self addViews];
+    [self initOwnObjects];
+    
+    [self createCompleteViews];
+    [self addTableViews];
 }
 
-- (void)addViews{
+- (void)initNavStyle{
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.rdv_tabBarController setTabBarHidden:YES];
     //
-    baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT)];
-    baseScrollView.backgroundColor = [UIColor whiteColor];
-    baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    [self.view addSubview:baseScrollView];
-    //
-    WS(weakSelf);
-    firstImageAndLabelView = [[ImageAndLabelView alloc] initWithFrame:CGRectMake(10, 30, 10, 10) image:[UIImage imageNamed:@"videoFlag"] title:@"技能-视频秀" font:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"]];
-    [baseScrollView addSubview:firstImageAndLabelView];
-    //
-    rightTopTipLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithRed:153.003/255.0 green:153.003/255.0 blue:153.003/255.0 alpha:1] aligement:2];
-    rightTopTipLabel.frame = CGRectMake(5, firstImageAndLabelView.top, self.view.width - 10, firstImageAndLabelView.height);
-    rightTopTipLabel.text = @"点击 +上传/拍摄";
-    [baseScrollView addSubview:rightTopTipLabel];
-    //
-    videoBaseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, rightTopTipLabel.bottom + 15, self.view.width, 90)];
-    videoBaseScrollView.backgroundColor = [UIColor whiteColor];
-    [baseScrollView addSubview:videoBaseScrollView];
-    
-    for (int i = 0; i < 3; i ++){
-        PersonalInfoAddPhotoFlagView *videoFlagView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(130 * i, 0, 130, 90)];
-        [videoBaseScrollView addSubview:videoFlagView];
-    }
-    
-    videoBaseScrollView.contentSize = CGSizeMake(130 * 3, videoBaseScrollView.height);
-    [baseScrollView addSubview:videoBaseScrollView];
-    //
-    ImageAndLabelView * photoImageAndLabelView = [[ImageAndLabelView alloc] initWithFrame:CGRectMake(firstImageAndLabelView.left, videoBaseScrollView.bottom + 15, 10, 10) image:[UIImage imageNamed:@"photoFlag"] title:@"技能-图片" font:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"]];
-    [baseScrollView addSubview:photoImageAndLabelView];
-    //
-    PersonalInfoAddPhotoFlagView *photoFlagView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(photoImageAndLabelView.left + photoImageAndLabelView.rightLabel.left, photoImageAndLabelView.bottom + 15, 130, 90)];
-    [baseScrollView addSubview:photoFlagView];
-    //
-    CGFloat buttWidth = SCREEN_WIDTH * 0.874;
-    CGFloat buttHeigt = buttWidth * 0.137;
-    CustomeStyleCornerButt *nextButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, photoFlagView.bottom + SCREEN_HEIGHT * 0.269, buttWidth, buttHeigt) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:4 title:@"完成" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
-    nextButt.center = CGPointMake(self.view.width  / 2, nextButt.centerY);
-    nextButt.clickButtBlock = ^{
-        [weakSelf nextHandler];
-    };
-    [baseScrollView addSubview:nextButt];
-    //
-    [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, nextButt.bottom + 30)];
+    self.title = @"个人资料";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButt)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButt)];
 }
+
+- (void)leftBarButt{
+        [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)rightBarButt{
+   
+}
+
+- (void)initOwnObjects{
+    self.videoModel = [[OwnPersonalInfoChoosePictureModel alloc]init];
+    
+    self.pictureModel = [[OwnPersonalInfoChoosePictureModel alloc]init];
+}
+
+- (void)addPicture:(NSIndexPath*)path{
+    currentClickpath = path;
+    NSLog(@"点击选取图片path.section=%ld",path.section);
+     [self callActionSheetFunc];
+   
+    
+}
+
+- (void)setPictureWhenChooseCpmplete:(NSString *)pictureBase64str image:(UIImage *)selectedPicture{
+    NSLog(@"添加视频或图片");
+    if (currentClickpath.section == 1){//添加视频
+        if (self.videoModel.selectedImageArr.count < 7){
+            [self.videoModel.selectedImageArr addObject:selectedPicture];
+            [self.videoModel.selectedImageBaseStrArr addObject:pictureBase64str];
+        }
+        
+    }else{//图片
+        if (self.pictureModel.selectedImageArr.count < 7){
+            [self.pictureModel.selectedImageArr addObject:selectedPicture];
+             [self.pictureModel.selectedImageBaseStrArr addObject:pictureBase64str];
+        }
+    }
+    [self.tableView reloadData];
+}
+
+
+
+- (void)addTableViews{
+    //
+    firstSectionView = [[OwnPersonalInfoSectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 30) image:[UIImage imageNamed:@"videoFlag"] title:@"技能-视频秀"];
+    //
+   secondSectionView = [[OwnPersonalInfoSectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 30) image:[UIImage imageNamed:@"photoFlag"] title:@"技能-图片秀"];
+    secondSectionView.rightTopTipLabel.hidden = YES;
+    //
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT) style:UITableViewStylePlain];
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+    //
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (section % 2){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellFlag = @"cell";
+    OwnPersonalInfoSelectPictureCellTableViewCell
+    *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
+    
+    if (nil == cell){
+        WS(weakSelf);
+        cell = [[OwnPersonalInfoSelectPictureCellTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+        cell.addPictureBlock = ^(NSIndexPath *path) {
+            [weakSelf addPicture:path];
+        };
+    }
+    cell.path = indexPath;
+    if (indexPath.section == 1){
+        cell.model = self.videoModel;
+    }else{
+        cell.model = self.pictureModel;
+    }
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat height = 0;
+    if (indexPath.section == 1){
+         height = [tableView cellHeightForIndexPath:indexPath model:self.videoModel keyPath:@"model" cellClass:[OwnPersonalInfoSelectPictureCellTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+    }else{
+         height = [tableView cellHeightForIndexPath:indexPath model:self.pictureModel keyPath:@"model" cellClass:[OwnPersonalInfoSelectPictureCellTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+    }
+    return height;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section % 2){
+        return nil;
+    }else{
+        if (section == 0){
+            return firstSectionView;
+        }else{
+            return secondSectionView;
+        }
+
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section % 2){
+        return 0;
+    }else{
+        if (section == 0){
+             return firstSectionView.height;
+        }else{
+             return secondSectionView.height;
+        }
+       
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 3){
+        return completeView.height;
+    }else{
+        return 0;
+    }
+}
+
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if (section == 3){
+        return completeView;
+    }else{
+        return nil;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)createCompleteViews{
+    completeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 300)];
+        CustomeStyleCornerButt *nextButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 240, completeView.width * 0.9, 50) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:4 title:@"完成" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
+        nextButt.center = CGPointMake(completeView.width  / 2, nextButt.centerY);
+        WS(weakSelf);
+        nextButt.clickButtBlock = ^{
+            [weakSelf nextHandler];
+        };
+    [completeView addSubview:nextButt];
+}
+
+
+
 
 - (void)nextHandler{
-    [self showPopView];
+    //
+     NSString *videoBase64Str = [self.videoModel.selectedImageBaseStrArr componentsJoinedByString:@","];
+    //
+    NSString *pictureBase64Str = [self.pictureModel.selectedImageBaseStrArr componentsJoinedByString:@","];
+   
+    //
+    NSDictionary *paraDict = @{@"realName":self.amendingInfoModel.nameStr,@"realNamePath":@"",
+                               @"age":self.amendingInfoModel.ageNum,@"gender":self.amendingInfoModel.sexStr,
+                               @"province":self.amendingInfoModel.proviceStr,@"city":self.amendingInfoModel.cityStr,
+                               @"area":self.amendingInfoModel.areaStr,@"address":self.amendingInfoModel.addressStr,
+                               @"technologys":self.amendingInfoModel.technologyServiceNeedStr,@"professionals":self.amendingInfoModel.jobServiceNeedStr,
+                               @"technologyShowPic":pictureBase64Str,@"technologyShowVideo":videoBase64Str,
+                               @"userId":[lzhGetAccountInfo getAccount].userID,@"headImg":@"",
+                               @"mobile":self.amendingInfoModel.mobileStr,@"workExperience":self.amendingInfoModel.jobExperienceStr,
+                               @"workExperiencePath":@""
+                                   };
+    [TDHttpTools casualChangeOwnInfo:paraDict success:^(id response) {
+        NSLog(@"修改个人信息%@",response);
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 //弹窗

@@ -389,6 +389,11 @@
 		187434BB20F333FD0008A24F /* CustomeLabelButt.m in Sources */ = {isa = PBXBuildFile; fileRef = 187434BA20F333FD0008A24F /* CustomeLabelButt.m */; };
 		187434C120F356AA0008A24F /* CompanyRecuritDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187434C020F356AA0008A24F /* CompanyRecuritDetailViewController.m */; };
 		187434C420F358850008A24F /* NavTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 187434C320F358850008A24F /* NavTools.m */; };
+		187768E32117D1F000766BE9 /* OwnPersonalInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187768E22117D1F000766BE9 /* OwnPersonalInfoModel.m */; };
+		187768E62117F3AB00766BE9 /* OwnPersonalInfoSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187768E52117F3AB00766BE9 /* OwnPersonalInfoSectionView.m */; };
+		187768E9211813DC00766BE9 /* OwnPersonalInfoSelectPictureCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187768E8211813DC00766BE9 /* OwnPersonalInfoSelectPictureCellTableViewCell.m */; };
+		187768EC211816C800766BE9 /* OwnPersonalInfoChoosePictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187768EB211816C800766BE9 /* OwnPersonalInfoChoosePictureModel.m */; };
+		187768EF2118280600766BE9 /* TakePhotoBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187768EE2118280600766BE9 /* TakePhotoBaseViewController.m */; };
 		187892DB210EA1C5002A5798 /* KeyboardToolsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892DA210EA1C5002A5798 /* KeyboardToolsView.m */; };
 		187892DE210EE1D9002A5798 /* TelephoneNumberTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892DD210EE1D9002A5798 /* TelephoneNumberTools.m */; };
 		187892E1210EFB72002A5798 /* NSString+OwnDealNullStr.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892E0210EFB72002A5798 /* NSString+OwnDealNullStr.m */; };
@@ -1023,6 +1028,16 @@
 		187434C020F356AA0008A24F /* CompanyRecuritDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyRecuritDetailViewController.m; sourceTree = "<group>"; };
 		187434C220F358850008A24F /* NavTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavTools.h; sourceTree = "<group>"; };
 		187434C320F358850008A24F /* NavTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavTools.m; sourceTree = "<group>"; };
+		187768E12117D1F000766BE9 /* OwnPersonalInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPersonalInfoModel.h; sourceTree = "<group>"; };
+		187768E22117D1F000766BE9 /* OwnPersonalInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalInfoModel.m; sourceTree = "<group>"; };
+		187768E42117F3AB00766BE9 /* OwnPersonalInfoSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPersonalInfoSectionView.h; sourceTree = "<group>"; };
+		187768E52117F3AB00766BE9 /* OwnPersonalInfoSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalInfoSectionView.m; sourceTree = "<group>"; };
+		187768E7211813DC00766BE9 /* OwnPersonalInfoSelectPictureCellTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPersonalInfoSelectPictureCellTableViewCell.h; sourceTree = "<group>"; };
+		187768E8211813DC00766BE9 /* OwnPersonalInfoSelectPictureCellTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalInfoSelectPictureCellTableViewCell.m; sourceTree = "<group>"; };
+		187768EA211816C800766BE9 /* OwnPersonalInfoChoosePictureModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPersonalInfoChoosePictureModel.h; sourceTree = "<group>"; };
+		187768EB211816C800766BE9 /* OwnPersonalInfoChoosePictureModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalInfoChoosePictureModel.m; sourceTree = "<group>"; };
+		187768ED2118280600766BE9 /* TakePhotoBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakePhotoBaseViewController.h; sourceTree = "<group>"; };
+		187768EE2118280600766BE9 /* TakePhotoBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakePhotoBaseViewController.m; sourceTree = "<group>"; };
 		187892D9210EA1C5002A5798 /* KeyboardToolsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardToolsView.h; sourceTree = "<group>"; };
 		187892DA210EA1C5002A5798 /* KeyboardToolsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardToolsView.m; sourceTree = "<group>"; };
 		187892DC210EE1D9002A5798 /* TelephoneNumberTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TelephoneNumberTools.h; sourceTree = "<group>"; };
@@ -1661,6 +1676,8 @@
 				1818E49920EB025A00B676C2 /* BaseCustomeTableViewController.m */,
 				1824F74F20EF0C6100E99823 /* BaseHiddenNavAndTabBarViewController.h */,
 				1824F75020EF0C6100E99823 /* BaseHiddenNavAndTabBarViewController.m */,
+				187768ED2118280600766BE9 /* TakePhotoBaseViewController.h */,
+				187768EE2118280600766BE9 /* TakePhotoBaseViewController.m */,
 			);
 			path = BaseInherit;
 			sourceTree = "<group>";
@@ -1898,6 +1915,10 @@
 				1824F74320EEF63300E99823 /* ChooseTechnologyRightTableViewCell.m */,
 				1824F74520EEF66100E99823 /* ChooseTechnologyLeftTableViewCell.h */,
 				1824F74620EEF66100E99823 /* ChooseTechnologyLeftTableViewCell.m */,
+				187768E42117F3AB00766BE9 /* OwnPersonalInfoSectionView.h */,
+				187768E52117F3AB00766BE9 /* OwnPersonalInfoSectionView.m */,
+				187768E7211813DC00766BE9 /* OwnPersonalInfoSelectPictureCellTableViewCell.h */,
+				187768E8211813DC00766BE9 /* OwnPersonalInfoSelectPictureCellTableViewCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1907,6 +1928,8 @@
 			children = (
 				1824F74920EEFEE200E99823 /* ChooseTechnologyLeftModel.h */,
 				1824F74A20EEFEE200E99823 /* ChooseTechnologyLeftModel.m */,
+				187768EA211816C800766BE9 /* OwnPersonalInfoChoosePictureModel.h */,
+				187768EB211816C800766BE9 /* OwnPersonalInfoChoosePictureModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -2097,6 +2120,8 @@
 			children = (
 				185ABF1A20F83D3200188520 /* MessageModel.h */,
 				185ABF1B20F83D3200188520 /* MessageModel.m */,
+				187768E12117D1F000766BE9 /* OwnPersonalInfoModel.h */,
+				187768E22117D1F000766BE9 /* OwnPersonalInfoModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -2980,8 +3005,10 @@
 				188813B920EC9A2B00F832BE /* PersonalInfoInputNameView.m in Sources */,
 				185ABF2620F8475F00188520 /* ConcernViewController.m in Sources */,
 				1443C57620E3188E0009E82F /* LzhReturnLabelHeight.m in Sources */,
+				187768EF2118280600766BE9 /* TakePhotoBaseViewController.m in Sources */,
 				1443C5C820E343E50009E82F /* RDVTabBarItem.m in Sources */,
 				185ABF1920F8352300188520 /* MessageTableViewCell.m in Sources */,
+				187768E9211813DC00766BE9 /* OwnPersonalInfoSelectPictureCellTableViewCell.m in Sources */,
 				1818E4A920EB42A000B676C2 /* SSSearchBar.m in Sources */,
 				1832B99D20F59CC400D6CE4F /* SDWeiXinPhotoContainerView.m in Sources */,
 				186FBCB42105CCEF00425105 /* GeocodeAnnotation.m in Sources */,
@@ -3037,6 +3064,7 @@
 				1874349620F2FE780008A24F /* StarView.m in Sources */,
 				185BDBAB2114443500F18CD5 /* THChooseSexView.m in Sources */,
 				1824F76720EF106600E99823 /* OwnPersonalInfomationTopPictureGoupView.m in Sources */,
+				187768E32117D1F000766BE9 /* OwnPersonalInfoModel.m in Sources */,
 				1853689120E9AED50053A5D4 /* FirstPageWaterCollectionReusableHeaderView.m in Sources */,
 				181FCBFC20F72D620044B055 /* OrderTakingQuotePriceDetailTableViewCell.m in Sources */,
 				186EBE2C20EDE33F00D0F54E /* OwnTextView.m in Sources */,
@@ -3110,11 +3138,13 @@
 				1832B9A620F5C45700D6CE4F /* UILabel+ChangeCustomeLineSpace.m in Sources */,
 				1443C59B20E331CA0009E82F /* VideoCenterViewController.m in Sources */,
 				1824F78320EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m in Sources */,
+				187768E62117F3AB00766BE9 /* OwnPersonalInfoSectionView.m in Sources */,
 				181FCBF920F728CC0044B055 /* OrderTakingQuotePriceDetailViewController.m in Sources */,
 				1443C61520E36B4A0009E82F /* MobileCode.m in Sources */,
 				1443C5F620E359110009E82F /* OwnTextField.m in Sources */,
 				188CB38220FC99E700302C94 /* DispatchTicketDetailBaoJiaTableViewSectionView.m in Sources */,
 				182030C821003A940098BFCC /* TDHttpTools.m in Sources */,
+				187768EC211816C800766BE9 /* OwnPersonalInfoChoosePictureModel.m in Sources */,
 				1443C5CB20E3446B0009E82F /* AppDelegate+tabbar.m in Sources */,
 				1824F74B20EEFEE200E99823 /* ChooseTechnologyLeftModel.m in Sources */,
 				1818E4D920EB5D1300B676C2 /* MyInfoTableHeaderView.m in Sources */,

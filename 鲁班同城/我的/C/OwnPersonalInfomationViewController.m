@@ -13,6 +13,8 @@
 #import "OwnPersonalInfomationPersonalServiceTypeGoupView.h"
 #import "OwnPersonalInfomationPersonalVideoGoupView.h"
 #import "PersonalInfoNameViewController.h"
+#import "OwnPersonalInfoModel.h"
+
 
 @interface OwnPersonalInfomationViewController (){
     UIScrollView *baseScrollView;
@@ -25,16 +27,8 @@
     //图片控件高度，先最多显示3张，高度写死
     CGFloat pictureViewGroupHeight;
 }
-//
-@property (strong,nonatomic) NSMutableArray *personalTechnologyArr;
-//
-@property (strong,nonatomic) NSMutableArray *personalJobArr;
-//
-@property (strong,nonatomic) NSMutableArray *personalVideoArr;
-//
-@property (strong,nonatomic) NSMutableArray *personalPictureArr;
 
-@property (assign,nonatomic) NSInteger starCount;
+@property (strong,nonatomic) OwnPersonalInfoModel *infoModel;
 
 @end
 
@@ -50,10 +44,6 @@
 }
 
 - (void)initOwnObjects{
-    self.personalTechnologyArr = [[NSMutableArray alloc]init];
-    self.personalJobArr = [[NSMutableArray alloc]init];
-    self.personalVideoArr = [[NSMutableArray alloc]init];
-    self.personalPictureArr = [[NSMutableArray alloc]init];
     pictureViewGroupHeight = IMAGE_VIEW_HEIGHT + 5 + 55;
 }
 
@@ -78,6 +68,7 @@
     };
     topPartView.editButt.clickButtBlock = ^{
         PersonalInfoNameViewController *nameEditVC = [[PersonalInfoNameViewController alloc]init];
+        nameEditVC.orinalInfoModel = weakSelf.infoModel;
         [weakSelf.navigationController pushViewController:nameEditVC animated:YES];
     };
     [baseScrollView addSubview:topPartView];
@@ -120,27 +111,21 @@
                 [TDHttpTools getCapsualUserInfo:praDict success:^(id response) {
                     NSDictionary *dataDict = response[@"data"];
                     NSLog(@"零工用户信息:%@",dataDict);
+//                    address = "\U94f6\U5ea7\U534e\U5e9c";
+//                    age = 30;
+//                    area = "\U674e\U6ca7\U533a";
+//                    city = "\U9752\U5c9b\U5e02";
+//                    fansNum = 0;
+//                    focusNum = 0;
+//                    gender = "\U7537";
+//                    headImg = trefreds;
+//                    hireNum = 2;
+//                    id = 16;
+//                    isFocused = 2;
+//                    mobile = 17096177665;
                     if ([dataDict allKeys].count){
-                        //写入plist
-                        NSNumber *starNumber = [NSNumber getResultNumberBySeverStr:dataDict[@"score"]];
-                        weakSelf.starCount = [starNumber integerValue];
-                    
-                        NSArray *techArr = dataDict[@"technologys"];
-                        NSArray *jobArr = dataDict[@"professions"];
-                        NSArray *videoArr = dataDict[@"technologysVideo"];
-                        NSArray *picArr = dataDict[@"technologysPic"];
-                        if (techArr.count){
-                            [weakSelf.personalTechnologyArr addObjectsFromArray:techArr];
-                        }
-                        if (jobArr.count){
-                            [weakSelf.personalJobArr addObjectsFromArray:jobArr];
-                        }
-                        if (videoArr.count){
-                            [weakSelf.personalVideoArr addObjectsFromArray:videoArr];
-                        }
-                        if (picArr.count){
-                            [weakSelf.personalPictureArr addObjectsFromArray:picArr];
-                        }
+                        self.infoModel = [OwnPersonalInfoModel setModelFromDict:dataDict];
+                       
                         //界面赋值
                         [self giveValueToView];
                     }
@@ -153,28 +138,28 @@
 }
 
 - (void)giveValueToView{
-    NSURL *imageUrl = [NSURL URLWithString:[lzhGetAccountInfo getAccount].PhotoUrl];
+    NSURL *imageUrl = [NSURL URLWithString:[self.infoModel.userPictureUrlStr copy]];
     [topPartView.userlogoImaView sd_setImageWithURL:imageUrl];
-    topPartView.fenSiLabel.text =[NSString stringWithFormat:@"%ld粉丝",[lzhGetAccountInfo getAccount].fansCount];
-    topPartView.concernLabel.text = [NSString stringWithFormat:@"%ld关注",[lzhGetAccountInfo getAccount].fousCount];
-    topPartView.sexAndHomeLabel.text = [NSString stringWithFormat:@"%@ %@ %@",[lzhGetAccountInfo getAccount].sexStr,[GetLocationICitynfo getLocationInfo].provinceStr,[GetLocationICitynfo getLocationInfo].cityStr];
-    [topPartView.starGroupView setYellowStar:self.starCount];
+    topPartView.fenSiLabel.text =[NSString stringWithFormat:@"%ld粉丝",[self.infoModel.fansNum integerValue]];
+    topPartView.concernLabel.text = [NSString stringWithFormat:@"%ld关注",[self.infoModel.focusNum integerValue]];
+    topPartView.sexAndHomeLabel.text = [NSString stringWithFormat:@"%@ %@",[self.infoModel.sexStr copy],[self.infoModel.addressStr copy]];
+    [topPartView.starGroupView setYellowStar:[self.infoModel.starCountNumber integerValue]];
     //个人介绍
-    [personalIntroduceView giveOwnValue:@"个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍"];
+    [personalIntroduceView giveOwnValue:[self.infoModel.introduceStr copy]];
     //技术
-    NSMutableArray *targetTechnologyArr = [self getTargetTechnologyArr:self.personalTechnologyArr];
+    NSMutableArray *targetTechnologyArr = [self getTargetTechnologyArr:[self.infoModel.technologyArr copy]];
     [personalTechnologyView giveOwnValue:targetTechnologyArr];
     personalTechnologyView.frame = CGRectMake(personalTechnologyView.x, personalIntroduceView.bottom + 15, personalTechnologyView.width, personalTechnologyView.height);
     
     //服务类型
-    NSMutableArray *targetJobArr = [self getTargetTechnologyArr:self.personalJobArr];
+    NSMutableArray *targetJobArr = [self getTargetTechnologyArr:[self.infoModel.jobArr copy]];
     [serviceTypeView giveOwnValue:targetJobArr];
     serviceTypeView.frame = CGRectMake(serviceTypeView.x, personalTechnologyView.bottom + 15, serviceTypeView.width, serviceTypeView.height);
     //视屏
-    [videoView givePictureArr:self.personalVideoArr];
+    [videoView givePictureArr:[self.infoModel.videoArr copy]];
     videoView.frame = CGRectMake(videoView.x, serviceTypeView.bottom + 15, videoView.width, pictureViewGroupHeight);
    //图片
-    [pictureView givePictureArr:self.personalPictureArr];
+    [pictureView givePictureArr:[self.infoModel.pictureArr copy]];
     
     pictureView.frame = CGRectMake(pictureView.x, videoView.bottom + 15, pictureView.width, pictureViewGroupHeight);
     //

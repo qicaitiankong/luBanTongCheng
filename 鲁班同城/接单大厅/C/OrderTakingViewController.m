@@ -113,6 +113,7 @@
     self.modelArr = [[NSMutableArray alloc] init];
     self.page = 1;
 }
+
 //
 - (void)getData:(int)page{
     if ([lzhGetAccountInfo getAccount].identityFlag == 0){//零工

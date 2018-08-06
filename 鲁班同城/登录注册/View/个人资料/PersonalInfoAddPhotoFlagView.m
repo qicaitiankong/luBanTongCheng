@@ -7,6 +7,12 @@
 //
 
 #import "PersonalInfoAddPhotoFlagView.h"
+@interface PersonalInfoAddPhotoFlagView (){
+    UIButton *backButt;
+}
+
+@end
+
 
 @implementation PersonalInfoAddPhotoFlagView
 
@@ -28,7 +34,7 @@
         addImageView.center = CGPointMake(frame.size.width / 2, frame.size.height / 2);
         [self addSubview:addImageView];
         //
-        UIButton *backButt = [UIButton buttonWithType:UIButtonTypeCustom];
+        backButt = [UIButton buttonWithType:UIButtonTypeCustom];
         backButt.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         [backButt addTarget:self action:@selector(backButtHandler) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:backButt];
@@ -36,8 +42,26 @@
     return self;
 }
 
+- (void)adjustConstraintsWhenNeed{
+    self.imageView.sd_resetLayout
+    .leftEqualToView(self)
+    .topEqualToView(self)
+    .widthIs(self.width)
+    .heightEqualToWidth();
+    
+    backButt.sd_resetLayout
+    .leftEqualToView(self)
+    .topEqualToView(self)
+    .widthIs(self.width)
+    .heightEqualToWidth();
+}
+
+
+
+
 - (void)backButtHandler{
     if (self.selectedAddPhotoBlock){
+        NSLog(@"点击选择图片");
         self.selectedAddPhotoBlock(self.imageView);
     }
 }

@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BasePersonalInfoViewController.h"
+#import "OwnPersonalInfoModel.h"
 
 @interface PersonalInfoWorkViewController : BasePersonalInfoViewController
+//修改前的模型
+@property (strong,nonatomic) OwnPersonalInfoModel *orinalInfoModel;
+//修改中存储的模型
+@property (strong,nonatomic) OwnPersonalInfoModel *amendingInfoModel;
 
 @end

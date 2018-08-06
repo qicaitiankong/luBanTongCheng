@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BasePersonalInfoViewController.h"
+#import "OwnPersonalInfoModel.h"
+
 
 @interface PersonalInfoNameViewController : BasePersonalInfoViewController
+
+@property (strong,nonatomic) OwnPersonalInfoModel *orinalInfoModel;
+
 
 @end
