@@ -25,4 +25,6 @@
 
 @property (strong,nonatomic) NSIndexPath *indexPath;
 
+@property (copy,nonatomic) void (^clickRightButtBlock)(NSIndexPath *path);
+
 @end

@@ -33,7 +33,10 @@
 
 @property (strong,nonatomic) StarView * starGroupView;
 
-- (instancetype)initWithFrame:(CGRect)frame vcKind:(NSInteger)rankUse;
+- (instancetype)initWithFrame:(CGRect)frame targetUseId:(NSInteger)targetUserID;
+
+//根据关注修改是否显示
+- (void)setEditButtDisplayByValue:(BOOL)isConcenrned;
 
 
 @end

@@ -133,7 +133,7 @@
             NSLog(@"查看");
             DispatchTicketDetailBaoJiaModel *model = self.modelArr[indexPath.row];
             OwnPersonalInfomationViewController *infomationVC = [[OwnPersonalInfomationViewController alloc]init];
-            infomationVC.targetUserID = model.baoJiaUserIdNum;
+            infomationVC.targetUserId = model.baoJiaUserIdNum;
             [self.navigationController pushViewController:infomationVC animated:YES];
         }
             break;

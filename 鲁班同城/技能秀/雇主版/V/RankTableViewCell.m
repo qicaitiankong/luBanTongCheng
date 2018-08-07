@@ -33,6 +33,10 @@
         //
         UIColor *buttBackCol = SPECIAL_BLUE_COLOR;
         self.ownRightButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, 0, 68, 26) backColor:buttBackCol cornerRadius:5 title:@"查看" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:12]];
+        WS(weakSelf);
+        self.ownRightButt.clickButtBlock = ^{
+            [weakSelf clickRightButt];
+        };
         NSArray *viewArr = @[self.userImageView,self.rankLabel,self.ownRightButt,self.nickLabel,self.jobLabel];
         [self.contentView sd_addSubviews:viewArr];
         //
@@ -85,8 +89,14 @@
         self.jobLabel.text = [model.jobStr copy];
         [self setupAutoHeightWithBottomView:self.userImageView bottomMargin:15];
     }
-    
 }
+
+- (void)clickRightButt{
+    if (self.clickRightButtBlock){
+        self.clickRightButtBlock(self.indexPath);
+    }
+}
+
 
 
 - (void)awakeFromNib {

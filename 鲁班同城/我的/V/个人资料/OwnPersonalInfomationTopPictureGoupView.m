@@ -20,8 +20,7 @@
 @synthesize addFriendButt;
 @synthesize editButt;
 
-- (instancetype)initWithFrame:(CGRect)frame vcKind:(NSInteger)rankUse
-{
+- (instancetype)initWithFrame:(CGRect)frame targetUseId:(NSInteger)targetUserID{
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
@@ -83,16 +82,16 @@
         CGFloat editWith = frame.size.width - editLeft - 15;
         //
         NSString *editButtTitle = @"编辑个人资料";
-        if (rankUse){
-            editButtTitle = @" 通过排行榜添加";
+        //是自己的资料才显示否则显示关注
+        if (targetUserID != [[lzhGetAccountInfo getAccount].userID integerValue]){
+            editButtTitle = @" 关注";
         }
         //
         editButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(editLeft, self.fenSiLabel.bottom + 10, editWith, 30) backColor:[UIColor whiteColor] cornerRadius:15 title:editButtTitle titleColor:[UIColor colorWithHexString:@"#666666"] font:[UIFont getPingFangSCMedium:14]];
         editButt.layer.borderWidth = 1;
         editButt.layer.borderColor = [UIColor colorWithHexString:@"#E3E3E3"].CGColor;
-        if (rankUse){
-            [editButt.loginButt setImage:[UIImage imageNamed:@"duiHao"] forState:UIControlStateNormal];
-            editButt.userInteractionEnabled = NO;
+        if (targetUserID != [[lzhGetAccountInfo getAccount].userID integerValue]){
+            [editButt.loginButt setImage:[UIImage imageNamed:@"addConcern"] forState:UIControlStateNormal];
         }
         [self addSubview:editButt];
         //
@@ -115,5 +114,16 @@
     }
     return self;
 }
+
+- (void)setEditButtDisplayByValue:(BOOL)isConcenrned{
+    if (isConcenrned){
+        [editButt.loginButt setImage:[UIImage imageNamed:@"duiHao"] forState:UIControlStateNormal];
+        [editButt.loginButt setTitle:@"已关注" forState:UIControlStateNormal];
+    }else{
+         [editButt.loginButt setImage:[UIImage imageNamed:@"addConcern"] forState:UIControlStateNormal];
+        [editButt.loginButt setTitle:@"关注" forState:UIControlStateNormal];
+    }
+}
+
 
 @end

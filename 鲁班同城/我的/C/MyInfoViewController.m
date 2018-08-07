@@ -255,7 +255,7 @@
                 [self.navigationController pushViewController:searchVC animated:YES];
             }else{
                 OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
-                 personalInfoVC.targetUserID = [NSNumber numberWithInt:-1];
+                 personalInfoVC.targetUserId= [lzhGetAccountInfo getAccount].userID;
                 [self.navigationController pushViewController:personalInfoVC animated:YES];
             }
             

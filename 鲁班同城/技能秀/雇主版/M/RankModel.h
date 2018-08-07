@@ -10,7 +10,11 @@
 
 @interface RankModel : NSObject
 
+@property (strong,nonatomic) NSNumber *userIdNum;
+
 @property (strong,nonatomic) NSString *rankStr;
+
+@property (strong,nonatomic) NSString *imageUrlStr;
 
 @property (strong,nonatomic) UIImage *userImage;
 

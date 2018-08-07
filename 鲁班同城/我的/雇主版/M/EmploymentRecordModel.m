@@ -13,11 +13,23 @@
 + (EmploymentRecordModel*)setModelFromDict:(NSDictionary*)dict{
     EmploymentRecordModel *model = [[EmploymentRecordModel alloc]init];
     if (model){
-        model.topNameStr = @"零工";
-        model.companyNameStr = @"公司名字";
-        model.stateStr = @"已完成";
-        model.timeStr = @"7.9 上周日 22.28";
-        model.addressStr = @"青岛市李沧区万年泉路青岛市李沧区万年泉路青岛市李沧区万年泉路";
+//        "workerName": "李四",       //被雇佣的零工姓名
+//        -"technologys": [           //派单的技能要求（仅名称）
+//                         "技能1",
+//                         "技能2",
+//                         "技能3"
+//                         ],
+//        "createTime": "2018-07-26",     //发起派单的时间
+//        "address": "详细地址",          //派单时填写的详细地址（不包含省、市、区）
+//        "state": 5
+        model.topNameStr = [NSString getResultStrBySeverStr:dict[@"workerName"]];
+        model.companyNameStr = @"公司名称";
+        NSNumber *stateNum = dict[@"state"] ;
+        model.stateStr = [NSString getStateStrByStateID:[stateNum integerValue]];
+        model.timeStr = [NSString getResultStrBySeverStr:dict[@"createTime"]];
+        model.addressStr = [NSString getResultStrBySeverStr:dict[@"address"]];
+        
+        model.addressHeight =  [LzhReturnLabelHeight getLabelHeight:model.addressStr font:[UIFont getPingFangSCMedium:14] width:SCREEN_WIDTH - 20];
     }
     return model;
 }

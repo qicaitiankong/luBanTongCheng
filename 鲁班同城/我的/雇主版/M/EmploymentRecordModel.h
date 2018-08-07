@@ -20,6 +20,8 @@
 
 @property (strong,nonatomic) NSString *addressStr;
 
+@property (assign,nonatomic) CGFloat addressHeight;
+
 + (EmploymentRecordModel*)setModelFromDict:(NSDictionary*)dict;
 
 @end

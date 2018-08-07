@@ -32,6 +32,39 @@
     
 }
 
++(NSString*)getStateStrByStateID:(NSInteger)stateId{
+    NSString *stateStr = @"";
+    switch (stateId) {
+        case 0:
+            stateStr = @"派单中";
+            break;
+        case 1:
+            stateStr = @"接单人满";
+            break;
+        case 2:
+            stateStr = @"已付款";
+            break;
+        case 3:
+            stateStr = @"已雇佣";
+            break;
+        case 4:
+            stateStr = @"已退款";
+            break;
+        case 5:
+            stateStr = @"确认接单";
+            break;
+        case 6:
+            stateStr = @"已完成";
+            break;
+        case 7:
+            stateStr = @"已取消";
+            break;
+        default:
+            break;
+    }
+    return stateStr;
+}
+
 
 
 @end

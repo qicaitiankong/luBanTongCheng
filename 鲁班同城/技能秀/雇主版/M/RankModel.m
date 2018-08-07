@@ -13,10 +13,20 @@
 + (RankModel*)setModelFromDict:(NSDictionary*)dict{
     RankModel *model = [[RankModel alloc]init];
     if (model){
-        model.rankStr = @"No.1";
-        model.userImage = [UIImage imageNamed:@"test01"];
-        model.nickName = @"昵称昵称";
-        model.jobStr = @"木匠  电工";
+        
+//        "number": 1,                //排名
+//        "headImg": "afewef",        //头像路径
+//        "userId": 3,                //用户id
+//        "userName": "李四",         //用户姓名
+        model.userIdNum = dict[@"userId"];
+        
+        NSNumber *rankNum = [NSNumber getResultNumberBySeverStr:dict[@"number"]];
+        model.rankStr = [NSString stringWithFormat:@"No.%ld",[rankNum integerValue]];
+        model.imageUrlStr = [NSString getResultStrBySeverStr:dict[@"headImg"]];
+        model.nickName = [NSString getResultStrBySeverStr:dict[@"userName"]];
+        
+        NSArray *technologyArr = dict[@"technologys"];
+        model.jobStr = [technologyArr componentsJoinedByString:@" "];
         
     }
     return model;

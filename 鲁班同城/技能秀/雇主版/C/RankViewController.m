@@ -10,15 +10,25 @@
 #import "RankTableViewCell.h"
 #import "ZHQScrollMenu.h"
 
+#import "OwnPersonalInfomationViewController.h"
 
 @interface RankViewController ()<UITableViewDelegate,UITableViewDataSource,categoryButtonClickDelegate>{
     ZHQScrollMenu *topScrollView;
+    __block BOOL isRefresh;//刷新标记
+    __block BOOL isLoad;//加载标记
 }
 
 @property (strong,nonatomic) UITableView *tableView;
 
-@property (strong,nonatomic) NSMutableArray *modelArr;
+@property (strong,nonatomic) NSMutableArray *goodModelArr;
 
+@property (strong,nonatomic) NSMutableArray *takeModelArr;
+//0:好评,1:接单
+@property (assign,nonatomic) NSInteger topSelectedFlag;
+
+@property (assign,nonatomic) int goodPage;
+
+@property (assign,nonatomic) int takePage;
 
 @end
 
@@ -52,27 +62,156 @@
     [self addTopScrollView];
     //
     [self addTableView:CGRectMake(0, topScrollView.bottom,self.view.width,SCREEN_HEIGHT - StatusBarAndNavigationBarHeight - topScrollView.bottom - TAB_BAR_HEIGHT) style:UITableViewStylePlain];
+    
+    WS(weakSelf);
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        __strong typeof(weakSelf) sself = weakSelf;
+        sself -> isRefresh = YES;
+        //
+        if([ShareNetWorkState getNetState] == NO){
+            [SVProgressHUD showErrorWithStatus:@"刷新失败，请检查网络"];
+            [weakSelf stopRefreshOrLoad];
+        }else{
+                if (weakSelf.topSelectedFlag == 0){
+                    weakSelf.goodPage = 1;
+                    [weakSelf getData:weakSelf.goodPage];
+                }else{
+                    weakSelf.takePage = 1;
+                    [weakSelf getData:weakSelf.takePage];
+                }
+        }
+    }];
     //
-    [self getData];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        __strong typeof(weakSelf) sself = weakSelf;
+        
+        //
+        if([ShareNetWorkState getNetState] == NO){
+            sself -> isLoad = YES;
+            [SVProgressHUD showErrorWithStatus:@"加载失败，请检查网络"];
+            [weakSelf stopRefreshOrLoad];
+        }else{
+            if (sself -> isLoad == NO){
+                if (weakSelf.topSelectedFlag == 0){
+                    weakSelf.goodPage ++;
+                    sself -> isLoad = YES;
+                    [weakSelf getData:weakSelf.goodPage];
+                }else{
+                    weakSelf.takePage ++;
+                    sself -> isLoad = YES;
+                    [weakSelf getTakeData:weakSelf.takePage];
+                }
+            }
+        }
+    }];
+    //
+    [self getData:1];
+}
+
+//停止刷新加载
+- (void)stopRefreshOrLoad{
+    
+    if (isRefresh){
+        [self.tableView.mj_header endRefreshing];
+        isRefresh = NO;
+    }
+    if (isLoad){
+        [self.tableView.mj_footer endRefreshing];
+        isLoad = NO;
+    }
 }
 
 - (void)initOwnObjects{
-    self.modelArr = [[NSMutableArray alloc]init];
+    self.goodModelArr = [[NSMutableArray alloc]init];
+    self.takeModelArr = [[NSMutableArray alloc]init];
 }
-
-- (void)getData{
+//好评
+- (void)getData:(NSInteger)page{
     //
-    for (int i = 0; i < 20; i ++){
-        RankModel *localModel = [RankModel setModelFromDict:nil];
-        [self.modelArr addObject:localModel];
-    }
-    //
-    [self.tableView reloadData];
-}
-
--(void)categoryButtonHandler:(NSInteger)tag{
+    [TDHttpTools getRankList:@{@"rankType":[NSNumber numberWithInteger:0],@"page":[NSNumber numberWithInteger:page]} success:^(id response) {
+        NSDictionary *webDict = response;
+        NSDictionary *dataDict = webDict[@"data"];
+        NSArray *listArr = dataDict[@"list"];
+        if (listArr.count){
+            if (NO == self -> isLoad){
+                [self.goodModelArr removeAllObjects];
+            }
+            for (NSDictionary *localDict in listArr){
+                RankModel *localModel = [RankModel setModelFromDict:localDict];
+                [self.goodModelArr addObject:localModel];
+            }
+            //
+          
+        }else{
+            if (self->isLoad && self.goodPage > 1){
+                self.goodPage --;
+            }
+        }
+        [self.tableView reloadData];
+        [self stopRefreshOrLoad];
+    } failure:^(NSError *error) {
+        if (self->isLoad && self.goodPage > 1){
+            self.goodPage --;
+        }
+         [self.tableView reloadData];
+        [self stopRefreshOrLoad];
+    }];
     
 }
+//接单榜
+- (void)getTakeData:(NSInteger)page{
+    //
+    [TDHttpTools getRankList:@{@"rankType":[NSNumber numberWithInteger:1],@"page":[NSNumber numberWithInteger:page]} success:^(id response) {
+        NSDictionary *webDict = response;
+        NSDictionary *dataDict = webDict[@"data"];
+        NSArray *listArr = dataDict[@"list"];
+        if (listArr.count){
+            if (NO == self -> isLoad){
+                [self.takeModelArr removeAllObjects];
+            }
+            for (NSDictionary *localDict in listArr){
+                RankModel *localModel = [RankModel setModelFromDict:localDict];
+                [self.takeModelArr addObject:localModel];
+            }
+            //
+            [self.tableView reloadData];
+        }else{
+            if (self->isLoad && self.takePage > 1){
+                self.takePage --;
+            }
+        }
+         [self.tableView reloadData];
+        [self stopRefreshOrLoad];
+    } failure:^(NSError *error) {
+        if (self->isLoad && self.takePage > 1){
+            self.takePage --;
+        }
+         [self.tableView reloadData];
+        [self stopRefreshOrLoad];
+    }];
+    
+}
+-(void)categoryButtonHandler:(NSInteger)tag{
+    self.topSelectedFlag = tag;
+    if (tag == 0){
+        [self getData:self.goodPage];
+    }else{
+        [self getTakeData:self.takePage];
+    }
+}
+
+- (void)clickCellButt:(NSIndexPath*)path{
+    RankModel *localModel = nil;
+    if (self.topSelectedFlag == 0){
+         localModel = self.goodModelArr[path.row];
+    }else{
+        localModel = self.takeModelArr[path.row];
+    }
+    OwnPersonalInfomationViewController *personalVC = [[OwnPersonalInfomationViewController alloc]init];
+     personalVC.targetUserId = localModel.userIdNum;
+    [self.navigationController pushViewController:personalVC animated:YES];
+}
+
 
 //view
 - (void)addTopScrollView{
@@ -104,7 +243,12 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.modelArr.count;
+    if (_topSelectedFlag == 0){
+        return self.goodModelArr.count;
+    }else{
+        return self.takeModelArr.count;
+    }
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -113,18 +257,30 @@
     if (nil == cell){
         cell = [[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
         WS(weakSelf);
-//        cell.bottomButtBlock = ^(NSIndexPath *indexPath) {
-//            [weakSelf clickCellButt:indexPath];
-//        };
+        cell.clickRightButtBlock = ^(NSIndexPath *path) {
+            [weakSelf clickCellButt:path];
+        };
     }
-    RankModel *model = self.modelArr[indexPath.row];
     cell.indexPath = indexPath;
-    cell.model = model;
+    if (_topSelectedFlag == 0){
+        RankModel *model = self.goodModelArr[indexPath.row];
+        cell.model = model;
+    }else{
+        RankModel *model = self.takeModelArr[indexPath.row];
+        cell.model = model;
+    }
+    
+    
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    RankModel *model = self.modelArr[indexPath.row];
+    RankModel *model = nil;
+    if (_topSelectedFlag == 0){
+        model  = self.goodModelArr[indexPath.row];
+    }else{
+        model = self.takeModelArr[indexPath.row];
+    }
     CGFloat height = [tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[RankTableViewCell class] contentViewWidth:SCREEN_WIDTH];
     return height;
 }

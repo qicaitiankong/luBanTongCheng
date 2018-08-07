@@ -91,7 +91,7 @@
                 weakSelf.amendingInfoModel.technologyStr = [nameArr componentsJoinedByString:@","];
                 weakSelf.amendingInfoModel.technologyServiceNeedStr = [nameIDArr componentsJoinedByString:@","];
                 //跟新显示信息
-                sself -> technologyView.rightTextField.myTextField.text = weakSelf.amendingInfoModel.technologyStr;
+                sself -> technologyView.rightTextField.myTextField.text = [weakSelf.amendingInfoModel.technologyStr copy];
                 
             };
             [weakSelf.navigationController pushViewController:chooseVC animated:YES];

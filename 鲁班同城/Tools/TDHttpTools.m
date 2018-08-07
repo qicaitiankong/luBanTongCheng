@@ -214,7 +214,41 @@
     }
 }
 
+//上传图片
++ (void)uploadFile:(NSDictionary*)paraDict success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure{
+     AFHTTPSessionManager *session= [AFHTTPSessionManager manager];
+     NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/loginW",kSERVER_HTTP_DXE];
+    [session POST:urlString parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        UIImage *image = [UIImage imageNamed:@"gauge.png"];
+        
+        NSData *data = UIImagePNGRepresentation(image);
+        
+        //上传的参数(上传图片，以文件流的格式)
+        
+        [formData appendPartWithFileData:data
+         
+                                    name:@"file"
+         
+                                fileName:@"gauge.png"
+         
+                                mimeType:@"image/png"];
+        
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        NSLog(@"%f",uploadProgress.fractionCompleted);
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        uploadSuccess(responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        upLoadfailure(error);
+    }];
 
+}
 
 +(void)loginWXWithText:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
     NSDictionary *params = paraDict;
@@ -475,7 +509,54 @@
         }
     }];
 }
-
+//我抢过的派单
++(void)casualTookTicked:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/myReceiveOrder",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:dict[@"msg"]];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
+//我被雇佣的派单
++(void)getmyHiredTicked:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/myHiredOrder",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
 
 
 
@@ -624,6 +705,180 @@
     }];
     
 }
+//排行榜
++(void)getRankList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/ranking",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
 
+
+
+
+
+
+
+
+///统一使用
+//雇佣记录
++(void)getGuYongRecordList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/hiredOrders",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
+
+//我的关注
++(void)getMyConcernList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/myFocus",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+    
+}
+
+//我的粉丝
++(void)getMyFans:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/myFanses",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
+
+//反馈消息
++(void)backWardInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/backMsg",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
+
+//添加关注
++(void)AddConcernAction:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/focus",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
+
+//取消关注
++(void)CancelConcernAction:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/cancelFocus",kSERVER_HTTP_DXE];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
 
 @end

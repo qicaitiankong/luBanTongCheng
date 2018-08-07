@@ -10,9 +10,13 @@
 #import "ConcernTableViewCell.h"
 #import "OwnPersonalInfomationViewController.h"
 
-@interface ConcernViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ConcernViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    __block BOOL isRefresh;
+}
 
 @property (strong,nonatomic) UITableView *tableView;
+
+@property (strong,nonatomic) NSMutableArray *modelArr;
 
 
 @end
@@ -35,13 +39,63 @@
     //
     [self addTableView:CGRectMake(0, 0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT) style:UITableViewStylePlain];
     [self getData];
+    
+    WS(weakSelf);
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        __strong typeof(weakSelf) sself = weakSelf;
+        sself -> isRefresh = YES;
+        //
+        if([ShareNetWorkState getNetState] == NO){
+            [SVProgressHUD showErrorWithStatus:@"刷新失败，请检查网络"];
+            [weakSelf stopRefreshOrLoad];
+        }else{
+            [weakSelf getData];
+        }
+    }];
 }
+
+//停止刷新加载
+- (void)stopRefreshOrLoad{
+    
+    if (isRefresh){
+        [self.tableView.mj_header endRefreshing];
+        isRefresh = NO;
+    }
+}
+
 - (void)initOwnObjects{
+    self.modelArr = [[NSMutableArray alloc]init];
 }
 
 - (void)getData{
+//    {
+//        data =     {
+//            key = "<null>";
+//            list =         (
+//                            {
+//                                headImg = "";
+//                                userId = 19;
+//                                userName = "\U66f9\U5efa\U6d9b";
+//                            }
     
-    [self.tableView reloadData];
+    [TDHttpTools getMyConcernList:@{@"userId":[lzhGetAccountInfo getAccount].userID} success:^(id response) {
+        NSLog(@"我的关注:%@",response);
+        NSDictionary *dataDict = response[@"data"];
+        
+        NSArray *webDataArr = dataDict[@"list"];
+        if (webDataArr.count){
+            [self.modelArr removeAllObjects];
+            for (NSDictionary *localDict in webDataArr){
+                [self.modelArr addObject:[localDict copy]];
+            }
+        }else{
+            
+        }
+        [self stopRefreshOrLoad];
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        [self stopRefreshOrLoad];
+    }];
 }
 
 //add views
@@ -61,7 +115,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 20;
+    return self.modelArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -70,8 +124,10 @@
     if (nil == cell){
         cell = [[ConcernTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag cellHieght:SCREEN_HEIGHT *0.12];
     }
-    [cell.userImageView setImage:[UIImage imageNamed:@"test01"]];
-    cell.nameLabel.text = @"昵称昵称昵称昵称";
+    NSDictionary *singleDict = self.modelArr[indexPath.row];
+    NSString *urlStr = [NSString getResultStrBySeverStr:singleDict[@"headImg"]];
+    [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:urlStr]];
+    cell.nameLabel.text = [singleDict[@"userName"] copy];
     return cell;
 }
 
@@ -82,7 +138,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     OwnPersonalInfomationViewController *rankVC = [[OwnPersonalInfomationViewController alloc]init];
-    rankVC.vcKind = 1;
+    //rankVC.targetUserID = 1;
     [self.navigationController pushViewController:rankVC animated:YES];
 }
 

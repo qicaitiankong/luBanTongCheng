@@ -15,4 +15,6 @@
 @property (strong,nonatomic) NSMutableArray *selectedImageBaseStrArr;
 
 
+@property (strong,nonatomic) NSArray *imageUrlStrArr;
+
 @end

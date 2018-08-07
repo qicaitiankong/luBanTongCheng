@@ -90,10 +90,8 @@
                 sself -> isLoad = YES;
                 [weakSelf getData:weakSelf.page];
             }
-           
         }
     }];
-    
 }
 
 //停止刷新加载

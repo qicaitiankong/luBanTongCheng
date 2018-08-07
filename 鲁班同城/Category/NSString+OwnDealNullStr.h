@@ -13,5 +13,8 @@
 + (NSString*)getResultStrBySeverStr:(NSString*)targetStr;
 //一个字符串是否为整型
 +(BOOL)isPureInt:(NSString*)string;
+//根据状态获取派单状态描述
++(NSString*)getStateStrByStateID:(NSInteger)stateId;
+
 
 @end

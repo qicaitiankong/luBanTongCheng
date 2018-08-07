@@ -46,6 +46,28 @@
 - (void)initOwnObjects{
     pictureViewGroupHeight = IMAGE_VIEW_HEIGHT + 5 + 55;
 }
+//添加关注
+- (void)addConcernOrCancelConcel{
+    
+    NSInteger fouseFlag = self.infoModel.FoucedFlag;
+    if (fouseFlag == 0){
+        [TDHttpTools AddConcernAction:@{@"myUserId":[lzhGetAccountInfo getAccount].userID,@"userId":self.targetUserId} success:^(id response) {
+            [self->topPartView setEditButtDisplayByValue:YES];
+            self.infoModel.FoucedFlag = 1;
+        } failure:^(NSError *error) {
+             [SVProgressHUD showInfoWithStatus:@"添加关注失败"];
+        }];
+    }else if (fouseFlag == 1){
+        [TDHttpTools CancelConcernAction:@{@"myUserId":[lzhGetAccountInfo getAccount].userID,@"userId":self.targetUserId} success:^(id response) {
+            [self->topPartView setEditButtDisplayByValue:NO];
+            self.infoModel.FoucedFlag = 0;
+        } failure:^(NSError *error) {
+             [SVProgressHUD showInfoWithStatus:@"取消关注失败"];
+        }];
+    }
+}
+
+
 
 - (void)addViews{
     //
@@ -54,7 +76,7 @@
     baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.view addSubview:baseScrollView];
     //
-    topPartView = [[OwnPersonalInfomationTopPictureGoupView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 20) vcKind:self.vcKind];
+    topPartView = [[OwnPersonalInfomationTopPictureGoupView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 20) targetUseId:[self.targetUserId integerValue]];
     
     topPartView.fenSiLabel.text = @"粉丝";
     topPartView.concernLabel.text = @"关注";
@@ -67,9 +89,14 @@
         
     };
     topPartView.editButt.clickButtBlock = ^{
-        PersonalInfoNameViewController *nameEditVC = [[PersonalInfoNameViewController alloc]init];
-        nameEditVC.orinalInfoModel = weakSelf.infoModel;
-        [weakSelf.navigationController pushViewController:nameEditVC animated:YES];
+        //自己的资料
+        if ([self.targetUserId integerValue] == -1){
+            PersonalInfoNameViewController *nameEditVC = [[PersonalInfoNameViewController alloc]init];
+            nameEditVC.orinalInfoModel = weakSelf.infoModel;
+            [weakSelf.navigationController pushViewController:nameEditVC animated:YES];
+        }else{//他人的资料显示关注
+            [weakSelf addConcernOrCancelConcel];
+        }
     };
     [baseScrollView addSubview:topPartView];
     //
@@ -98,14 +125,12 @@
 //
 - (void)getUserInfo{
     //零工
-    if ([lzhGetAccountInfo getAccount].identityFlag == 0){
         NSDictionary *praDict =nil;
-        if ([self.targetUserID integerValue] == -1){//自己信息
+        if ([self.targetUserId integerValue] == [[lzhGetAccountInfo getAccount].userID integerValue]){//自己信息
             praDict = @{@"myUserId":[lzhGetAccountInfo getAccount].userID};
         }else{//其他零工信息
-            praDict = @{@"userId":self.targetUserID,@"myUserId":[lzhGetAccountInfo getAccount].userID};
+            praDict = @{@"userId":self.targetUserId,@"myUserId":[lzhGetAccountInfo getAccount].userID};
         }
-        
                 WS(weakSelf);
                  [weakSelf giveValueToView];
                 [TDHttpTools getCapsualUserInfo:praDict success:^(id response) {
@@ -132,9 +157,6 @@
                 } failure:^(NSError *error) {
                     
                 }];
-    }else if ([lzhGetAccountInfo getAccount].identityFlag == 1){//雇主
-        
-    }
 }
 
 - (void)giveValueToView{
@@ -144,6 +166,11 @@
     topPartView.concernLabel.text = [NSString stringWithFormat:@"%ld关注",[self.infoModel.focusNum integerValue]];
     topPartView.sexAndHomeLabel.text = [NSString stringWithFormat:@"%@ %@",[self.infoModel.sexStr copy],[self.infoModel.addressStr copy]];
     [topPartView.starGroupView setYellowStar:[self.infoModel.starCountNumber integerValue]];
+    if (self.infoModel.FoucedFlag == 0){
+        [topPartView setEditButtDisplayByValue:NO];
+    }else if (self.infoModel.FoucedFlag == 1){
+         [topPartView setEditButtDisplayByValue:YES];
+    }
     //个人介绍
     [personalIntroduceView giveOwnValue:[self.infoModel.introduceStr copy]];
     //技术
@@ -156,11 +183,10 @@
     [serviceTypeView giveOwnValue:targetJobArr];
     serviceTypeView.frame = CGRectMake(serviceTypeView.x, personalTechnologyView.bottom + 15, serviceTypeView.width, serviceTypeView.height);
     //视屏
-    [videoView givePictureArr:[self.infoModel.videoArr copy]];
+    [videoView givePictureArr:[NSArray getOwnCopyArr:self.infoModel.videoUrlStrArr]];
     videoView.frame = CGRectMake(videoView.x, serviceTypeView.bottom + 15, videoView.width, pictureViewGroupHeight);
    //图片
-    [pictureView givePictureArr:[self.infoModel.pictureArr copy]];
-    
+    [pictureView givePictureArr:[NSArray getOwnCopyArr:self.infoModel.pictureUrlStrArr]];
     pictureView.frame = CGRectMake(pictureView.x, videoView.bottom + 15, pictureView.width, pictureViewGroupHeight);
     //
     UIView *botView = pictureView;

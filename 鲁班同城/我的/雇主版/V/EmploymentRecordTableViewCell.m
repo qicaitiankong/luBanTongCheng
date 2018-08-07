@@ -9,12 +9,13 @@
 #import "EmploymentRecordTableViewCell.h"
 
 @implementation EmploymentRecordTableViewCell
+UIView *baseView = nil;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier cellHeight:(CGFloat)height{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self){
         self.contentView.backgroundColor = RGBA(242, 242, 242, 1);
-        UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, height * 0.9)];
+        baseView = [[UIView alloc]initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, height * 0.9)];
         baseView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:baseView];
         //
@@ -85,6 +86,12 @@
         self.stateLabel.text = [model.stateStr copy];
         self.timeLabel.text = [model.timeStr copy];
         self.addressLabel.text = [model.addressStr copy];
+        self.addressLabel.frame = CGRectMake(self.addressLabel.x, self.addressLabel.y, self.addressLabel.width, model.addressHeight);
+        
+         [baseView setupAutoHeightWithBottomView:self.addressLabel bottomMargin:10];
+        
+        [self setupAutoHeightWithBottomView:baseView bottomMargin:10];
+        
     }
 }
 

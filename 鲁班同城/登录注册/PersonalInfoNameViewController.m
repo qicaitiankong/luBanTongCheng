@@ -58,18 +58,44 @@
 }
 
 - (void)initAmendModel{
+   
+    //将原始数据模型里面的数据拷贝一份
+    //基本信息
      self.amendingInfoModel = [[OwnPersonalInfoModel alloc]init];
+    self.amendingInfoModel.nameStr = [self.orinalInfoModel.nameStr copy];
+    self.amendingInfoModel.ageNum = [self.orinalInfoModel.ageNum copy];
+    self.amendingInfoModel.sexStr = [self.orinalInfoModel.sexStr copy];
+    self.amendingInfoModel.mobileStr = [self.orinalInfoModel.mobileStr copy];
+    self.amendingInfoModel.introduceStr = [self.orinalInfoModel.introduceStr copy];
+    
+    //地址工作信息
     self.amendingInfoModel.proviceStr = [self.orinalInfoModel.proviceStr copy];
     self.amendingInfoModel.cityStr = [self.orinalInfoModel.cityStr copy];
     self.amendingInfoModel.areaStr = [self.orinalInfoModel.areaStr copy];
     self.amendingInfoModel.technologyStr =  [self.orinalInfoModel.technologyStr copy];
     self.amendingInfoModel.jobStr =  [self.orinalInfoModel.jobStr copy];
+    self.amendingInfoModel.jobExperienceStr = [self.orinalInfoModel.jobExperienceStr copy];
+    NSLog(@"\n\n!!!!!!!!!!!technologyStr%@,!!!!!!!!!%@",self.amendingInfoModel.technologyStr,self.amendingInfoModel.jobStr);
+    //技术(传给后台id的格式)
+    NSArray *technoArr = [self getTargetServiceneedTechnologyArr:self.orinalInfoModel.technologyArr];
+    self.amendingInfoModel.technologyServiceNeedStr = [technoArr componentsJoinedByString:@","];
+    //职能(传给后台id的格式)
+    NSArray *jobArr = [self getTargetServiceneedTechnologyArr:self.orinalInfoModel.jobArr];
+    self.amendingInfoModel.jobServiceNeedStr= [jobArr componentsJoinedByString:@","];
     
-    self.amendingInfoModel.technologyServiceNeedStr =
-    [self.orinalInfoModel.technologyServiceNeedStr copy];
-    
-    
-    
+    //视屏和图片展示
+    self.amendingInfoModel.pictureUrlStrArr = [NSArray getOwnCopyArr:self.orinalInfoModel.pictureUrlStrArr];
+    //
+    self.amendingInfoModel.videoUrlStrArr = [NSArray getOwnCopyArr:self.orinalInfoModel.videoUrlStrArr];
+}
+
+- (NSMutableArray*)getTargetServiceneedTechnologyArr:(NSArray*)originArr{
+    NSMutableArray *localTechnologyArr = [[NSMutableArray alloc]init];
+    for (NSDictionary *localDict in originArr){
+        NSNumber *idNum = localDict[@"id"];
+        [localTechnologyArr addObject:[idNum stringValue]];
+    }
+    return localTechnologyArr;
 }
 
 //性别选择

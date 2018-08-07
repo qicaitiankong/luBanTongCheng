@@ -309,6 +309,9 @@
 		185ABF3C20F8771A00188520 /* searchBiaoQian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185ABF3920F8771900188520 /* searchBiaoQian@3x.png */; };
 		185ABF3D20F8771A00188520 /* searchBiaoQian.png in Resources */ = {isa = PBXBuildFile; fileRef = 185ABF3A20F8771900188520 /* searchBiaoQian.png */; };
 		185ABF3E20F8771A00188520 /* searchBiaoQian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185ABF3B20F8771900188520 /* searchBiaoQian@2x.png */; };
+		185B5E46211937EC0023DA95 /* NSArray+OwnArrCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 185B5E45211937EC0023DA95 /* NSArray+OwnArrCopy.m */; };
+		185B5E48211987B00023DA95 /* addConcern@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185B5E47211987AF0023DA95 /* addConcern@3x.png */; };
+		185B5E4A211987EB0023DA95 /* addConcern@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185B5E49211987EB0023DA95 /* addConcern@2x.png */; };
 		185BDBA42114400C00F18CD5 /* YAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BDB9E2114400200F18CD5 /* YAddressPickerView.m */; };
 		185BDBA52114400C00F18CD5 /* ProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BDB9F2114400400F18CD5 /* ProvinceModel.m */; };
 		185BDBA62114400C00F18CD5 /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 185BDBA22114400A00F18CD5 /* city.json */; };
@@ -928,6 +931,10 @@
 		185ABF3920F8771900188520 /* searchBiaoQian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchBiaoQian@3x.png"; sourceTree = "<group>"; };
 		185ABF3A20F8771900188520 /* searchBiaoQian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchBiaoQian.png; sourceTree = "<group>"; };
 		185ABF3B20F8771900188520 /* searchBiaoQian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchBiaoQian@2x.png"; sourceTree = "<group>"; };
+		185B5E44211937EC0023DA95 /* NSArray+OwnArrCopy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+OwnArrCopy.h"; sourceTree = "<group>"; };
+		185B5E45211937EC0023DA95 /* NSArray+OwnArrCopy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+OwnArrCopy.m"; sourceTree = "<group>"; };
+		185B5E47211987AF0023DA95 /* addConcern@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addConcern@3x.png"; sourceTree = "<group>"; };
+		185B5E49211987EB0023DA95 /* addConcern@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addConcern@2x.png"; sourceTree = "<group>"; };
 		185BDB9D2114400000F18CD5 /* YAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YAddressPickerView.h; sourceTree = "<group>"; };
 		185BDB9E2114400200F18CD5 /* YAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAddressPickerView.m; sourceTree = "<group>"; };
 		185BDB9F2114400400F18CD5 /* ProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvinceModel.m; sourceTree = "<group>"; };
@@ -1440,6 +1447,8 @@
 				187892E0210EFB72002A5798 /* NSString+OwnDealNullStr.m */,
 				187892E2210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.h */,
 				187892E3210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m */,
+				185B5E44211937EC0023DA95 /* NSArray+OwnArrCopy.h */,
+				185B5E45211937EC0023DA95 /* NSArray+OwnArrCopy.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1696,6 +1705,8 @@
 		1818E4AD20EB517B00B676C2 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				185B5E49211987EB0023DA95 /* addConcern@2x.png */,
+				185B5E47211987AF0023DA95 /* addConcern@3x.png */,
 				182030E221007B830098BFCC /* duiHao.png */,
 				182030E121007B830098BFCC /* duiHao@2x.png */,
 				182030E021007B820098BFCC /* duiHao@3x.png */,
@@ -2728,6 +2739,7 @@
 				186EBE2220EDDF2500D0F54E /* tecnology@3x.png in Resources */,
 				1443C50720E204180009E82F /* Assets.xcassets in Resources */,
 				182284D120FF2C9F0059FB94 /* mapChoose@2x.png in Resources */,
+				185B5E4A211987EB0023DA95 /* addConcern@2x.png in Resources */,
 				1851D91E21017337000C6306 /* RCConfig.plist in Resources */,
 				186FBCA82105B92700425105 /* gpsStat2@2x.png in Resources */,
 				186EBE5120EE111500D0F54E /* sucsess@3x.png in Resources */,
@@ -2888,6 +2900,7 @@
 				182284A720FF152E0059FB94 /* ticket_mobile@3x.png in Resources */,
 				1818E4CA20EB523E00B676C2 /* withDraw@2x.png in Resources */,
 				1443C5D820E348540009E82F /* order@3x.png in Resources */,
+				185B5E48211987B00023DA95 /* addConcern@3x.png in Resources */,
 				1818E4D420EB57A200B676C2 /* goFlag.png in Resources */,
 				1443C5F220E3571B0009E82F /* navLogo@2x.png in Resources */,
 				186EBE2820EDDF3A00D0F54E /* job@3x.png in Resources */,
@@ -3119,6 +3132,7 @@
 				1832B99120F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m in Sources */,
 				1443C59820E3316C0009E82F /* OrderTakingViewController.m in Sources */,
 				186EBE3220EDF08400D0F54E /* ImageAndLabelView.m in Sources */,
+				185B5E46211937EC0023DA95 /* NSArray+OwnArrCopy.m in Sources */,
 				187434C120F356AA0008A24F /* CompanyRecuritDetailViewController.m in Sources */,
 				186EBE4B20EE0C8700D0F54E /* CommitPopView.m in Sources */,
 				1858552521100A2A0044BE64 /* TakeOrderQuotePriceSecondUseTableViewCell.m in Sources */,

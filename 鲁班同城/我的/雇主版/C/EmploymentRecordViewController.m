@@ -13,6 +13,7 @@
 
 @interface EmploymentRecordViewController ()<UITableViewDelegate,UITableViewDataSource>{
     EmploymentRecordSectionView *sectionView;
+      __block BOOL isRefresh;//刷新标记
 }
 
 @property (strong,nonatomic) UITableView *tableView;
@@ -41,26 +42,56 @@
     [self addTableView:CGRectMake(0, 0,self.view.width,CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT) style:UITableViewStylePlain];
     //
     [self getData];
+    //
+    WS(weakSelf);
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        __strong typeof(weakSelf) sself = weakSelf;
+        sself -> isRefresh = YES;
+        //
+        if([ShareNetWorkState getNetState] == NO){
+            [SVProgressHUD showErrorWithStatus:@"刷新失败，请检查网络"];
+            [weakSelf stopRefreshOrLoad];
+        }else{
+            [weakSelf getData];
+        }
+    }];
+    
 }
-
+//停止刷新加载
+- (void)stopRefreshOrLoad{
+    if (isRefresh){
+        [self.tableView.mj_header endRefreshing];
+        isRefresh = NO;
+    }
+}
 - (void)initOwnObjects{
     self.modelArr = [[NSMutableArray alloc]init];
 }
 
 - (void)getData{
     //
-    for (int i = 0; i < 20; i ++){
-        EmploymentRecordModel *localModel = [EmploymentRecordModel setModelFromDict:nil];
-        [self.modelArr addObject:localModel];
-    }
-    //
-    [self.tableView reloadData];
+    [TDHttpTools getGuYongRecordList:@{@"userId":[lzhGetAccountInfo getAccount].userID} success:^(id response) {
+        NSDictionary *webDict = response;
+        if ([[webDict allKeys] containsObject:@"data"]){
+            NSArray *dataArr = webDict[@"data"];
+            if(dataArr.count){
+                    [self.modelArr removeAllObjects];
+                    for (NSDictionary *localDict in dataArr){
+                        EmploymentRecordModel *localModel = [EmploymentRecordModel setModelFromDict:localDict];
+                        [self.modelArr addObject:localModel];
+                    }
+                   [self.tableView reloadData];
+            }
+        }
+          [self stopRefreshOrLoad];
+    } failure:^(NSError *error) {
+          [self stopRefreshOrLoad];
+    }];
 }
 
 - (void)addTableView:(CGRect)size style:(UITableViewStyle)styles{
     //
     sectionView = [[EmploymentRecordSectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
-    
     //
     self.tableView = [[UITableView alloc]initWithFrame:size style:styles];
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -91,12 +122,14 @@
         cell = [[EmploymentRecordTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag cellHeight:150];
     }
     EmploymentRecordModel *model = self.modelArr[indexPath.row];
+    
     cell.model = model;
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 150;
+    EmploymentRecordModel *model = self.modelArr[indexPath.row];
+    return model.addressHeight + 100;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

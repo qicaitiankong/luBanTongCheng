@@ -72,8 +72,9 @@
 
 - (void)initOwnObjects{
     self.videoModel = [[OwnPersonalInfoChoosePictureModel alloc]init];
-    
+    self.videoModel.selectedImageArr = [NSArray getOwnCopyArr:self.amendingInfoModel.technologyPicArr];
     self.pictureModel = [[OwnPersonalInfoChoosePictureModel alloc]init];
+    self.videoModel.selectedImageArr = [NSArray getOwnCopyArr:self.amendingInfoModel.technologyVideoArr];
 }
 
 - (void)addPicture:(NSIndexPath*)path{
@@ -133,24 +134,41 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellFlag = @"cell";
     OwnPersonalInfoSelectPictureCellTableViewCell
-    *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
-    
-    if (nil == cell){
-        WS(weakSelf);
-        cell = [[OwnPersonalInfoSelectPictureCellTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
-        cell.addPictureBlock = ^(NSIndexPath *path) {
-            [weakSelf addPicture:path];
-        };
-    }
-    cell.path = indexPath;
+    *parentCell = nil;
     if (indexPath.section == 1){
-        cell.model = self.videoModel;
-    }else{
-        cell.model = self.pictureModel;
+        static NSString *cellFlag = @"cell";
+        OwnPersonalInfoSelectPictureCellTableViewCell
+        *cell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
+        if (nil == cell){
+            WS(weakSelf);
+            cell = [[OwnPersonalInfoSelectPictureCellTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+            cell.addPictureBlock = ^(NSIndexPath *path) {
+                [weakSelf addPicture:path];
+            };
+        }
+        parentCell = cell;
+    }else if (indexPath.section == 3){
+        static NSString *cellFlag = @"cell2";
+        OwnPersonalInfoSelectPictureCellTableViewCell
+        *cell2 = [tableView dequeueReusableCellWithIdentifier:cellFlag];
+        if (nil == cell2){
+            WS(weakSelf);
+            cell2 = [[OwnPersonalInfoSelectPictureCellTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+            cell2.addPictureBlock = ^(NSIndexPath *path) {
+                [weakSelf addPicture:path];
+            };
+        }
+        parentCell = cell2;
     }
-    return cell;
+  
+    parentCell.path = indexPath;
+    if (indexPath.section == 1){
+        parentCell.model = self.videoModel;
+    }else{
+        parentCell.model = self.pictureModel;
+    }
+    return parentCell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -221,32 +239,39 @@
     [completeView addSubview:nextButt];
 }
 
-
-
-
 - (void)nextHandler{
-    //
-     NSString *videoBase64Str = [self.videoModel.selectedImageBaseStrArr componentsJoinedByString:@","];
-    //
-    NSString *pictureBase64Str = [self.pictureModel.selectedImageBaseStrArr componentsJoinedByString:@","];
-   
+    self.amendingInfoModel.nameStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.nameStr];
+    self.amendingInfoModel.sexStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.sexStr];
+     self.amendingInfoModel.proviceStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.proviceStr];
+     self.amendingInfoModel.cityStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.cityStr];
+    self.amendingInfoModel.areaStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.areaStr];
+    
+    self.amendingInfoModel.jobExperienceStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.jobExperienceStr];
+    NSLog(@"请求之前答应选择的技术self.amendingInfoModel.technologyServiceNeedStr = %@ ,jobstr = %@",self.amendingInfoModel.technologyServiceNeedStr,self.amendingInfoModel.jobServiceNeedStr);
+    //;
+    //self.amendingInfoModel.technologyServiceNeedStr = @"1,2,3,4,5,6,7,8,40,41,42,43";
+//    self.amendingInfoModel.jobServiceNeedStr = @"1,2,3,4,5,6,8,16";
     //
     NSDictionary *paraDict = @{@"realName":self.amendingInfoModel.nameStr,@"realNamePath":@"",
                                @"age":self.amendingInfoModel.ageNum,@"gender":self.amendingInfoModel.sexStr,
                                @"province":self.amendingInfoModel.proviceStr,@"city":self.amendingInfoModel.cityStr,
-                               @"area":self.amendingInfoModel.areaStr,@"address":self.amendingInfoModel.addressStr,
+                               @"area":self.amendingInfoModel.areaStr,@"address":@"",
                                @"technologys":self.amendingInfoModel.technologyServiceNeedStr,@"professionals":self.amendingInfoModel.jobServiceNeedStr,
-                               @"technologyShowPic":pictureBase64Str,@"technologyShowVideo":videoBase64Str,
+//                               @"technologyShowPic":self.amendingInfoModel.technologyPicSeviceNeedStr,@"technologyShowVideo":self.amendingInfoModel.technologyVideoSeviceNeedStr,
                                @"userId":[lzhGetAccountInfo getAccount].userID,@"headImg":@"",
-                               @"mobile":self.amendingInfoModel.mobileStr,@"workExperience":self.amendingInfoModel.jobExperienceStr,
+                               @"mobile":@"",@"workExperience":self.amendingInfoModel.jobExperienceStr,
                                @"workExperiencePath":@""
                                    };
     [TDHttpTools casualChangeOwnInfo:paraDict success:^(id response) {
         NSLog(@"修改个人信息%@",response);
+        NSDictionary *webDict = response;
+        [SVProgressHUD showSuccessWithStatus:webDict[@"msg"]];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     } failure:^(NSError *error) {
         
     }];
 }
+
 
 //弹窗
 - (void)showPopView{

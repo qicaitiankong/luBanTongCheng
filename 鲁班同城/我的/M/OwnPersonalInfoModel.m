@@ -44,6 +44,8 @@
         
         localModel.fansNum = [NSNumber getResultNumberBySeverStr:webDict[@"fansNum"]];
         localModel.focusNum = [NSNumber getResultNumberBySeverStr:webDict[@"focusNum"]];
+        NSNumber *focusFlagNum = [NSNumber getResultNumberBySeverStr:webDict[@"isFocused"]];
+        localModel.FoucedFlag = [focusFlagNum integerValue];
          localModel.ageNum = [NSNumber getResultNumberBySeverStr:webDict[@"age"]];
         localModel.starCountNumber = [NSNumber getResultNumberBySeverStr:webDict[@"score"]];
         localModel.introduceStr = @"";
@@ -54,8 +56,8 @@
 
         localModel.technologyArr = webDict[@"technologys"];
         localModel.jobArr = webDict[@"professions"];
-        localModel.pictureArr = webDict[@"technologysPic"];
-        localModel.videoArr = webDict[@"technologysVideo"];
+        localModel.pictureUrlStrArr = webDict[@"technologysPic"];
+        localModel.technologyVideoArr = webDict[@"technologysVideo"];
         //
         NSArray * targetArr = [localModel getTargetTechnologyArr:localModel.technologyArr];
          NSArray * targetJobArr = [localModel getTargetTechnologyArr:localModel.jobArr];
