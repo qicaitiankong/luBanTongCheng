@@ -77,7 +77,7 @@
         __strong typeof(weakSelf) sself = weakSelf;
         if(NO == sself->isSound){
             PersonalInfoTechnologyChooseViewController *chooseVC = [[PersonalInfoTechnologyChooseViewController alloc] init];
-            chooseVC.kindTag = 2;
+            chooseVC.kindTag = 1;
             chooseVC.selectedBlock = ^(NSMutableArray *modelArr) {
                 NSArray *localModelArr = modelArr;
                 NSMutableArray *nameArr = [[NSMutableArray alloc]init];
@@ -108,7 +108,7 @@
         __strong typeof(weakSelf) sself = weakSelf;
         if(NO == sself->isSound){
             PersonalInfoTechnologyChooseViewController *chooseVC = [[PersonalInfoTechnologyChooseViewController alloc] init];
-            chooseVC.kindTag = 1;
+            chooseVC.kindTag = 2;
             chooseVC.selectedBlock = ^(NSMutableArray *modelArr) {
                 NSArray *localModelArr = modelArr;
                 NSMutableArray *nameArr = [[NSMutableArray alloc]init];

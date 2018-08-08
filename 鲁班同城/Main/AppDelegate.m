@@ -14,7 +14,10 @@
 #import "SkillShowViewController.h"
 #import "MyInfoViewController.h"
 #import "WxQQLoginViewController.h"
+#import "LoginViewController.h"
 #import "RankViewController.h"
+#import "VideoCenterViewController.h"
+
 
 //category
 #import "AppDelegate+tabbar.h"
@@ -27,45 +30,77 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //sharesdk
+    [self registerShareSdk];
+    //融云
     [self initRongYun];
+    //高德
     [self initGaoDe];
+    //导航栏样式设置
     [self customNaviBar];
-    if ([lzhGetAccountInfo getAccount].identityFlag == 0){
-        [self setupViewControllersForCasualLabour];
-    }else{
-        [self setupViewControllersForEmployment];
-    }
+    //保持登录
+    [self JudgeKeepLogin];
+    //
     NSLog(@"设备序列号%@",VENDER_IDENTIFIER);
     return YES;
 }
 
+//保持登录
+- (void)JudgeKeepLogin{
+    if ([lzhGetAccountInfo getAccount].infoDict.allKeys.count){//登录状态
+        if ([lzhGetAccountInfo getAccount].identityFlag){
+            [self setupViewControllersForEmployment];
+        }else{
+            [self setupViewControllersForCasualLabour];
+        }
+    }else{//非登录状态
+        [self displayLoginPageByIsInstalledWX];
+    }
+}
+
+//显示登录页(微信授权隐藏处理)
+- (void)displayLoginPageByIsInstalledWX{
+    if(NO == [ShareSDK isClientInstalled:SSDKPlatformTypeWechat]){
+        NSLog(@"你没有安装微信");
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+    self.window.rootViewController=nav;
+        [self.window makeKeyAndVisible];
+    }else{
+        WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc]init];
+        loginVC.isWx = YES;
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+        self.window.rootViewController=nav;
+        [self.window makeKeyAndVisible];
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+   
 }
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+   
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+  
+    
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+   
 }
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+   
 }
-//
+
+//融云
 /**
  *此方法中要提供给融云用户的信息，建议缓存到本地，然后改方法每次从您的缓存返回
  */
@@ -77,7 +112,6 @@
         user.userId = @"LZH-6D74CBD6-1D81-45E0-B329-690CA31AF49C";
         user.name = @"LZH";
         //user.portraitUri = @"https://ss0.baidu.com/73t1bjeh1BF3odCf/it/u=1756054607,4047938258&fm=96&s=94D712D20AA1875519EB37BE0300C008";
-
         return completion(user);
     }else if([@"TEST02-6D74CBD6-1D81-45E0-B329-690CA31AF49C" isEqual:userId]) {
         RCUserInfo *user = [[RCUserInfo alloc]init];
@@ -88,7 +122,7 @@
     }
 }
 
-//
+//融云end
 
 //
 - (void)displayVC{
@@ -96,9 +130,10 @@
     [self.window makeKeyAndVisible];
 }
 
-//默认零工状态
+//零工状态
 -(void)setupViewControllersForCasualLabour{
     [SVProgressHUD setMaximumDismissTimeInterval:3];
+    
     FirstPageViewController *firstVC=[[FirstPageViewController alloc]init];
     UINavigationController *firstNavi=[[UINavigationController alloc]initWithRootViewController:firstVC];
     
@@ -122,13 +157,15 @@
     //点击中间大按钮的处理
     WS(weakSelf);
     self.tabBarController.clickBigButtBlock = ^{
-        UINavigationController *nav = [NavTools currentNavgation:weakSelf.tabBarController];
-        if(nav){
-            WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc] init];
-            loginVC.isWx = YES;
-            [nav pushViewController:loginVC animated:YES];
+        //显示拍摄视屏界面，若果没登录，则显示登录界面
+        if([lzhGetAccountInfo getAccount].infoDict.allKeys.count == 0){
+            [weakSelf displayLoginPageByIsInstalledWX];
         }else{
-            //NSLog(@"当前导航栏为空");
+            UINavigationController *nav = [NavTools currentNavgation:weakSelf.tabBarController];
+            if(nav){
+                VideoCenterViewController *videoVC = [[VideoCenterViewController alloc]init];
+                [nav pushViewController:videoVC animated:YES];
+            }
         }
     };
     //
@@ -164,9 +201,8 @@
     self.tabBarController.clickBigButtBlock = ^{
         UINavigationController *nav = [NavTools currentNavgation:weakSelf.tabBarController];
         if(nav){
-            WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc] init];
-            loginVC.isWx = YES;
-            [nav pushViewController:loginVC animated:YES];
+            VideoCenterViewController *videoVC = [[VideoCenterViewController alloc]init];
+            [nav pushViewController:videoVC animated:YES];
         }
     };
     [self displayVC];

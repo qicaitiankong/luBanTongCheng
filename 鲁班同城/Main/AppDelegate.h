@@ -26,7 +26,8 @@
 -(void)setupViewControllersForEmployment;
 //零工状态
 -(void)setupViewControllersForCasualLabour;
-
+//显示登录页
+- (void)displayLoginPageByIsInstalledWX;
 
 @end
 

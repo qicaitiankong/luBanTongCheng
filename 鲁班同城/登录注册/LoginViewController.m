@@ -22,6 +22,7 @@
     OwnTextField *mobileTextField;
     OwnTextField *codeTextField;
     UIButton *codeButt;
+    LoginThirdGroupView *otherLoginView;
 }
 
 @end
@@ -32,7 +33,18 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self addViews];
+    //
+    [self adjustInstallWx];
+    //
     NSLog(@"SCREEN_HEIGHT%lf",SCREEN_HEIGHT);
+}
+
+- (void)adjustInstallWx{
+     if(NO == [ShareSDK isClientInstalled:SSDKPlatformTypeWechat]){
+         otherLoginView.wxButt.hidden = YES;
+         [otherLoginView updateOwnContsaintsWhenNoWeXin];
+     }else{
+     }
 }
 
 - (void)addViews{
@@ -107,7 +119,7 @@
     LoginOtherTipView *tipView = [[LoginOtherTipView alloc] initWithFrame:CGRectMake(0, 0, tipViewWidth + 100, 10)];
     [self.view addSubview:tipView];
     //
-    LoginThirdGroupView *otherLoginView = [[LoginThirdGroupView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.40, SCREEN_HEIGHT * 0.052)];
+     otherLoginView = [[LoginThirdGroupView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.40, SCREEN_HEIGHT * 0.052)];
     [otherLoginView.wxButt addTarget:self action:@selector(wxHandler) forControlEvents:UIControlEventTouchUpInside];
     [otherLoginView.qqButt addTarget:self action:@selector(qqHandler) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:otherLoginView];
@@ -191,9 +203,16 @@
 
 - (void)cancelHandler{
     NSLog(@"cancel button");
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    
+    //没有安装微信本业就会作为登录首页
+    if(NO == [ShareSDK isClientInstalled:SSDKPlatformTypeWechat]){
+        NSDictionary *makeDict = @{@"id":[NSNumber numberWithInt:1],@"userType":[NSNumber numberWithInteger:2]};
+        [[lzhGetAccountInfo getAccount] writeToAccount:makeDict];
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [app setupViewControllersForEmployment];
+        
+    }else{//安装了微信本页不是默认登录首页
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)codeButtHandler{

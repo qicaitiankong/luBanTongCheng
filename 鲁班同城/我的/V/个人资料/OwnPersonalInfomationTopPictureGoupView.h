@@ -37,6 +37,8 @@
 
 //根据关注修改是否显示
 - (void)setEditButtDisplayByValue:(BOOL)isConcenrned;
+//显示个人资料展示
+- (void)findOwnInfoDisplay;
 
 
 @end

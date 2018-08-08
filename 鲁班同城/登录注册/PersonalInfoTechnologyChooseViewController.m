@@ -105,13 +105,14 @@
                             ChooseTechnologyLeftModel *localModel = [[ChooseTechnologyLeftModel alloc]init];
                             localModel.title = [modelDict[@"name"] copy];
                             localModel.idFlag = [modelDict[@"id"] integerValue];
+                            localModel.parentId = [modelDict[@"parentId"] integerValue];
                             [self.leftModelArr addObject:localModel];
                         }
                         [self.leftTableView reloadData];
                         //
                         if (isSecondLevelUseItsResult && self.leftModelArr.count){
                             ChooseTechnologyLeftModel *localModel = self.leftModelArr[0];
-                            [self getSecondLevelData:localModel.idFlag];
+                            [self getSecondLevelData:localModel.parentId];
                         }
                     }else if (status == 1){
                         [SVProgressHUD showInfoWithStatus:@"获取失败"];
@@ -136,13 +137,14 @@
                         ChooseTechnologyLeftModel *localModel = [[ChooseTechnologyLeftModel alloc]init];
                         localModel.title = [modelDict[@"name"] copy];
                         localModel.idFlag = [modelDict[@"id"] integerValue];
+                         localModel.parentId = [modelDict[@"parentId"] integerValue];
                         [self.leftModelArr addObject:localModel];
                     }
                     [self.leftTableView reloadData];
                     //
                     if (isSecondLevelUseItsResult && self.leftModelArr.count){
                         ChooseTechnologyLeftModel *localModel = self.leftModelArr[0];
-                        [self getSecondLevelData:localModel.idFlag];
+                        [self getSecondLevelData:localModel.parentId];
                     }
                     
                 }else if (status == 1){

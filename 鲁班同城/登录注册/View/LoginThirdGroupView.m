@@ -46,6 +46,14 @@
     .centerYEqualToView(self);
 }
 
+- (void)updateOwnContsaintsWhenNoWeXin{
+    self.qqButt.sd_resetLayout
+    .centerXEqualToView(self)
+    .heightRatioToView(self, 0.9)
+    .widthEqualToHeight()
+    .centerYEqualToView(self);
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

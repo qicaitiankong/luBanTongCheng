@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger,ChosePhotoType) {
 -(void)chosePhoto:(ChosePhotoType)type{
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
-    imagePickerController.allowsEditing = YES;
+    //imagePickerController.allowsEditing = YES;
     if (type==ChosePhotoTypeAlbum) {
         imagePickerController.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
     }else if (type==ChosePhotoTypeCamera){
@@ -62,27 +62,28 @@ typedef NS_ENUM(NSInteger,ChosePhotoType) {
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
-    
-    
-    UIImage *image = info[UIImagePickerControllerEditedImage];
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
     //UIImage *image = info[UIImagePickerControllerOriginalImage];
-    
-    CGFloat wh= (SCREEN_WIDTH - 15 * 2 - 5 * 2) / 3;
-    
-    UIImage *newImage=[self imageCompressForSize:image targetSize:CGSizeMake(wh, wh)];
-    
+    CGSize targetSize = CGSizeMake(0, 0);
+    CGFloat ImageProperty = image.size.width / image.size.height;
+    if (image.size.width >= 375.f){
+        targetSize = CGSizeMake(375, 375.0 / ImageProperty);
+    }else{
+        targetSize = CGSizeMake(image.size.width, image.size.height);
+    }
+    UIImage *newImage=[self imageCompressForSize:image targetSize:targetSize];
     
     
     NSData *data = nil;
     
     if (UIImagePNGRepresentation(newImage) == nil) {
-        
         data = UIImageJPEGRepresentation(newImage, 0.5);
-        
     } else {
-        
-        data = UIImagePNGRepresentation(newImage);
+        data = UIImageJPEGRepresentation(newImage, 0.5);
     }
+    newImage = [UIImage imageWithData:data];
+    //查看压缩后图片大小
+    [UIImage getImageSize:newImage];
     NSString *poststr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (self.selectedImageBlock){
         self.selectedImageBlock([poststr copy], [newImage copy]);

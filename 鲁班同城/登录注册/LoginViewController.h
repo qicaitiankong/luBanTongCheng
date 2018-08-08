@@ -7,8 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "BaseHiddenNavAndTabBarViewController.h"
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : BaseHiddenNavAndTabBarViewController
 
 @property (copy,nonatomic) void (^wxOrQQBackBlock)(BOOL isWx);
 

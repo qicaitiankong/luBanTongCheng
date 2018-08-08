@@ -9,8 +9,13 @@
 #import "AppDelegate+tabbar.h"
 #import "RDVTabBarItem.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
+#import <ShareSDKExtension/ShareSDK+Extension.h>
+
+#import "WxQQLoginViewController.h"
+#import "LoginViewController.h"
 
 @implementation AppDelegate (tabbar)
+
 
 //tabbar零工状态
 -(void)customizeTabBarForCapsualLabourController:(RDVTabBarController *)tabBarController{
@@ -23,9 +28,8 @@
     }else{
         [tabBarController.tabBar setHeight:49];
     }
-    //UIImage *finishedImage = [UIImage imageWithData:nil];
-    //UIImage *unfinishedImage = [UIImage imageWithData:nil];
     NSArray *tabBarItemImages = @[@"home", @"order",@"xiangji",@"play", @"user"];
+    
     NSArray *tabBarItemTitles = @[@"首页", @"接单大厅",@"",@"技能秀",@"我的"];
     UIColor *themColor = K_THEM_COLOR;
     NSDictionary *unSelectedTitle=@{NSFontAttributeName: [UIFont systemFontOfSize:12],
@@ -171,6 +175,47 @@
         NSLog(@"token错误");
     }];
 }
+
+- (void)registerShareSdk{
+    [ShareSDK registerActivePlatforms:@[
+                                        @(SSDKPlatformTypeWechat),
+                                        @(SSDKPlatformTypeQQ),
+                                        ]
+                             onImport:^(SSDKPlatformType platformType)
+     {
+         switch (platformType)
+         {
+             case SSDKPlatformTypeWechat:
+                 [ShareSDKConnector connectWeChat:[WXApi class]];
+                 break;
+             case SSDKPlatformTypeQQ:
+                 [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
+                 break;
+             default:
+                 break;
+         }
+     }
+                      onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo)
+     {
+         
+         switch (platformType)
+         {
+            
+             case SSDKPlatformTypeWechat:
+                 [appInfo SSDKSetupWeChatByAppId:@"wxa20f8fb29b7515c6"
+                                       appSecret:@"da38abf31cfe219df4b4b306697d0faf"];
+                 break;
+             case SSDKPlatformTypeQQ://改成自己的
+                 [appInfo SSDKSetupQQByAppId:@"100371282"
+                                      appKey:@"aed9b0303e3ed1e27bae87c33761161d"
+                                    authType:SSDKAuthTypeBoth];
+                 break;
+             default:
+                 break;
+         }
+     }];
+}
+
 
 
 @end

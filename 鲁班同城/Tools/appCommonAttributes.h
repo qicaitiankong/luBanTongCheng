@@ -32,6 +32,7 @@
 #import "NSString+OwnDealNullStr.h"
 #import "NSNumber+OwnDealServerNumber.h"
 #import "NSArray+OwnArrCopy.h"
+#import "UIImage+OwnCalculateImageSize.h"
 
 //third party class
 #import <SVProgressHUD.h>
@@ -41,7 +42,18 @@
 #import <SDAutoLayout.h>
 #import <AFNetworking.h>
 #import <MJRefresh.h>
+//sharesdk
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+//腾讯开放平台（对应QQ和QQ空间）SDK头文件
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <ShareSDKExtension/ShareSDK+Extension.h>
 
+//微信SDK头文件
+#import "WXApi.h"
+//新浪微博SDK头文件
+//#import "WeiboSDK.h"
 //解决xocde打印日志不全
 #ifdef DEBUG
 

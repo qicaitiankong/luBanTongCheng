@@ -12,6 +12,8 @@
 
 @property (assign,nonatomic) NSInteger idFlag;
 
+@property (assign,nonatomic) NSInteger parentId;
+
 @property (strong,nonatomic) NSString *title;
 
 @property (assign,nonatomic) BOOL judgeSelected;

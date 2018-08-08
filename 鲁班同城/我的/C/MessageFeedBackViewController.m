@@ -10,10 +10,14 @@
 #import "OwnTextView.h"
 #import "PersonalInfoAddPhotoFlagView.h"
 #import "CustomeStyleCornerButt.h"
+#import <AFNetworking.h>
 
 @interface MessageFeedBackViewController (){
     OwnTextView *problemTextView;
+    PersonalInfoAddPhotoFlagView *addPictureFlagView;
 }
+
+@property (strong,nonatomic)NSString *selectedImageBase64Str;
 
 @end
 
@@ -33,9 +37,39 @@
     self.title = @"信息反馈";
     //
     [self addViews];
+    //
+    WS(weakSelf);
+    self.selectedImageBlock = ^(NSString *pictureBase64str, UIImage *selectedPicture) {
+        __strong typeof(weakSelf) sslef = weakSelf;
+        [sslef -> addPictureFlagView.imageView setImage:selectedPicture];
+        weakSelf.selectedImageBase64Str = pictureBase64str ;
+    };
 }
 
+- (void)feedBackRequest{
+    if (problemTextView.writeTextView.text.length == 0){
+        [SVProgressHUD showInfoWithStatus:@"请填写反馈信息"];
+        return;
+    }
+    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:self.selectedImageBase64Str options:0];
+    
+    
+//    [TDHttpTools uploadFile:@{@"userId":[lzhGetAccountInfo getAccount].userID,@"content":problemTextView.writeTextView.text,@"backMsgPic":@""} singleImage:decodedData success:^(id response) {
+//        if([response[@"status"] integerValue] == 0){
+//            NSLog(@"反馈信息成功");
+//        }else{
+//            NSLog(@"反馈信息失败");
+//        }
+//
+//    } failure:^(NSError *error) {
+//        NSLog(@"反馈信息失败");
+//    }];
+//
+}
+
+
 - (void)addViews{
+    WS(weakSelf);
     UIScrollView *baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT)];
     baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     baseScrollView.backgroundColor = RGBA(242, 242, 242,1);
@@ -67,7 +101,12 @@
     botTipLabel.text = @"图片（选填，提供问题截图）";
     [botBaseView addSubview:botTipLabel];
     //
-    PersonalInfoAddPhotoFlagView *addPictureFlagView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(botTipLabel.left, botTipLabel.bottom + 10, 100, 100)];
+     addPictureFlagView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(botTipLabel.left, botTipLabel.bottom + 10, 100, 100)];
+    addPictureFlagView.selectedAddPhotoBlock = ^(UIImageView *imageView) {
+        if (imageView.image == nil){
+             [weakSelf callActionSheetFunc];
+        }
+    };
     [botBaseView addSubview:addPictureFlagView];
     //
     [baseScrollView addSubview:botBaseView];
@@ -75,7 +114,7 @@
     CustomeStyleCornerButt *nextButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, botBaseView.bottom + 50, self.view.width - 2 * leftSpace, 45) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:4 title:@"提交" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
     nextButt.center = CGPointMake(self.view.width  / 2, nextButt.centerY);
     nextButt.clickButtBlock = ^{
-    
+        [weakSelf feedBackRequest];
     };
     [baseScrollView addSubview:nextButt];
     //

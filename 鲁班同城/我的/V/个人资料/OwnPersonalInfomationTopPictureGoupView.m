@@ -125,5 +125,11 @@
     }
 }
 
+- (void)findOwnInfoDisplay{
+    UIImage *dataImage = nil;
+    [editButt.loginButt setImage:dataImage forState:UIControlStateNormal];
+    [editButt.loginButt setTitle:@"编辑个人资料" forState:UIControlStateNormal];
+}
+
 
 @end

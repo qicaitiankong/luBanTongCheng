@@ -127,7 +127,7 @@
     NSDictionary *singleDict = self.modelArr[indexPath.row];
     NSString *urlStr = [NSString getResultStrBySeverStr:singleDict[@"headImg"]];
     [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:urlStr]];
-    cell.nameLabel.text = [singleDict[@"userName"] copy];
+    cell.nameLabel.text = [NSString getResultStrBySeverStr:singleDict[@"userName"] ];
     return cell;
 }
 
@@ -138,7 +138,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     OwnPersonalInfomationViewController *rankVC = [[OwnPersonalInfomationViewController alloc]init];
-    //rankVC.targetUserID = 1;
+    NSDictionary *singleDict = self.modelArr[indexPath.row];
+    rankVC.targetUserId = singleDict[@"userId"];
     [self.navigationController pushViewController:rankVC animated:YES];
 }
 

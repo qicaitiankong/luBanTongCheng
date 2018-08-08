@@ -37,7 +37,7 @@
     if (localModel){
         localModel.nameStr = [NSString getResultStrBySeverStr:webDict[@"realName"]];
         localModel.addressStr = [NSString getResultStrBySeverStr:webDict[@"address"]];
-        
+         localModel.sexStr = [NSString getResultStrBySeverStr:webDict[@"gender"]];
         localModel.proviceStr = [NSString getResultStrBySeverStr:webDict[@"province"]];
          localModel.cityStr = [NSString getResultStrBySeverStr:webDict[@"city"]];
          localModel.areaStr = [NSString getResultStrBySeverStr:webDict[@"area"]];

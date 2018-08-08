@@ -97,6 +97,7 @@
 }
 
 
+
 - (void)writeToAccount:(NSDictionary*)dict{
 //    age = "<null>";
 //    fansNum = 0;
@@ -120,7 +121,7 @@
     NSNumber *fansNum = [NSNumber numberWithInteger:0];
     NSNumber *focusNum = [NSNumber numberWithInteger:0];
     NSNumber *ageNum = [NSNumber numberWithInteger:0];
-    //方便测试写死了，以后改成id获取
+    //
     if ([[dict allKeys] containsObject:@"id"]){//针对于登入保存
          userID = dict[@"id"];
     }else{
@@ -170,6 +171,18 @@
         NSLog(@"身份信息更改写入本地失败");
     }
 }
+
+//清除账户信息
++ (void)cleanAccountInfo{
+    NSDictionary *nullDict = @{};
+    BOOL suc = [nullDict writeToFile:kAccountPath atomically:YES];
+    if (suc){
+        NSLog(@"账户信息已经清除");
+    }else{
+         NSLog(@"账户信息清除失败");
+    }
+}
+
 
 
 

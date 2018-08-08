@@ -185,7 +185,9 @@
     };
     footerView.exitLoginButtView.clickButtBlock = ^{
         //NSLog(@"退出登录");
-
+        [lzhGetAccountInfo cleanAccountInfo];
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [app displayLoginPageByIsInstalledWX];
     };
     //
     self.tableView = [[UITableView alloc] initWithFrame:size style:styles];

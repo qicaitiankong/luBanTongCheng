@@ -127,4 +127,8 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 //取消关注
 +(void)CancelConcernAction:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
+//上传图片
++ (void)uploadFile:(NSDictionary*)paraDict singleImage:(NSData*)targetData success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure;
+
+
 @end

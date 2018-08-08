@@ -90,7 +90,7 @@
     };
     topPartView.editButt.clickButtBlock = ^{
         //自己的资料
-        if ([self.targetUserId integerValue] == -1){
+        if ([self.targetUserId integerValue] == [[lzhGetAccountInfo getAccount].userID integerValue]){
             PersonalInfoNameViewController *nameEditVC = [[PersonalInfoNameViewController alloc]init];
             nameEditVC.orinalInfoModel = weakSelf.infoModel;
             [weakSelf.navigationController pushViewController:nameEditVC animated:YES];
@@ -164,12 +164,15 @@
     [topPartView.userlogoImaView sd_setImageWithURL:imageUrl];
     topPartView.fenSiLabel.text =[NSString stringWithFormat:@"%ld粉丝",[self.infoModel.fansNum integerValue]];
     topPartView.concernLabel.text = [NSString stringWithFormat:@"%ld关注",[self.infoModel.focusNum integerValue]];
-    topPartView.sexAndHomeLabel.text = [NSString stringWithFormat:@"%@ %@",[self.infoModel.sexStr copy],[self.infoModel.addressStr copy]];
+    NSString *addressStr = (self.infoModel.addressStr.length == 0) ? [NSString stringWithFormat:@"%@%@%@",self.infoModel.proviceStr,self.infoModel.cityStr,self.infoModel.areaStr]:self.infoModel.addressStr;
+    topPartView.sexAndHomeLabel.text = [NSString stringWithFormat:@"%@ %@",[self.infoModel.sexStr copy],addressStr];
     [topPartView.starGroupView setYellowStar:[self.infoModel.starCountNumber integerValue]];
     if (self.infoModel.FoucedFlag == 0){
         [topPartView setEditButtDisplayByValue:NO];
     }else if (self.infoModel.FoucedFlag == 1){
          [topPartView setEditButtDisplayByValue:YES];
+    }else{
+        [topPartView findOwnInfoDisplay];
     }
     //个人介绍
     [personalIntroduceView giveOwnValue:[self.infoModel.introduceStr copy]];

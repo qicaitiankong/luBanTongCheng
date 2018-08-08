@@ -9,21 +9,24 @@
 #import "VideoCenterViewController.h"
 #import "WxQQLoginViewController.h"
 
-
 @interface VideoCenterViewController ()
 
 @end
 
 @implementation VideoCenterViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [NavTools displayNav:self.navigationController];
+    [NavTools hiddenTabbar:self.rdv_tabBarController];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc]init];
-    loginVC.isWx = YES;
-    [self.navigationController pushViewController:loginVC animated:YES];
-    
+    [NavTools displayNav:self.navigationController];
+    [NavTools hiddenTabbar:self.rdv_tabBarController];
+    self.title = @"录制视屏";
+    self.view.backgroundColor = [UIColor blackColor];
 }
 
 - (void)didReceiveMemoryWarning {

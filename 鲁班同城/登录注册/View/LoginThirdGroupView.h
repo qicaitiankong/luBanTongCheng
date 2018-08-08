@@ -17,4 +17,7 @@
 
 - (void)updateOwnContsaints;
 
+- (void)updateOwnContsaintsWhenNoWeXin;
+
+
 @end

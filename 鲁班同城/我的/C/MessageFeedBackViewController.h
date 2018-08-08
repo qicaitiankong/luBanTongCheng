@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TakePhotoBaseViewController.h"
 
-@interface MessageFeedBackViewController : UIViewController
+
+@interface MessageFeedBackViewController : TakePhotoBaseViewController
 
 @end

@@ -37,5 +37,8 @@
 
 - (void)writeToAccount:(NSDictionary*)dict;
 
+//清除账户信息
++ (void)cleanAccountInfo;
+
 
 @end

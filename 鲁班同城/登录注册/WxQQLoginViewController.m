@@ -38,39 +38,81 @@
 }
 
 - (void)cancelHandler{
-    [self.navigationController popViewControllerAnimated:YES];
-    [self.rdv_tabBarController setTabBarHidden:NO];
+//    [self.navigationController popViewControllerAnimated:YES];
+//    [self.rdv_tabBarController setTabBarHidden:NO];
+    //说明用户不想登录，开放进入app浏览
+    //后期还需处理，用户非登录状态处理界面显示，此处一下只为了跳转通过随便写了一个userid
+    NSDictionary *makeDict = @{@"id":[NSNumber numberWithInt:1],@"userType":[NSNumber numberWithInteger:2]};
+    [[lzhGetAccountInfo getAccount] writeToAccount:makeDict];
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app setupViewControllersForEmployment];
 }
 
 - (void)firstLoginHandler{
     NSLog(@"firstLoginHandler");
-    [TDHttpTools loginWXWithText:@{@"weixinCode":@"23824837875"} success:^(id response) {
+    if(self.isWx){
+        [ShareSDK getUserInfo:SSDKPlatformTypeWechat
+               onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
+         {
+             if (state == SSDKResponseStateSuccess)
+             {
+                 
+                 NSLog(@"uid=%@",user.uid);
+                 NSLog(@"%@",user.credential);
+                 NSLog(@"token=%@",user.credential.token);
+                 NSLog(@"nickname=%@",user.nickname);
+                 [self wxLoginRequest:user.credential.token];
+                 //要根据后台接口判断该qq号是否已与手机号关联，没关联才会显示qq昵称名字，否则应显示手机账号信息
+                 //
+                 //             NSString *CName=[user.nickname copy];
+                 //             NSString *icon = [user.icon copy];
+                 //
+             }
+             else
+             {
+                 NSLog(@"%@",error);
+                 [SVProgressHUD showErrorWithStatus:@"微信登录失败，请重试"];
+             }
+             
+         }];
+        
+    }
+}
+
+- (void)wxLoginRequest:(NSString*)wexinCode{
+    [TDHttpTools loginWXWithText:@{@"weixinCode":wexinCode} success:^(id response) {
         NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
         int status = [dict[@"status"] intValue];
         NSLog(@" test dict:%@",dict);
         NSDictionary *dataDict = dict[@"data"];
         if (status == 0){
-             NSLog(@"userType:%@",dataDict[@"userType"]);
+            NSLog(@"userType:%@",dataDict[@"userType"]);
             // age = "<null>";
-//            fansNum = 0;
-//            focusNum = 0;
-//            gender = "\U7537";
-//            headImg = "<null>";
-//            id = 8;
-//            mobile = "<null>";
-//            realName = "<null>";
-//            realNamePath = "<null>";
-//            state = 0;
-//            userType = "\U96c7\U4e3b";
-//            username = "<null>";
+            //            fansNum = 0;
+            //            focusNum = 0;
+            //            gender = "\U7537";
+            //            headImg = "<null>";
+            //            id = 8;
+            //            mobile = "<null>";
+            //            realName = "<null>";
+            //            realNamePath = "<null>";
+            //            state = 0;
+            //            userType = "\U96c7\U4e3b";
+            //            username = "<null>";
             //在此保存用户信息
             [[lzhGetAccountInfo getAccount] writeToAccount:dataDict];
             
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:USER_TYPE_UPDATE_NOTIFICATION_NAME object:nil userInfo:nil];
+            //[[NSNotificationCenter defaultCenter] postNotificationName:USER_TYPE_UPDATE_NOTIFICATION_NAME object:nil userInfo:nil];
             //通知跟新界面
             [SVProgressHUD showSuccessWithStatus:dict[@"msg"]];
-            [self.navigationController popViewControllerAnimated:YES];
+            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+            if ([lzhGetAccountInfo getAccount].identityFlag == 1){
+                [app setupViewControllersForEmployment];
+            }else{
+                [app setupViewControllersForCasualLabour];
+            }
+            
         }else if (status == 1){
             [SVProgressHUD showErrorWithStatus:dict[@"msg"]];
         }
@@ -79,8 +121,11 @@
         NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
         [SVProgressHUD showErrorWithStatus:errorCode];
     }];
-    
 }
+
+
+
+
 
 - (void)otherLoginHandler{
      NSLog(@"otherLoginHandler");

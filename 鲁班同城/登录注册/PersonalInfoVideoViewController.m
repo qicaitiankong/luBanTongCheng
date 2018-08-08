@@ -247,15 +247,12 @@
     self.amendingInfoModel.areaStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.areaStr];
     
     self.amendingInfoModel.jobExperienceStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.jobExperienceStr];
-    NSLog(@"请求之前答应选择的技术self.amendingInfoModel.technologyServiceNeedStr = %@ ,jobstr = %@",self.amendingInfoModel.technologyServiceNeedStr,self.amendingInfoModel.jobServiceNeedStr);
-    //;
-    //self.amendingInfoModel.technologyServiceNeedStr = @"1,2,3,4,5,6,7,8,40,41,42,43";
-//    self.amendingInfoModel.jobServiceNeedStr = @"1,2,3,4,5,6,8,16";
+    NSLog(@"请求之前答应选择的技术self.amendingInfoModel.technologyServiceNeedStr = %@ ,jobstr = %@ 性别:%@",self.amendingInfoModel.technologyServiceNeedStr,self.amendingInfoModel.jobServiceNeedStr,self.amendingInfoModel.sexStr);
     //
     NSDictionary *paraDict = @{@"realName":self.amendingInfoModel.nameStr,@"realNamePath":@"",
                                @"age":self.amendingInfoModel.ageNum,@"gender":self.amendingInfoModel.sexStr,
                                @"province":self.amendingInfoModel.proviceStr,@"city":self.amendingInfoModel.cityStr,
-                               @"area":self.amendingInfoModel.areaStr,@"address":@"",
+                               @"area":self.amendingInfoModel.areaStr,@"address":@"",@"gender":self.amendingInfoModel.sexStr,
                                @"technologys":self.amendingInfoModel.technologyServiceNeedStr,@"professionals":self.amendingInfoModel.jobServiceNeedStr,
 //                               @"technologyShowPic":self.amendingInfoModel.technologyPicSeviceNeedStr,@"technologyShowVideo":self.amendingInfoModel.technologyVideoSeviceNeedStr,
                                @"userId":[lzhGetAccountInfo getAccount].userID,@"headImg":@"",
@@ -264,6 +261,8 @@
                                    };
     [TDHttpTools casualChangeOwnInfo:paraDict success:^(id response) {
         NSLog(@"修改个人信息%@",response);
+        //
+        //
         NSDictionary *webDict = response;
         [SVProgressHUD showSuccessWithStatus:webDict[@"msg"]];
         [self.navigationController popToRootViewControllerAnimated:YES];

@@ -215,14 +215,16 @@
 }
 
 //上传图片
-+ (void)uploadFile:(NSDictionary*)paraDict success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure{
++ (void)uploadFile:(NSDictionary*)paraDict singleImage:(NSData*)targetData success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure{
      AFHTTPSessionManager *session= [AFHTTPSessionManager manager];
-     NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/loginW",kSERVER_HTTP_DXE];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    session.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript",@"text/css", @"text/plain", @"application/x-javascript", @"application/javascript",@"application/xhtml+xml",@"application/xml", nil];
+    
+    session.requestSerializer = [AFJSONRequestSerializer serializer];
+     NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/backMsg",kSERVER_HTTP_DXE];
     [session POST:urlString parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
-        UIImage *image = [UIImage imageNamed:@"gauge.png"];
-        
-        NSData *data = UIImagePNGRepresentation(image);
+        NSData *data = targetData;
         
         //上传的参数(上传图片，以文件流的格式)
         
@@ -230,9 +232,9 @@
          
                                     name:@"file"
          
-                                fileName:@"gauge.png"
+                                fileName:@"gauge.jpg"
          
-                                mimeType:@"image/png"];
+                                mimeType:@"image/jpg"];
         
         
     } progress:^(NSProgress * _Nonnull uploadProgress) {
