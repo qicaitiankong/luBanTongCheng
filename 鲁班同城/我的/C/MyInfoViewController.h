@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseHiddenNaviViewController.h"
+#import "TakePhotoBaseViewController.h"
 
-@interface MyInfoViewController : BaseHiddenNaviViewController
+
+@interface MyInfoViewController : TakePhotoBaseViewController
 
 @end

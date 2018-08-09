@@ -61,12 +61,13 @@
                  NSLog(@"%@",user.credential);
                  NSLog(@"token=%@",user.credential.token);
                  NSLog(@"nickname=%@",user.nickname);
-                 [self wxLoginRequest:user.credential.token];
-                 //要根据后台接口判断该qq号是否已与手机号关联，没关联才会显示qq昵称名字，否则应显示手机账号信息
-                 //
-                 //             NSString *CName=[user.nickname copy];
-                 //             NSString *icon = [user.icon copy];
-                 //
+                 if (user.credential == nil){
+                     NSLog(@"\n\n！！！！！！！！微信登录尚未授权\n\n");
+                 }else{
+                     NSLog(@"\n\n！！！！！！微信登录已经授权\n\n");
+                 }
+                 
+                 [self wxLoginRequest:user.uid];
              }
              else
              {
@@ -83,7 +84,7 @@
     [TDHttpTools loginWXWithText:@{@"weixinCode":wexinCode} success:^(id response) {
         NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
         int status = [dict[@"status"] intValue];
-        NSLog(@" test dict:%@",dict);
+        NSLog(@" 微信登录后台返回 dict:%@",dict);
         NSDictionary *dataDict = dict[@"data"];
         if (status == 0){
             NSLog(@"userType:%@",dataDict[@"userType"]);

@@ -123,10 +123,11 @@
                     if ([dict allKeys].count){
                         NSDictionary *dataDict = dict[@"data"];
                         NSArray *dataArr = dataDict[@"list"];
+                        if (NO == self -> isLoad){
+                            [self.modelArr removeAllObjects];
+                        }
                         if (dataArr.count){
-                            if (NO == self -> isLoad){
-                                [self.modelArr removeAllObjects];
-                            }
+                            
                             for (NSDictionary *singleDict in dataArr){
                                 TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:singleDict];
                                 [self.modelArr addObject:model];
@@ -160,10 +161,11 @@
                
                 NSDictionary *dataDict = dict[@"data"];
                 NSArray *dataArr = dataDict[@"list"];
+                if (NO == self -> isLoad){
+                    [self.modelArr removeAllObjects];
+                }
                 if (dataArr.count){
-                    if (NO == self -> isLoad){
-                        [self.modelArr removeAllObjects];
-                    }
+                    
                     for (NSDictionary *singleDict in dataArr){
                         TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:singleDict];
                         [self.modelArr addObject:model];

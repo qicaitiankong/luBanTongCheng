@@ -31,8 +31,9 @@
         imageCenterSpace = 5;
         imageViewWidth = (SCREEN_WIDTH - imageLeftBeginSpace * 2 - imageCenterSpace * 2) / 3;
         WS(weakSelf);
+        //在此改变循环大小可以改变可选张数
         for (int k = 0; k < 6; k ++){
-            PersonalInfoAddPhotoFlagView *singleView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(0, 0, imageViewWidth, imageViewWidth)];
+            PersonalInfoAddPhotoFlagView *singleView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(0, 0, 5, 5)];
             singleView.selectedAddPhotoBlock = ^(UIImageView *imageView) {
                 if (weakSelf.addPictureBlock){
                     weakSelf.addPictureBlock(weakSelf.path);
@@ -51,56 +52,73 @@
     _model = model;
     if (model){
         UIView *botView = nil;
-        //如果有选中了照片
-                if (model.selectedImageArr.count){
+        //将全部影藏
+         for (PersonalInfoAddPhotoFlagView *singleView in self.imageViewArr){
+             singleView.hidden = YES;
+             singleView.userInteractionEnabled = NO;
+         }
+        if (model.selectedImageArr.count == 0){
                     int i = 0;
-                    
                     for (PersonalInfoAddPhotoFlagView *singleView in self.imageViewArr){
-                        if (i < model.selectedImageArr.count + 1){
-                            singleView.hidden = NO;
-                            if (model.selectedImageArr.count > i){
-                                [singleView.imageView setImage:model.selectedImageArr[i]];
-                                }
-                               singleView.sd_resetLayout
-                                .leftSpaceToView(self.contentView, imageLeftBeginSpace + (imageViewWidth + imageCenterSpace)* (i % 3))
-                                .topSpaceToView(self.contentView, 15 + (imageViewWidth + imageCenterSpace) * (i / 3))
-                                .widthIs(imageViewWidth)
-                                .heightEqualToWidth();
-                            [singleView adjustConstraintsWhenNeed];
-                                botView = singleView;
-                            }else{
-                                singleView.hidden = YES;
-                            }
-                            i ++;
-                        
-                    }
-                    //添加完图片不再支持点击
-                    for (int m = 0; m < self.imageViewArr.count; m ++){
-                        PersonalInfoAddPhotoFlagView *localView = self.imageViewArr[m];
-                        if (m == model.selectedImageArr.count){
-                            localView.userInteractionEnabled = YES;
+                        if (i > 0){
+                            singleView.hidden = YES;
+                            singleView.userInteractionEnabled = NO;
                         }else{
-                            localView.userInteractionEnabled = NO;;
+                            singleView.hidden = NO;
+                            singleView.addImageView.hidden = NO;
+                            singleView.userInteractionEnabled = YES;
+                             botView = singleView;
+                        }
+                        singleView.sd_resetLayout
+                        .leftSpaceToView(self.contentView, imageLeftBeginSpace + (imageViewWidth + imageCenterSpace)* (i % 3))
+                        .topSpaceToView(self.contentView, 15 + (imageViewWidth + imageCenterSpace) * (i / 3))
+                        .widthIs(imageViewWidth)
+                            .heightEqualToWidth();
+                        [singleView adjustConstraintsWhenNeed];
+                        i ++;
+                       
+                    }
+        }else{
+                    if (model.selectedImageArr.count < self.imageViewArr.count){
+                        for (int k = 0; k < model.selectedImageArr.count; k ++){
+                            PersonalInfoAddPhotoFlagView *singleView = self.imageViewArr[k];
+                            [singleView.imageView setImage:model.selectedImageArr[k]];
+                            singleView.sd_resetLayout
+                            .leftSpaceToView(self.contentView, imageLeftBeginSpace + (imageViewWidth + imageCenterSpace)* (k % 3))
+                            .topSpaceToView(self.contentView, 15 + (imageViewWidth + imageCenterSpace) * (k / 3))
+                            .widthIs(imageViewWidth)
+                            .heightEqualToWidth();
+                            [singleView adjustConstraintsWhenNeed];
+                           
+                            singleView.hidden = NO;
+                            singleView.userInteractionEnabled = NO;
+                            singleView.addImageView.hidden = YES;
+                        }
+                        PersonalInfoAddPhotoFlagView *singleView = self.imageViewArr[model.selectedImageArr.count];
+                        singleView.hidden = NO;
+                        singleView.userInteractionEnabled = YES;
+                        singleView.addImageView.hidden = NO;
+                        botView = singleView;
+                    }else{//当选择的图片为imageview arr count个时
+                        int m = 0;
+                        for (PersonalInfoAddPhotoFlagView *singleView in self.imageViewArr){
+                            singleView.hidden = NO;
+                            singleView.userInteractionEnabled = NO;
+                            singleView.addImageView.hidden = YES;
+                            [singleView.imageView setImage:model.selectedImageArr[m]];
+                            //
+                            singleView.sd_resetLayout
+                            .leftSpaceToView(self.contentView, imageLeftBeginSpace + (imageViewWidth + imageCenterSpace)* (m % 3))
+                            .topSpaceToView(self.contentView, 15 + (imageViewWidth + imageCenterSpace) * (m / 3))
+                            .widthIs(imageViewWidth)
+                            .heightEqualToWidth();
+                            
+                            m ++;
+                            botView = singleView;
                         }
                     }
-                }else{//刚开始没有选择图片应该显示一个
-                        int k = 0;
-                        for (PersonalInfoAddPhotoFlagView *singleView in self.imageViewArr){
-                            if (k < 1){
-                                singleView.hidden = NO;
-                                singleView.userInteractionEnabled = YES; singleView.sd_resetLayout
-                                .leftSpaceToView(self.contentView, imageLeftBeginSpace + (imageViewWidth + imageCenterSpace)* (k % 3))
-                                .topSpaceToView(self.contentView, 15 + (imageViewWidth + imageCenterSpace) * (k / 3))
-                                .widthIs(imageViewWidth)
-                                .heightEqualToWidth();
-                                [singleView adjustConstraintsWhenNeed];
-                                botView = singleView;
-                            }else{
-                                singleView.hidden = YES;
-                            }
-                            k ++;
-                        }
-                }
+        }
+        
         [self setupAutoHeightWithBottomView:botView bottomMargin:10];
     }
 }

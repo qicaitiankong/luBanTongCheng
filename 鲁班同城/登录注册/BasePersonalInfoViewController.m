@@ -22,22 +22,21 @@
     //
     self.title = @"个人资料";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButt)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButt)];
+    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButt)];
     // Do any additional setup after loading the view.
 }
 
 - (void)leftBarButt{
     if (self.leftBarbuttBlock){
-        [self.navigationController popViewControllerAnimated:YES];
         self.leftBarbuttBlock();
     }
 }
 
-- (void)rightBarButt{
-    if (self.rightBarbuttBlock){
-        self.rightBarbuttBlock();
-    }
-}
+//- (void)rightBarButt{
+//    if (self.rightBarbuttBlock){
+//        self.rightBarbuttBlock();
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

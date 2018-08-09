@@ -14,9 +14,9 @@
 }
 @end
 
-static ShareNetWorkState *ShareGetNetState = nil;
-static AFHTTPSessionManager *manager = nil;
-static dispatch_queue_t serialQueue = nil;
+ShareNetWorkState *ShareGetNetState = nil;
+AFHTTPSessionManager *manager = nil;
+dispatch_queue_t serialQueue = nil;
 // NSLock *myLock = nil;
 //NSLock *mySecondLock = nil;
 

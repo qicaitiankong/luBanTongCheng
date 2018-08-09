@@ -33,6 +33,7 @@
 #import "NSNumber+OwnDealServerNumber.h"
 #import "NSArray+OwnArrCopy.h"
 #import "UIImage+OwnCalculateImageSize.h"
+#import "UIView+ShowNullTipImageView.h"
 
 //third party class
 #import <SVProgressHUD.h>

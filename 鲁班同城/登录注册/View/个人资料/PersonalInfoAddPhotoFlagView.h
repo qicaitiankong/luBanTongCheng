@@ -12,6 +12,8 @@
 
 @property (strong,nonatomic) UIImageView *imageView;
 
+@property (strong,nonatomic) UIImageView *addImageView;
+
 @property (copy,nonatomic) void (^selectedAddPhotoBlock)(UIImageView* imageView);
 //当该空间的父控件使用sdautolauaut应该再次调整里面子空间
 - (void)adjustConstraintsWhenNeed;

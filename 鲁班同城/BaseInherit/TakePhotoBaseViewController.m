@@ -74,19 +74,16 @@ typedef NS_ENUM(NSInteger,ChosePhotoType) {
     UIImage *newImage=[self imageCompressForSize:image targetSize:targetSize];
     
     
-    NSData *data = nil;
-    
-    if (UIImagePNGRepresentation(newImage) == nil) {
-        data = UIImageJPEGRepresentation(newImage, 0.5);
-    } else {
-        data = UIImageJPEGRepresentation(newImage, 0.5);
+    NSData *data = UIImageJPEGRepresentation(newImage, 0.5);;
+    if (data == nil){
+        data = UIImagePNGRepresentation(newImage);
     }
     newImage = [UIImage imageWithData:data];
     //查看压缩后图片大小
     [UIImage getImageSize:newImage];
-    NSString *poststr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    //NSString *poststr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (self.selectedImageBlock){
-        self.selectedImageBlock([poststr copy], [newImage copy]);
+        self.selectedImageBlock([data copy], [newImage copy]);
     }
     
     

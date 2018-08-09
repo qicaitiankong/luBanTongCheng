@@ -193,10 +193,10 @@
 }
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    UICollectionReusableView *reusableView =nil;
+    FirstPageWaterCollectionReusableHeaderView *header =nil;
     //返回段头段尾视图
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        FirstPageWaterCollectionReusableHeaderView *header=[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([FirstPageWaterCollectionReusableHeaderView class]) forIndexPath:indexPath];
+         header=[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([FirstPageWaterCollectionReusableHeaderView class]) forIndexPath:indexPath];
         WS(weakSelf);
         header.searchView.clickLocationCity = ^(UIButton *targetCityButton) {
             [weakSelf clickLocationCity:targetCityButton];
@@ -208,15 +208,13 @@
         header.traingleButtonGroupView.traingleButtBlock = ^(NSInteger index, TraingleCategorySmallButtonView *targetView) {
             [weakSelf traingleButtonHandler:index targetView:targetView];
         };
-        [header.searchView.locationCityButt setTitle:[GetLocationICitynfo getLocationInfo].cityStr forState:UIControlStateNormal];
+        
         //添加头视图的内容
-        reusableView = header;
         [header addConstraints];
-        return reusableView;
     }
     NSLog(@"viewForSupplementaryElementOfKind");
-    
-    return reusableView;
+    [header.searchView.locationCityButt setTitle:[GetLocationICitynfo getLocationInfo].cityStr forState:UIControlStateNormal];
+    return header;
 }
 //悬浮按钮
 - (void)createButtView{

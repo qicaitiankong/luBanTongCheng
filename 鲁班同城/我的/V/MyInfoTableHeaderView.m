@@ -9,6 +9,7 @@
 #import "MyInfoTableHeaderView.h"
 
 @implementation MyInfoTableHeaderView
+@synthesize backImageButt;
 
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -20,6 +21,10 @@
         self.userImageView.center = CGPointMake(frame.size.width / 2, self.userImageView.centerY);
         self.userImageView.layer.cornerRadius = self.userImageView.width / 2;
         self.userImageView.clipsToBounds = YES;
+        
+        //
+         backImageButt = [[CustomeStyleCornerButt alloc]initWithFrame:self.userImageView.frame backColor:[UIColor clearColor] cornerRadius:0 title:@"" titleColor:nil font:nil];
+        [self addSubview:backImageButt];
         [self addSubview:self.userImageView];
         //
         self.userNameLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:1];

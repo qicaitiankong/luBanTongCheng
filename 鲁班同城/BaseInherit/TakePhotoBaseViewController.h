@@ -11,7 +11,7 @@
 @interface TakePhotoBaseViewController : UIViewController
 
 
-@property (copy,nonatomic) void (^selectedImageBlock)(NSString *pictureBase64str,UIImage *selectedPicture);
+@property (copy,nonatomic) void (^selectedImageBlock)(NSData *pictureData,UIImage *selectedPicture);
 
 
 - (void)callActionSheetFunc;

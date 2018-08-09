@@ -45,9 +45,6 @@
     [self initOwnObjects];
     WS(weakSelf);
     self.leftBarbuttBlock = ^{
-        
-    };
-    self.rightBarbuttBlock = ^{
         if (weakSelf.selectedBlock){
             for (ChooseTechnologyLeftModel *localModel in weakSelf.rightModelArr){
                 if (localModel.judgeSelected){
@@ -112,6 +109,7 @@
                         //
                         if (isSecondLevelUseItsResult && self.leftModelArr.count){
                             ChooseTechnologyLeftModel *localModel = self.leftModelArr[0];
+                            localModel.judgeSelected = YES;
                             [self getSecondLevelData:localModel.parentId];
                         }
                     }else if (status == 1){
@@ -144,6 +142,7 @@
                     //
                     if (isSecondLevelUseItsResult && self.leftModelArr.count){
                         ChooseTechnologyLeftModel *localModel = self.leftModelArr[0];
+                        localModel.judgeSelected = YES;
                         [self getSecondLevelData:localModel.parentId];
                     }
                     

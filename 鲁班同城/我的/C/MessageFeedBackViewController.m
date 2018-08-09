@@ -17,7 +17,7 @@
     PersonalInfoAddPhotoFlagView *addPictureFlagView;
 }
 
-@property (strong,nonatomic)NSString *selectedImageBase64Str;
+@property (strong,nonatomic) NSMutableArray *selectedImageDataArr;
 
 @end
 
@@ -35,14 +35,15 @@
     [NavTools displayNav:self.navigationController];
     [NavTools hiddenTabbar:self.rdv_tabBarController];
     self.title = @"信息反馈";
+    self.selectedImageDataArr = [[NSMutableArray alloc]init];
     //
     [self addViews];
     //
     WS(weakSelf);
-    self.selectedImageBlock = ^(NSString *pictureBase64str, UIImage *selectedPicture) {
+    self.selectedImageBlock = ^(NSData *pictureData, UIImage *selectedPicture) {
         __strong typeof(weakSelf) sslef = weakSelf;
         [sslef -> addPictureFlagView.imageView setImage:selectedPicture];
-        weakSelf.selectedImageBase64Str = pictureBase64str ;
+        [weakSelf.selectedImageDataArr addObject:pictureData];
     };
 }
 
@@ -51,20 +52,17 @@
         [SVProgressHUD showInfoWithStatus:@"请填写反馈信息"];
         return;
     }
-    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:self.selectedImageBase64Str options:0];
     
-    
-//    [TDHttpTools uploadFile:@{@"userId":[lzhGetAccountInfo getAccount].userID,@"content":problemTextView.writeTextView.text,@"backMsgPic":@""} singleImage:decodedData success:^(id response) {
-//        if([response[@"status"] integerValue] == 0){
-//            NSLog(@"反馈信息成功");
-//        }else{
-//            NSLog(@"反馈信息失败");
-//        }
-//
-//    } failure:^(NSError *error) {
-//        NSLog(@"反馈信息失败");
-//    }];
-//
+    [TDHttpTools uploadFile:@{@"userId":[lzhGetAccountInfo getAccount].userID,@"content":problemTextView.writeTextView.text} traileUrlStr:@"/lubantc/api/user/backMsg" imageFlagName:@"backMsgPic" imageDataArr:self.selectedImageDataArr success:^(id response) {
+        NSDictionary *dict = response;
+        if ([dict[@"status"] integerValue] == 0){
+            [SVProgressHUD showSuccessWithStatus:@"信息反馈成功"];
+        }else{
+            [SVProgressHUD showInfoWithStatus:@"信息反馈失败"];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BasePersonalInfoViewController.h"
 #import "OwnPersonalInfoModel.h"
+#import "BasePersonalInfoViewController.h"
 
 @interface PersonalInfoWorkViewController : BasePersonalInfoViewController
 //修改前的模型

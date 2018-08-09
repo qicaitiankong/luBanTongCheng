@@ -215,39 +215,51 @@
 }
 
 //上传图片
-+ (void)uploadFile:(NSDictionary*)paraDict singleImage:(NSData*)targetData success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure{
++ (void)uploadFile:(NSDictionary*)paraDict traileUrlStr:(NSString*)traileUrlStr imageFlagName:(NSString*)imageName imageDataArr:(NSArray*)targetDataArr success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure{
      AFHTTPSessionManager *session= [AFHTTPSessionManager manager];
     session.responseSerializer = [AFHTTPResponseSerializer serializer];
     session.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript",@"text/css", @"text/plain", @"application/x-javascript", @"application/javascript",@"application/xhtml+xml",@"application/xml", nil];
     
     session.requestSerializer = [AFJSONRequestSerializer serializer];
-     NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/backMsg",kSERVER_HTTP_DXE];
+     NSString *urlString=[NSString stringWithFormat:@"%@%@",kSERVER_HTTP_DXE,traileUrlStr];
     [session POST:urlString parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
-        NSData *data = targetData;
-        
-        //上传的参数(上传图片，以文件流的格式)
-        
-        [formData appendPartWithFileData:data
-         
-                                    name:@"file"
-         
-                                fileName:@"gauge.jpg"
-         
-                                mimeType:@"image/jpg"];
-        
-        
+        if(targetDataArr.count > 0){
+            for (int m = 0; m < targetDataArr.count; m ++){
+                NSData *imageData = targetDataArr[m];
+                NSString *imageType = [UIImage contentTypeForImageData:imageData];
+                NSString *imageAppendType = @"image/jpeg";
+                if (imageType == nil){
+                    
+                }else{
+                    imageAppendType = [NSString stringWithFormat:@"image/%@",imageType];
+                }
+                if (imageData == nil){
+                    NSLog(@"!!!!!!!!!图片为空");
+                }
+                //上传的参数(上传图片，以文件流的格式)
+                
+                [formData appendPartWithFileData:imageData
+                 
+                                            name:imageName
+                 
+                                        fileName:@"test1000.jpg"
+                 
+                                        mimeType:imageType];
+            }
+        }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
         NSLog(@"%f",uploadProgress.fractionCompleted);
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
-        uploadSuccess(responseObject);
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        uploadSuccess(dict);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         upLoadfailure(error);
+        NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+        [SVProgressHUD showErrorWithStatus:errorCode];
     }];
 
 }

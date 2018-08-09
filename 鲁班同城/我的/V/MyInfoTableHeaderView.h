@@ -22,5 +22,6 @@
 
 @property (strong,nonatomic) WithDrawView *withDrawView;
 
+@property (strong,nonatomic) CustomeStyleCornerButt *backImageButt;
 
 @end

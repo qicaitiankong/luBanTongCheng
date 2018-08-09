@@ -61,6 +61,11 @@
         [self.tableView.mj_header endRefreshing];
         isRefresh = NO;
     }
+    if (self.modelArr.count == 0){
+        [UIView showNullTipView:self.tableView];
+    }else{
+        [UIView hiddenNullTipView:self.tableView];
+    }
 }
 
 - (void)initOwnObjects{
@@ -83,8 +88,9 @@
         NSDictionary *dataDict = response[@"data"];
         
         NSArray *webDataArr = dataDict[@"list"];
+         [self.modelArr removeAllObjects];
         if (webDataArr.count){
-            [self.modelArr removeAllObjects];
+           
             for (NSDictionary *localDict in webDataArr){
                 [self.modelArr addObject:[localDict copy]];
             }

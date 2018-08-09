@@ -39,18 +39,17 @@
 
 @implementation PersonalInfoNameViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    WS(weakSelf);
+    self.leftBarbuttBlock = ^{
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
     [self addViews];
     //
     [self initAmendModel];
-    WS(weakSelf);
-    self.leftBarbuttBlock = ^{
-        [weakSelf.navigationController setNavigationBarHidden:YES];
-    };
-    self.rightBarbuttBlock = ^{
-        
-    };
     //
     _addressView = [[YAddressPickerView alloc]init];
     _addressView.delegate = self;
@@ -198,7 +197,7 @@
     //城市
     PersonalInfoInputAgeView *cityView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, sexView.bottom, self.view.width, viewHeight)];
     addressTextField = cityView.rightTextField.myTextField;
-    addressTextField.text = [NSString stringWithFormat:@"%@%@%@",self.orinalInfoModel.proviceStr,self.orinalInfoModel.cityStr,self.orinalInfoModel.areaStr];
+    addressTextField.text = [NSString stringWithFormat:@"%@%@%@",[NSString getResultStrBySeverStr:self.orinalInfoModel.proviceStr],[NSString getResultStrBySeverStr:self.orinalInfoModel.cityStr],[NSString getResultStrBySeverStr:self.orinalInfoModel.areaStr]];
     cityView.ageLabel.text = @"城市";
     [baseScrollView addSubview:cityView];
     cityView.rightTextField.myTextField.placeholder = @"请选择城市";

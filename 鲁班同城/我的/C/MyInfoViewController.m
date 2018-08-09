@@ -23,6 +23,8 @@
     NSMutableArray *cellImageArr;
     MyInfoTableHeaderView *headerView;
     MyInfoTableFootView *footerView;
+    //修改头像时用到的
+    NSMutableArray *selectedImageDataArr;
 }
 
 @property (strong,nonatomic) UITableView *tableView;
@@ -42,6 +44,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [NavTools hiddenNav:self.navigationController];
     [NavTools displayTabbar:self.rdv_tabBarController];
     if ([lzhGetAccountInfo getAccount].identityFlag){
         [self displayXuanFuButt];
@@ -60,12 +63,19 @@
     [self initObject];
     [self addTableView:CGRectMake(0, STATUSBAR_HEIGHT, SCREEN_WIDTH, CENTER_VIEW_HEIGHT + NAVIGATION_HEIGHT) style:UITableViewStylePlain];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserTypeNoti:) name:USER_TYPE_UPDATE_NOTIFICATION_NAME object:nil];
-    
+    //更换头像
+    WS(weakSelf);
+    self.selectedImageBlock = ^(NSData *pictureData, UIImage *selectedPicture) {
+        __strong typeof(weakSelf) sself = weakSelf;
+        [sself -> selectedImageDataArr addObject:pictureData];
+        [weakSelf uploadUserPicture];
+    };
+    //
     [self getData];
     
 }
 
-//
+//获取用户信息
 - (void)getData{
     WS(weakSelf);
     if ([lzhGetAccountInfo getAccount].identityFlag){
@@ -83,6 +93,26 @@
         
     }
 }
+
+- (void)uploadUserPicture{
+    [TDHttpTools uploadFile:@{@"userId":[lzhGetAccountInfo getAccount].userID} traileUrlStr:@"/lubantc/api/user/updateHeadImg" imageFlagName:@"headPic" imageDataArr:selectedImageDataArr success:^(id response) {
+        NSDictionary *dict = response;
+        NSLog(@"头像上传%@",dict);
+        if ([dict[@"status"] integerValue] == 0){
+            [SVProgressHUD showSuccessWithStatus:@"上传头像成功"];
+            NSString *pictureUrlStr = [NSString getResultStrBySeverStr:dict[@"data"]];
+            NSURL *picUrl = [NSURL URLWithString:pictureUrlStr];
+            [self->headerView.userImageView sd_setImageWithURL:picUrl];
+        }else{
+            [SVProgressHUD showInfoWithStatus:@"上传头像失败"];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
+
 - (void)giveValue{
     NSURL *picUrl = [NSURL URLWithString:self.userInfoDict[@"headImg"]];
     [headerView.userImageView sd_setImageWithURL:picUrl];
@@ -93,6 +123,7 @@
 
 - (void)initObject{
      cellImageArr = [[NSMutableArray alloc] init];
+    selectedImageDataArr = [[NSMutableArray alloc]init];
     if ([lzhGetAccountInfo getAccount].identityFlag == 0){
         cellTitleArr = @[@"消息",@"收藏",@"搜索",@"个人资料",@"设置"];
         for (int i = 0; i < cellTitleArr.count; i ++){
@@ -171,7 +202,9 @@
     headerView = [[MyInfoTableHeaderView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_HEIGHT / 2)];
     headerView.userNameLabel.text = @"昵称昵称昵称";
     headerView.commissionLabel.text = @"6666";
-    [headerView.userImageView setImage:[UIImage imageNamed:@"test07.jpg"]];
+    headerView.backImageButt.clickButtBlock = ^{
+        [weakSelf callActionSheetFunc];
+    };
     //
     footerView = [[MyInfoTableFootView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.195)];
     if ([lzhGetAccountInfo getAccount].identityFlag){

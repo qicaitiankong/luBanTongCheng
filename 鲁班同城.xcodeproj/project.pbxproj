@@ -320,6 +320,8 @@
 		185BDBAF2114496000F18CD5 /* THScrollChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BDBAD2114495F00F18CD5 /* THScrollChooseView.m */; };
 		185D39E42112D95E008E224F /* OwnPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D39E32112D95E008E224F /* OwnPopView.m */; };
 		186037322109C5CD002B5FDD /* rightSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 186037312109C5CD002B5FDD /* rightSelected.png */; };
+		18662A06211BE6DF00DE1DB6 /* nullRecord.png in Resources */ = {isa = PBXBuildFile; fileRef = 18662A05211BE6DE00DE1DB6 /* nullRecord.png */; };
+		18662A0C211BE80E00DE1DB6 /* UIView+ShowNullTipImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18662A0B211BE80E00DE1DB6 /* UIView+ShowNullTipImageView.m */; };
 		1866B0A2211A758700B1F5A7 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1866B088211A758700B1F5A7 /* WeiboSDK.bundle */; };
 		1866B0A3211A758700B1F5A7 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1866B089211A758700B1F5A7 /* libWeiboSDK.a */; };
 		1866B0A4211A758700B1F5A7 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1866B08F211A758700B1F5A7 /* README.txt */; };
@@ -966,6 +968,9 @@
 		185D39E22112D95E008E224F /* OwnPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPopView.h; sourceTree = "<group>"; };
 		185D39E32112D95E008E224F /* OwnPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPopView.m; sourceTree = "<group>"; };
 		186037312109C5CD002B5FDD /* rightSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightSelected.png; sourceTree = "<group>"; };
+		18662A05211BE6DE00DE1DB6 /* nullRecord.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nullRecord.png; sourceTree = "<group>"; };
+		18662A0A211BE80E00DE1DB6 /* UIView+ShowNullTipImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+ShowNullTipImageView.h"; sourceTree = "<group>"; };
+		18662A0B211BE80E00DE1DB6 /* UIView+ShowNullTipImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+ShowNullTipImageView.m"; sourceTree = "<group>"; };
 		1866B088211A758700B1F5A7 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		1866B089211A758700B1F5A7 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		1866B08A211A758700B1F5A7 /* WBHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBHttpRequest.h; sourceTree = "<group>"; };
@@ -1503,6 +1508,8 @@
 				185B5E45211937EC0023DA95 /* NSArray+OwnArrCopy.m */,
 				1866B0B3211AD9FD00B1F5A7 /* UIImage+OwnCalculateImageSize.h */,
 				1866B0B4211AD9FD00B1F5A7 /* UIImage+OwnCalculateImageSize.m */,
+				18662A0A211BE80E00DE1DB6 /* UIView+ShowNullTipImageView.h */,
+				18662A0B211BE80E00DE1DB6 /* UIView+ShowNullTipImageView.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1759,6 +1766,7 @@
 		1818E4AD20EB517B00B676C2 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				18662A05211BE6DE00DE1DB6 /* nullRecord.png */,
 				185B5E49211987EB0023DA95 /* addConcern@2x.png */,
 				185B5E47211987AF0023DA95 /* addConcern@3x.png */,
 				182030E221007B830098BFCC /* duiHao.png */,
@@ -2951,6 +2959,7 @@
 				181FCC0620F73A7C0044B055 /* quotePriceTraingle@2x.png in Resources */,
 				1818E4C320EB51D900B676C2 /* set00.png in Resources */,
 				188CB36E20FC733B00302C94 /* scrollPictureLabour01@3x.png in Resources */,
+				18662A06211BE6DF00DE1DB6 /* nullRecord.png in Resources */,
 				1874348D20F2F6F30008A24F /* commentStar@3x.png in Resources */,
 				187434AC20F3279D0008A24F /* share@2x.png in Resources */,
 				1824F75520EF0ED500E99823 /* addFriend.png in Resources */,
@@ -3219,6 +3228,7 @@
 				185ABF1320F82CC700188520 /* SettingTableViewCell.m in Sources */,
 				185368FE20E9EF6D0053A5D4 /* TraingleCategoryButtonGroupView.m in Sources */,
 				1443C61C20E384490009E82F /* LoginOtherTipView.m in Sources */,
+				18662A0C211BE80E00DE1DB6 /* UIView+ShowNullTipImageView.m in Sources */,
 				180609AF20F47DD100471E08 /* DetailSmallButtView.m in Sources */,
 				1822848020FECFB30059FB94 /* EmploymentRecordModel.m in Sources */,
 				1824F76A20EF147F00E99823 /* CustomerImageButt.m in Sources */,

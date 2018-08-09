@@ -43,10 +43,10 @@
     [self initNavStyle];
     //图片选取回调
     WS(weakSelf);
-    self.selectedImageBlock = ^(NSString *pictureBase64str, UIImage *selectedPicture) {
-        NSLog(@"!!!!!!!!!!!!!!选取图片%@ %@",selectedPicture,pictureBase64str);
-        [weakSelf setPictureWhenChooseCpmplete:pictureBase64str image:selectedPicture];
+    self.selectedImageBlock = ^(NSData *pictureData, UIImage *selectedPicture) {
+        [weakSelf setPictureWhenChooseCpmplete:pictureData image:selectedPicture];
     };
+
     //WS(weakSelf);
     [self initOwnObjects];
     
@@ -60,7 +60,7 @@
     //
     self.title = @"个人资料";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButt)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButt)];
+    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButt)];
 }
 
 - (void)leftBarButt{
@@ -72,10 +72,39 @@
 
 - (void)initOwnObjects{
     self.videoModel = [[OwnPersonalInfoChoosePictureModel alloc]init];
-    self.videoModel.selectedImageArr = [NSArray getOwnCopyArr:self.amendingInfoModel.technologyPicArr];
     self.pictureModel = [[OwnPersonalInfoChoosePictureModel alloc]init];
-    self.videoModel.selectedImageArr = [NSArray getOwnCopyArr:self.amendingInfoModel.technologyVideoArr];
+    //通过网络请求下载图片保存到模型里面展示
+    NSArray *tecnologePicArr = self.amendingInfoModel.pictureUrlStrArr;
+    if(tecnologePicArr.count){
+        [[ShareNetWorkState ShareNetState] asynSerialDownload:tecnologePicArr downloadCompleteHandler:@selector(addPictureToPictureModel:) target:self modelIndex:1];
+        //
+    }
+   
+    NSArray *tecnologeVideoPicArr = self.amendingInfoModel.videoUrlStrArr;
+    if (tecnologeVideoPicArr.count){
+        [[ShareNetWorkState ShareNetState] asynSerialDownload:tecnologeVideoPicArr downloadCompleteHandler:@selector(addPictureToVideoModel:) target:self modelIndex:2];
+    }
+    
 }
+
+- (void)addPictureToPictureModel:(NSDictionary*)dict{
+    //@{@"modelIndex":[NSNumber numberWithInteger:index],@"imageData":data}
+    NSData *imageData = [dict[@"imageData"] copy];
+    UIImage *image = [UIImage imageWithData:imageData];
+    [self.pictureModel.selectedImageArr addObject:image];
+    [self.pictureModel.selectedImageBaseStrArr addObject:image];
+    [self.tableView reloadData];
+}
+
+- (void)addPictureToVideoModel:(NSDictionary*)dict{
+    //@{@"modelIndex":[NSNumber numberWithInteger:index],@"imageData":data}
+    NSData *imageData = [dict[@"imageData"] copy];
+    UIImage *image = [UIImage imageWithData:imageData];
+    [self.videoModel.selectedImageArr addObject:image];
+    [self.videoModel.selectedImageBaseStrArr addObject:image];
+    [self.tableView reloadData];
+}
+
 
 - (void)addPicture:(NSIndexPath*)path{
     currentClickpath = path;
@@ -85,19 +114,15 @@
     
 }
 
-- (void)setPictureWhenChooseCpmplete:(NSString *)pictureBase64str image:(UIImage *)selectedPicture{
+- (void)setPictureWhenChooseCpmplete:(NSData *)pictureBase64str image:(UIImage *)selectedPicture{
     NSLog(@"添加视频或图片");
     if (currentClickpath.section == 1){//添加视频
-        if (self.videoModel.selectedImageArr.count < 7){
             [self.videoModel.selectedImageArr addObject:selectedPicture];
             [self.videoModel.selectedImageBaseStrArr addObject:pictureBase64str];
-        }
         
     }else{//图片
-        if (self.pictureModel.selectedImageArr.count < 7){
             [self.pictureModel.selectedImageArr addObject:selectedPicture];
              [self.pictureModel.selectedImageBaseStrArr addObject:pictureBase64str];
-        }
     }
     [self.tableView reloadData];
 }
@@ -248,6 +273,8 @@
     
     self.amendingInfoModel.jobExperienceStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.jobExperienceStr];
     NSLog(@"请求之前答应选择的技术self.amendingInfoModel.technologyServiceNeedStr = %@ ,jobstr = %@ 性别:%@",self.amendingInfoModel.technologyServiceNeedStr,self.amendingInfoModel.jobServiceNeedStr,self.amendingInfoModel.sexStr);
+    //图片是以pictureModel 和videoModel取，里面存有图片data,然后通过上传多张file类型图片操作
+    
     //
     NSDictionary *paraDict = @{@"realName":self.amendingInfoModel.nameStr,@"realNamePath":@"",
                                @"age":self.amendingInfoModel.ageNum,@"gender":self.amendingInfoModel.sexStr,
@@ -255,10 +282,14 @@
                                @"area":self.amendingInfoModel.areaStr,@"address":@"",@"gender":self.amendingInfoModel.sexStr,
                                @"technologys":self.amendingInfoModel.technologyServiceNeedStr,@"professionals":self.amendingInfoModel.jobServiceNeedStr,
 //                               @"technologyShowPic":self.amendingInfoModel.technologyPicSeviceNeedStr,@"technologyShowVideo":self.amendingInfoModel.technologyVideoSeviceNeedStr,
-                               @"userId":[lzhGetAccountInfo getAccount].userID,@"headImg":@"",
+                               @"userId":[lzhGetAccountInfo getAccount].userID,
                                @"mobile":@"",@"workExperience":self.amendingInfoModel.jobExperienceStr,
                                @"workExperiencePath":@""
                                    };
+    
+    
+    
+    
     [TDHttpTools casualChangeOwnInfo:paraDict success:^(id response) {
         NSLog(@"修改个人信息%@",response);
         //
@@ -267,7 +298,7 @@
         [SVProgressHUD showSuccessWithStatus:webDict[@"msg"]];
         [self.navigationController popToRootViewControllerAnimated:YES];
     } failure:^(NSError *error) {
-        
+
     }];
 }
 

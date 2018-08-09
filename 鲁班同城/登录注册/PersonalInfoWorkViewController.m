@@ -31,19 +31,16 @@
 
 @implementation PersonalInfoWorkViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addViews];
+    WS(weakSelf);
     self.leftBarbuttBlock = ^{
-        
+         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
-    self.rightBarbuttBlock = ^{
-        
-    };
-    // Do any additional setup after loading the view.
+    [self addViews];
 }
-
-
 
 - (void)addViews{
     //
