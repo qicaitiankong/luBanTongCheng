@@ -56,8 +56,8 @@
 
         localModel.technologyArr = webDict[@"technologys"];
         localModel.jobArr = webDict[@"professions"];
-        localModel.pictureUrlStrArr = webDict[@"technologysPic"];
-        localModel.technologyVideoArr = webDict[@"technologysVideo"];
+        localModel.pictureInfoArr = webDict[@"technologysPic"];
+        localModel.videoInfoArr = webDict[@"technologysVideo"];
         //
         NSArray * targetArr = [localModel getTargetTechnologyArr:localModel.technologyArr];
          NSArray * targetJobArr = [localModel getTargetTechnologyArr:localModel.jobArr];

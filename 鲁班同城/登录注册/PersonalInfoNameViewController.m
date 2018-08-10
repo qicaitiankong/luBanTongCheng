@@ -57,7 +57,6 @@
 }
 
 - (void)initAmendModel{
-   
     //将原始数据模型里面的数据拷贝一份
     //基本信息
      self.amendingInfoModel = [[OwnPersonalInfoModel alloc]init];
@@ -81,11 +80,10 @@
     //职能(传给后台id的格式)
     NSArray *jobArr = [self getTargetServiceneedTechnologyArr:self.orinalInfoModel.jobArr];
     self.amendingInfoModel.jobServiceNeedStr= [jobArr componentsJoinedByString:@","];
-    
     //视屏和图片展示
-    self.amendingInfoModel.pictureUrlStrArr = [NSArray getOwnCopyArr:self.orinalInfoModel.pictureUrlStrArr];
+    self.amendingInfoModel.pictureInfoArr = [NSArray getOwnCopyArr:self.orinalInfoModel.pictureInfoArr];
     //
-    self.amendingInfoModel.videoUrlStrArr = [NSArray getOwnCopyArr:self.orinalInfoModel.videoUrlStrArr];
+    self.amendingInfoModel.videoInfoArr = [NSArray getOwnCopyArr:self.orinalInfoModel.videoInfoArr];
 }
 
 - (NSMutableArray*)getTargetServiceneedTechnologyArr:(NSArray*)originArr{

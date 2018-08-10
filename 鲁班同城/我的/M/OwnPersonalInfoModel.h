@@ -47,10 +47,10 @@
 
 //职业字典数组
 @property (strong,nonatomic) NSMutableArray *jobArr;
-//技能视屏url字符串数组
-@property (strong,nonatomic) NSMutableArray *videoUrlStrArr;
-//技能图片url数组
-@property (strong,nonatomic) NSMutableArray *pictureUrlStrArr;
+//技能视屏信息数组
+@property (strong,nonatomic) NSMutableArray *videoInfoArr;
+//技能图片信息数组
+@property (strong,nonatomic) NSMutableArray *pictureInfoArr;
 
 //显示需要,,,
 //技术

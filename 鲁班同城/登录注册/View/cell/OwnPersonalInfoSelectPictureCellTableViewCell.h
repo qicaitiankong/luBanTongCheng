@@ -15,6 +15,6 @@
 
 @property (strong,nonatomic) NSIndexPath *path;
 
-@property (copy,nonatomic) void (^addPictureBlock)(NSIndexPath *path);
+@property (copy,nonatomic) void (^addPictureBlock)(NSIndexPath *path,NSInteger clickIndex);
 
 @end

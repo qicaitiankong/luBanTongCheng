@@ -36,7 +36,7 @@
             PersonalInfoAddPhotoFlagView *singleView = [[PersonalInfoAddPhotoFlagView alloc]initWithFrame:CGRectMake(0, 0, 5, 5)];
             singleView.selectedAddPhotoBlock = ^(UIImageView *imageView) {
                 if (weakSelf.addPictureBlock){
-                    weakSelf.addPictureBlock(weakSelf.path);
+                    weakSelf.addPictureBlock(self.path, k);
                 }
             };
             singleView.hidden = YES;
@@ -55,14 +55,14 @@
         //将全部影藏
          for (PersonalInfoAddPhotoFlagView *singleView in self.imageViewArr){
              singleView.hidden = YES;
-             singleView.userInteractionEnabled = NO;
+             //singleView.userInteractionEnabled = NO;
          }
         if (model.selectedImageArr.count == 0){
                     int i = 0;
                     for (PersonalInfoAddPhotoFlagView *singleView in self.imageViewArr){
                         if (i > 0){
                             singleView.hidden = YES;
-                            singleView.userInteractionEnabled = NO;
+                            //singleView.userInteractionEnabled = NO;
                         }else{
                             singleView.hidden = NO;
                             singleView.addImageView.hidden = NO;
@@ -91,7 +91,7 @@
                             [singleView adjustConstraintsWhenNeed];
                            
                             singleView.hidden = NO;
-                            singleView.userInteractionEnabled = NO;
+                            //singleView.userInteractionEnabled = NO;
                             singleView.addImageView.hidden = YES;
                         }
                         PersonalInfoAddPhotoFlagView *singleView = self.imageViewArr[model.selectedImageArr.count];
@@ -103,7 +103,7 @@
                         int m = 0;
                         for (PersonalInfoAddPhotoFlagView *singleView in self.imageViewArr){
                             singleView.hidden = NO;
-                            singleView.userInteractionEnabled = NO;
+                            //singleView.userInteractionEnabled = NO;
                             singleView.addImageView.hidden = YES;
                             [singleView.imageView setImage:model.selectedImageArr[m]];
                             //

@@ -214,13 +214,17 @@
     }
 }
 
-//上传图片
-+ (void)uploadFile:(NSDictionary*)paraDict traileUrlStr:(NSString*)traileUrlStr imageFlagName:(NSString*)imageName imageDataArr:(NSArray*)targetDataArr success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure{
-     AFHTTPSessionManager *session= [AFHTTPSessionManager manager];
++ (AFHTTPSessionManager*)getSessionManager{
+    AFHTTPSessionManager *session= [AFHTTPSessionManager manager];
     session.responseSerializer = [AFHTTPResponseSerializer serializer];
     session.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript",@"text/css", @"text/plain", @"application/x-javascript", @"application/javascript",@"application/xhtml+xml",@"application/xml", nil];
-    
     session.requestSerializer = [AFJSONRequestSerializer serializer];
+    return session;
+}
+
+//上传图片
++ (void)uploadFile:(NSDictionary*)paraDict traileUrlStr:(NSString*)traileUrlStr imageFlagName:(NSString*)imageName imageDataArr:(NSArray*)targetDataArr success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure{
+    AFHTTPSessionManager *session= [self getSessionManager];
      NSString *urlString=[NSString stringWithFormat:@"%@%@",kSERVER_HTTP_DXE,traileUrlStr];
     [session POST:urlString parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         if(targetDataArr.count > 0){
@@ -229,7 +233,7 @@
                 NSString *imageType = [UIImage contentTypeForImageData:imageData];
                 NSString *imageAppendType = @"image/jpeg";
                 if (imageType == nil){
-                    
+
                 }else{
                     imageAppendType = [NSString stringWithFormat:@"image/%@",imageType];
                 }
@@ -244,7 +248,7 @@
                  
                                         fileName:@"test1000.jpg"
                  
-                                        mimeType:imageType];
+                                        mimeType:imageAppendType];
             }
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -499,29 +503,74 @@
         }
     }];
 }
+
 //零工修改个人信息
-+(void)casualChangeOwnInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
-    NSDictionary *params = paraDict;
-    
-    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/updateWorkerInfo",kSERVER_HTTP_DXE];
-    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
-        if (success) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
-            int status = [dict[@"status"] intValue];
-            if (status == 0){
-                success(dict);
-            }else if (status == 1){
-                [SVProgressHUD showInfoWithStatus:dict[@"msg"]];
-                failure(nil);
++ (void)capsualChangeOwnInfo:(NSDictionary*)paraDict traileUrlStr:(NSString*)traileUrlStr imageFlagNameArr:(NSArray*)imageNameArr picDataArr:(NSArray*)targetPictureDataArr
+                     videoDataArr:(NSArray*)targetVideoDataArr success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure{
+    AFHTTPSessionManager *session= [self getSessionManager];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@",kSERVER_HTTP_DXE,traileUrlStr];
+    [session POST:urlString parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        if(targetPictureDataArr.count > 0){
+            for (int m = 0; m < targetPictureDataArr.count; m ++){
+                NSData *imageData = targetPictureDataArr[m];
+                NSString *imageType = [UIImage contentTypeForImageData:imageData];
+                NSString *imageAppendType = @"image/jpeg";
+                if (imageType == nil){
+                }else{
+                    imageAppendType = [NSString stringWithFormat:@"image/%@",imageType];
+                }
+                if (imageData == nil){
+                    NSLog(@"!!!!!!!!!图片为空");
+                }
+                //上传的参数(上传图片，以文件流的格式)
+                [formData appendPartWithFileData:imageData
+                 
+                                            name:imageNameArr[0]
+                 
+                                        fileName:@"test1000.jpg"
+                 
+                                        mimeType:imageAppendType];
             }
         }
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
-            [SVProgressHUD showErrorWithStatus:errorCode];
-        }
+            //
+//            if(targetVideoDataArr.count > 0){
+//                for (int m = 0; m < targetVideoDataArr.count; m ++){
+//                    NSData *imageData = targetVideoDataArr[m];
+//                    NSString *imageType = [UIImage contentTypeForImageData:imageData];
+//                    NSString *imageAppendType = @"image/jpeg";
+//                    if (imageType == nil){
+//                    }else{
+//                        imageAppendType = [NSString stringWithFormat:@"image/%@",imageType];
+//                    }
+//                    if (imageData == nil){
+//                        NSLog(@"!!!!!!!!!图片为空");
+//                    }
+//                    //上传的参数(上传图片，以文件流的格式)
+//                    [formData appendPartWithFileData:imageData
+//
+//                                                name:imageNameArr[1]
+//
+//                                            fileName:@"test1001.jpg"
+//
+//                                            mimeType:imageType];
+//                }
+//
+        //}
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        NSLog(@"%f",uploadProgress.fractionCompleted);
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        uploadSuccess(dict);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        upLoadfailure(error);
+        NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+        [SVProgressHUD showErrorWithStatus:errorCode];
     }];
+    
 }
 //我抢过的派单
 +(void)casualTookTicked:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
@@ -825,29 +874,6 @@
     }];
 }
 
-//反馈消息
-+(void)backWardInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
-    NSDictionary *params = paraDict;
-    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/backMsg",kSERVER_HTTP_DXE];
-    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
-        if (success) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
-            int status = [dict[@"status"] intValue];
-            if (status == 0){
-                success(dict);
-            }else if (status == 1){
-                [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
-                failure(nil);
-            }
-        }
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
-            [SVProgressHUD showErrorWithStatus:errorCode];
-        }
-    }];
-}
 
 //添加关注
 +(void)AddConcernAction:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{

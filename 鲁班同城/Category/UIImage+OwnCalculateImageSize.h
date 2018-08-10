@@ -12,6 +12,7 @@
 
 + (double) getImageSize:(UIImage*)image;
 
+
 + (NSString *)contentTypeForImageData:(NSData *)data;
 
 @end

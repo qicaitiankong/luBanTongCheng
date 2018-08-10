@@ -21,5 +21,15 @@
     return resultArr;
 }
 
++ (NSMutableArray*)getTargetArr:(NSArray*)orinalArr keyStr:(NSString*)key{
+    NSMutableArray *resultArr = [[NSMutableArray alloc]init];
+    if (orinalArr.count){
+        for (NSDictionary *dict in orinalArr){
+            [resultArr addObject:[dict[key]copy]];
+        }
+    }
+    return resultArr;
+}
+
 
 @end

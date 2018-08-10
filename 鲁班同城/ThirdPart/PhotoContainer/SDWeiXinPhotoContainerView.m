@@ -103,8 +103,8 @@
         imageView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
         imageView.hidden = NO;
         NSURL *imageUrl = _picPathStringsArray[idx];
-        [imageView setImage:[UIImage imageNamed:@"test02"]];
-        //[imageView sd_setImageWithURL:imageUrl];
+        //[imageView setImage:[UIImage imageNamed:@"test02"]];
+        [imageView sd_setImageWithURL:imageUrl];
         imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
     }
     CGFloat w = perRowItemCount * itemW + (perRowItemCount - 1) * margin;

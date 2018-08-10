@@ -12,4 +12,9 @@
 //数组拷贝
 + (NSMutableArray*)getOwnCopyArr:(NSArray*)tagetArr;
 
+
+//将一个字典数组，重新拿出其中某个键的值组成一个新数组
++ (NSMutableArray*)getTargetArr:(NSArray*)orinalArr keyStr:(NSString*)key;
+
+
 @end

@@ -16,5 +16,8 @@
 
 - (void)callActionSheetFunc;
 
+//带有删除样式的
+- (void)callActionSheetWithChangeStyleFunc:(void (^)(void))deleteBolck insteadBlock:(void (^)(void))insteadBlock;
+
 
 @end

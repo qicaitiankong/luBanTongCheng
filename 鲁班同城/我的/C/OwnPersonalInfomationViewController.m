@@ -67,8 +67,6 @@
     }
 }
 
-
-
 - (void)addViews{
     //
     baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -82,6 +80,7 @@
     topPartView.concernLabel.text = @"关注";
     topPartView.sexAndHomeLabel.text = @"";
     [topPartView.starGroupView setYellowStar:0];
+    //topPartView.editButt.hidden = YES;
     WS(weakSelf);
     topPartView.navReturnButt.clickButtBlock = ^{
         [weakSelf.rdv_tabBarController setTabBarHidden:NO];
@@ -120,10 +119,11 @@
     pictureView.topTipLabel.text = @"技能-图片秀";
     [baseScrollView addSubview:pictureView];
     //
-    [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, pictureView.bottom + 20)];
+    [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, pictureView.bottom + 50)];
 }
 //
 - (void)getUserInfo{
+    
     //零工
         NSDictionary *praDict =nil;
         if ([self.targetUserId integerValue] == [[lzhGetAccountInfo getAccount].userID integerValue]){//自己信息
@@ -131,31 +131,21 @@
         }else{//其他零工信息
             praDict = @{@"userId":self.targetUserId,@"myUserId":[lzhGetAccountInfo getAccount].userID};
         }
-                WS(weakSelf);
-                 [weakSelf giveValueToView];
+        NSLog(@"\n\n!!!!!!!!!praDict=%@\n\n",praDict);
                 [TDHttpTools getCapsualUserInfo:praDict success:^(id response) {
                     NSDictionary *dataDict = response[@"data"];
                     NSLog(@"零工用户信息:%@",dataDict);
-//                    address = "\U94f6\U5ea7\U534e\U5e9c";
-//                    age = 30;
-//                    area = "\U674e\U6ca7\U533a";
-//                    city = "\U9752\U5c9b\U5e02";
-//                    fansNum = 0;
-//                    focusNum = 0;
-//                    gender = "\U7537";
-//                    headImg = trefreds;
-//                    hireNum = 2;
-//                    id = 16;
-//                    isFocused = 2;
-//                    mobile = 17096177665;
+                    //显示编辑按钮
+                    self->topPartView.editButt.hidden = NO;
+                    //
                     if ([dataDict allKeys].count){
                         self.infoModel = [OwnPersonalInfoModel setModelFromDict:dataDict];
-                       
                         //界面赋值
                         [self giveValueToView];
                     }
                 } failure:^(NSError *error) {
-                    
+                    //
+                   
                 }];
 }
 
@@ -186,10 +176,10 @@
     [serviceTypeView giveOwnValue:targetJobArr];
     serviceTypeView.frame = CGRectMake(serviceTypeView.x, personalTechnologyView.bottom + 15, serviceTypeView.width, serviceTypeView.height);
     //视屏
-    [videoView givePictureArr:[NSArray getOwnCopyArr:self.infoModel.videoUrlStrArr]];
+    [videoView givePictureArr:[NSArray getTargetArr:self.infoModel.videoInfoArr keyStr:@"filePath"]];
     videoView.frame = CGRectMake(videoView.x, serviceTypeView.bottom + 15, videoView.width, pictureViewGroupHeight);
    //图片
-    [pictureView givePictureArr:[NSArray getOwnCopyArr:self.infoModel.pictureUrlStrArr]];
+    [pictureView givePictureArr:[NSArray getTargetArr:self.infoModel.pictureInfoArr keyStr:@"filePath"]];
     pictureView.frame = CGRectMake(pictureView.x, videoView.bottom + 15, pictureView.width, pictureViewGroupHeight);
     //
     UIView *botView = pictureView;

@@ -43,6 +43,31 @@ typedef NS_ENUM(NSInteger,ChosePhotoType) {
     [self presentViewController:self.actionSheet animated:YES completion:nil];
 }
 
+- (void)callActionSheetWithChangeStyleFunc:(void (^)(void))deleteBolck insteadBlock:(void (^)(void))insteadBlock{
+    WS(weakSelf);
+    self.actionSheet=[UIAlertController alertControllerWithTitle:@"删除图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [self.actionSheet addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        insteadBlock();
+        [weakSelf chosePhoto:ChosePhotoTypeCamera];
+    }]];
+    [self.actionSheet addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        insteadBlock();
+        [weakSelf chosePhoto:ChosePhotoTypeAlbum];
+    }]];
+    
+    [self.actionSheet addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        deleteBolck();
+    }]];
+    
+    [self.actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [self presentViewController:self.actionSheet animated:YES completion:nil];
+}
+
+
+
+
 -(void)chosePhoto:(ChosePhotoType)type{
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;

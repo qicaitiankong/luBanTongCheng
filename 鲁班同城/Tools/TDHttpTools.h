@@ -75,7 +75,9 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 +(void)casualCancelTakeOrder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 //零工修改个人信息
-+(void)casualChangeOwnInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
++ (void)capsualChangeOwnInfo:(NSDictionary*)paraDict traileUrlStr:(NSString*)traileUrlStr imageFlagNameArr:(NSArray*)imageNameArr picDataArr:(NSArray*)targetPictureDataArr
+                videoDataArr:(NSArray*)targetVideoDataArr success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure;
+
 //我抢过的派单
 +(void)casualTookTicked:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 //我被雇佣的派单
