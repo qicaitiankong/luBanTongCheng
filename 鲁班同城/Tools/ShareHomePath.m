@@ -16,6 +16,7 @@ static ShareHomePath *shareHomePath = nil;
     });
     return shareHomePath;
 }
+
 - (NSMutableString*)getDocumentsPath{//存放数据
     NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSMutableString *documentPath = [arr objectAtIndex:0];
@@ -26,6 +27,7 @@ static ShareHomePath *shareHomePath = nil;
     NSString *cache = [arr objectAtIndex:0];
     return cache;
 }
+
 - (NSString *)getTmpPath{//tmp文件夹存放下次应用启用不需要的文件
     NSString *tmp = NSTemporaryDirectory();
     return tmp;
@@ -35,6 +37,15 @@ static ShareHomePath *shareHomePath = nil;
     return imagePath;
 }
 
-
+//
+- (NSString *)getWavSoundPath{
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];;
+    NSString* fileDirectory = [[[directory stringByAppendingPathComponent:@"lzhWav200"]
+                                stringByAppendingPathExtension:@"wav"]
+                               stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    return fileDirectory;
+}
 
 @end

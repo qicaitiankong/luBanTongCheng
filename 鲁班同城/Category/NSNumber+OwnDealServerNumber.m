@@ -30,5 +30,18 @@
     return resultNum;
 }
 
++ (NSString*)getMinutesFormat:(NSInteger)time{
+    NSInteger miniute = 0;
+    NSInteger seconds = 0;
+    if (time % 60){
+        miniute = time / 60;
+        seconds = time - miniute * 60;
+    }else{
+        seconds = time;
+    }
+    NSDictionary *resultDict = @{@"minute":[NSNumber numberWithInteger:miniute],@"second":[NSNumber numberWithInteger:seconds]};
+    return [NSString stringWithFormat:@"%02ld:%02ld",miniute,seconds];
+}
+
 
 @end

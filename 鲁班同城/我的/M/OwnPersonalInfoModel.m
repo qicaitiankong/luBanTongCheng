@@ -46,7 +46,8 @@
         localModel.focusNum = [NSNumber getResultNumberBySeverStr:webDict[@"focusNum"]];
         NSNumber *focusFlagNum = [NSNumber getResultNumberBySeverStr:webDict[@"isFocused"]];
         localModel.FoucedFlag = [focusFlagNum integerValue];
-         localModel.ageNum = [NSNumber getResultNumberBySeverStr:webDict[@"age"]];
+        NSNumber *ageNum = [NSNumber getResultNumberBySeverStr:webDict[@"age"]];
+        localModel.ageNum= ageNum;
         localModel.starCountNumber = [NSNumber getResultNumberBySeverStr:webDict[@"score"]];
         localModel.introduceStr = @"";
         localModel.jobExperienceStr = [NSString getResultStrBySeverStr:webDict[@"workExperience"]];

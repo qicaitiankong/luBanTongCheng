@@ -62,6 +62,10 @@
 //技能视屏图片
 @property (strong,nonatomic) NSArray *technologyVideoArr;
 
+//名字语音
+@property (strong,nonatomic) NSData *nameSoundData;
+
+
 
 //修改信息上传时需要
 //1,2,3,4

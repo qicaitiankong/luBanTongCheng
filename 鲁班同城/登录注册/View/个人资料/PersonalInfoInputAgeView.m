@@ -68,9 +68,11 @@
         self.rightTextField.hidden = YES;
         self.rightTextField.myTextField.text = @"";
         self.addSoundView.hidden = NO;
+        backButt.hidden = YES;
     }else{
         self.rightTextField.hidden = NO;
         self.addSoundView.hidden = YES;
+        backButt.hidden = NO;
     }
 }
 

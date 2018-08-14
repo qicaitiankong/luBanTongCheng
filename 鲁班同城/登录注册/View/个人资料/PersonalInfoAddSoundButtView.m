@@ -69,10 +69,14 @@
     .rightEqualToView(self)
     .topEqualToView(self)
     .bottomEqualToView(self);
+    
 }
 
 - (void)backButtonHandler{
     NSLog(@"添加语音");
+    if (self.addSoundClickBlock){
+        self.addSoundClickBlock();
+    }
 }
 
 

@@ -420,6 +420,14 @@
 		187892DE210EE1D9002A5798 /* TelephoneNumberTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892DD210EE1D9002A5798 /* TelephoneNumberTools.m */; };
 		187892E1210EFB72002A5798 /* NSString+OwnDealNullStr.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892E0210EFB72002A5798 /* NSString+OwnDealNullStr.m */; };
 		187892E4210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892E3210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m */; };
+		188697202122714300580419 /* LuZhiYuYinPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1886971F2122714300580419 /* LuZhiYuYinPopView.m */; };
+		18869727212272D900580419 /* huaTong@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18869724212272D500580419 /* huaTong@3x.png */; };
+		18869728212272D900580419 /* huaTong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18869725212272D700580419 /* huaTong@2x.png */; };
+		18869729212272D900580419 /* huaTong.png in Resources */ = {isa = PBXBuildFile; fileRef = 18869726212272D900580419 /* huaTong.png */; };
+		1886972C21227D6D00580419 /* LuZhiYuYinPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 1886972B21227D6D00580419 /* LuZhiYuYinPop.m */; };
+		188697322122AE0500580419 /* BoFangYuYinOwnPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188697312122AE0500580419 /* BoFangYuYinOwnPopView.m */; };
+		188697352122AE1F00580419 /* BoFangYuYinOwnPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 188697342122AE1F00580419 /* BoFangYuYinOwnPop.m */; };
+		1886973B2122C6C400580419 /* RecordAndPlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 1886973A2122C6C400580419 /* RecordAndPlaySound.m */; };
 		1888139420EC4F0700F832BE /* MyInfoTableFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139320EC4F0700F832BE /* MyInfoTableFootView.m */; };
 		1888139720EC50FE00F832BE /* CustomeStyleCornerButt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139620EC50FE00F832BE /* CustomeStyleCornerButt.m */; };
 		1888139A20EC62AA00F832BE /* WxQQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888139920EC62AA00F832BE /* WxQQLoginViewController.m */; };
@@ -1098,6 +1106,19 @@
 		187892E0210EFB72002A5798 /* NSString+OwnDealNullStr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+OwnDealNullStr.m"; sourceTree = "<group>"; };
 		187892E2210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+OwnDealServerNumber.h"; sourceTree = "<group>"; };
 		187892E3210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+OwnDealServerNumber.m"; sourceTree = "<group>"; };
+		1886971E2122714300580419 /* LuZhiYuYinPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuZhiYuYinPopView.h; sourceTree = "<group>"; };
+		1886971F2122714300580419 /* LuZhiYuYinPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuZhiYuYinPopView.m; sourceTree = "<group>"; };
+		18869724212272D500580419 /* huaTong@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huaTong@3x.png"; sourceTree = "<group>"; };
+		18869725212272D700580419 /* huaTong@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huaTong@2x.png"; sourceTree = "<group>"; };
+		18869726212272D900580419 /* huaTong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = huaTong.png; sourceTree = "<group>"; };
+		1886972A21227D6D00580419 /* LuZhiYuYinPop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuZhiYuYinPop.h; sourceTree = "<group>"; };
+		1886972B21227D6D00580419 /* LuZhiYuYinPop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuZhiYuYinPop.m; sourceTree = "<group>"; };
+		188697302122AE0500580419 /* BoFangYuYinOwnPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoFangYuYinOwnPopView.h; sourceTree = "<group>"; };
+		188697312122AE0500580419 /* BoFangYuYinOwnPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoFangYuYinOwnPopView.m; sourceTree = "<group>"; };
+		188697332122AE1F00580419 /* BoFangYuYinOwnPop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoFangYuYinOwnPop.h; sourceTree = "<group>"; };
+		188697342122AE1F00580419 /* BoFangYuYinOwnPop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoFangYuYinOwnPop.m; sourceTree = "<group>"; };
+		188697392122C6C400580419 /* RecordAndPlaySound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordAndPlaySound.h; sourceTree = "<group>"; };
+		1886973A2122C6C400580419 /* RecordAndPlaySound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordAndPlaySound.m; sourceTree = "<group>"; };
 		1888139220EC4F0700F832BE /* MyInfoTableFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyInfoTableFootView.h; sourceTree = "<group>"; };
 		1888139320EC4F0700F832BE /* MyInfoTableFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInfoTableFootView.m; sourceTree = "<group>"; };
 		1888139520EC50FE00F832BE /* CustomeStyleCornerButt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomeStyleCornerButt.h; sourceTree = "<group>"; };
@@ -1656,6 +1677,7 @@
 		1443C61620E379B90009E82F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1886971D21226F7E00580419 /* 录制语音弹窗控件 */,
 				1824F74120EEF60800E99823 /* cell */,
 				186EBE4820EE0C5700D0F54E /* 提交弹窗 */,
 				188813B620EC99DF00F832BE /* 个人资料 */,
@@ -2027,6 +2049,9 @@
 		1824F77120EF400F00E99823 /* sound */ = {
 			isa = PBXGroup;
 			children = (
+				18869726212272D900580419 /* huaTong.png */,
+				18869725212272D700580419 /* huaTong@2x.png */,
+				18869724212272D500580419 /* huaTong@3x.png */,
 				1824F77420EF40C800E99823 /* SenderVoiceNodePlaying01.png */,
 				1824F77220EF40C700E99823 /* SenderVoiceNodePlaying02.png */,
 				1824F77320EF40C700E99823 /* SenderVoiceNodePlaying03.png */,
@@ -2459,6 +2484,23 @@
 				187434A120F327910008A24F /* clickPraise@3x.png */,
 			);
 			path = "技能秀";
+			sourceTree = "<group>";
+		};
+		1886971D21226F7E00580419 /* 录制语音弹窗控件 */ = {
+			isa = PBXGroup;
+			children = (
+				1886971E2122714300580419 /* LuZhiYuYinPopView.h */,
+				1886971F2122714300580419 /* LuZhiYuYinPopView.m */,
+				1886972A21227D6D00580419 /* LuZhiYuYinPop.h */,
+				1886972B21227D6D00580419 /* LuZhiYuYinPop.m */,
+				188697302122AE0500580419 /* BoFangYuYinOwnPopView.h */,
+				188697312122AE0500580419 /* BoFangYuYinOwnPopView.m */,
+				188697332122AE1F00580419 /* BoFangYuYinOwnPop.h */,
+				188697342122AE1F00580419 /* BoFangYuYinOwnPop.m */,
+				188697392122C6C400580419 /* RecordAndPlaySound.h */,
+				1886973A2122C6C400580419 /* RecordAndPlaySound.m */,
+			);
+			path = "录制语音弹窗控件";
 			sourceTree = "<group>";
 		};
 		188813B620EC99DF00F832BE /* 个人资料 */ = {
@@ -2952,6 +2994,7 @@
 				1874348920F2F6F30008A24F /* myInfoGrayStar.png in Resources */,
 				1866B0A8211A758700B1F5A7 /* ShareSDK.bundle in Resources */,
 				1818E4C520EB51D900B676C2 /* set00@3x.png in Resources */,
+				18869727212272D900580419 /* huaTong@3x.png in Resources */,
 				187434A620F327920008A24F /* clickPraise.png in Resources */,
 				182284CF20FF2C9F0059FB94 /* mapChoose@3x.png in Resources */,
 				188CB33F20FC23A100302C94 /* location.png in Resources */,
@@ -2979,6 +3022,7 @@
 				1818E4B820EB51B300B676C2 /* set03@2x.png in Resources */,
 				182030E321007B830098BFCC /* duiHao@3x.png in Resources */,
 				1874347720F2F1BB0008A24F /* scollPicture03@3x.png in Resources */,
+				18869729212272D900580419 /* huaTong.png in Resources */,
 				186EBE1C20EDDF1300D0F54E /* experience@3x.png in Resources */,
 				182284B420FF15420059FB94 /* ticket_yuSuan.png in Resources */,
 				188813DF20ECB7D900F832BE /* voiceFlag@2x.png in Resources */,
@@ -3124,6 +3168,7 @@
 				1851D9402101AF6F000C6306 /* dispatchOnMap@2x.png in Resources */,
 				182284AA20FF152E0059FB94 /* ticket_address@2x.png in Resources */,
 				1851D92321017337000C6306 /* RongCloud.bundle in Resources */,
+				18869728212272D900580419 /* huaTong@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3207,6 +3252,7 @@
 				185ABF1920F8352300188520 /* MessageTableViewCell.m in Sources */,
 				187768E9211813DC00766BE9 /* OwnPersonalInfoSelectPictureCellTableViewCell.m in Sources */,
 				1818E4A920EB42A000B676C2 /* SSSearchBar.m in Sources */,
+				188697202122714300580419 /* LuZhiYuYinPopView.m in Sources */,
 				1832B99D20F59CC400D6CE4F /* SDWeiXinPhotoContainerView.m in Sources */,
 				186FBCB42105CCEF00425105 /* GeocodeAnnotation.m in Sources */,
 				1443C5AA20E336740009E82F /* UIColor+Hex.m in Sources */,
@@ -3220,6 +3266,7 @@
 				1866B0B5211AD9FE00B1F5A7 /* UIImage+OwnCalculateImageSize.m in Sources */,
 				181FCBEC20F707740044B055 /* TakeOrderQuotePriceQiangBiaoTableViewCell.m in Sources */,
 				1822849D20FF0FE50059FB94 /* LaunchPiesTicketInputNameView.m in Sources */,
+				1886973B2122C6C400580419 /* RecordAndPlaySound.m in Sources */,
 				188813AF20EC939900F832BE /* BasePersonalInfoViewController.m in Sources */,
 				187892E1210EFB72002A5798 /* NSString+OwnDealNullStr.m in Sources */,
 				18E2DF0B20E8BB9D00FDF9C1 /* JHCollectionViewCell.m in Sources */,
@@ -3230,6 +3277,7 @@
 				1443C61C20E384490009E82F /* LoginOtherTipView.m in Sources */,
 				18662A0C211BE80E00DE1DB6 /* UIView+ShowNullTipImageView.m in Sources */,
 				180609AF20F47DD100471E08 /* DetailSmallButtView.m in Sources */,
+				1886972C21227D6D00580419 /* LuZhiYuYinPop.m in Sources */,
 				1822848020FECFB30059FB94 /* EmploymentRecordModel.m in Sources */,
 				1824F76A20EF147F00E99823 /* CustomerImageButt.m in Sources */,
 				185368FA20E9E9D60053A5D4 /* TraingleCategorySmallButtonView.m in Sources */,
@@ -3260,6 +3308,7 @@
 				1832B99E20F59CC400D6CE4F /* SDPhotoBrowser.m in Sources */,
 				1443C50D20E204180009E82F /* main.m in Sources */,
 				185ABF1620F8350400188520 /* MessageViewController.m in Sources */,
+				188697322122AE0500580419 /* BoFangYuYinOwnPopView.m in Sources */,
 				1874349620F2FE780008A24F /* StarView.m in Sources */,
 				185BDBAB2114443500F18CD5 /* THChooseSexView.m in Sources */,
 				1824F76720EF106600E99823 /* OwnPersonalInfomationTopPictureGoupView.m in Sources */,
@@ -3312,6 +3361,7 @@
 				187892DB210EA1C5002A5798 /* KeyboardToolsView.m in Sources */,
 				1851143E20FD7B5300872AC5 /* DispatchOrderDetailCellSureServiceCompleteGroupView.m in Sources */,
 				187892E4210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m in Sources */,
+				188697352122AE1F00580419 /* BoFangYuYinOwnPop.m in Sources */,
 				1851145120FDD62700872AC5 /* RankTableViewCell.m in Sources */,
 				1824F74720EEF66100E99823 /* ChooseTechnologyLeftTableViewCell.m in Sources */,
 				186EBE1720EDA04200D0F54E /* RdvtarbarBigView.m in Sources */,

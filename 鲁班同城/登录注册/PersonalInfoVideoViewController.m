@@ -420,6 +420,7 @@
     //要修改删除的图片或视屏id str 拼接
     NSString *needDeletePicStr = [self.needDeleteTecPicIdStrArr componentsJoinedByString:@","];
     NSString *needDeleteVideoStr = [self.needDeleteTecVideoIdStrArr componentsJoinedByString:@","];
+    NSLog(@"打印工作经历:%@",self.amendingInfoModel.jobExperienceStr);
     //
     NSDictionary *paraDict = @{@"realName":self.amendingInfoModel.nameStr,@"realNamePath":@"",
                                @"age":self.amendingInfoModel.ageNum,@"gender":self.amendingInfoModel.sexStr,

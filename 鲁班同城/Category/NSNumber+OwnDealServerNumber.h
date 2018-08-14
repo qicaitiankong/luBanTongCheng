@@ -15,4 +15,8 @@
 //处理后台bool数据可能为空的情况
 + (NSNumber*)getResultBoolNumberBySeverStr:(NSNumber*)targetNumber;
 
+//将秒转换为00：00格式
++ (NSString*)getMinutesFormat:(NSInteger)time;
+
+
 @end

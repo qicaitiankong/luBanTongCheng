@@ -9,7 +9,6 @@
 #import "PersonalInfoNameViewController.h"
 //
 #import "PersonalInfoWorkViewController.h"
-
 //v
 #import "PersonalInfoInputAgeView.h"
 #import "PersonalInfoExchangeViceTextView.h"
@@ -26,7 +25,7 @@
     UITextField *addressTextField;
     UITextField *sexTextField;
     UITextField *ageTextField;
-
+    RecordAndPlaySound *dealRecordPlaySound;
 }
 //修改信息存储模型
 @property (strong,nonatomic) OwnPersonalInfoModel *amendingInfoModel;
@@ -54,6 +53,8 @@
     _addressView = [[YAddressPickerView alloc]init];
     _addressView.delegate = self;
     [self.view addSubview:_addressView];
+    //语音对象
+    dealRecordPlaySound = [[RecordAndPlaySound alloc]init];
 }
 
 - (void)initAmendModel{
@@ -124,9 +125,11 @@
     [scrollChooseView showView];
     scrollChooseView.confirmBlock = ^(NSInteger selectedQuestion) {
         __strong typeof(weakSelf) sself = weakSelf;
-         sself -> ageTextField.text = self.ageArr[selectedQuestion];
-        NSString *ageStr = self.ageArr[selectedQuestion];
+         sself -> ageTextField.text =  self.ageArr[selectedQuestion];
+        NSString *ageStr = [self.ageArr[selectedQuestion] copy];
+        
         weakSelf.amendingInfoModel.ageNum = [NSNumber numberWithInteger:[ageStr integerValue]];
+        NSLog(@"age=%ld",[weakSelf.amendingInfoModel.ageNum integerValue] );
     };
 }
 
@@ -165,6 +168,9 @@
     nameView.nameLabel.text = @"姓名";
     nameView.rightTextField.myTextField.text = self.orinalInfoModel.nameStr;
     nameView.rightTextField.myTextField.placeholder = @"请输入名字";
+    nameView.addSoundView.addSoundClickBlock = ^{
+        [weakSelf clickAddSound];
+    };
     [baseScrollView addSubview:nameView];
     [nameView addOwnConstraints:[UIImage imageNamed:@"name"]];
     //
@@ -222,12 +228,6 @@
     //
     self.amendingInfoModel.nameStr = [NSString getResultStrBySeverStr:nameView.rightTextField.myTextField.text] ;
     //
-    NSInteger ageNum  = 0;
-    if([NSString isPureInt:sexTextField.text]){
-       ageNum = [sexTextField.text integerValue];
-    }else{
-    }
-     self.amendingInfoModel.ageNum = [NSNumber getResultNumberBySeverStr:[NSNumber numberWithInteger:ageNum]] ;
     self.amendingInfoModel.sexStr = [NSString getResultStrBySeverStr:sexTextField.text];
     //
     PersonalInfoWorkViewController *workVC = [[PersonalInfoWorkViewController alloc]init];
@@ -235,6 +235,32 @@
     workVC.amendingInfoModel = self.amendingInfoModel;
     [self.navigationController pushViewController:workVC animated:YES];
 }
+//语音录制
+
+- (void)clickAddSound{
+    if (self.amendingInfoModel.nameSoundData == nil){
+        //录制语音弹窗
+        [LuZhiYuYinPop showPopView:^{//暂时没有做取消块
+            [self->dealRecordPlaySound startRecord];
+        } completeBlock:^{
+            [LuZhiYuYinPop dismissPopView];
+            [self->dealRecordPlaySound endRecord];
+            self.amendingInfoModel.nameSoundData = self->dealRecordPlaySound.WavsoundData;
+        } ];
+        
+    }else{
+        
+         [self->dealRecordPlaySound playSound:self.amendingInfoModel.nameSoundData];
+        
+        [BoFangYuYinOwnPop showPopView:30 deleteBlock:^{//删除点击
+            [BoFangYuYinOwnPop dismissPopView];
+        } completeBlock:^{//完成点击
+            [BoFangYuYinOwnPop dismissPopView];
+        }];
+    }
+}
+
+
 
 
 - (void)didReceiveMemoryWarning {

@@ -40,6 +40,22 @@
          [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     [self addViews];
+    //
+    [self dealAllOwnEvent];
+}
+
+- (void)dealAllOwnEvent{
+    //工作经历语音点击添加语音
+    experienceView.addSoundView.addSoundClickBlock = ^{
+       
+        [BoFangYuYinOwnPop showPopView:30 deleteBlock:^{//删除点击
+            [BoFangYuYinOwnPop dismissPopView];
+        } completeBlock:^{//完成点击
+            [BoFangYuYinOwnPop dismissPopView];
+        }];
+    };
+    
+    
 }
 
 - (void)addViews{
@@ -54,12 +70,8 @@
     WS(weakSelf);
     topTipView.clickSoundTextChangeViewBlock = ^(BOOL isSound) {
         __strong typeof(weakSelf) sself = weakSelf;
-        [sself->technologyView displayTextOrYuYin:isSound];
-        [sself->jobView displayTextOrYuYin:isSound];
         [sself->experienceView displayTextOrYuYin:isSound];
         [sself->experienceTextView setHidden:isSound];
-        [sself->technologyView hiddenBottomLine:isSound];
-        [sself->jobView hiddenBottomLine:isSound];
         [sself->experienceView hiddenBottomLine:isSound];
         sself->isSound  = isSound;
     };
@@ -72,7 +84,6 @@
     [baseScrollView addSubview:technologyView];
     technologyView.backButtBlock = ^(UITextField *textField) {
         __strong typeof(weakSelf) sself = weakSelf;
-        if(NO == sself->isSound){
             PersonalInfoTechnologyChooseViewController *chooseVC = [[PersonalInfoTechnologyChooseViewController alloc] init];
             chooseVC.kindTag = 1;
             chooseVC.selectedBlock = ^(NSMutableArray *modelArr) {
@@ -92,8 +103,6 @@
                 
             };
             [weakSelf.navigationController pushViewController:chooseVC animated:YES];
-        }
-        
     };
     technologyView.rightTextField.myTextField.text = [self.orinalInfoModel.technologyStr copy];
     [technologyView addOwnConstraints:[UIImage imageNamed:@"tecnology"]];
@@ -103,7 +112,6 @@
     [baseScrollView addSubview:jobView];
     jobView.backButtBlock = ^(UITextField *textField) {
         __strong typeof(weakSelf) sself = weakSelf;
-        if(NO == sself->isSound){
             PersonalInfoTechnologyChooseViewController *chooseVC = [[PersonalInfoTechnologyChooseViewController alloc] init];
             chooseVC.kindTag = 2;
             chooseVC.selectedBlock = ^(NSMutableArray *modelArr) {
@@ -117,23 +125,19 @@
                 }
                 weakSelf.amendingInfoModel.jobStr = [nameArr componentsJoinedByString:@","];
                 weakSelf.amendingInfoModel.jobServiceNeedStr = [nameIDArr componentsJoinedByString:@","];
-                
                 sself -> jobView.rightTextField.myTextField.text = weakSelf.amendingInfoModel.jobStr;
-                
             };
             [weakSelf.navigationController pushViewController:chooseVC animated:YES];
-        }
     };
     jobView.rightTextField.myTextField.text = [self.orinalInfoModel.jobStr copy];
     [jobView addOwnConstraints:[UIImage imageNamed:@"job"]];
+    
     //工作经历
     experienceView = [[PersonalInfoInputAgeView alloc] initWithFrame:CGRectMake(0, jobView.bottom, self.view.width, viewHeight)];
+   
     experienceView.flagImageView.hidden = YES;
     experienceView.ageLabel.text = @"工作经历";
     [baseScrollView addSubview:experienceView];
-    experienceView.backButtBlock = ^(UITextField *textField) {
-        
-    };
     [experienceView addOwnConstraints:[UIImage imageNamed:@"experience"]];
     //
     experienceTextView = [[OwnTextView alloc] initWithFrame:CGRectMake(35, experienceView.bottom + 20, SCREEN_WIDTH - 2 * 35, SCREEN_HEIGHT * 0.134)];
@@ -148,6 +152,7 @@
     experienceTextView.layer.borderColor = [UIColor colorWithHexString:@"#C6C6C6"].CGColor;
     experienceTextView.layer.cornerRadius = 3;
     experienceTextView.clipsToBounds = YES;
+    experienceTextView.writeTextView.text = self.orinalInfoModel.jobExperienceStr;
     CGPoint rememeberContentOffset = baseScrollView.contentOffset;
     //调整basescrollview 方便输入
     experienceTextView.keyBoardChangedBlock = ^(CGFloat keyBoardHeight) {
@@ -177,6 +182,8 @@
     [baseScrollView setContentSize:CGSizeMake(self.view.width, nextButt.bottom + 30)];
     NSLog(@"contentoffset.y=%lf",baseScrollView.contentOffset.y);
 }
+
+
 
 - (void)nextHandler{
     PersonalInfoVideoViewController *videoVC = [[PersonalInfoVideoViewController alloc]init];

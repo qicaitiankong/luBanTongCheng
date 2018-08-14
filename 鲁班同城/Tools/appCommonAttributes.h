@@ -34,6 +34,10 @@
 #import "NSArray+OwnArrCopy.h"
 #import "UIImage+OwnCalculateImageSize.h"
 #import "UIView+ShowNullTipImageView.h"
+#import "LuZhiYuYinPop.h"
+#import "BoFangYuYinOwnPop.h"
+#import "ShareHomePath.h"
+#import "RecordAndPlaySound.h"
 
 //third party class
 #import <SVProgressHUD.h>

@@ -13,4 +13,6 @@
 - (void)addOwnContraints;
 
 
+@property (copy,nonatomic) void(^addSoundClickBlock)(void);
+
 @end
