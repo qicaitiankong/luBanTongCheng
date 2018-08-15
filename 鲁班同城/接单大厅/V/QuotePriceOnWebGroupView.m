@@ -10,7 +10,7 @@
 #import "CustomeStyleCornerButt.h"
 
 @interface QuotePriceOnWebGroupView (){
-    UIButton *soundButtView;
+   // UIButton *soundButtView;
 }
 @end
 
@@ -34,14 +34,18 @@
         topTipLabel.frame = CGRectMake(0, lineView.bottom + 10, frame.size.width, 15);
         [self addSubview:topTipLabel];
         //
-        soundButtView = [UIButton buttonWithType:UIButtonTypeCustom];
-        soundButtView.frame = CGRectMake(0, topTipLabel.bottom  + 10, frame.size.width , 60);
-        soundButtView.backgroundColor = [UIColor whiteColor];
-        [soundButtView setBackgroundImage:[UIImage imageNamed:@"pressSound"] forState:UIControlStateNormal];
-        [self addSubview:soundButtView];
+        self.addSoundView = [[PersonalInfoAddSoundButtView alloc]initWithSecondUseFrame:CGRectMake(0, topTipLabel.bottom  + 10, frame.size.width , 60)];
+        [self addSubview:self.addSoundView];
+        
+//        soundButtView = [UIButton buttonWithType:UIButtonTypeCustom];
+//        soundButtView.frame = CGRectMake(0, topTipLabel.bottom  + 10, frame.size.width , 60);
+//        soundButtView.backgroundColor = [UIColor whiteColor];
+//        [soundButtView setBackgroundImage:[UIImage imageNamed:@"pressSound"] forState:UIControlStateNormal];
+//        [soundButtView addTarget:self action:@selector(<#selector#>) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:soundButtView];
         //
         UILabel *priceTipLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
-        priceTipLabel.frame = CGRectMake(0, soundButtView.bottom + 20, 30, 15);
+        priceTipLabel.frame = CGRectMake(0, self.addSoundView.bottom + 20, 30, 15);
         priceTipLabel.text = @"报价";
         [self addSubview:priceTipLabel];
         //

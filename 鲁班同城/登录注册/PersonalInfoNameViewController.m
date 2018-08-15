@@ -19,7 +19,7 @@
 #import "THChooseSexView.h"
 #import "THScrollChooseView.h"
 
-@interface PersonalInfoNameViewController ()<AddressViewDelegate>{
+@interface PersonalInfoNameViewController ()<AddressViewDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate>{
     PersonalInfoInputNameView *nameView;
     UIScrollView *baseScrollView;
     UITextField *addressTextField;
@@ -43,6 +43,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     WS(weakSelf);
+    //语音对象
+    dealRecordPlaySound = [[RecordAndPlaySound alloc]init:self plyerDelegate:self];
+    
     self.leftBarbuttBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -53,8 +56,7 @@
     _addressView = [[YAddressPickerView alloc]init];
     _addressView.delegate = self;
     [self.view addSubview:_addressView];
-    //语音对象
-    dealRecordPlaySound = [[RecordAndPlaySound alloc]init];
+   
 }
 
 - (void)initAmendModel{
@@ -235,27 +237,39 @@
     workVC.amendingInfoModel = self.amendingInfoModel;
     [self.navigationController pushViewController:workVC animated:YES];
 }
-//语音录制
 
+//语音录制播放
 - (void)clickAddSound{
     if (self.amendingInfoModel.nameSoundData == nil){
+        NSLog(@"没有语音");
+        [self->dealRecordPlaySound startRecord];
         //录制语音弹窗
         [LuZhiYuYinPop showPopView:^{//暂时没有做取消块
-            [self->dealRecordPlaySound startRecord];
+            
         } completeBlock:^{
             [LuZhiYuYinPop dismissPopView];
             [self->dealRecordPlaySound endRecord];
-            self.amendingInfoModel.nameSoundData = self->dealRecordPlaySound.WavsoundData;
+            self.amendingInfoModel.nameSoundData = [self->dealRecordPlaySound.WavsoundData copy];
+             self.amendingInfoModel.nameSoundTime = self->dealRecordPlaySound.recordTime;
+            self.amendingInfoModel.nameSoundAmrData = [self->dealRecordPlaySound.amrSoundData copy];
+            
+            [self -> nameView.addSoundView changeToPlaySoundState];
+            NSLog(@"录制完成后的语音文件%@",self.amendingInfoModel.nameSoundData);
         } ];
-        
     }else{
-        
-         [self->dealRecordPlaySound playSound:self.amendingInfoModel.nameSoundData];
-        
-        [BoFangYuYinOwnPop showPopView:30 deleteBlock:^{//删除点击
+         NSLog(@"有语音");
+        [dealRecordPlaySound playSound:self.amendingInfoModel.nameSoundData];
+        [BoFangYuYinOwnPop showPopView:self.amendingInfoModel.nameSoundTime deleteBlock:^{//删除点击
             [BoFangYuYinOwnPop dismissPopView];
+            [self -> dealRecordPlaySound stopPlay];
+            self.amendingInfoModel.nameSoundData = nil;
+            self.amendingInfoModel.nameSoundAmrData = nil;
+            self.amendingInfoModel.nameSoundTime = 0;
+            [self -> nameView.addSoundView changeToAddSoundState];
         } completeBlock:^{//完成点击
+            [self->dealRecordPlaySound stopPlay];
             [BoFangYuYinOwnPop dismissPopView];
+           [self -> nameView.addSoundView changeToPlaySoundState];
         }];
     }
 }

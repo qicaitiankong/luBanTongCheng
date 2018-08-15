@@ -62,10 +62,19 @@
 //技能视屏图片
 @property (strong,nonatomic) NSArray *technologyVideoArr;
 
-//名字语音
+//名字语音wav
 @property (strong,nonatomic) NSData *nameSoundData;
+//名字语音amr
+@property (strong,nonatomic) NSData *nameSoundAmrData;
+//名字语音时间
+@property (assign,nonatomic) NSInteger nameSoundTime;
 
+//工作经历语音
+@property (strong,nonatomic) NSData *workExperienceData;
 
+@property (strong,nonatomic) NSData *workExperienceAmrData;
+
+@property (assign,nonatomic) NSInteger workExperienceSoundTime;
 
 //修改信息上传时需要
 //1,2,3,4

@@ -15,7 +15,7 @@
     UILabel *changeTimeLabel;
     UILabel *totalTimeLabel;
     UIProgressView * timeProgressView;
-
+    NSInteger time;
 }
 
 
@@ -114,8 +114,7 @@
 }
 
 - (void)timerHandler:(NSTimer*)timer{
-    NSLog(@"定时器执行");
-    static NSInteger time = 0;
+    //NSLog(@"定时器执行");
     time ++;
     changeTimeLabel.text = [NSNumber getMinutesFormat:time];
     timeProgressView.progress = time / (float)totalTime;

@@ -19,7 +19,8 @@ static ShareHomePath *shareHomePath = nil;
 
 - (NSMutableString*)getDocumentsPath{//存放数据
     NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSMutableString *documentPath = [arr objectAtIndex:0];
+    NSString *docupath = [arr objectAtIndex:0];
+    NSMutableString *documentPath = [[NSMutableString alloc]initWithString:docupath];
     return documentPath;
 }
 - (NSString *)getCachePath{//下次启动需要的缓存文件
@@ -39,13 +40,49 @@ static ShareHomePath *shareHomePath = nil;
 
 //
 - (NSString *)getWavSoundPath{
-    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];;
-    NSString* fileDirectory = [[[directory stringByAppendingPathComponent:@"lzhWav200"]
-                                stringByAppendingPathExtension:@"wav"]
-                               stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSMutableString *doucumentPath = [self getDocumentsPath];
+    NSLog(@">>>>>>>>doucumentPath=%@",doucumentPath);
+    [doucumentPath appendString:@"/lzhWav203.wav"];
+    [self createFileAtPath:doucumentPath error:nil];
+    return doucumentPath;
+}
+
+- (NSString *)getAmrSoundPath{
+    NSMutableString *doucumentPath = [self getDocumentsPath];
+    NSLog(@">>>>>>>>doucumentPath=%@",doucumentPath);
+    [doucumentPath appendString:@"/lzhAmr203.amr"];
+    [self createFileAtPath:doucumentPath error:nil];
+    return doucumentPath;
+}
+
+
+- (BOOL)createFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    BOOL isSuccess  = NO;
+    NSFileManager *manager = [NSFileManager defaultManager];
+    // 如果文件夹路径不存在，那么先创建文件夹
+    BOOL exist = [manager fileExistsAtPath:path];
+    if (NO == exist) {
+        NSLog(@"文件不存在");
+        // 创建文件
+      isSuccess = [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil];
+        if(isSuccess){
+            NSLog(@"文件创建成功");
+        }else{
+            NSLog(@"文件创建失败");
+        }
+    }else{
+        isSuccess = YES;
+         NSLog(@"文件已经存在");
+    }
+   
+    /*创建文件
+     *参数1：创建文件的路径
+     *参数2：创建文件的内容（NSData类型）
+     *参数3：文件相关属性
+     */
     
     
-    return fileDirectory;
+    return isSuccess;
 }
 
 @end

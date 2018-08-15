@@ -16,5 +16,6 @@
 
 - (NSString *)getWavSoundPath;
 
+- (NSString *)getAmrSoundPath;
 
 @end

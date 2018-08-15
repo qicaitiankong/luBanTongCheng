@@ -47,6 +47,8 @@
 #import <SDAutoLayout.h>
 #import <AFNetworking.h>
 #import <MJRefresh.h>
+#import "AudioConverter.h"
+
 //sharesdk
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
@@ -54,6 +56,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
+
 
 //微信SDK头文件
 #import "WXApi.h"
@@ -121,6 +124,11 @@
 #define TAB_BAR_HEIGHT (FU_iPhoneX ? 83.f : 49.f)
 
 #define CENTER_VIEW_HEIGHT  SCREEN_HEIGHT - StatusBarAndNavigationBarHeight - TAB_BAR_HEIGHT
+//接单大厅分组控件高度
+#define TAKE_ORDER_SEGUMENT_HEIGHT 40
+//接单大厅搜索view高度
+#define TAKE_ORDER_SEARCH_VIEW_HEIGHT SCREEN_HEIGHT * 0.06
+
 
 //主窗口
 #define APP_MAIN_WINDOW [UIApplication sharedApplication].windows[0]

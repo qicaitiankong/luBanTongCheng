@@ -434,16 +434,14 @@
     
     
   
-    
-    [TDHttpTools capsualChangeOwnInfo:paraDict traileUrlStr:@"/lubantc/api/user/updateWorkerInfo" imageFlagNameArr:@[@"technologyPic"] picDataArr:self.IncreasedNewPictureDataArr videoDataArr:self.IncreasedNewVideoDataArr success:^(id response) {
-         NSLog(@"修改个人信息%@",response);
+    [TDHttpTools capsualChangeOwnInfo:paraDict traileUrlStr:@"/lubantc/api/user/updateWorkerInfo" imageFlagNameArr:@[@"technologyPic"] picDataArr:self.IncreasedNewPictureDataArr soundNameData:self.amendingInfoModel.nameSoundAmrData soundExperienceData:self.amendingInfoModel.workExperienceAmrData videoDataArr:self.IncreasedNewVideoDataArr success:^(id response) {
+        NSLog(@"修改个人信息%@",response);
         NSDictionary *webDict = response;
         [SVProgressHUD showSuccessWithStatus:webDict[@"msg"]];
         [self.navigationController popToRootViewControllerAnimated:YES];
     } failure:^(NSError *error) {
-
-    }];
     
+    }];
 }
 
 
@@ -468,8 +466,6 @@
             [weakSelf.navigationController setNavigationBarHidden:YES];
             [weakSelf.rdv_tabBarController setTabBarHidden:NO];
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-            //[weakSelf.rdv_tabBarController setSelectedIndex:4];
-            
         };
     }else{
         [popbackButt setHidden:NO];

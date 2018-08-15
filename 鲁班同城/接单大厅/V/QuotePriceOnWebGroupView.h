@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "OwnTextView.h"
+#import "PersonalInfoAddSoundButtView.h"
+
 
 @interface QuotePriceOnWebGroupView : UIView
+
+@property (strong,nonatomic) PersonalInfoAddSoundButtView *addSoundView;
 
 @property (copy,nonatomic) CustomeStyleCornerButt *takeOrderButt;
 

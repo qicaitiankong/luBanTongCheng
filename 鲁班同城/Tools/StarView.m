@@ -170,7 +170,7 @@
 }
 //处理半星方法
 - (void)addWithHalfStar:(NSInteger)count{
-    NSInteger i = 0;
+   // NSInteger i = 0;
 //    for(i = 0; i <=  4 ; i ++){
 //        UIImageView *imageView = starImageArr[i];
 //        [imageView setImage:[UIImage imageNamed:@"hui"]];

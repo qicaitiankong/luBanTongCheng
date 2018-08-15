@@ -505,11 +505,33 @@
 }
 
 //零工修改个人信息
-+ (void)capsualChangeOwnInfo:(NSDictionary*)paraDict traileUrlStr:(NSString*)traileUrlStr imageFlagNameArr:(NSArray*)imageNameArr picDataArr:(NSArray*)targetPictureDataArr
++ (void)capsualChangeOwnInfo:(NSDictionary*)paraDict traileUrlStr:(NSString*)traileUrlStr imageFlagNameArr:(NSArray*)imageNameArr picDataArr:(NSArray*)targetPictureDataArr soundNameData:(NSData*)nameData soundExperienceData:(NSData*)experienceData
                      videoDataArr:(NSArray*)targetVideoDataArr success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure{
     AFHTTPSessionManager *session= [self getSessionManager];
     NSString *urlString=[NSString stringWithFormat:@"%@%@",kSERVER_HTTP_DXE,traileUrlStr];
     [session POST:urlString parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        //拼接名字语音
+        if (nameData){
+            [formData appendPartWithFileData:nameData
+             
+                                        name:@"nameVoice"
+             
+                                    fileName:@"nameSound.amr"
+             
+                                    mimeType:@"audio/amr"];
+        }
+        //拼接工作经历
+        if (experienceData){
+            [formData appendPartWithFileData:experienceData
+             
+                                        name:@"workExperienceVoice"
+             
+                                    fileName:@"experienceSound.amr"
+             
+                                    mimeType:@"audio/amr"];
+        }
+        
+        //拼接图片
         if(targetPictureDataArr.count > 0){
             for (int m = 0; m < targetPictureDataArr.count; m ++){
                 NSData *imageData = targetPictureDataArr[m];

@@ -10,9 +10,19 @@
 
 @interface PersonalInfoAddSoundButtView : UIView
 
+@property (copy,nonatomic) void(^addSoundClickBlock)(void);
+
+//报价中使用，其他用的是系统的initWithFrame
+- (instancetype)initWithSecondUseFrame:(CGRect)frame;
+
+
 - (void)addOwnContraints;
 
 
-@property (copy,nonatomic) void(^addSoundClickBlock)(void);
+
+- (void)changeToAddSoundState;
+
+- (void)changeToPlaySoundState;
+
 
 @end

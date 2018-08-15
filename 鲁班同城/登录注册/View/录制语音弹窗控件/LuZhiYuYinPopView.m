@@ -10,6 +10,7 @@
 
 @interface LuZhiYuYinPopView (){
     NSTimer *myTimeer;
+    NSInteger time;
 }
 @end
 
@@ -85,7 +86,6 @@
 
 - (void)timerHandler:(NSTimer*)timer{
     NSLog(@"定时器执行");
-    static NSInteger time = 0;
     time ++;
     NSDictionary *resultDict = [self getMinutesFormat:time];
     NSInteger minute = [resultDict[@"minute"] integerValue];
