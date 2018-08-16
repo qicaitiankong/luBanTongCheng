@@ -8,27 +8,23 @@
 
 #import "OwnPersonalInfomationViewController.h"
 #import "OwnPersonalInfomationTopPictureGoupView.h"
-#import "OwnPersonalInfomationPersonalIntroduceGoupView.h"
-#import "OwnPersonalInfomationPersonalTechnologyGoupView.h"
-#import "OwnPersonalInfomationPersonalServiceTypeGoupView.h"
-#import "OwnPersonalInfomationPersonalVideoGoupView.h"
 #import "PersonalInfoNameViewController.h"
 #import "OwnPersonalInfoModel.h"
 
+//cell
+#import "OwnPersonalServiceTypeTableViewCell.h"
+#import "OwnPersonalIntroduceTableViewCell.h"
+#import "OwnPersonalPictureTableViewCell.h"
 
-@interface OwnPersonalInfomationViewController (){
+
+@interface OwnPersonalInfomationViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UIScrollView *baseScrollView;
     OwnPersonalInfomationTopPictureGoupView *topPartView;
-    OwnPersonalInfomationPersonalIntroduceGoupView *personalIntroduceView;
-    OwnPersonalInfomationPersonalTechnologyGoupView *personalTechnologyView;
-    OwnPersonalInfomationPersonalServiceTypeGoupView *serviceTypeView;
-    OwnPersonalInfomationPersonalVideoGoupView *videoView;
-    OwnPersonalInfomationPersonalVideoGoupView *pictureView;
-    //图片控件高度，先最多显示3张，高度写死
-    CGFloat pictureViewGroupHeight;
 }
 
 @property (strong,nonatomic) OwnPersonalInfoModel *infoModel;
+
+@property (strong,nonatomic) UITableView *tableView;
 
 @end
 
@@ -38,14 +34,18 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self initOwnObjects];
-    [self addViews];
     //
-    [self getUserInfo];
+    [self addTableView];
+    //[self getUserInfo];
+   
 }
 
 - (void)initOwnObjects{
-    pictureViewGroupHeight = IMAGE_VIEW_HEIGHT + 5 + 55;
+    //模型必须创建，因为cell用该模型布局，如果无网络，该模型也不能为空
+    self.infoModel = [[OwnPersonalInfoModel alloc]init];
+    
 }
+
 //添加关注
 - (void)addConcernOrCancelConcel{
     
@@ -66,13 +66,9 @@
         }];
     }
 }
-
-- (void)addViews{
-    //
-    baseScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    baseScrollView.backgroundColor = [UIColor colorWithRed:245 / 255.0 green:245 / 255.0 blue:245 / 255.0 alpha:1];
-    baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    [self.view addSubview:baseScrollView];
+//修改界面版
+//
+- (void)addTableView{
     //
     topPartView = [[OwnPersonalInfomationTopPictureGoupView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 20) targetUseId:[self.targetUserId integerValue]];
     
@@ -97,29 +93,113 @@
             [weakSelf addConcernOrCancelConcel];
         }
     };
-    [baseScrollView addSubview:topPartView];
-    //
-    personalIntroduceView = [[OwnPersonalInfomationPersonalIntroduceGoupView alloc]initWithFrame:CGRectMake(0, topPartView.bottom + 15, baseScrollView.width, 20)];
-    personalIntroduceView.topTipLabel.text = @"个人介绍";
-    [baseScrollView addSubview:personalIntroduceView];
-    //
-    personalTechnologyView = [[OwnPersonalInfomationPersonalTechnologyGoupView alloc]initWithFrame:CGRectMake(0, personalIntroduceView.bottom + 15, baseScrollView.width, 50)];
-    personalTechnologyView.topTipLabel.text = @"个人技能";
-    [baseScrollView addSubview:personalTechnologyView];
-    //
-    serviceTypeView = [[OwnPersonalInfomationPersonalServiceTypeGoupView alloc]initWithFrame:CGRectMake(0, personalTechnologyView.bottom + 15, baseScrollView.width, 50)];
-    serviceTypeView.topTipLabel.text = @"服务类型";
-    [baseScrollView addSubview:serviceTypeView];
-    //
-    videoView = [[OwnPersonalInfomationPersonalVideoGoupView alloc]initWithFrame:CGRectMake(0, serviceTypeView.bottom + 15, baseScrollView.width, 55)];
-    videoView.topTipLabel.text = @"技能-视频秀";
-    [baseScrollView addSubview:videoView];
-    //
-    pictureView = [[OwnPersonalInfomationPersonalVideoGoupView alloc]initWithFrame:CGRectMake(0, videoView.bottom + 15, baseScrollView.width, 55)];
-    pictureView.topTipLabel.text = @"技能-图片秀";
-    [baseScrollView addSubview:pictureView];
-    //
-    [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, pictureView.bottom + 50)];
+
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, SCREEN_HEIGHT) style:UITableViewStylePlain];
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    self.tableView.tableHeaderView = topPartView;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSInteger rows = 0;
+    switch (section) {
+        case 0:
+            rows = 1;
+            break;
+        case 1:
+            rows = 2;
+            break;
+        case 2:
+            rows  = 2;
+            break;
+        default:
+            break;
+    }
+    return rows;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *parentCell = nil;
+    
+    switch (indexPath.section) {
+        case 0:{
+            static NSString *introCellFlag = @"introCell";
+            OwnPersonalIntroduceTableViewCell *introCell = [tableView dequeueReusableCellWithIdentifier:introCellFlag];
+            if (nil == introCell){
+                introCell = [[OwnPersonalIntroduceTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:introCellFlag];
+            }
+            introCell.model = self.infoModel;
+            parentCell = introCell;
+        }
+            break;
+        case 1:
+        {
+            static NSString *secondFlagCell = @"cell";
+            OwnPersonalServiceTypeTableViewCell *technologyCell = [tableView dequeueReusableCellWithIdentifier:secondFlagCell];
+            if (nil == technologyCell){
+                technologyCell = [[OwnPersonalServiceTypeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+            }
+            technologyCell.path = indexPath;
+            if(indexPath.row == 0){
+                technologyCell.model = self.infoModel;
+                technologyCell.topDisplayLabel.text = @"个人技能";
+            }else{
+                technologyCell.model = self.infoModel;
+                technologyCell.topDisplayLabel.text = @"服务类型";
+            }
+            parentCell = technologyCell;
+        }
+            break;
+        case 2:{
+            static NSString *picFlagCell = @"picCell";
+            OwnPersonalPictureTableViewCell *picCell = [tableView dequeueReusableCellWithIdentifier:picFlagCell];
+            if (nil == picCell){
+                picCell = [[OwnPersonalPictureTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:picFlagCell];
+            }
+            picCell.path = indexPath;
+            //
+            picCell.model = self.infoModel;
+            //
+            parentCell = picCell;
+        }
+            break;
+        default:
+            break;
+    }
+    return parentCell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat cellHeight = 0;
+    switch (indexPath.section) {
+        case 0:{
+            cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalIntroduceTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+        }
+            break;
+        case 1:{
+            if (indexPath.row == 0){
+                cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalServiceTypeTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+            }else if (indexPath.row == 1){
+                cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalServiceTypeTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+            }
+        }
+            break;
+        case 2:{
+            cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalPictureTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    return cellHeight;
 }
 //
 - (void)getUserInfo{
@@ -141,7 +221,7 @@
                     if ([dataDict allKeys].count){
                         self.infoModel = [OwnPersonalInfoModel setModelFromDict:dataDict];
                         //界面赋值
-                        [self giveValueToView];
+                        [self.tableView reloadData];
                     }
                 } failure:^(NSError *error) {
                     //
@@ -149,73 +229,7 @@
                 }];
 }
 
-- (void)giveValueToView{
-    NSURL *imageUrl = [NSURL URLWithString:[self.infoModel.userPictureUrlStr copy]];
-    [topPartView.userlogoImaView sd_setImageWithURL:imageUrl];
-    topPartView.fenSiLabel.text =[NSString stringWithFormat:@"%ld粉丝",[self.infoModel.fansNum integerValue]];
-    topPartView.concernLabel.text = [NSString stringWithFormat:@"%ld关注",[self.infoModel.focusNum integerValue]];
-    NSString *addressStr = (self.infoModel.addressStr.length == 0) ? [NSString stringWithFormat:@"%@%@%@",self.infoModel.proviceStr,self.infoModel.cityStr,self.infoModel.areaStr]:self.infoModel.addressStr;
-    topPartView.sexAndHomeLabel.text = [NSString stringWithFormat:@"%@ %@",[self.infoModel.sexStr copy],addressStr];
-    [topPartView.starGroupView setYellowStar:[self.infoModel.starCountNumber integerValue]];
-    if (self.infoModel.FoucedFlag == 0){
-        [topPartView setEditButtDisplayByValue:NO];
-    }else if (self.infoModel.FoucedFlag == 1){
-         [topPartView setEditButtDisplayByValue:YES];
-    }else{
-        [topPartView findOwnInfoDisplay];
-    }
-    //个人介绍
-    [personalIntroduceView giveOwnValue:[self.infoModel.introduceStr copy]];
-    //技术
-    NSMutableArray *targetTechnologyArr = [self getTargetTechnologyArr:[self.infoModel.technologyArr copy]];
-    [personalTechnologyView giveOwnValue:targetTechnologyArr];
-    personalTechnologyView.frame = CGRectMake(personalTechnologyView.x, personalIntroduceView.bottom + 15, personalTechnologyView.width, personalTechnologyView.height);
-    
-    //服务类型
-    NSMutableArray *targetJobArr = [self getTargetTechnologyArr:[self.infoModel.jobArr copy]];
-    [serviceTypeView giveOwnValue:targetJobArr];
-    serviceTypeView.frame = CGRectMake(serviceTypeView.x, personalTechnologyView.bottom + 15, serviceTypeView.width, serviceTypeView.height);
-    //视屏
-    [videoView givePictureArr:[NSArray getTargetArr:self.infoModel.videoInfoArr keyStr:@"filePath"]];
-    videoView.frame = CGRectMake(videoView.x, serviceTypeView.bottom + 15, videoView.width, pictureViewGroupHeight);
-   //图片
-    [pictureView givePictureArr:[NSArray getTargetArr:self.infoModel.pictureInfoArr keyStr:@"filePath"]];
-    pictureView.frame = CGRectMake(pictureView.x, videoView.bottom + 15, pictureView.width, pictureViewGroupHeight);
-    //
-    UIView *botView = pictureView;
-     [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, botView.bottom + 10)];
-    //没图片没视屏
-//    if (self.personalPictureArr.count == 0 && self.personalVideoArr.count == 0){
-//        NSLog(@"没图片没视屏");
-//        botView = serviceTypeView;
-//        videoView.hidden =YES;
-//        pictureView.hidden = YES;
-//         [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, botView.bottom + 10)];
-//    //有图片没视频
-//    }else if (self.personalPictureArr.count != 0){
-//         NSLog(@"有图片没视频");
-//        videoView.hidden = YES;
-//        pictureView.frame = CGRectMake(0, serviceTypeView.bottom + 15, baseScrollView.width, pictureViewGroupHeight);
-//        [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, serviceTypeView.bottom + 15 + pictureViewGroupHeight +10)];
-//    }else if(self.personalVideoArr.count != 0){   //有视屏没图片
-//         NSLog(@"有视屏没图片");
-//        pictureView.hidden = YES;
-//        [baseScrollView setContentSize:CGSizeMake(baseScrollView.width, serviceTypeView.bottom + 15 + pictureViewGroupHeight +10)];
-//    }else{
-//        //有图片有视屏
-//        NSLog(@"有图片有视屏");
-//
-//    }
-    
-}
-//将获取的技术，工作等数组数据解析为需要的字符串数组
-- (NSMutableArray*)getTargetTechnologyArr:(NSArray*)originArr{
-    NSMutableArray *localTechnologyArr = [[NSMutableArray alloc]init];
-    for (NSDictionary *localDict in originArr){
-        [localTechnologyArr addObject:localDict[@"name"]];
-    }
-    return localTechnologyArr;
-}
+
 
 
 //- (void)makeDictToWritePlist:(NSDictionary*)dict{

@@ -90,6 +90,35 @@
     }
 }
 
+//设置角标
+- (void)setBadgeDisplayByNum:(NSInteger)num{
+    int index = 0;
+    RDVTabBarItem *targetItem = nil;
+     for (RDVTabBarItem *item in [self items]) {
+         if (index == 2){
+             targetItem = item;
+             break;
+         }
+         index ++;
+     }
+    if (targetItem){
+        if (num == 0){
+             targetItem.badgeBackgroundColor = [UIColor clearColor];
+             targetItem.badgeTextColor = [UIColor clearColor];
+            targetItem.badgeValue = @"";
+
+        }else{
+            targetItem.badgeBackgroundColor = [UIColor redColor];
+            targetItem.badgeValue = [NSString stringWithFormat:@"%ld",num];
+            targetItem.badgeTextColor = [UIColor whiteColor];
+        }
+        
+    }
+    
+}
+
+
+
 #pragma mark - Configuration
 
 - (void)setItemWidth:(CGFloat)itemWidth {
@@ -107,8 +136,11 @@
     for (RDVTabBarItem *item in _items) {
         [item addTarget:self action:@selector(tabBarItemWasSelected:) forControlEvents:UIControlEventTouchDown];
         [self addSubview:item];
-        
     }
+    if (self.bigButt){
+        [self.bigButt removeFromSuperview];
+    }
+    //
     self.bigButt = [UIButton buttonWithType:UIButtonTypeCustom];
     [self addSubview:self.bigButt];
 }
@@ -140,7 +172,6 @@
             return;
         }
     }
-    
     [self setSelectedItem:sender];
     
     if ([[self delegate] respondsToSelector:@selector(tabBar:didSelectItemAtIndex:)]) {

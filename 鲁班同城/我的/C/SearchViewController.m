@@ -197,7 +197,11 @@
     searchHeadView.searchView.searchTextFieldBlock = ^(NSString *targetStr) {
         __strong typeof(weakSelf) sself = weakSelf;
         if ((sself -> isRefresh == NO) && (sself -> isLoad == NO)){
-            weakSelf.searchStr = targetStr;
+            if(targetStr.length == 0){
+                weakSelf.searchStr = SEARCH_NULL_FLAG_STR;
+            }else{
+                weakSelf.searchStr = targetStr;
+            }
             weakSelf.page = 1;
             [weakSelf getData:weakSelf.page searchStr:weakSelf.searchStr];
         }

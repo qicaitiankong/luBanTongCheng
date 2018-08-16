@@ -60,28 +60,25 @@
         [backButt addTarget:self action:@selector(backButtonHandler) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:backButt];
         //
-        
         CGFloat labelHeight = frame.size.height * 0.9;
         CGFloat titleWidth = [LzhReturnLabelHeight getLabelWidth:@"添加语音" font:[UIFont getPingFangSCMedium:14] targetHeight:labelHeight];
         UIImage *image = [UIImage imageNamed:@"voiceGray"];
         CGFloat imageWidth = 11;
         CGFloat imageHeight = imageWidth / (image.size.width / image.size.height);
         CGFloat imageAndLabelSpace = 15;
-        CGFloat labelLeftSpace = (frame.size.width - titleWidth) / 2 - imageAndLabelSpace;
+        //CGFloat labelLeftSpace = (frame.size.width - titleWidth) / 2 - imageAndLabelSpace;
         //
         tipLabel.frame = CGRectMake(0, 0, titleWidth, labelHeight);
         tipLabel.center = CGPointMake(frame.size.width / 2, frame.size.height / 2);
         tipLabel.text = @"添加语音";
         
         //
-        voiceImageView.frame = CGRectMake(tipLabel.right + labelLeftSpace, 0, imageWidth, imageHeight);
+        voiceImageView.frame = CGRectMake(tipLabel.right + imageAndLabelSpace, 0, imageWidth, imageHeight);
         voiceImageView.center = CGPointMake(voiceImageView.centerX, tipLabel.centerY);
         [voiceImageView setImage:image];
     }
     return self;
 }
-
-
 
 - (void)addOwnContraints{
     //
@@ -91,7 +88,7 @@
     CGFloat imageWidth = 11;
     CGFloat imageHeight = imageWidth / (image.size.width / image.size.height);
     CGFloat imageAndLabelSpace = 15;
-    CGFloat labelLeftSpace = (self.width - titleWidth) / 2 - imageAndLabelSpace;
+    //CGFloat labelLeftSpace = (self.width - titleWidth) / 2 - imageAndLabelSpace;
     //
     [voiceImageView setImage:image];
     tipLabel.text = @"添加语音";

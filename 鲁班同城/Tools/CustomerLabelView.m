@@ -28,11 +28,38 @@
     return self;
 }
 
-- (void)giveTitles:(NSString*)str{
-    CGFloat labelWidth = [LzhReturnLabelHeight getLabelWidth:str font:[UIFont getPingFangSCMedium:12] targetHeight:self.height];
-    self.displayLabel.text = str;
-    [self setFrame:CGRectMake(self.x, self.y, labelWidth + 10, self.height)];
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.layer.borderWidth = 1;
+        self.layer.borderColor = [UIColor colorWithHexString:@"#C6C6C6"].CGColor;
+        self.clipsToBounds = YES;
+        self.layer.cornerRadius = 4;
+        self.backgroundColor = [UIColor whiteColor];
+        //
+        self.displayLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:12] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:1];
+        [self addSubview:self.displayLabel];
+    }
+    return self;
 }
+
+- (void)giveTitles:(NSString*)str{
+    self.displayLabel.text = str;
+    self.displayLabel.sd_resetLayout
+    .leftEqualToView(self)
+    .rightEqualToView(self)
+    .topEqualToView(self)
+    .bottomEqualToView(self);
+}
+
+
+
+//- (void)giveTitles:(NSString*)str{
+//    CGFloat labelWidth = [LzhReturnLabelHeight getLabelWidth:str font:[UIFont getPingFangSCMedium:12] targetHeight:self.height];
+//    self.displayLabel.text = str;
+//    [self setFrame:CGRectMake(self.x, self.y, labelWidth + 10, self.height)];
+//}
 
 
 @end

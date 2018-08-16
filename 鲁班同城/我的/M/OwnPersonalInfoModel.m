@@ -57,18 +57,23 @@
 
         localModel.technologyArr = webDict[@"technologys"];
         localModel.jobArr = webDict[@"professions"];
+        
         localModel.pictureInfoArr = webDict[@"technologysPic"];
         localModel.videoInfoArr = webDict[@"technologysVideo"];
-        //
-        NSArray * targetArr = [localModel getTargetTechnologyArr:localModel.technologyArr];
-         NSArray * targetJobArr = [localModel getTargetTechnologyArr:localModel.jobArr];
-        if (targetArr.count){
-            localModel.technologyStr = [targetArr componentsJoinedByString:@","];
+        //再次解析得到视频和图片url字符串数组
+        localModel.videoUrlStrArr = [localModel getTargetImageUrlStrArr:localModel.videoInfoArr];
+        
+        localModel.pictureUrlStrArr = [localModel getTargetImageUrlStrArr:localModel.pictureInfoArr];
+        //技能和工作
+        localModel.targetTechSeviceArr = [localModel getTargetTechnologyArr:localModel.technologyArr];
+         localModel.targetJobArr = [localModel getTargetTechnologyArr:localModel.jobArr];
+        if (localModel.targetTechSeviceArr.count){
+            localModel.technologyStr = [localModel.targetTechSeviceArr componentsJoinedByString:@","];
         }else{
             localModel.technologyStr = @"";
         }
-        if (targetJobArr.count){
-            localModel.jobStr = [targetJobArr componentsJoinedByString:@","];
+        if (localModel.targetJobArr.count){
+            localModel.jobStr = [localModel.targetJobArr componentsJoinedByString:@","];
         }else{
             localModel.jobStr = @"";
         }
@@ -86,5 +91,15 @@
     }
     return localTechnologyArr;
 }
+
+//将获取的视屏秀，图片秀数组数据解析为需要的url字符串数组
+- (NSMutableArray*)getTargetImageUrlStrArr:(NSArray*)originArr{
+    NSMutableArray *localTechnologyArr = [[NSMutableArray alloc]init];
+    for (NSDictionary *localDict in originArr){
+        [localTechnologyArr addObject:localDict[@"filePath"]];
+    }
+    return localTechnologyArr;
+}
+
 
 @end

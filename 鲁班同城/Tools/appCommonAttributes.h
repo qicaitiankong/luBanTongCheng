@@ -128,7 +128,8 @@
 #define TAKE_ORDER_SEGUMENT_HEIGHT 40
 //接单大厅搜索view高度
 #define TAKE_ORDER_SEARCH_VIEW_HEIGHT SCREEN_HEIGHT * 0.06
-
+//搜索输入空字符串后台需要传的格式字符串
+#define SEARCH_NULL_FLAG_STR @"!#$%&*123qwe"
 
 //主窗口
 #define APP_MAIN_WINDOW [UIApplication sharedApplication].windows[0]

@@ -51,12 +51,22 @@
 @property (strong,nonatomic) NSMutableArray *videoInfoArr;
 //技能图片信息数组
 @property (strong,nonatomic) NSMutableArray *pictureInfoArr;
-
+//技能视屏图片url数组
+@property (strong,nonatomic) NSMutableArray *videoUrlStrArr;
+//技能图片url数组
+@property (strong,nonatomic) NSMutableArray *pictureUrlStrArr;
+//
 //显示需要,,,
 //技术
 @property (strong,nonatomic) NSString *technologyStr;
 //职业
 @property (strong,nonatomic) NSString *jobStr;
+//个人信息技能字符串数组
+@property (strong,nonatomic) NSArray *targetTechSeviceArr;
+//个人信息职业字符串数组
+@property (strong,nonatomic) NSArray *targetJobArr;
+
+
 //技能图片image
 @property (strong,nonatomic) NSArray *technologyPicArr;
 //技能视屏图片

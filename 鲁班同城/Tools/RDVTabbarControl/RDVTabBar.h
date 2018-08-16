@@ -86,5 +86,8 @@
 
 @property (strong,nonatomic) UIButton *bigButt;
 
+- (void)setBadgeDisplayByNum:(NSInteger)num;
+
+
 //
 @end

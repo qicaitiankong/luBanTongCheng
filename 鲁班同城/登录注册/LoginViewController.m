@@ -17,6 +17,9 @@
 //vc
 #import "WxQQLoginViewController.h"
 #import "PersonalInfoNameViewController.h"
+//share sdk smsdk
+#import <SMS_SDK/SMSSDK.h>
+
 
 @interface LoginViewController (){
     OwnTextField *mobileTextField;
@@ -216,7 +219,42 @@
 }
 
 - (void)codeButtHandler{
-    [MobileCode withButtonState:codeButt totalTime:30];
+    if (NO == [TelephoneNumberTools isMobile:mobileTextField.myTextField.text]){
+        [SVProgressHUD showErrorWithStatus:@"请输入正确手机号码"];
+        return;
+    }
+    [MobileCode withButtonState:codeButt totalTime:60];
+    //获取验证码
+    //
+    [SMSSDK getVerificationCodeByMethod:0 phoneNumber:mobileTextField.myTextField.text zone:@"+86" template:nil result:^(NSError *error) {
+        if (error)
+        {
+            if(error.code == NSURLErrorNotConnectedToInternet)
+            {
+               
+            }
+            else if(error.code == 300255)
+            {
+                
+            }
+            else if(error.code == 300462)
+            {
+                
+            }
+            else
+            {
+                
+            }
+             [SVProgressHUD showErrorWithStatus:@"短信获取失败，请重新获取"];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"短信获取成功"];
+        }
+    }];
+    
+    
+    
 }
 
 - (void)loginHandler{

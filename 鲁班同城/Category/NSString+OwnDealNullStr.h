@@ -16,5 +16,10 @@
 //根据状态获取派单状态描述
 +(NSString*)getStateStrByStateID:(NSInteger)stateId;
 
+//获取时间戳
++(NSString*)getCurrentTimes;
+
++ (NSString*)getMd5JiaMi:(NSString*)orinalStr;
+
 
 @end
