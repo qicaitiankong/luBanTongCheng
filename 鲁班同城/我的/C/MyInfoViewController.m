@@ -79,7 +79,7 @@
 - (void)getData{
     WS(weakSelf);
     if ([lzhGetAccountInfo getAccount].identityFlag){
-        [TDHttpTools getEmployerMyPage:@{@"userId":[lzhGetAccountInfo getAccount].userID} success:^(id response) {
+        [TDHttpTools getEmployerMyPage:@{} success:^(id response) {
             
             self.userInfoDict = response;
             [self.tableView reloadData];
@@ -95,7 +95,7 @@
 }
 
 - (void)uploadUserPicture{
-    [TDHttpTools uploadFile:@{@"userId":[lzhGetAccountInfo getAccount].userID} traileUrlStr:@"/lubantc/api/user/updateHeadImg" imageFlagName:@"headPic" imageDataArr:selectedImageDataArr success:^(id response) {
+    [TDHttpTools uploadFile:@{} traileUrlStr:@"/lubantc/api/user/updateHeadImg" imageFlagName:@"headPic" imageDataArr:selectedImageDataArr success:^(id response) {
         NSDictionary *dict = response;
         NSLog(@"头像上传%@",dict);
         if ([dict[@"status"] integerValue] == 0){
@@ -111,15 +111,11 @@
     }];
 }
 
-
-
 - (void)giveValue{
     NSURL *picUrl = [NSURL URLWithString:self.userInfoDict[@"headImg"]];
     [headerView.userImageView sd_setImageWithURL:picUrl];
     headerView.userNameLabel.text = self.userInfoDict[@"userName"];
 }
-
-
 
 - (void)initObject{
      cellImageArr = [[NSMutableArray alloc] init];
@@ -159,12 +155,12 @@
         }
     }
 }
-//
+
 
 //切换身份
 - (void)exchangeIndentity{
     NSLog(@"??????????userid=%ld",[[lzhGetAccountInfo getAccount].userID integerValue]);
-    [TDHttpTools exchangeUserIdentity:@{@"userId":[lzhGetAccountInfo getAccount].userID} success:^(id response) {
+    [TDHttpTools exchangeUserIdentity:@{} success:^(id response) {
         [SVProgressHUD showInfoWithStatus:response[@"msg"]];
         NSLog(@"!!!!!!!!!!dict=%@ 后台切换为了%@",response,response[@"data"]);
         AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -189,10 +185,6 @@
     } failure:^(NSError *error) {
         
     }];
-    
-    
-    
-   
 }
 
 

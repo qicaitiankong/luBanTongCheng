@@ -15,6 +15,8 @@
 @property (assign,nonatomic) NSInteger identityFlag;
 
 @property (assign,nonatomic) NSNumber *userID;
+//userCode
+@property (strong,nonatomic) NSString *userCode;
 
 
 @property(nonatomic,strong)NSString *PhotoUrl;

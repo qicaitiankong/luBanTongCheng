@@ -72,7 +72,7 @@
         //msgId:用于接单成功后发过来的通知消息标记已读未读
         //NSInteger orderID = [self.orderIdStr integerValue];
         //order id 写死了1 后期改过来
-        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"userId":[lzhGetAccountInfo getAccount].userID,@"msgId":[NSNumber numberWithInteger:1]};
+        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"msgId":[NSNumber numberWithInteger:1]};
         [TDHttpTools getCasualTakeOrderDetail:paraDict success:^(id response) {
             NSDictionary *dict = response;
             
@@ -123,7 +123,7 @@
             return;
         }
     }
-    NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"orderId":[NSNumber numberWithInteger:self.orderId],@"price":[NSNumber numberWithInteger:[moneyStr integerValue]],@"remark":beiZhuStr};
+    NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"price":[NSNumber numberWithInteger:[moneyStr integerValue]],@"remark":beiZhuStr};
     [TDHttpTools CasualScramebleTakeOrder:paraDict success:^(id response) {
         NSDictionary *webDict = response;
         NSLog(@"webDict:%@",webDict);
@@ -272,8 +272,6 @@
     }
      popView.tipLabel.text = messageStr;
 }
-
-
 
 //
 - (void)didReceiveMemoryWarning {

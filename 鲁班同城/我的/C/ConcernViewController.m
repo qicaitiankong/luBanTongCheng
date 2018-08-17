@@ -83,7 +83,7 @@
 //                                userName = "\U66f9\U5efa\U6d9b";
 //                            }
     
-    [TDHttpTools getMyConcernList:@{@"userId":[lzhGetAccountInfo getAccount].userID} success:^(id response) {
+    [TDHttpTools getMyConcernList:@{} success:^(id response) {
         NSLog(@"我的关注:%@",response);
         NSDictionary *dataDict = response[@"data"];
         

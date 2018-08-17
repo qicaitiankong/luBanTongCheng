@@ -101,7 +101,7 @@
 
 + (OwnPersonalInfoModel*)setModelFromDict:(NSDictionary*)webDict;
 
-
-
+//图片的获取是另外的接口，所以需要插入
+- (NSMutableArray*)getTargetImageUrlStrArr:(NSArray*)originArr;
 
 @end

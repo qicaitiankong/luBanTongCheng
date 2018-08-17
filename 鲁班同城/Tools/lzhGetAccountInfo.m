@@ -90,6 +90,8 @@
                 selfClass.userID = userID;
             }else{
             }
+            //
+            selfClass.userCode = dict[@"userCode"];
         }
         
     }
@@ -111,8 +113,10 @@
 //    state = 0;
 //    userType = "\U96c7\U4e3b";
 //    username = "<null>";
-    NSNumber *userType = dict[@"userType"];
+   
+    NSNumber *userType = nil;
     NSNumber *userID = nil;
+    NSString *userCode = @"";
     NSString *realName = @"";
     NSString *nickName = @"";
     NSString *mobile = @"";
@@ -122,12 +126,30 @@
     NSNumber *focusNum = [NSNumber numberWithInteger:0];
     NSNumber *ageNum = [NSNumber numberWithInteger:0];
     //
+    if ([[dict allKeys] containsObject:@"userType"]){//
+        userType = dict[@"userType"];
+    }else{
+        NSInteger typeNum = (self.identityFlag == 0) ? 1 : 2;
+        userType = [NSNumber numberWithInteger:typeNum];
+    }
+    //
     if ([[dict allKeys] containsObject:@"id"]){//针对于登入保存
          userID = dict[@"id"];
     }else{
         userID = [lzhGetAccountInfo getAccount].userID;
     }
-   
+    if ([[dict allKeys] containsObject:@"userCode"]){
+        userCode = dict[@"userCode"];
+    }else{
+        if ([lzhGetAccountInfo getAccount].userCode == nil){
+             userCode = @"";
+        }else{
+             userCode = [lzhGetAccountInfo getAccount].userCode;
+        }
+       
+    }
+    
+    
     if ([[dict allKeys] containsObject:@"realName"]){
         realName = [NSString getResultStrBySeverStr:dict[@"realName"]];
     }else{
@@ -160,7 +182,7 @@
         ageNum = [NSNumber getResultNumberBySeverStr:dict[@"age"]];
     }else{
     }
-    NSDictionary *newDict = @{@"userType":userType,@"userID":userID,@"userName":realName,@"nickName":nickName,@"gender":gender,@"age":ageNum,@"headImg":headImg,@"mobile":mobile,@"focusNum":focusNum,@"fansNum":fansNum};
+    NSDictionary *newDict = @{@"userType":userType,@"userID":userID,@"userCode":userCode,@"userName":realName,@"nickName":nickName,@"gender":gender,@"age":ageNum,@"headImg":headImg,@"mobile":mobile,@"focusNum":focusNum,@"fansNum":fansNum};
     BOOL suc = [newDict writeToFile:kAccountPath atomically:YES];
    
     if (suc){
@@ -176,6 +198,8 @@
 + (void)cleanAccountInfo{
     NSDictionary *nullDict = @{};
     BOOL suc = [nullDict writeToFile:kAccountPath atomically:YES];
+    //
+    [PDKeyChain keyChainDelete];
     if (suc){
         NSLog(@"账户信息已经清除");
     }else{

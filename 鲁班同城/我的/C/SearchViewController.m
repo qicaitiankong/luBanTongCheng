@@ -112,7 +112,7 @@
 - (void)getData:(int)page searchStr:(NSString*)keyStr{
     WS(weakSelf);
     if ([lzhGetAccountInfo getAccount].identityFlag == 0){//零工
-        NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:3],@"page":[NSNumber numberWithInt:page],@"size":[NSNumber numberWithInt:10],@"key":keyStr};
+        NSDictionary *paraDict = @{@"page":[NSNumber numberWithInt:page],@"size":[NSNumber numberWithInt:10],@"key":keyStr};
         [TDHttpTools getReceiveOrderList:paraDict success:^(id response) {
             NSDictionary *dict = response;
             if ([dict allKeys].count){
@@ -149,7 +149,7 @@
         }];
         
     }else{//雇主
-        NSDictionary *paraDict = @{@"userId":[NSNumber numberWithInt:1],@"page":[NSNumber numberWithInt:page],@"size":[NSNumber numberWithInt:10],@"key":keyStr};
+        NSDictionary *paraDict = @{@"page":[NSNumber numberWithInt:page],@"size":[NSNumber numberWithInt:10],@"key":keyStr};
         [TDHttpTools getLauchOrderList:paraDict success:^(id response) {
             NSDictionary *dict = response;
             if ([dict allKeys].count){

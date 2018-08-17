@@ -48,6 +48,7 @@
 #import <AFNetworking.h>
 #import <MJRefresh.h>
 #import "AudioConverter.h"
+#import "PDKeyChain.h"
 
 //sharesdk
 #import <ShareSDK/ShareSDK.h>
@@ -143,6 +144,11 @@
 #define SysVer [[[UIDevice currentDevice] systemVersion] floatValue]
 // 改写为弱引用
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+
+//noti name
+
+//我的资料页面刷新界面通知
+#define PERSONAL_REFRESH_NOTI @"refreshPersonalInfoNoti"
 
 
 #endif /* appCommonAttributes_h */

@@ -70,10 +70,6 @@
 //
 - (void)initObjects{
     self.modelArr = [[NSMutableArray alloc] init];
-    
-    //
-    NSLog(@"！！！！！！md5加密：%@",[NSString getMd5JiaMi:@"123"]);
-    
 }
 
 //获取定位城市

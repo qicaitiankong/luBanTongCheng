@@ -17,7 +17,7 @@
 #import "LoginViewController.h"
 #import "RankViewController.h"
 #import "VideoCenterViewController.h"
-
+#import "ChooseIdentityViewController.h"
 
 //category
 #import "AppDelegate+tabbar.h"
@@ -47,32 +47,47 @@
 
 //保持登录
 - (void)JudgeKeepLogin{
-    if ([lzhGetAccountInfo getAccount].infoDict.allKeys.count){//登录状态
+    NSString *opratToken = [PDKeyChain keyChainLoad];
+    NSLog(@"opratToken %@",opratToken);
+    if ([opratToken isKindOfClass:[NSString class]]){
+        NSLog(@"是字符串");
+    }else{
+         NSLog(@"不是字符串");
+    }
+    if ([opratToken isKindOfClass:[NSString class]]){//登录状态
+        NSLog(@"登录状态");
         if ([lzhGetAccountInfo getAccount].identityFlag){
             [self setupViewControllersForEmployment];
         }else{
             [self setupViewControllersForCasualLabour];
         }
     }else{//非登录状态
+        NSLog(@"非登录状态");
         [self displayLoginPageByIsInstalledWX];
     }
 }
 
 //显示登录页(微信授权隐藏处理)
 - (void)displayLoginPageByIsInstalledWX{
-    if(NO == [ShareSDK isClientInstalled:SSDKPlatformTypeWechat]){
-        NSLog(@"你没有安装微信");
-        LoginViewController *loginVC = [[LoginViewController alloc]init];
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+    ChooseIdentityViewController *chooseIdentityVC = [[ChooseIdentityViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:chooseIdentityVC];
     self.window.rootViewController=nav;
-        [self.window makeKeyAndVisible];
-    }else{
-        WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc]init];
-        loginVC.isWx = YES;
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
-        self.window.rootViewController=nav;
-        [self.window makeKeyAndVisible];
-    }
+    [self.window makeKeyAndVisible];
+    
+    
+//    if(NO == [ShareSDK isClientInstalled:SSDKPlatformTypeWechat]){
+//        NSLog(@"你没有安装微信");
+//        LoginViewController *loginVC = [[LoginViewController alloc]init];
+//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+//    self.window.rootViewController=nav;
+//        [self.window makeKeyAndVisible];
+//    }else{
+//        WxQQLoginViewController *loginVC = [[WxQQLoginViewController alloc]init];
+//        loginVC.isWx = YES;
+//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+//        self.window.rootViewController=nav;
+//        [self.window makeKeyAndVisible];
+//    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -33,11 +33,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    //add refresh noti
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfo) name:PERSONAL_REFRESH_NOTI object:nil];
+    
     [self initOwnObjects];
     //
     [self addTableView];
-    //[self getUserInfo];
-   
+    [self getUserInfo];
 }
 
 - (void)initOwnObjects{
@@ -48,17 +50,16 @@
 
 //添加关注
 - (void)addConcernOrCancelConcel{
-    
     NSInteger fouseFlag = self.infoModel.FoucedFlag;
     if (fouseFlag == 0){
-        [TDHttpTools AddConcernAction:@{@"myUserId":[lzhGetAccountInfo getAccount].userID,@"userId":self.targetUserId} success:^(id response) {
+        [TDHttpTools AddConcernAction:@{@"hisId":self.targetUserId} success:^(id response) {
             [self->topPartView setEditButtDisplayByValue:YES];
             self.infoModel.FoucedFlag = 1;
         } failure:^(NSError *error) {
              [SVProgressHUD showInfoWithStatus:@"添加关注失败"];
         }];
     }else if (fouseFlag == 1){
-        [TDHttpTools CancelConcernAction:@{@"myUserId":[lzhGetAccountInfo getAccount].userID,@"userId":self.targetUserId} success:^(id response) {
+        [TDHttpTools CancelConcernAction:@{@"hisId":self.targetUserId} success:^(id response) {
             [self->topPartView setEditButtDisplayByValue:NO];
             self.infoModel.FoucedFlag = 0;
         } failure:^(NSError *error) {
@@ -95,6 +96,7 @@
     };
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, SCREEN_HEIGHT) style:UITableViewStylePlain];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.tableView.tableHeaderView = topPartView;
@@ -203,13 +205,13 @@
 }
 //
 - (void)getUserInfo{
-    
+    self.infoModel = [[OwnPersonalInfoModel alloc]init];
     //零工
         NSDictionary *praDict =nil;
         if ([self.targetUserId integerValue] == [[lzhGetAccountInfo getAccount].userID integerValue]){//自己信息
-            praDict = @{@"myUserId":[lzhGetAccountInfo getAccount].userID};
+            praDict = @{};
         }else{//其他零工信息
-            praDict = @{@"userId":self.targetUserId,@"myUserId":[lzhGetAccountInfo getAccount].userID};
+            praDict = @{@"hisId":self.targetUserId};
         }
         NSLog(@"\n\n!!!!!!!!!praDict=%@\n\n",praDict);
                 [TDHttpTools getCapsualUserInfo:praDict success:^(id response) {
@@ -220,16 +222,33 @@
                     //
                     if ([dataDict allKeys].count){
                         self.infoModel = [OwnPersonalInfoModel setModelFromDict:dataDict];
+                        
+                        self.infoModel.pictureUrlStrArr = @[@"",@"",@"",@""];
                         //界面赋值
                         [self.tableView reloadData];
+                        //
+//                       [self getTechnologyPictureInfo];
                     }
                 } failure:^(NSError *error) {
                     //
-                   
                 }];
 }
 
-
+- (void)getTechnologyPictureInfo{
+    [TDHttpTools getSeveralPicture:@{@"relatedId":self.targetUserId,@"application":[NSString getPictureAndVideoInfoServiceNeedFunctionStr:3],@"type":[NSString getPictureAndVideoServiceNeedTypeFlagStr:0]} success:^(id response) {
+        NSInteger state = [response[@"status"] integerValue];
+        if (state == 0){
+            NSArray *dataArr = response[@"data"];
+            NSLog(@"技能秀图片 dataArr:%@",dataArr);
+            self.infoModel.pictureInfoArr = [[NSMutableArray alloc ] initWithArray:dataArr];
+            self.infoModel.pictureUrlStrArr = [self.infoModel getTargetImageUrlStrArr:self.infoModel.pictureInfoArr];
+            [self.tableView reloadData];
+        }else{
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 
 //- (void)makeDictToWritePlist:(NSDictionary*)dict{
@@ -249,7 +268,9 @@
 //    [[lzhGetAccountInfo getAccount] writeToAccount:makeDict];
 //}
 
-
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

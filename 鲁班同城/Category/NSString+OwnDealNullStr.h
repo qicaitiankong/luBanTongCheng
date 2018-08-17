@@ -18,8 +18,15 @@
 
 //获取时间戳
 +(NSString*)getCurrentTimes;
+//获取时间戳毫秒
++(NSString *)getNowMMTimeTimes;
+//
++ (NSString *) md5:(NSString *) input;
+//
+//获取图片和语音时后台需要上传的作用参数
++(NSString*)getPictureAndVideoInfoServiceNeedFunctionStr:(NSInteger)flagId;
 
-+ (NSString*)getMd5JiaMi:(NSString*)orinalStr;
-
+//获取图片和语音时后台需要上传的区别类型参数
++(NSString*)getPictureAndVideoServiceNeedTypeFlagStr:(NSInteger)flagId;
 
 @end

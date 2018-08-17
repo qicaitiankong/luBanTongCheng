@@ -58,12 +58,12 @@
         localModel.technologyArr = webDict[@"technologys"];
         localModel.jobArr = webDict[@"professions"];
         
-        localModel.pictureInfoArr = webDict[@"technologysPic"];
-        localModel.videoInfoArr = webDict[@"technologysVideo"];
-        //再次解析得到视频和图片url字符串数组
-        localModel.videoUrlStrArr = [localModel getTargetImageUrlStrArr:localModel.videoInfoArr];
-        
-        localModel.pictureUrlStrArr = [localModel getTargetImageUrlStrArr:localModel.pictureInfoArr];
+//        localModel.pictureInfoArr = webDict[@"technologysPic"];
+//        localModel.videoInfoArr = webDict[@"technologysVideo"];
+//        //再次解析得到视频和图片url字符串数组
+//        localModel.videoUrlStrArr = [localModel getTargetImageUrlStrArr:localModel.videoInfoArr];
+//
+//        localModel.pictureUrlStrArr = [localModel getTargetImageUrlStrArr:localModel.pictureInfoArr];
         //技能和工作
         localModel.targetTechSeviceArr = [localModel getTargetTechnologyArr:localModel.technologyArr];
          localModel.targetJobArr = [localModel getTargetTechnologyArr:localModel.jobArr];
@@ -96,7 +96,7 @@
 - (NSMutableArray*)getTargetImageUrlStrArr:(NSArray*)originArr{
     NSMutableArray *localTechnologyArr = [[NSMutableArray alloc]init];
     for (NSDictionary *localDict in originArr){
-        [localTechnologyArr addObject:localDict[@"filePath"]];
+        [localTechnologyArr addObject:localDict[@"path"]];
     }
     return localTechnologyArr;
 }

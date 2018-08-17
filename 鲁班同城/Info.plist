@@ -2,24 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>mqzone</string>
-		<string>wechat</string>
-		<string>wtloginmqq2</string>
-		<string>mpsharesdk10</string>
-		<string>mpsharesdk11</string>
-		<string>mqzoneopensdkapi19</string>
-		<string>mqqopensdkapiV3</string>
-		<string>weixin</string>
-		<string>mqqOpensdkSSoLogin</string>
-		<string>mqqopensdkapiV4</string>
-		<string>mqzoneopensdkapiV2</string>
-		<string>mqqwpa</string>
-		<string>mqq</string>
-		<string>mqqopensdkapiV2</string>
-		<string>mqqapi</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -41,12 +23,30 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxa20f8fb29b7515c6</string>
+				<string>wx02306e615972be35</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>mqzone</string>
+		<string>wechat</string>
+		<string>wtloginmqq2</string>
+		<string>mpsharesdk10</string>
+		<string>mpsharesdk11</string>
+		<string>mqzoneopensdkapi19</string>
+		<string>mqqopensdkapiV3</string>
+		<string>weixin</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>mqqopensdkapiV4</string>
+		<string>mqzoneopensdkapiV2</string>
+		<string>mqqwpa</string>
+		<string>mqq</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqapi</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MOBAppKey</key>

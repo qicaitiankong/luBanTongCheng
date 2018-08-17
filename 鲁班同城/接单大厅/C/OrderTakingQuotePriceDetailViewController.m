@@ -177,7 +177,7 @@
         //NSInteger orderID = self.orderId
         //order id 写死了1 后期改过来
     
-        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"userId":[lzhGetAccountInfo getAccount].userID,@"msgId":[NSNumber numberWithInteger:1]};
+        NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"msgId":[NSNumber numberWithInteger:1]};
         //WS(weakSelf);
         [TDHttpTools getCasualTakeOrderDetail:paraDict success:^(id response) {
             
@@ -210,7 +210,7 @@
 - (void)takeOrderClick{
     NSLog(@"接单");
     
-    [TDHttpTools CasualSureTakeOrder:@{@"userId":[lzhGetAccountInfo getAccount].userID,@"orderId":[NSNumber numberWithInteger:self.orderId]} success:^(id response) {
+    [TDHttpTools CasualSureTakeOrder:@{@"orderId":[NSNumber numberWithInteger:self.orderId]} success:^(id response) {
         [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
         if (self.refreshDataAfterTakeOrderBlock){
             self.refreshDataAfterTakeOrderBlock();
@@ -222,7 +222,7 @@
 }
 //放弃接单
 - (void)giveHandler{
-    [TDHttpTools casualCancelTakeOrder:@{@"userId":[lzhGetAccountInfo getAccount].userID,@"orderId":[NSNumber numberWithInteger:self.orderId]} success:^(id response) {
+    [TDHttpTools casualCancelTakeOrder:@{@"orderId":[NSNumber numberWithInteger:self.orderId]} success:^(id response) {
         [SVProgressHUD showSuccessWithStatus:response[@"msg"]];
         if (self.refreshDataAfterTakeOrderBlock){
             self.refreshDataAfterTakeOrderBlock();

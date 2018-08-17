@@ -130,8 +130,8 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
         [SVProgressHUD showInfoWithStatus:@"请选择时间"];
         return;
     }
-    
-    NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"userName":nameStr,@"mobile":mobileStr,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressStr,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuStr,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
+    NSLog(@"打印称呼 nameStr=%@",nameStr);
+    NSDictionary *paraDict = @{@"userName":nameStr,@"mobile":mobileStr,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressStr,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuStr,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
     
     [TDHttpTools launchOder:paraDict success:^(id response) {
         NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];

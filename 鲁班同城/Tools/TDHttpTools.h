@@ -128,9 +128,28 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 
 //取消关注
 +(void)CancelConcernAction:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+//
 
 //上传单张图片 traileUrlStr;尾部url路径 imageFlagName:接口图片字段名
 + (void)uploadFile:(NSDictionary*)paraDict traileUrlStr:(NSString*)traileUrlStr imageFlagName:(NSString*)imageName imageDataArr:(NSArray*)targetDataArr success:(void (^)(id response))uploadSuccess failure:(void (^)(NSError *error))upLoadfailure;
+
+
+//
+
+//获取单张图片信息
++(void)getSinglePicture:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+//获取多张图片信息
++(void)getSeveralPicture:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+
+//获取单个音频信息
++(void)getSingleAudio:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+//
+//获取多个音频信息
++(void)getSeveralAudio:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
 
 
 @end

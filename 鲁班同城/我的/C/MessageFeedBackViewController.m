@@ -53,7 +53,7 @@
         return;
     }
     
-    [TDHttpTools uploadFile:@{@"userId":[lzhGetAccountInfo getAccount].userID,@"content":problemTextView.writeTextView.text} traileUrlStr:@"/lubantc/api/user/backMsg" imageFlagName:@"backMsgPic" imageDataArr:self.selectedImageDataArr success:^(id response) {
+    [TDHttpTools uploadFile:@{@"content":problemTextView.writeTextView.text} traileUrlStr:@"/lubantc/api/user/backMsg" imageFlagName:@"backMsgPic" imageDataArr:self.selectedImageDataArr success:^(id response) {
         NSDictionary *dict = response;
         if ([dict[@"status"] integerValue] == 0){
             [SVProgressHUD showSuccessWithStatus:@"信息反馈成功"];

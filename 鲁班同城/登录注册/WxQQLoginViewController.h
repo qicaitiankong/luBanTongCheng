@@ -13,4 +13,6 @@
 
 @property (assign,nonatomic) BOOL isWx;
 
+@property (assign,nonatomic) NSInteger selectedUserType;
+
 @end

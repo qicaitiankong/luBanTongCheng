@@ -227,6 +227,19 @@
 		1824F78020EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F77F20EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m */; };
 		1824F78320EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824F78220EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m */; };
 		18264E5F210AED5F001B793B /* GSPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18264E5E210AED5F001B793B /* GSPickerView.m */; };
+		1827494C212660130018957C /* PDKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827494B212660130018957C /* PDKeyChain.m */; };
+		1827494F212671490018957C /* ChooseIdentityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827494E212671490018957C /* ChooseIdentityViewController.m */; };
+		182749532126B8F00018957C /* chooseIdentityPerson.png in Resources */ = {isa = PBXBuildFile; fileRef = 182749502126B8EC0018957C /* chooseIdentityPerson.png */; };
+		182749542126B8F00018957C /* chooseIdentityPerson@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 182749512126B8EE0018957C /* chooseIdentityPerson@3x.png */; };
+		182749552126B8F00018957C /* chooseIdentityPerson@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 182749522126B8F00018957C /* chooseIdentityPerson@2x.png */; };
+		182749592126B90C0018957C /* chooseIdentityFlag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 182749562126B9070018957C /* chooseIdentityFlag@2x.png */; };
+		1827495A2126B90C0018957C /* chooseIdentityFlag@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 182749572126B9090018957C /* chooseIdentityFlag@3x.png */; };
+		1827495B2126B90C0018957C /* chooseIdentityFlag.png in Resources */ = {isa = PBXBuildFile; fileRef = 182749582126B90B0018957C /* chooseIdentityFlag.png */; };
+		1827495E2126B9F40018957C /* chooseIdentityButtView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827495D2126B9F40018957C /* chooseIdentityButtView.m */; };
+		182749612126C1990018957C /* chooseIdentityGroupButtView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182749602126C1990018957C /* chooseIdentityGroupButtView.m */; };
+		182749652126C7780018957C /* chooseIdentitySelectedPerson@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 182749622126C7730018957C /* chooseIdentitySelectedPerson@2x.png */; };
+		182749662126C7780018957C /* chooseIdentitySelectedPerson@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 182749632126C7750018957C /* chooseIdentitySelectedPerson@3x.png */; };
+		182749672126C7780018957C /* chooseIdentitySelectedPerson.png in Resources */ = {isa = PBXBuildFile; fileRef = 182749642126C7770018957C /* chooseIdentitySelectedPerson.png */; };
 		1828C1DD2125058C009E9B40 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1828C1DC2125058C009E9B40 /* MessageUI.framework */; };
 		1828C1FD21250BD5009E9B40 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1828C1E321250BD4009E9B40 /* WeiboSDK.bundle */; };
 		1828C1FE21250BD5009E9B40 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1828C1E421250BD4009E9B40 /* libWeiboSDK.a */; };
@@ -851,6 +864,23 @@
 		1824F78220EF51A300E99823 /* OwnPersonalInfomationPersonalVideoGoupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalInfomationPersonalVideoGoupView.m; sourceTree = "<group>"; };
 		18264E5D210AED5F001B793B /* GSPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPickerView.h; sourceTree = "<group>"; };
 		18264E5E210AED5F001B793B /* GSPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPickerView.m; sourceTree = "<group>"; };
+		1827494A212660110018957C /* PDKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDKeyChain.h; sourceTree = "<group>"; };
+		1827494B212660130018957C /* PDKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDKeyChain.m; sourceTree = "<group>"; };
+		1827494D212671490018957C /* ChooseIdentityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseIdentityViewController.h; sourceTree = "<group>"; };
+		1827494E212671490018957C /* ChooseIdentityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseIdentityViewController.m; sourceTree = "<group>"; };
+		182749502126B8EC0018957C /* chooseIdentityPerson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chooseIdentityPerson.png; sourceTree = "<group>"; };
+		182749512126B8EE0018957C /* chooseIdentityPerson@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooseIdentityPerson@3x.png"; sourceTree = "<group>"; };
+		182749522126B8F00018957C /* chooseIdentityPerson@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooseIdentityPerson@2x.png"; sourceTree = "<group>"; };
+		182749562126B9070018957C /* chooseIdentityFlag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooseIdentityFlag@2x.png"; sourceTree = "<group>"; };
+		182749572126B9090018957C /* chooseIdentityFlag@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooseIdentityFlag@3x.png"; sourceTree = "<group>"; };
+		182749582126B90B0018957C /* chooseIdentityFlag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chooseIdentityFlag.png; sourceTree = "<group>"; };
+		1827495C2126B9F40018957C /* chooseIdentityButtView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chooseIdentityButtView.h; sourceTree = "<group>"; };
+		1827495D2126B9F40018957C /* chooseIdentityButtView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chooseIdentityButtView.m; sourceTree = "<group>"; };
+		1827495F2126C1990018957C /* chooseIdentityGroupButtView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chooseIdentityGroupButtView.h; sourceTree = "<group>"; };
+		182749602126C1990018957C /* chooseIdentityGroupButtView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chooseIdentityGroupButtView.m; sourceTree = "<group>"; };
+		182749622126C7730018957C /* chooseIdentitySelectedPerson@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooseIdentitySelectedPerson@2x.png"; sourceTree = "<group>"; };
+		182749632126C7750018957C /* chooseIdentitySelectedPerson@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooseIdentitySelectedPerson@3x.png"; sourceTree = "<group>"; };
+		182749642126C7770018957C /* chooseIdentitySelectedPerson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chooseIdentitySelectedPerson.png; sourceTree = "<group>"; };
 		1828C1DC2125058C009E9B40 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1828C1E321250BD4009E9B40 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		1828C1E421250BD4009E9B40 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
@@ -1429,6 +1459,8 @@
 		1443C57020E317960009E82F /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				1827494A212660110018957C /* PDKeyChain.h */,
+				1827494B212660130018957C /* PDKeyChain.m */,
 				185FE9642123F25F007697B3 /* 录音 */,
 				182030C621003A930098BFCC /* TDHttpTools.h */,
 				182030C721003A940098BFCC /* TDHttpTools.m */,
@@ -1695,6 +1727,8 @@
 				186EBE5320EE17D200D0F54E /* PersonalInfoTechnologyChooseViewController.m */,
 				188813AD20EC939900F832BE /* BasePersonalInfoViewController.h */,
 				188813AE20EC939900F832BE /* BasePersonalInfoViewController.m */,
+				1827494D212671490018957C /* ChooseIdentityViewController.h */,
+				1827494E212671490018957C /* ChooseIdentityViewController.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -1734,6 +1768,10 @@
 				1443C61B20E384490009E82F /* LoginOtherTipView.m */,
 				1443C61D20E387D80009E82F /* LoginThirdGroupView.h */,
 				1443C61E20E387D80009E82F /* LoginThirdGroupView.m */,
+				1827495C2126B9F40018957C /* chooseIdentityButtView.h */,
+				1827495D2126B9F40018957C /* chooseIdentityButtView.m */,
+				1827495F2126C1990018957C /* chooseIdentityGroupButtView.h */,
+				182749602126C1990018957C /* chooseIdentityGroupButtView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2660,6 +2698,15 @@
 		188813BA20ECA3B900F832BE /* 登录注册 */ = {
 			isa = PBXGroup;
 			children = (
+				182749642126C7770018957C /* chooseIdentitySelectedPerson.png */,
+				182749622126C7730018957C /* chooseIdentitySelectedPerson@2x.png */,
+				182749632126C7750018957C /* chooseIdentitySelectedPerson@3x.png */,
+				182749582126B90B0018957C /* chooseIdentityFlag.png */,
+				182749562126B9070018957C /* chooseIdentityFlag@2x.png */,
+				182749572126B9090018957C /* chooseIdentityFlag@3x.png */,
+				182749502126B8EC0018957C /* chooseIdentityPerson.png */,
+				182749522126B8F00018957C /* chooseIdentityPerson@2x.png */,
+				182749512126B8EE0018957C /* chooseIdentityPerson@3x.png */,
 				186EBE4C20EE111500D0F54E /* sucsess.png */,
 				186EBE4D20EE111500D0F54E /* sucsess@2x.png */,
 				186EBE4E20EE111500D0F54E /* sucsess@3x.png */,
@@ -3027,6 +3074,7 @@
 				185368F320E9CDC40053A5D4 /* test05.jpeg in Resources */,
 				186EBE2920EDDF3A00D0F54E /* job.png in Resources */,
 				1828C20421250BD5009E9B40 /* ShareSDKUI.bundle in Resources */,
+				182749592126B90C0018957C /* chooseIdentityFlag@2x.png in Resources */,
 				185ABF3520F874A400188520 /* grayNavReturn.png in Resources */,
 				1851D9412101AF6F000C6306 /* dispatchOnMap@3x.png in Resources */,
 				186EBE2320EDDF2500D0F54E /* tecnology.png in Resources */,
@@ -3141,10 +3189,14 @@
 				1828C1FF21250BD5009E9B40 /* README.txt in Resources */,
 				181FCC0620F73A7C0044B055 /* quotePriceTraingle@2x.png in Resources */,
 				1818E4C320EB51D900B676C2 /* set00.png in Resources */,
+				182749662126C7780018957C /* chooseIdentitySelectedPerson@3x.png in Resources */,
 				188CB36E20FC733B00302C94 /* scrollPictureLabour01@3x.png in Resources */,
+				182749542126B8F00018957C /* chooseIdentityPerson@3x.png in Resources */,
 				18662A06211BE6DF00DE1DB6 /* nullRecord.png in Resources */,
 				1874348D20F2F6F30008A24F /* commentStar@3x.png in Resources */,
 				187434AC20F3279D0008A24F /* share@2x.png in Resources */,
+				182749672126C7780018957C /* chooseIdentitySelectedPerson.png in Resources */,
+				182749652126C7780018957C /* chooseIdentitySelectedPerson@2x.png in Resources */,
 				1824F75520EF0ED500E99823 /* addFriend.png in Resources */,
 				185ABF2120F8413B00188520 /* set000@3x.png in Resources */,
 				1824F77620EF40C800E99823 /* SenderVoiceNodePlaying03.png in Resources */,
@@ -3170,6 +3222,7 @@
 				188813BE20ECA3D600F832BE /* city@3x.png in Resources */,
 				1818E4C920EB523E00B676C2 /* withDraw.png in Resources */,
 				1443C50520E204170009E82F /* Main.storyboard in Resources */,
+				1827495A2126B90C0018957C /* chooseIdentityFlag@3x.png in Resources */,
 				188813B320EC95A400F832BE /* nav.png in Resources */,
 				18E2DEFF20E882C700FDF9C1 /* SanFranciscoText-Medium-17.otf in Resources */,
 				1824F75D20EF0EDF00E99823 /* shareNav@3x.png in Resources */,
@@ -3221,6 +3274,7 @@
 				188813F520ECCC8300F832BE /* voiceGray@3x.png in Resources */,
 				180609BA20F481C800471E08 /* pullDown@2x.png in Resources */,
 				1851143A20FD7AA100872AC5 /* smallCancel.png in Resources */,
+				182749532126B8F00018957C /* chooseIdentityPerson.png in Resources */,
 				1822848F20FEE5D60059FB94 /* companyName@3x.png in Resources */,
 				185ABF3C20F8771A00188520 /* searchBiaoQian@3x.png in Resources */,
 				18BD58B12106CF0000D2AC64 /* work_person2.png in Resources */,
@@ -3241,6 +3295,7 @@
 				188CB36C20FC733B00302C94 /* scrollPictureLabour01@2x.png in Resources */,
 				186EBE4F20EE111500D0F54E /* sucsess.png in Resources */,
 				1824F77520EF40C800E99823 /* SenderVoiceNodePlaying02.png in Resources */,
+				1827495B2126B90C0018957C /* chooseIdentityFlag.png in Resources */,
 				1851D92221017337000C6306 /* Emoji.plist in Resources */,
 				188813C420ECA3E800F832BE /* age@2x.png in Resources */,
 				1824F72820EEF38900E99823 /* orderSelected@3x.png in Resources */,
@@ -3282,6 +3337,7 @@
 				188813D120ECA40600F832BE /* sex@2x.png in Resources */,
 				1824F73E20EEF4C600E99823 /* user.png in Resources */,
 				1824F73320EEF3B600E99823 /* playSelected@3x.png in Resources */,
+				182749552126B8F00018957C /* chooseIdentityPerson@2x.png in Resources */,
 				1443C5D920E348540009E82F /* order.png in Resources */,
 				182284BF20FF155A0059FB94 /* ticket_beizhu.png in Resources */,
 				188813F420ECCC8300F832BE /* voiceGray.png in Resources */,
@@ -3439,6 +3495,7 @@
 				188CB34A20FC3BEE00302C94 /* searchHeaderView.m in Sources */,
 				1832B9AC20F5DFC300D6CE4F /* TakeOrderQuotePriceTableViewCell.m in Sources */,
 				185ABF2F20F86A9400188520 /* SearchViewController.m in Sources */,
+				1827494F212671490018957C /* ChooseIdentityViewController.m in Sources */,
 				18E2DF1E20E8C66B00FDF9C1 /* ConcernDisplayView.m in Sources */,
 				18E2DF1120E8BED300FDF9C1 /* BaseDisplayNaviViewController.m in Sources */,
 				180609BE20F493BD00471E08 /* CompanyCruitDetailModel.m in Sources */,
@@ -3451,6 +3508,7 @@
 				188697322122AE0500580419 /* BoFangYuYinOwnPopView.m in Sources */,
 				1874349620F2FE780008A24F /* StarView.m in Sources */,
 				185FE97B2123F25F007697B3 /* wav.mm in Sources */,
+				182749612126C1990018957C /* chooseIdentityGroupButtView.m in Sources */,
 				185BDBAB2114443500F18CD5 /* THChooseSexView.m in Sources */,
 				1824F76720EF106600E99823 /* OwnPersonalInfomationTopPictureGoupView.m in Sources */,
 				187768E32117D1F000766BE9 /* OwnPersonalInfoModel.m in Sources */,
@@ -3460,6 +3518,7 @@
 				186EBE2C20EDE33F00D0F54E /* OwnTextView.m in Sources */,
 				1443C59E20E332200009E82F /* SkillShowViewController.m in Sources */,
 				185FE9852123FFE7007697B3 /* ZWMSegmentController.m in Sources */,
+				1827494C212660130018957C /* PDKeyChain.m in Sources */,
 				1443C58020E31B2D0009E82F /* ShareHomePath.m in Sources */,
 				1832B9A320F5B0E900D6CE4F /* CompanyCruitDetailVedioTableViewCell.m in Sources */,
 				185FE98A21240654007697B3 /* TakeorderSeveralCategoryViewController.m in Sources */,
@@ -3508,6 +3567,7 @@
 				187892DB210EA1C5002A5798 /* KeyboardToolsView.m in Sources */,
 				1851143E20FD7B5300872AC5 /* DispatchOrderDetailCellSureServiceCompleteGroupView.m in Sources */,
 				187892E4210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m in Sources */,
+				1827495E2126B9F40018957C /* chooseIdentityButtView.m in Sources */,
 				188697352122AE1F00580419 /* BoFangYuYinOwnPop.m in Sources */,
 				1851145120FDD62700872AC5 /* RankTableViewCell.m in Sources */,
 				1824F74720EEF66100E99823 /* ChooseTechnologyLeftTableViewCell.m in Sources */,

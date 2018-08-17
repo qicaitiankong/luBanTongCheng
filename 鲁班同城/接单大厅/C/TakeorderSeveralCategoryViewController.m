@@ -105,7 +105,7 @@
 //
 - (void)getData:(int)page{
     if ([lzhGetAccountInfo getAccount].identityFlag == 0){//零工
-        NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"page":[NSNumber numberWithInt:page],@"pageSize":@10,@"type":[NSNumber numberWithInteger:self.flagVC]};
+        NSDictionary *paraDict = @{@"key":@"",@"page":[NSNumber numberWithInt:page],@"pageSize":@10,@"type":[NSNumber numberWithInteger:self.flagVC]};
         [TDHttpTools getReceiveOrderList:paraDict success:^(id response) {
             NSDictionary *dict = response;
             NSLog(@"零工接单大厅%@",dict);
@@ -148,12 +148,11 @@
         }];
         
     }else{//雇主
-        NSDictionary *paraDict = @{@"userId":[lzhGetAccountInfo getAccount].userID,@"page":[NSNumber numberWithInt:page],@"pageSize":@10};
+        NSDictionary *paraDict = @{@"key":@"",@"page":[NSNumber numberWithInt:page],@"pageSize":@10};
         [TDHttpTools getLauchOrderList:paraDict success:^(id response) {
             NSDictionary *dict = response;
             NSLog(@"雇主接单大厅%@",dict);
             if ([dict allKeys].count){
-                
                 NSDictionary *dataDict = dict[@"data"];
                 NSArray *dataArr = dataDict[@"list"];
                 if (NO == self -> isLoad){

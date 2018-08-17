@@ -10,7 +10,10 @@
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
 
-#define kSERVER_HTTP_DXE @"http://192.168.0.112"
+#define kSERVER_HTTP_DXE @"http://www.lubantc.com"
+
+#define kSever_HTTP_IMAGE_AUDIO @"http://www.lubantc.com:8080"
+
 
 @implementation TDHttpTools
 
@@ -25,30 +28,7 @@
  */
 +(void)requestWithMethodType:(RequestMethodType)methodType Url:(NSString *)urlString params:(id)params success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
     
-    [SVProgressHUD showWithStatus:@""];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    // 设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = 10.f;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
-    
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript",@"text/css", @"text/plain", @"application/x-javascript", @"application/javascript",@"application/xhtml+xml",@"application/xml", nil];
-    
-    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    //
-    NSString *currentTime = [NSString getCurrentTimes];
-    //
-    //
-    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"userId"];
-    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"timeStamp"];
-    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"sign"];
-    //
-    //
-    //manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    AFHTTPSessionManager *manager = [self getSessionManager];
     
     urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     switch (methodType) {
@@ -224,11 +204,35 @@
 }
 
 + (AFHTTPSessionManager*)getSessionManager{
-    AFHTTPSessionManager *session= [AFHTTPSessionManager manager];
-    session.responseSerializer = [AFHTTPResponseSerializer serializer];
-    session.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript",@"text/css", @"text/plain", @"application/x-javascript", @"application/javascript",@"application/xhtml+xml",@"application/xml", nil];
-    session.requestSerializer = [AFJSONRequestSerializer serializer];
-    return session;
+    AFHTTPSessionManager *manager= [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript",@"text/css", @"text/plain", @"application/x-javascript", @"application/javascript",@"application/xhtml+xml",@"application/xml", nil];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    // 设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    //
+     [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    //
+    NSString *userIDstr = @"";
+    NSString *token = @"";
+    if ([lzhGetAccountInfo getAccount].userID && ([[lzhGetAccountInfo getAccount].userID integerValue] != 0)){//登录状态可以取到
+        userIDstr = [[lzhGetAccountInfo getAccount].userID stringValue];
+        [manager.requestSerializer setValue:userIDstr forHTTPHeaderField:@"userId"];
+        //
+        token = [PDKeyChain keyChainLoad];
+    }
+    //时间戳毫秒
+    NSString *currentTime = [NSString getNowMMTimeTimes];
+    [manager.requestSerializer setValue:currentTime forHTTPHeaderField:@"timeStamp"];
+    //签名认证
+    NSMutableString *signStr = [[NSMutableString alloc]initWithString:@""];
+    [signStr appendFormat:@"%@%@%@%ld",token,[lzhGetAccountInfo getAccount].userCode,currentTime,[[lzhGetAccountInfo getAccount].userID integerValue]];
+    NSString *md5SignStr = [NSString md5:signStr];
+    [manager.requestSerializer setValue:md5SignStr forHTTPHeaderField:@"sign"];
+    //
+    return manager;
 }
 
 //上传图片
@@ -298,15 +302,14 @@
     NSDictionary *params = paraDict;
     NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/user/changeUserType",kSERVER_HTTP_DXE];
     [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
-        if (success) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+        NSLog(@"切换身份dict=%@",dict);
             int status = [dict[@"status"] intValue];
             if (status == 0){
                 success(dict);
             }else if (status == 1){
                 [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
                 failure(nil);
-            }
         }
     } failure:^(NSError *error) {
         if (failure) {
@@ -940,6 +943,117 @@
             if (status == 0){
                 success(dict);
             }else if (status == 1){
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
+
+
+
+
+
+
+
+//获取图片和音频有关接口
+
+
+//获取单张图片信息
++(void)getSinglePicture:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/files/filePic",kSever_HTTP_IMAGE_AUDIO];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:dict[@"msg"]];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
+
+
+//获取多张图片信息
++(void)getSeveralPicture:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/files/mulFilePic",kSever_HTTP_IMAGE_AUDIO];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:dict[@"msg"]];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
+
+//获取单个音频信息
++(void)getSingleAudio:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/files/fileVoice",kSever_HTTP_IMAGE_AUDIO];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:dict[@"msg"]];
+                failure(nil);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+            [SVProgressHUD showErrorWithStatus:errorCode];
+        }
+    }];
+}
+
+//
+//获取多个音频信息
++(void)getSeveralAudio:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    NSDictionary *params = paraDict;
+    
+    NSString *urlString=[NSString stringWithFormat:@"%@/files/mulFileVoice",kSever_HTTP_IMAGE_AUDIO];
+    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
+        if (success) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            int status = [dict[@"status"] intValue];
+            if (status == 0){
+                success(dict);
+            }else if (status == 1){
+                [SVProgressHUD showInfoWithStatus:dict[@"msg"]];
                 failure(nil);
             }
         }

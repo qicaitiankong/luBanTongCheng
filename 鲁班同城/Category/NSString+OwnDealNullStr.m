@@ -67,6 +67,52 @@
     return stateStr;
 }
 
+//获取图片和语音时后台需要上传的作用参数
++(NSString*)getPictureAndVideoInfoServiceNeedFunctionStr:(NSInteger)flagId{
+    NSString *stateStr = @"";
+    switch (flagId) {
+        case 0:
+            stateStr = @"头像";
+            break;
+        case 1:
+            stateStr = @"姓名";
+            break;
+        case 2:
+            stateStr = @"工作经历";
+            break;
+        case 3:
+            stateStr = @"技能秀";
+            break;
+        case 4:
+            stateStr = @"反馈消息";
+            break;
+        case 5:
+            stateStr = @"派单说明";
+            break;
+        case 6:
+            stateStr = @"报价备注";
+            break;
+        default:
+            break;
+    }
+    return stateStr;
+}
+//获取图片和语音时后台需要上传的区别类型参数
++(NSString*)getPictureAndVideoServiceNeedTypeFlagStr:(NSInteger)flagId{
+    NSString *stateStr = @"";
+    switch (flagId) {
+        case 0:
+            stateStr = @"图片";
+            break;
+        case 1:
+            stateStr = @"音频";
+            break;
+        default:
+            break;
+    }
+    return stateStr;
+}
+
 
 +(NSString*)getCurrentTimes{
     
@@ -90,27 +136,42 @@
     
 }
 
-+ (NSString*)getMd5JiaMi:(NSString*)input{
++(NSString *)getNowMMTimeTimes{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss SSS"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    
+    //设置时区,这个对于时间的处理有时很重要
+    
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    [formatter setTimeZone:timeZone];
+    
+    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]*1000];
+    
+    return timeSp;
+}
+
+
++ (NSString *) md5:(NSString *) input {
     const char *cStr = [input UTF8String];
-    
     unsigned char digest[CC_MD5_DIGEST_LENGTH];
-    
-    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
-    
-    
+    CC_MD5( cStr, (unsigned int)strlen(cStr), digest ); // This is the md5 call
     
     NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
     
-    
-    
     for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-        
         [output appendFormat:@"%02x", digest[i]];
-    
-    
     
     return  output;
 }
+
 
 
 

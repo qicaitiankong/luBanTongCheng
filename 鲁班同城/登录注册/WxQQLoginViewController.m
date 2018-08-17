@@ -38,14 +38,8 @@
 }
 
 - (void)cancelHandler{
-//    [self.navigationController popViewControllerAnimated:YES];
-//    [self.rdv_tabBarController setTabBarHidden:NO];
-    //说明用户不想登录，开放进入app浏览
-    //后期还需处理，用户非登录状态处理界面显示，此处一下只为了跳转通过随便写了一个userid
-    NSDictionary *makeDict = @{@"id":[NSNumber numberWithInt:1],@"userType":[NSNumber numberWithInteger:2]};
-    [[lzhGetAccountInfo getAccount] writeToAccount:makeDict];
-    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app setupViewControllersForEmployment];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)firstLoginHandler{
@@ -58,16 +52,17 @@
              {
                  
                  NSLog(@"uid=%@",user.uid);
-                 NSLog(@"%@",user.credential);
+                 NSLog(@"user.credential..rawData=%@",user.credential.rawData);
                  NSLog(@"token=%@",user.credential.token);
                  NSLog(@"nickname=%@",user.nickname);
                  if (user.credential == nil){
                      NSLog(@"\n\n！！！！！！！！微信登录尚未授权\n\n");
                  }else{
                      NSLog(@"\n\n！！！！！！微信登录已经授权\n\n");
+                      [self wxLoginRequest:user];
                  }
                  
-                 [self wxLoginRequest:user.uid];
+                
              }
              else
              {
@@ -80,32 +75,47 @@
     }
 }
 
-- (void)wxLoginRequest:(NSString*)wexinCode{
-    [TDHttpTools loginWXWithText:@{@"weixinCode":wexinCode} success:^(id response) {
+- (void)wxLoginRequest:(SSDKUser *)weixinInfo{
+    NSString *sexStr = @"";
+    if (weixinInfo.gender == 0){
+        sexStr = @"男";
+    }else if (weixinInfo.gender == 1){
+        sexStr = @"女";
+    }
+
+    NSLog(@"!!!!!! openID:%@ unionID:%@ selected tyoe %ld",weixinInfo.credential.rawData[@"openid"],weixinInfo.credential.rawData[@"unionid"],self.selectedUserType);
+    
+    NSDictionary *paraDict = @{@"openId":weixinInfo.credential.rawData[@"openid"],@"unionID":weixinInfo.credential.rawData[@"unionid"],@"username":weixinInfo.nickname,@"gender":sexStr,@"headImg":weixinInfo.icon,@"province":@"",@"city":@"",@"area":@"",@"userType":[NSNumber numberWithInteger:self.selectedUserType]};
+    
+    [TDHttpTools loginWXWithText:paraDict success:^(id response) {
         NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
         int status = [dict[@"status"] intValue];
         NSLog(@" 微信登录后台返回 dict:%@",dict);
         NSDictionary *dataDict = dict[@"data"];
         if (status == 0){
             NSLog(@"userType:%@",dataDict[@"userType"]);
-            // age = "<null>";
-            //            fansNum = 0;
-            //            focusNum = 0;
-            //            gender = "\U7537";
-            //            headImg = "<null>";
-            //            id = 8;
-            //            mobile = "<null>";
-            //            realName = "<null>";
-            //            realNamePath = "<null>";
-            //            state = 0;
-            //            userType = "\U96c7\U4e3b";
-            //            username = "<null>";
+//            -"data": {              //返回结果。若status为1，则为null
+//                "id": 2,                //用户id
+//                "username": null,       //用户名（昵称）
+//                "realName": null,       //真实姓名，文字
+//                "realNamePath": null,   //真实姓名语音路径
+//                "gender": "男",         //性别
+//                "age": null,            //年龄
+//                "headImg": null,        //头像路径
+//                "mobile": null,         //电话
+//                "userType": 1,          //身份。1：零工。2：雇主
+//                "focusNum": null,       //关注人数
+//                "fansNum": null,        //粉丝人数
+//                "state": 0              //状态。0：正常。
+//                "isFirst": true         //是不是第一次登录（即注册），false：不是。true：是
+//                "token": "N3ii1IpaUMqsdpV2",        //用户的token
+//                "userCode": "FKfaKd"                //用户编码
+//            },
             //在此保存用户信息
             [[lzhGetAccountInfo getAccount] writeToAccount:dataDict];
-            
-            
-            //[[NSNotificationCenter defaultCenter] postNotificationName:USER_TYPE_UPDATE_NOTIFICATION_NAME object:nil userInfo:nil];
-            //通知跟新界面
+            //
+            NSString *operatorToken = [dataDict[@"token"] copy];
+            [PDKeyChain keyChainSave:operatorToken];
             [SVProgressHUD showSuccessWithStatus:dict[@"msg"]];
             AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
             if ([lzhGetAccountInfo getAccount].identityFlag == 1){

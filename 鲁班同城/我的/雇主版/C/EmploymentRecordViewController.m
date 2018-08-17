@@ -70,7 +70,7 @@
 
 - (void)getData{
     //
-    [TDHttpTools getGuYongRecordList:@{@"userId":[lzhGetAccountInfo getAccount].userID} success:^(id response) {
+    [TDHttpTools getGuYongRecordList:@{} success:^(id response) {
         NSDictionary *webDict = response;
         if ([[webDict allKeys] containsObject:@"data"]){
             NSArray *dataArr = webDict[@"data"];

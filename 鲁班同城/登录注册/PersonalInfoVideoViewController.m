@@ -7,6 +7,9 @@
 //
 
 #import "PersonalInfoVideoViewController.h"
+
+#import "OwnPersonalInfomationViewController.h"
+//v
 #import "PersonalInfoAddPhotoFlagView.h"
 #import "CustomeStyleCornerButt.h"
 #import "CommitPopView.h"
@@ -437,8 +440,17 @@
     [TDHttpTools capsualChangeOwnInfo:paraDict traileUrlStr:@"/lubantc/api/user/updateWorkerInfo" imageFlagNameArr:@[@"technologyPic"] picDataArr:self.IncreasedNewPictureDataArr soundNameData:self.amendingInfoModel.nameSoundAmrData soundExperienceData:self.amendingInfoModel.workExperienceAmrData videoDataArr:self.IncreasedNewVideoDataArr success:^(id response) {
         NSLog(@"修改个人信息%@",response);
         NSDictionary *webDict = response;
-        [SVProgressHUD showSuccessWithStatus:webDict[@"msg"]];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        NSInteger status = [webDict[@"status"] integerValue];
+        if(status == 0){
+             [SVProgressHUD showSuccessWithStatus:webDict[@"msg"]];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            //
+            [[NSNotificationCenter defaultCenter] postNotificationName:PERSONAL_REFRESH_NOTI object:[OwnPersonalInfomationViewController class] userInfo:nil];
+        }else{
+            [SVProgressHUD showInfoWithStatus:webDict[@"msg"]];
+        }
+       
+        
     } failure:^(NSError *error) {
     
     }];
