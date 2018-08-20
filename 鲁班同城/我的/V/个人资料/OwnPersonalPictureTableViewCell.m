@@ -27,17 +27,31 @@
     if (self){
         spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 25)];
         spaceView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
-        [self.contentView addSubview:spaceView];
         //
         self.topDisplayLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCBold:16] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         self.topDisplayLabel.frame = CGRectMake(15, spaceView.bottom, SCREEN_WIDTH - 30, 50);
-        [self.contentView addSubview:self.topDisplayLabel];
         //
         pictureView = [SDWeiXinPhotoContainerView new];
-        [self.contentView addSubview:pictureView];
+        //
+        NSArray *viewArr = @[spaceView,self.topDisplayLabel,pictureView];
+        [self.contentView sd_addSubviews:viewArr];
+        //
+        spaceView.sd_layout
+        .leftEqualToView(self.contentView)
+        .rightEqualToView(self.contentView)
+        .topEqualToView(self.contentView)
+        .heightIs(25);
+        //
+        self.topDisplayLabel.sd_layout
+        .leftSpaceToView(self.contentView, 15)
+        .rightSpaceToView(self.contentView, 15)
+        .topSpaceToView(spaceView, 0)
+        .heightIs(50);
+        
         pictureView.sd_layout
         .leftEqualToView(self.topDisplayLabel)
         .topSpaceToView(self.topDisplayLabel, 10);
+        
     }
     return self;
 }

@@ -53,5 +53,17 @@
     return nav;
 }
 
++ (BOOL)judgeIsLogin{
+    BOOL login = NO;
+    NSString *opratToken = [PDKeyChain keyChainLoad];
+    NSLog(@"opratToken %@",opratToken);
+    if ([opratToken isKindOfClass:[NSString class]]){
+        login = YES;
+    }else{
+        NSLog(@"不是字符串");
+        login = NO;
+    }
+    return login;
+}
 
 @end

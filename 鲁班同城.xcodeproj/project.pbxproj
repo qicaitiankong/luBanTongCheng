@@ -447,6 +447,10 @@
 		187892DE210EE1D9002A5798 /* TelephoneNumberTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892DD210EE1D9002A5798 /* TelephoneNumberTools.m */; };
 		187892E1210EFB72002A5798 /* NSString+OwnDealNullStr.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892E0210EFB72002A5798 /* NSString+OwnDealNullStr.m */; };
 		187892E4210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 187892E3210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m */; };
+		187AF5A7212A64A7005503EA /* xuanFuButt.png in Resources */ = {isa = PBXBuildFile; fileRef = 187AF5A4212A64A1005503EA /* xuanFuButt.png */; };
+		187AF5A8212A64A7005503EA /* xuanFuButt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 187AF5A5212A64A4005503EA /* xuanFuButt@2x.png */; };
+		187AF5A9212A64A7005503EA /* xuanFuButt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 187AF5A6212A64A6005503EA /* xuanFuButt@3x.png */; };
+		187AF5AB212AC05E005503EA /* nullWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 187AF5AA212AC05D005503EA /* nullWhite.png */; };
 		188697202122714300580419 /* LuZhiYuYinPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1886971F2122714300580419 /* LuZhiYuYinPopView.m */; };
 		18869727212272D900580419 /* huaTong@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18869724212272D500580419 /* huaTong@3x.png */; };
 		18869728212272D900580419 /* huaTong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18869725212272D700580419 /* huaTong@2x.png */; };
@@ -1178,6 +1182,10 @@
 		187892E0210EFB72002A5798 /* NSString+OwnDealNullStr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+OwnDealNullStr.m"; sourceTree = "<group>"; };
 		187892E2210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+OwnDealServerNumber.h"; sourceTree = "<group>"; };
 		187892E3210EFC7C002A5798 /* NSNumber+OwnDealServerNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+OwnDealServerNumber.m"; sourceTree = "<group>"; };
+		187AF5A4212A64A1005503EA /* xuanFuButt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xuanFuButt.png; sourceTree = "<group>"; };
+		187AF5A5212A64A4005503EA /* xuanFuButt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xuanFuButt@2x.png"; sourceTree = "<group>"; };
+		187AF5A6212A64A6005503EA /* xuanFuButt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xuanFuButt@3x.png"; sourceTree = "<group>"; };
+		187AF5AA212AC05D005503EA /* nullWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nullWhite.png; sourceTree = "<group>"; };
 		1886971E2122714300580419 /* LuZhiYuYinPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuZhiYuYinPopView.h; sourceTree = "<group>"; };
 		1886971F2122714300580419 /* LuZhiYuYinPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuZhiYuYinPopView.m; sourceTree = "<group>"; };
 		18869724212272D500580419 /* huaTong@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huaTong@3x.png"; sourceTree = "<group>"; };
@@ -2870,6 +2878,10 @@
 		18E2DF1220E8C56100FDF9C1 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				187AF5AA212AC05D005503EA /* nullWhite.png */,
+				187AF5A4212A64A1005503EA /* xuanFuButt.png */,
+				187AF5A5212A64A4005503EA /* xuanFuButt@2x.png */,
+				187AF5A6212A64A6005503EA /* xuanFuButt@3x.png */,
 				188CB36A20FC733A00302C94 /* scrollPictureLabour01.png */,
 				188CB36920FC733A00302C94 /* scrollPictureLabour01@2x.png */,
 				188CB36B20FC733B00302C94 /* scrollPictureLabour01@3x.png */,
@@ -3118,12 +3130,14 @@
 				1818E4B720EB51B300B676C2 /* set03@3x.png in Resources */,
 				1851143B20FD7AA100872AC5 /* smallCancel@2x.png in Resources */,
 				1851D93F2101AF6F000C6306 /* dispatchOnMap.png in Resources */,
+				187AF5A9212A64A7005503EA /* xuanFuButt@3x.png in Resources */,
 				182030E521007B830098BFCC /* duiHao.png in Resources */,
 				1824F72620EEF38900E99823 /* orderSelected.png in Resources */,
 				185BDBA62114400C00F18CD5 /* city.json in Resources */,
 				1828C20321250BD5009E9B40 /* ShareSDK.bundle in Resources */,
 				187434AA20F3279D0008A24F /* share.png in Resources */,
 				1818E4BE20EB51BF00B676C2 /* set01.png in Resources */,
+				187AF5AB212AC05E005503EA /* nullWhite.png in Resources */,
 				182284C120FF155A0059FB94 /* ticket_time@3x.png in Resources */,
 				1822848A20FEE5B20059FB94 /* companyAddress@3x.png in Resources */,
 				180609BB20F481C800471E08 /* pullDown@3x.png in Resources */,
@@ -3157,11 +3171,13 @@
 				186EBE3620EDF91F00D0F54E /* videoFlag.png in Resources */,
 				188813A020EC714100F832BE /* weixinLogin@3x.png in Resources */,
 				188CB36420FC5EFA00302C94 /* rankSelected.png in Resources */,
+				187AF5A7212A64A7005503EA /* xuanFuButt.png in Resources */,
 				181FCBF520F727700044B055 /* quotePriceDetailBack.png in Resources */,
 				1888139F20EC714100F832BE /* weixinLogin@2x.png in Resources */,
 				186EBE1B20EDDF1300D0F54E /* experience@2x.png in Resources */,
 				180609B620F481C800471E08 /* pullUp.png in Resources */,
 				1824F77720EF40C800E99823 /* SenderVoiceNodePlaying01.png in Resources */,
+				187AF5A8212A64A7005503EA /* xuanFuButt@2x.png in Resources */,
 				188813D020ECA40600F832BE /* sex@3x.png in Resources */,
 				187434B820F327E00008A24F /* message@2x.png in Resources */,
 				1874348820F2F6F30008A24F /* myInfoStar@3x.png in Resources */,

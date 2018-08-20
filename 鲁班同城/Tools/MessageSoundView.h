@@ -8,19 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+
+
 @interface MessageSoundView : UIView
 
 @property (strong,nonatomic) UIButton* soundButt;
 //
 @property (strong,nonatomic) UILabel *soundTimeLabel;
 
+@property (copy,nonatomic) void (^clickSoundViewBlock)(void);
+
 - (void)adjustSoundView;
 
-- (void)startVoiceAnimation;
 
-- (void)stopVoiceAnimation;
-
-- (void)giveTimeToSoundView:(NSString*)timeStr;
+- (void)giveTimeToSoundViewAndPlay:(NSString*)timeStr wavData:(NSData*)data;
 
 
 @end

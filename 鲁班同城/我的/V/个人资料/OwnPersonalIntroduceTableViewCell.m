@@ -25,23 +25,51 @@
     if (self){
         spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 25)];
         spaceView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
-        [self.contentView addSubview:spaceView];
         //
         self.topDisplayLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCBold:16] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         self.topDisplayLabel.frame = CGRectMake(15, spaceView.bottom, SCREEN_WIDTH - 30, 50);
-        [self.contentView addSubview:self.topDisplayLabel];
         //
         self.introduceLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSC:16] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:0];
+        
         self.introduceLabel.numberOfLines = 0;
-        [self.contentView addSubview:self.introduceLabel];
         //
         self.soundView = [[MessageSoundView alloc]initWithFrame:CGRectMake(0, 0, 260, 40)];
         self.soundView.hidden = YES;
-        [self.contentView addSubview:self.soundView];
         //
+        NSArray *viewArr = @[spaceView,self.topDisplayLabel,self.introduceLabel,self.soundView];
+        [self.contentView sd_addSubviews:viewArr];
+        [self addConstraints];
     }
     return self;
 }
+- (void)addConstraints{
+    spaceView.sd_layout
+    .leftEqualToView(self.contentView)
+    .topEqualToView(self.contentView)
+    .rightEqualToView(self.contentView)
+    .heightIs(25);
+    
+    self.topDisplayLabel.sd_layout
+    .leftSpaceToView(self.contentView, 15)
+    .rightSpaceToView(self.contentView, 15)
+    .topSpaceToView(spaceView, 0)
+    .heightIs(50);
+    
+    self.introduceLabel.sd_layout
+    .leftEqualToView(self.topDisplayLabel)
+    .rightEqualToView(self.topDisplayLabel)
+    .topSpaceToView(self.topDisplayLabel, 10)
+    .autoHeightRatio(0);
+    
+    self.soundView.sd_layout
+    .leftEqualToView(self.topDisplayLabel)
+    .topSpaceToView(self.introduceLabel, 15)
+    .widthIs(260)
+    .heightIs(40);
+    
+}
+
+
 
 - (void)setModel:(OwnPersonalInfoModel*)model{
     _model = model;
@@ -49,6 +77,9 @@
     NSData *soundData = model.nameSoundData;
     UIView *bottomView = self.topDisplayLabel;
     self.topDisplayLabel.text = @"个人介绍";
+    
+    
+    
     if (str.length){
         self.introduceLabel.sd_resetLayout
         .leftEqualToView(self.topDisplayLabel)
@@ -56,19 +87,19 @@
         .topSpaceToView(self.topDisplayLabel, 10)
         .autoHeightRatio(0);
         self.introduceLabel.text = str;
-        bottomView = self.introduceLabel;
+        //bottomView = self.introduceLabel;
     }
-    if (soundData){
+    //if (soundData){
         self.soundView.hidden = NO;
         self.soundView.sd_resetLayout
-        .leftEqualToView(bottomView)
-        .topSpaceToView(bottomView, 10)
+        .leftEqualToView(self.introduceLabel)
+        .topSpaceToView(self.introduceLabel, 10)
         .widthIs(260)
         .heightIs(40);
         bottomView = self.soundView;
-    }else{
-        self.soundView.hidden = YES;
-    }
+    //}else{
+       // self.soundView.hidden = YES;
+    //}
     
     [self setupAutoHeightWithBottomView:bottomView bottomMargin:15];
     

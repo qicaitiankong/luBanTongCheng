@@ -102,7 +102,6 @@
 }
 
 - (void)clickLocationCity:(UIButton*)targetButt{
-//    [targetButt setTitle:@"李沧李沧" forState:UIControlStateNormal];
     [self getLocationCity];
 }
 
@@ -121,7 +120,6 @@
         [targetView adjustConstraintsAfterGiveTitle];
     }
 }
-
 //
 - (void)addCollectionView{
     JHWaterfallCollectionLayout* layout = [[JHWaterfallCollectionLayout alloc]init];
@@ -135,7 +133,6 @@
     mainCollectionView.delegate = self;
     mainCollectionView.dataSource = self;
     [self.view addSubview:mainCollectionView];
-    
 }
 
 #pragma mark - WaterFlowLayoutDelegate
@@ -192,6 +189,7 @@
     return cell;
 }
 
+
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     FirstPageWaterCollectionReusableHeaderView *header =nil;
     //返回段头段尾视图
@@ -219,10 +217,9 @@
 //悬浮按钮
 - (void)createButtView{
     if([lzhGetAccountInfo getAccount].identityFlag){
-        self.xuanFubuttView = [[LaunchTicketOnWindowCircleButtView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - SCREEN_WIDTH * 0.16 - 10, SCREEN_HEIGHT - TAB_BAR_HEIGHT - SCREEN_WIDTH * 0.16 - 50, SCREEN_WIDTH * 0.16, SCREEN_WIDTH * 0.16)];
+        self.xuanFubuttView = [[LaunchTicketOnWindowCircleButtView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - SCREEN_WIDTH * 0.24, SCREEN_HEIGHT - TAB_BAR_HEIGHT - SCREEN_WIDTH * 0.24 - 50, SCREEN_WIDTH * 0.24, SCREEN_WIDTH * 0.24)];
         UIWindow *appWindow = APP_MAIN_WINDOW;
         [appWindow addSubview:self.xuanFubuttView];
-        self.xuanFubuttView.layer.cornerRadius = self.xuanFubuttView.width / 2;
         WS(weakSelf);
         self.xuanFubuttView.clickButtBlock = ^{
              UINavigationController *currentNav = [NavTools currentNavgation:weakSelf.rdv_tabBarController];

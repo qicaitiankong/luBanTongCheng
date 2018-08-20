@@ -58,6 +58,7 @@
         
         backButt = [UIButton buttonWithType:UIButtonTypeCustom];
         [backButt addTarget:self action:@selector(backButtonHandler) forControlEvents:UIControlEventTouchUpInside];
+        backButt.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:backButt];
         //
         CGFloat labelHeight = frame.size.height * 0.9;

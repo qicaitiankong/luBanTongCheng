@@ -133,19 +133,18 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
     NSLog(@"打印称呼 nameStr=%@",nameStr);
     NSDictionary *paraDict = @{@"userName":nameStr,@"mobile":mobileStr,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressStr,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuStr,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
     
-    [TDHttpTools launchOder:paraDict success:^(id response) {
-        NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
-        int status = [dict[@"status"] intValue];
+    [TDHttpTools launchOder:paraDict pictureDataArr:@[] success:^(id response) {
+        int status = [response[@"status"] intValue];
         if (status == 0){
-             [self showPopView];
+            [self showPopView];
         }else if (status == 1){
-            [SVProgressHUD showInfoWithStatus:dict[@"msg"]];
+            [SVProgressHUD showInfoWithStatus:response[@"msg"]];
         }
-        
     } failure:^(NSError *error) {
-        NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
-        [SVProgressHUD showInfoWithStatus:errorCode];
+        
     }];
+    
+    
     
 }
 //

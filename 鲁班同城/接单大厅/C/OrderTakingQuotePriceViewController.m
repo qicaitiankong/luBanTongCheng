@@ -13,11 +13,12 @@
 #import "TakeOrderQuotePriceSectionView.h"
 #import "CommitPopView.h"
 
-@interface OrderTakingQuotePriceViewController ()<UITableViewDelegate,UITableViewDataSource>{
+@interface OrderTakingQuotePriceViewController ()<UITableViewDelegate,UITableViewDataSource,AVAudioRecorderDelegate,AVAudioPlayerDelegate>{
     TakeOrderQuotePriceSectionView *sectionView;
     //
     CommitPopView *popView;
     UIButton *popbackButt;
+    RecordAndPlaySound *dealRecordPlaySound;
 }
 
 @property (strong,nonatomic) UITableView *tableView;
@@ -30,7 +31,15 @@
 
 @property (strong,nonatomic) UITextView *beiZhuTextView;
 
+//录制的语音信息
+@property (strong,nonatomic) NSData *amrData;
 
+@property (strong,nonatomic) NSData *wavData;
+
+@property (assign,nonatomic) float soundTimes;
+//获得报价cell所有权
+@property (strong,nonatomic) TakeOrderQuotePriceTableViewCell *baoJiaCell;
+//
 @end
 
 @implementation OrderTakingQuotePriceViewController
@@ -45,13 +54,6 @@
     //
     [NavTools hiddenTabbar:self.rdv_tabBarController];
     //
-    if(self.isBapJiaDetail){
-        self.title = @"详情";
-
-    }else{
-        self.title = @"报价";
-
-    }
     self.view.backgroundColor = [UIColor whiteColor];
     //
     [self initOwnObjects];
@@ -62,6 +64,13 @@
 }
 
 - (void)initOwnObjects{
+    if(self.isBapJiaDetail){
+        self.title = @"详情";
+    }else{
+        self.title = @"报价";
+    }
+    //初始化语音对象
+    dealRecordPlaySound = [[RecordAndPlaySound alloc]init:self plyerDelegate:self];
     self.modelArr = [[NSMutableArray alloc]init];
     self.singleModel = [[TakeOrderQuotePriceModel alloc] init];
     self.singleModel.imageUrls = [[NSMutableArray alloc]init];
@@ -108,6 +117,7 @@
         }];
 }
 
+
 - (void)takeOrderHandler{
     NSString *moneyStr = [NSString getResultStrBySeverStr: self.moneyField.text];
     NSString *beiZhuStr = [NSString getResultStrBySeverStr: self.beiZhuTextView.text];
@@ -123,8 +133,10 @@
             return;
         }
     }
-    NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"price":[NSNumber numberWithInteger:[moneyStr integerValue]],@"remark":beiZhuStr};
-    [TDHttpTools CasualScramebleTakeOrder:paraDict success:^(id response) {
+    
+    NSDictionary *paraDict = @{@"orderId":[NSNumber numberWithInteger:self.orderId],@"price":[NSNumber numberWithInteger:[moneyStr integerValue]],@"voiceLength":[NSString stringWithFormat:@"%lf",self.soundTimes]};
+    
+    [TDHttpTools CasualScramebleTakeOrder:paraDict voiceFile:self.amrData success:^(id response) {
         NSDictionary *webDict = response;
         NSLog(@"webDict:%@",webDict);
         [SVProgressHUD showSuccessWithStatus:webDict[@"msg"]];
@@ -137,6 +149,45 @@
         
     }];
 }
+
+//添加语音
+- (void)clickAddSound:(PersonalInfoAddSoundButtView*)soundView{
+    NSLog(@"添加语音");
+    if (self.wavData == nil){
+        NSLog(@"没有语音");
+        [self->dealRecordPlaySound startRecord];
+        //录制语音弹窗
+        [LuZhiYuYinPop showPopView:^{//暂时没有做取消块
+            
+        } completeBlock:^{
+            [LuZhiYuYinPop dismissPopView];
+            [self->dealRecordPlaySound endRecord];
+            self.wavData = [self->dealRecordPlaySound.WavsoundData copy];
+            self.soundTimes = self->dealRecordPlaySound.recordTime;
+            self.amrData = [self->dealRecordPlaySound.amrSoundData copy];
+            [soundView changeToPlaySoundState];
+            
+            //NSLog(@"录制完成后的语音文件%@",self.amendingInfoModel.workExperienceData);
+        }];
+    }else{
+        NSLog(@"有语音");
+        [dealRecordPlaySound playSound:self.wavData];
+        [BoFangYuYinOwnPop showPopView:self.soundTimes deleteBlock:^{//删除点击
+            [BoFangYuYinOwnPop dismissPopView];
+            [self -> dealRecordPlaySound stopPlay];
+            self.amrData = nil;
+            self.wavData = nil;
+            self.soundTimes = 0;
+            [soundView changeToAddSoundState];
+        } completeBlock:^{//完成点击
+            [self->dealRecordPlaySound stopPlay];
+            [BoFangYuYinOwnPop dismissPopView];
+            [soundView changeToPlaySoundState];
+        }];
+    }
+}
+
+
 
 //views
 - (void)addTableView:(CGRect)size style:(UITableViewStyle)styles{
@@ -183,10 +234,13 @@
                     TakeOrderQuotePriceTableViewCell *secondCell = [tableView dequeueReusableCellWithIdentifier:cellFlag];
                     if (nil == secondCell){
                         secondCell = [[TakeOrderQuotePriceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellFlag];
+                        self.baoJiaCell = secondCell;
                         //指定控件
                         weakSelf.moneyField = secondCell.bottomGroupView.moneyTextfield.myTextField;
                         weakSelf.beiZhuTextView = secondCell.bottomGroupView.beiZhuTextView.writeTextView;
-                        secondCell.bottomGroupView.takeOrderButt.clickButtBlock = ^{
+                    secondCell.bottomGroupView.addSoundView.addSoundClickBlock = ^{
+                            [weakSelf clickAddSound:  weakSelf.baoJiaCell.bottomGroupView.addSoundView];
+                        }; secondCell.bottomGroupView.takeOrderButt.clickButtBlock = ^{
                             [weakSelf takeOrderHandler];
                         };
                     }

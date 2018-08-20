@@ -55,18 +55,17 @@
         //将全部影藏
          for (PersonalInfoAddPhotoFlagView *singleView in self.imageViewArr){
              singleView.hidden = YES;
-             //singleView.userInteractionEnabled = NO;
+             singleView.addImageView.hidden = YES;
+             [singleView.imageView setImage:[UIImage imageNamed:@"nullWhite"]];
          }
         if (model.selectedImageArr.count == 0){
                     int i = 0;
                     for (PersonalInfoAddPhotoFlagView *singleView in self.imageViewArr){
                         if (i > 0){
                             singleView.hidden = YES;
-                            //singleView.userInteractionEnabled = NO;
                         }else{
                             singleView.hidden = NO;
                             singleView.addImageView.hidden = NO;
-                            singleView.userInteractionEnabled = YES;
                              botView = singleView;
                         }
                         singleView.sd_resetLayout
@@ -81,7 +80,9 @@
         }else{
                     if (model.selectedImageArr.count < self.imageViewArr.count){
                         for (int k = 0; k < model.selectedImageArr.count; k ++){
-                            PersonalInfoAddPhotoFlagView *singleView = self.imageViewArr[k];
+                           PersonalInfoAddPhotoFlagView *singleView = self.imageViewArr[k];
+                            singleView.hidden = NO;
+                        singleView.addImageView.hidden = YES;
                             [singleView.imageView setImage:model.selectedImageArr[k]];
                             singleView.sd_resetLayout
                             .leftSpaceToView(self.contentView, imageLeftBeginSpace + (imageViewWidth + imageCenterSpace)* (k % 3))
@@ -90,20 +91,15 @@
                             .heightEqualToWidth();
                             [singleView adjustConstraintsWhenNeed];
                            
-                            singleView.hidden = NO;
-                            //singleView.userInteractionEnabled = NO;
-                            singleView.addImageView.hidden = YES;
                         }
                         PersonalInfoAddPhotoFlagView *singleView = self.imageViewArr[model.selectedImageArr.count];
-                        singleView.hidden = NO;
-                        singleView.userInteractionEnabled = YES;
+                        singleView.hidden = NO;                        singleView.addImageView.hidden = NO;
                         singleView.addImageView.hidden = NO;
                         botView = singleView;
                     }else{//当选择的图片为imageview arr count个时
                         int m = 0;
                         for (PersonalInfoAddPhotoFlagView *singleView in self.imageViewArr){
                             singleView.hidden = NO;
-                            //singleView.userInteractionEnabled = NO;
                             singleView.addImageView.hidden = YES;
                             [singleView.imageView setImage:model.selectedImageArr[m]];
                             //

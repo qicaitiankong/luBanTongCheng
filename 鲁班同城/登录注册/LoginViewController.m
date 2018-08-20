@@ -249,16 +249,67 @@
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:@"短信获取成功"];
+            [SVProgressHUD showSuccessWithStatus:@"短信获取成功"];
         }
     }];
     
-    
-    
 }
 
-- (void)loginHandler{
+//
+- (void)judgeYanZhengMa{
+    if(codeTextField.myTextField.text.length == 0){
+        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
+        return;
+    }
+    //判断是否验证成功
     
+    [SMSSDK  commitVerificationCode:codeTextField.myTextField.text
+     
+     //传获取到的区号
+     
+                        phoneNumber:mobileTextField.myTextField.text
+     
+                               zone:@"86"
+     
+                             result:^(NSError *error)
+     
+     {
+         
+         
+         
+         if (!error)
+             
+         {
+             
+             NSLog(@"验证成功");
+             
+             
+             
+             
+         }
+         
+         else
+             
+         {
+             
+             
+             NSLog(@"验证失败");
+             
+         }
+         
+     }];
+
+}
+
+
+
+
+
+
+//
+
+- (void)loginHandler{
+    [self judgeYanZhengMa];
 }
 
 - (void)registerHandler{

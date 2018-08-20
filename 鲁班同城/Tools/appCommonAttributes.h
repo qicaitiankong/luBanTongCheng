@@ -50,6 +50,7 @@
 #import "AudioConverter.h"
 #import "PDKeyChain.h"
 
+
 //sharesdk
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
@@ -149,6 +150,13 @@
 
 //我的资料页面刷新界面通知
 #define PERSONAL_REFRESH_NOTI @"refreshPersonalInfoNoti"
+
+//微信app id app screet
+
+#define WX_APP_ID @"wx02306e615972be35"
+
+#define WX_APP_SCRET @"3ddea37af9e6e25fca5a43c69198ce3d"
+
 
 
 #endif /* appCommonAttributes_h */

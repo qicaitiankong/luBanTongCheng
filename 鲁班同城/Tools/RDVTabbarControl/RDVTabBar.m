@@ -95,7 +95,7 @@
     int index = 0;
     RDVTabBarItem *targetItem = nil;
      for (RDVTabBarItem *item in [self items]) {
-         if (index == 2){
+         if (index == 1){
              targetItem = item;
              break;
          }

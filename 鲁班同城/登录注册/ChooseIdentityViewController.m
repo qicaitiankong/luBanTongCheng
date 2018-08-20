@@ -47,6 +47,7 @@
         WxQQLoginViewController *weiXinVC = [[WxQQLoginViewController alloc]init];
         weiXinVC.isWx = YES;
         weiXinVC.selectedUserType = self.groupButtView.selectedUserType;
+        weiXinVC.selectedUserType = self.groupButtView.selectedUserType;
         [self.navigationController pushViewController:weiXinVC animated:YES];
     }else{
         LoginViewController *loginVC = [[LoginViewController alloc]init];
@@ -71,6 +72,7 @@
     //UIColor *textColor = [UIColor colorWithRed:153.003/255.0 green:153.003/255.0 blue:153.003/255.0 alpha:1];
     //
     self.groupButtView = [[chooseIdentityGroupButtView alloc]initWithFrame:CGRectMake(0, topLogoImageView.bottom + 30, SCREEN_WIDTH * 0.72, SCREEN_HEIGHT * 0.187)];
+    
     [self.view addSubview:self.groupButtView];
     
     CustomeStyleCornerButt *loginButtView = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 0, self.view.width * 0.72, SCREEN_HEIGHT * 0.06) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:0 title:@"确定" titleColor:[UIColor colorWithHexString:@"#FFFEFE"] font: [UIFont getPingFangSCMedium:16]];

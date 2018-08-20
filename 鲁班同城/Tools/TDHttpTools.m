@@ -12,6 +12,8 @@
 
 #define kSERVER_HTTP_DXE @"http://www.lubantc.com"
 
+//
+
 #define kSever_HTTP_IMAGE_AUDIO @"http://www.lubantc.com:8080"
 
 
@@ -84,69 +86,69 @@
  *  @param success    <#success description#>
  *  @param failure    <#failure description#>
  */
-+(void)anotherRequestWithMethodType:(RequestMethodType)methodType Url:(NSString *)urlString params:(id)params success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
-    
-    [SVProgressHUD showWithStatus:@""];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    // 设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = 10.f;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
-    
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript",@"text/css", @"text/plain", @"application/x-javascript", @"application/javascript",@"application/xhtml+xml",@"application/xml", nil];
-    
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
-    
-    urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
-    switch (methodType) {
-        case RequestMethodTypeGet:
-        {
-            [manager GET:urlString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                if (success) {
-                    //id dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-                    
-                    
-                    [SVProgressHUD dismiss];
-                    success(responseObject);
-                }
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                if (failure) {
-                    [SVProgressHUD dismiss];
-                    failure(error);
-                }
-            }];
-        }
-            break;
-        case RequestMethodTypePost:
-        {
-            [manager POST:urlString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                if (success) {
-                    //id dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-                    
-                    
-                    [SVProgressHUD dismiss];
-                    success(responseObject);
-                    
-                }
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                if (failure) {
-                    [SVProgressHUD dismiss];
-                    failure(error);
-                    
-                }
-            }];
-        }
-            break;
-            
-        default:
-            break;
-    }
-}
+//+(void)anotherRequestWithMethodType:(RequestMethodType)methodType Url:(NSString *)urlString params:(id)params success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+//
+//    [SVProgressHUD showWithStatus:@""];
+//
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//
+//    // 设置超时时间
+//    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+//    manager.requestSerializer.timeoutInterval = 10.f;
+//    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+//
+//
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript",@"text/css", @"text/plain", @"application/x-javascript", @"application/javascript",@"application/xhtml+xml",@"application/xml", nil];
+//
+//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//
+//
+//    urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+//    switch (methodType) {
+//        case RequestMethodTypeGet:
+//        {
+//            [manager GET:urlString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//                if (success) {
+//                    //id dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+//
+//
+//                    [SVProgressHUD dismiss];
+//                    success(responseObject);
+//                }
+//            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//                if (failure) {
+//                    [SVProgressHUD dismiss];
+//                    failure(error);
+//                }
+//            }];
+//        }
+//            break;
+//        case RequestMethodTypePost:
+//        {
+//            [manager POST:urlString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//                if (success) {
+//                    //id dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+//
+//
+//                    [SVProgressHUD dismiss];
+//                    success(responseObject);
+//
+//                }
+//            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//                if (failure) {
+//                    [SVProgressHUD dismiss];
+//                    failure(error);
+//
+//                }
+//            }];
+//        }
+//            break;
+//
+//        default:
+//            break;
+//    }
+//}
 /**
  *  xml格式
  *
@@ -204,33 +206,37 @@
 }
 
 + (AFHTTPSessionManager*)getSessionManager{
-    AFHTTPSessionManager *manager= [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript",@"text/css", @"text/plain", @"application/x-javascript", @"application/javascript",@"application/xhtml+xml",@"application/xml", nil];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
     // 设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = 10.f;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    //
-     [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript",@"text/css", @"text/plain", @"application/x-javascript", @"application/javascript",@"application/xhtml+xml",@"application/xml", nil];
+    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
     //
     NSString *userIDstr = @"";
     NSString *token = @"";
-    if ([lzhGetAccountInfo getAccount].userID && ([[lzhGetAccountInfo getAccount].userID integerValue] != 0)){//登录状态可以取到
+    if ([NavTools judgeIsLogin]){//登录状态可以取到
         userIDstr = [[lzhGetAccountInfo getAccount].userID stringValue];
         [manager.requestSerializer setValue:userIDstr forHTTPHeaderField:@"userId"];
         //
+        //
         token = [PDKeyChain keyChainLoad];
+    
+        //时间戳毫秒
+        NSString *currentTime = [NSString getNowMMTimeTimes];
+        [manager.requestSerializer setValue:currentTime forHTTPHeaderField:@"timeStamp"];
+        //签名认证
+        NSMutableString *signStr = [[NSMutableString alloc]initWithString:@""];
+        [signStr appendFormat:@"%@%@%@%ld",token,[lzhGetAccountInfo getAccount].userCode,currentTime,[[lzhGetAccountInfo getAccount].userID integerValue]];
+        NSString *md5SignStr = [NSString md5:signStr];
+        [manager.requestSerializer setValue:md5SignStr forHTTPHeaderField:@"sign"];
     }
-    //时间戳毫秒
-    NSString *currentTime = [NSString getNowMMTimeTimes];
-    [manager.requestSerializer setValue:currentTime forHTTPHeaderField:@"timeStamp"];
-    //签名认证
-    NSMutableString *signStr = [[NSMutableString alloc]initWithString:@""];
-    [signStr appendFormat:@"%@%@%@%ld",token,[lzhGetAccountInfo getAccount].userCode,currentTime,[[lzhGetAccountInfo getAccount].userID integerValue]];
-    NSString *md5SignStr = [NSString md5:signStr];
-    [manager.requestSerializer setValue:md5SignStr forHTTPHeaderField:@"sign"];
     //
     return manager;
 }
@@ -280,6 +286,7 @@
     }];
 
 }
+
 
 +(void)loginWXWithText:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
     NSDictionary *params = paraDict;
@@ -441,29 +448,41 @@
 }
 
 //零工抢单
-+(void)CasualScramebleTakeOrder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
++(void)CasualScramebleTakeOrder:(NSDictionary*)paraDict voiceFile:(NSData*)soundData success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
     NSDictionary *params = paraDict;
-    
+    //
+    AFHTTPSessionManager *session= [self getSessionManager];
+    //
     NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/receiveOrder",kSERVER_HTTP_DXE];
-    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
-        if (success) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
-            int status = [dict[@"status"] intValue];
-            if (status == 0){
-                success(dict);
-            }else if (status == 1){
-                [SVProgressHUD showInfoWithStatus:dict[@"msg"]];
-                failure(nil);
-            }
+    //
+   
+    [session POST:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        if(soundData){
+            [formData appendPartWithFileData:soundData
+             
+                                        name:@"remarkVoice"
+             
+                                    fileName:@"sound.amr"
+             
+                                    mimeType:@"audio/amr"];
         }
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-            NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
-            [SVProgressHUD showErrorWithStatus:errorCode];
-        }
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        NSLog(@"%f",uploadProgress.fractionCompleted);
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        success(dict);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+        NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+        [SVProgressHUD showErrorWithStatus:errorCode];
     }];
+    
 }
+
 
 //零工确认接单
 +(void)CasualSureTakeOrder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
@@ -515,6 +534,7 @@
         }
     }];
 }
+
 
 //零工修改个人信息
 + (void)capsualChangeOwnInfo:(NSDictionary*)paraDict traileUrlStr:(NSString*)traileUrlStr imageFlagNameArr:(NSArray*)imageNameArr picDataArr:(NSArray*)targetPictureDataArr soundNameData:(NSData*)nameData soundExperienceData:(NSData*)experienceData
@@ -763,18 +783,71 @@
     }];
 }
 //派单
-+(void)launchOder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
-    NSDictionary *params = paraDict;
-    
-    NSString *urlString=[NSString stringWithFormat:@"%@/lubantc/api/order/publishOrder",kSERVER_HTTP_DXE];
-    [TDHttpTools requestWithMethodType:RequestMethodTypePost Url:urlString params:params success:^(id response) {
-        if (success) {
-            success(response);
++(void)launchOder:(NSDictionary*)paraDict pictureDataArr:(NSArray*)picDataArr success:(void (^)(id response))success failure:(void (^)(NSError *error))failure{
+    AFHTTPSessionManager *session= [self getSessionManager];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@",kSERVER_HTTP_DXE,@"/lubantc/api/order/publishOrder"];
+    [session POST:urlString parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+       
+        //拼接图片
+        if(picDataArr.count > 0){
+            for (int m = 0; m < picDataArr.count; m ++){
+                NSData *imageData = picDataArr[m];
+                NSString *imageType = [UIImage contentTypeForImageData:imageData];
+                NSString *imageAppendType = @"image/jpeg";
+                if (imageType == nil){
+                }else{
+                    imageAppendType = [NSString stringWithFormat:@"image/%@",imageType];
+                }
+                if (imageData == nil){
+                    NSLog(@"!!!!!!!!!图片为空");
+                }
+                //上传的参数(上传图片，以文件流的格式)
+                [formData appendPartWithFileData:imageData
+                 
+                                            name:@"publishOrderPic"
+                 
+                                        fileName:@"test1000.jpg"
+                 
+                                        mimeType:imageAppendType];
+            }
         }
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-        }
+        //
+        //            if(targetVideoDataArr.count > 0){
+        //                for (int m = 0; m < targetVideoDataArr.count; m ++){
+        //                    NSData *imageData = targetVideoDataArr[m];
+        //                    NSString *imageType = [UIImage contentTypeForImageData:imageData];
+        //                    NSString *imageAppendType = @"image/jpeg";
+        //                    if (imageType == nil){
+        //                    }else{
+        //                        imageAppendType = [NSString stringWithFormat:@"image/%@",imageType];
+        //                    }
+        //                    if (imageData == nil){
+        //                        NSLog(@"!!!!!!!!!图片为空");
+        //                    }
+        //                    //上传的参数(上传图片，以文件流的格式)
+        //                    [formData appendPartWithFileData:imageData
+        //
+        //                                                name:imageNameArr[1]
+        //
+        //                                            fileName:@"test1001.jpg"
+        //
+        //                                            mimeType:imageType];
+        //                }
+        //
+        //}
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        NSLog(@"%f",uploadProgress.fractionCompleted);
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        success(dict);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+        NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
+        [SVProgressHUD showErrorWithStatus:errorCode];
     }];
 }
 

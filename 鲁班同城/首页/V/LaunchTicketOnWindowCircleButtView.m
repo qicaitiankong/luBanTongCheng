@@ -14,18 +14,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = SPECIAL_BLUE_COLOR;
-        self.clipsToBounds = YES;
-        UIImageView *topImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height * 0.2, 15, 13)];
+        UIImageView *topImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         topImageView.backgroundColor = self.backgroundColor;
-        topImageView.center = CGPointMake(frame.size.width / 2, topImageView.centerY);
-        [topImageView setImage:[UIImage imageNamed:@"send_message"]];
+        //topImageView.center = CGPointMake(frame.size.width, topImageView.centerY);
+        [topImageView setImage:[UIImage imageNamed:@"xuanFuButt"]];
         [self addSubview:topImageView];
-        //
-        UILabel *bottomLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:17] titleColor:[UIColor whiteColor] aligement:1];
-        bottomLabel.frame = CGRectMake(0, topImageView.bottom, frame.size.width, frame.size.height - topImageView.bottom);
-        bottomLabel.text = @"派单";
-        [self addSubview:bottomLabel];
         //
         UIButton *butt = [UIButton buttonWithType:UIButtonTypeCustom];
         butt.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);

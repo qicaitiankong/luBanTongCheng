@@ -20,6 +20,7 @@
 @interface OwnPersonalInfomationViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UIScrollView *baseScrollView;
     OwnPersonalInfomationTopPictureGoupView *topPartView;
+    MessageSoundView *soundView;
 }
 
 @property (strong,nonatomic) OwnPersonalInfoModel *infoModel;
@@ -47,6 +48,15 @@
     self.infoModel = [[OwnPersonalInfoModel alloc]init];
     
 }
+//语音播放
+- (void)playSoundIfHaveSound{
+    NSLog(@"点击了播放语音");
+    //将下载的与语音转换为amr
+    [soundView giveTimeToSoundViewAndPlay:@"10s测试显示" wavData:nil];
+}
+//delegate
+
+
 
 //添加关注
 - (void)addConcernOrCancelConcel{
@@ -68,7 +78,6 @@
     }
 }
 //修改界面版
-//
 - (void)addTableView{
     //
     topPartView = [[OwnPersonalInfomationTopPictureGoupView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 20) targetUseId:[self.targetUserId integerValue]];
@@ -135,7 +144,11 @@
             static NSString *introCellFlag = @"introCell";
             OwnPersonalIntroduceTableViewCell *introCell = [tableView dequeueReusableCellWithIdentifier:introCellFlag];
             if (nil == introCell){
+                WS(weakSelf);
                 introCell = [[OwnPersonalIntroduceTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:introCellFlag];
+                soundView = introCell.soundView; introCell.soundView.clickSoundViewBlock = ^{
+                    [weakSelf playSoundIfHaveSound];
+                    };
             }
             introCell.model = self.infoModel;
             parentCell = introCell;
@@ -149,13 +162,7 @@
                 technologyCell = [[OwnPersonalServiceTypeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
             }
             technologyCell.path = indexPath;
-            if(indexPath.row == 0){
-                technologyCell.model = self.infoModel;
-                technologyCell.topDisplayLabel.text = @"个人技能";
-            }else{
-                technologyCell.model = self.infoModel;
-                technologyCell.topDisplayLabel.text = @"服务类型";
-            }
+            technologyCell.model = self.infoModel;
             parentCell = technologyCell;
         }
             break;
@@ -203,6 +210,12 @@
     
     return cellHeight;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+
 //
 - (void)getUserInfo{
     self.infoModel = [[OwnPersonalInfoModel alloc]init];
@@ -223,7 +236,9 @@
                     if ([dataDict allKeys].count){
                         self.infoModel = [OwnPersonalInfoModel setModelFromDict:dataDict];
                         
-                        self.infoModel.pictureUrlStrArr = @[@"",@"",@"",@""];
+                        self.infoModel.videoUrlStrArr = @[@"",@"",@""]; self.infoModel.pictureUrlStrArr = @[@"",@"",@"",@""];
+                        //self.infoModel.introduceStr = @"个人介绍工作经历个人介绍工作经历个人介绍工作经历个人介绍工作经历";
+                        
                         //界面赋值
                         [self.tableView reloadData];
                         //

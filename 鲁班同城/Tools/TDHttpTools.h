@@ -48,9 +48,6 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 //获取零工用户信息
 +(void)getCapsualUserInfo:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
-//派单
-+(void)launchOder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
-
 
 //工作职业列表
 +(void)getJobList:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
@@ -66,7 +63,9 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 +(void)getCasualTakeOrderDetail:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 //零工抢单
-+(void)CasualScramebleTakeOrder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
++(void)CasualScramebleTakeOrder:(NSDictionary*)paraDict voiceFile:(NSData*)soundData success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+
 
 //零工确认接单
 +(void)CasualSureTakeOrder:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
@@ -91,6 +90,9 @@ typedef NS_ENUM(NSInteger , RequestMethodType) {
 
 //雇佣
 +(void)EmplyeerEmploy:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
+
+//派单
++(void)launchOder:(NSDictionary*)paraDict pictureDataArr:(NSArray*)picDataArr success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 //雇主评价
 +(void)EmplyeerComment:(NSDictionary*)paraDict success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;

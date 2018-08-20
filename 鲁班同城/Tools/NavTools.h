@@ -24,5 +24,8 @@
 + (void)displayTabbar:(RDVTabBarController*)tab;
 
 + (UINavigationController*)currentNavgation:(RDVTabBarController*)tabbarControler;
+//判断是否是登录状态
++ (BOOL)judgeIsLogin;
+
 
 @end

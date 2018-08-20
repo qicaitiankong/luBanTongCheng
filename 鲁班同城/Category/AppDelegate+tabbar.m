@@ -202,8 +202,8 @@
          {
             
              case SSDKPlatformTypeWechat:
-                 [appInfo SSDKSetupWeChatByAppId:@"wx02306e615972be35"
-                                       appSecret:@"3ddea37af9e6e25fca5a43c69198ce3d"];
+                 [appInfo SSDKSetupWeChatByAppId:WX_APP_ID
+                                       appSecret:WX_APP_SCRET];
                  break;
              case SSDKPlatformTypeQQ://改成自己的
                  [appInfo SSDKSetupQQByAppId:@"100371282"

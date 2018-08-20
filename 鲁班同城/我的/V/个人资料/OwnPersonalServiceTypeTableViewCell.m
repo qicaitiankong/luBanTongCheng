@@ -17,6 +17,7 @@
     CGFloat verticalSpace;
     //
     UIView *spaceView;
+    NSMutableArray *viewArr;
 }
 @end
 
@@ -36,12 +37,21 @@
         //
         spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 25)];
         spaceView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
-        [self.contentView addSubview:spaceView];
         //
         self.topDisplayLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCBold:16] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         self.topDisplayLabel.frame = CGRectMake(15, spaceView.bottom, SCREEN_WIDTH - 30, 50);
-        [self.contentView addSubview:self.topDisplayLabel];
         //
+         viewArr = [[NSMutableArray alloc]initWithObjects:spaceView,self.topDisplayLabel, nil];
+        for (int k = 0; k < 3; k ++){
+            CustomerLabelView *itemView = [[CustomerLabelView alloc]init];
+            [self.contentView addSubview:itemView];
+            [itemArr addObject:itemView];
+            [viewArr addObject:itemView];
+        }
+       
+        
+        [self.contentView sd_addSubviews:viewArr];
+        
         spaceView.sd_layout
         .leftEqualToView(self.contentView)
         .rightEqualToView(self.contentView)
@@ -53,12 +63,7 @@
         .rightSpaceToView(self.contentView, 15)
         .topSpaceToView(spaceView, 0)
         .heightIs(50);
-        //
-        for (int k = 0; k < 3; k ++){
-            CustomerLabelView *itemView = [[CustomerLabelView alloc]init];
-            [self.contentView addSubview:itemView];
-            [itemArr addObject:itemView];
-        }
+        
     }
     return self;
 }
@@ -69,8 +74,10 @@
     NSArray *infoArr = nil;
     if (_path.row == 0){
         infoArr = model.targetTechSeviceArr;
+          self.topDisplayLabel.text = @"个人技能";
     }else{
         infoArr = model.targetJobArr;
+          self.topDisplayLabel.text = @"服务类型";
     }
     NSInteger itemCount = itemArr.count;
     //
@@ -79,6 +86,7 @@
             CustomerLabelView *itemView = [[CustomerLabelView alloc]init];
             [self.contentView addSubview:itemView];
             [itemArr addObject:itemView];
+            [viewArr addObject:itemView];
         }
     }
     //先全部隐藏

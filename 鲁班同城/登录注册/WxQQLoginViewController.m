@@ -44,6 +44,9 @@
 
 - (void)firstLoginHandler{
     NSLog(@"firstLoginHandler");
+    [SVProgressHUD show];
+    
+    
     if(self.isWx){
         [ShareSDK getUserInfo:SSDKPlatformTypeWechat
                onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
@@ -55,6 +58,7 @@
                  NSLog(@"user.credential..rawData=%@",user.credential.rawData);
                  NSLog(@"token=%@",user.credential.token);
                  NSLog(@"nickname=%@",user.nickname);
+                 [SVProgressHUD dismiss];
                  if (user.credential == nil){
                      NSLog(@"\n\n！！！！！！！！微信登录尚未授权\n\n");
                  }else{
@@ -66,6 +70,7 @@
              }
              else
              {
+                 [SVProgressHUD dismiss];
                  NSLog(@"%@",error);
                  [SVProgressHUD showErrorWithStatus:@"微信登录失败，请重试"];
              }
@@ -83,9 +88,24 @@
         sexStr = @"女";
     }
 
-    NSLog(@"!!!!!! openID:%@ unionID:%@ selected tyoe %ld",weixinInfo.credential.rawData[@"openid"],weixinInfo.credential.rawData[@"unionid"],self.selectedUserType);
+   
+    //
+    NSString *openIDStr = [weixinInfo.credential.rawData[@"openid"] copy];
+    if ([openIDStr isKindOfClass:[NSNumber class]]){
+        NSLog(@"openid是数字");
+    }else{
+         NSLog(@"openid不是数字");
+    }
     
-    NSDictionary *paraDict = @{@"openId":weixinInfo.credential.rawData[@"openid"],@"unionID":weixinInfo.credential.rawData[@"unionid"],@"username":weixinInfo.nickname,@"gender":sexStr,@"headImg":weixinInfo.icon,@"province":@"",@"city":@"",@"area":@"",@"userType":[NSNumber numberWithInteger:self.selectedUserType]};
+    
+    
+    NSString *unionIDStr = [weixinInfo.credential.rawData[@"unionid"] copy];
+    
+     NSLog(@"!!!!!! openID:%@ unionID:%@ selected tyoe %ld",openIDStr,unionIDStr,self.selectedUserType);
+    
+    NSDictionary *paraDict = @{@"openId":openIDStr,@"unionID":unionIDStr,@"username":weixinInfo.nickname,@"gender":sexStr,@"headImg":weixinInfo.icon,@"province":@"",@"city":@"",@"area":@"",@"userType":[NSNumber numberWithInteger:self.selectedUserType]};
+    //NSDictionary *paraDict = @{@"openId":openIDStr,@"unionID":@"4346789",@"username":weixinInfo.nickname,@"headImg":weixinInfo.icon,@"userType":[NSNumber numberWithInteger:self.selectedUserType]};
+    NSLog(@"!!!!!!!!!!! paradict:%@",paraDict);
     
     [TDHttpTools loginWXWithText:paraDict success:^(id response) {
         NSDictionary *dict =  [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
@@ -123,16 +143,17 @@
             }else{
                 [app setupViewControllersForCasualLabour];
             }
-            
+
         }else if (status == 1){
             [SVProgressHUD showErrorWithStatus:dict[@"msg"]];
         }
-        
+        [SVProgressHUD dismiss];
     } failure:^(NSError *error) {
         NSString *errorCode = [NSString stringWithFormat:@"error code: %ld",error.code];
         [SVProgressHUD showErrorWithStatus:errorCode];
     }];
 }
+
 
 
 

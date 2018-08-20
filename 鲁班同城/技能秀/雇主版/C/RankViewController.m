@@ -104,13 +104,13 @@
             }
         }
     }];
-    //
+    
     [self getData:1];
 }
 
 //停止刷新加载
 - (void)stopRefreshOrLoad{
-    
+
     if (isRefresh){
         [self.tableView.mj_header endRefreshing];
         isRefresh = NO;
