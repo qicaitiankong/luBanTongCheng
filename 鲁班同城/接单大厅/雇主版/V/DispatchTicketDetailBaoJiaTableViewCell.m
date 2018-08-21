@@ -10,6 +10,7 @@
 #import "CustomeStyleCornerButt.h"
 
 @interface DispatchTicketDetailBaoJiaTableViewCell (){
+    UILabel *yuYinTipLabel;
     CustomeStyleCornerButt *findUpButt;
     ImageAndLabelView *communicateButt;
     CustomeStyleCornerButt *employButt;
@@ -18,6 +19,7 @@
     CGFloat buttWidth;
     CGFloat buttHeight;
     CGFloat buttSpace;
+    CGFloat yuYinTipLabelWidth;
 }
 @end
 
@@ -26,10 +28,12 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self){
+        WS(weakSelf);
         self.contentView.backgroundColor = [UIColor whiteColor];
         //
         leftSpace = 15;
         imageViewWidth = SCREEN_WIDTH * 0.106;
+        yuYinTipLabelWidth = [LzhReturnLabelHeight getLabelWidth:@"语音：" font:[UIFont getPingFangSCMedium:13] targetHeight:15];
         //
         self.userImageView = [[UIImageView alloc]init];
         self.userImageView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
@@ -49,7 +53,6 @@
         findUpButt.layer.cornerRadius = 5;
         findUpButt.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;
         findUpButt.layer.borderWidth = 1;
-        WS(weakSelf);
         findUpButt.clickButtBlock = ^{
             [weakSelf clickButt:0];
         };
@@ -74,6 +77,17 @@
          self.beizhuLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         self.beizhuLabel.numberOfLines = 0;
         //
+        yuYinTipLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
+        yuYinTipLabel.backgroundColor = [UIColor whiteColor];
+        yuYinTipLabel.text = @"语音";
+        //
+        self.soundView = [[MessageSoundView alloc]initWithFrame:CGRectMake(0, 0, 260, 40)];
+        self.soundView.clickSoundViewBlock = ^{
+            if (weakSelf.clickButtBlock){
+                weakSelf.clickButtBlock(7, weakSelf.indexPath);
+            }
+        };
+        //
         self.bottomGroupView = [[DispatchOrderDetailCellSureServiceCompleteGroupView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 2 * leftSpace, SCREEN_WIDTH * 0.106 + 100)];
         self.bottomGroupView.messageButtView.clickBackButt = ^{
             [weakSelf clickButt:3];
@@ -88,7 +102,7 @@
             [weakSelf clickButt:6];
         };
         //
-        NSArray *viewArr = @[self.userImageView,self.nickNameLabel,self.xinxinView,findUpButt,communicateButt,employButt,self.baoJiaLabel,self.beizhuLabel,self.bottomGroupView];
+        NSArray *viewArr = @[self.userImageView,self.nickNameLabel,self.xinxinView,findUpButt,communicateButt,employButt,self.baoJiaLabel,self.beizhuLabel,yuYinTipLabel,self.soundView,self.bottomGroupView];
         [self.contentView sd_addSubviews:viewArr];
         //
         [self addOwnConstraints];
@@ -146,6 +160,18 @@
     .topSpaceToView(self.baoJiaLabel, 20)
     .autoHeightRatio(0);
     //
+    yuYinTipLabel.sd_layout
+    .leftEqualToView(self.beizhuLabel)
+    .widthIs(yuYinTipLabelWidth)
+    .topSpaceToView(self.beizhuLabel, 40)
+    .heightIs(15);
+    //
+    self.soundView.sd_layout
+    .leftSpaceToView(self.beizhuLabel, 0)
+    .widthIs(260)
+    .centerYEqualToView(yuYinTipLabel)
+    .heightIs(40);
+    //
     self.bottomGroupView.sd_layout
     .leftEqualToView(self.beizhuLabel)
     .topSpaceToView(self.beizhuLabel, 10)
@@ -174,9 +200,21 @@
         self.beizhuLabel.text = [NSString stringWithFormat:@"备注：%@",model.beiZhuNameStr];
         [self.xinxinView setYellowStar:[model.xinxinStr floatValue]];
         //
-        self.bottomGroupView.sd_layout
+        yuYinTipLabel.sd_resetLayout
         .leftEqualToView(self.beizhuLabel)
-        .topSpaceToView(self.beizhuLabel, 10)
+        .widthIs(yuYinTipLabelWidth)
+        .topSpaceToView(self.beizhuLabel, 40)
+        .heightIs(15);
+        //
+        self.soundView.sd_resetLayout
+        .leftSpaceToView(yuYinTipLabel, 5)
+        .widthIs(260)
+        .centerYEqualToView(yuYinTipLabel)
+        .heightIs(40);
+        //
+        self.bottomGroupView.sd_resetLayout
+        .leftEqualToView(self.beizhuLabel)
+        .topSpaceToView(self.soundView, 10)
         .rightSpaceToView(self.contentView, leftSpace)
         .heightIs(SCREEN_WIDTH * 0.106 + 115);
         //
@@ -191,9 +229,8 @@
             self.bottomGroupView.messageTipLabel.text = @"已通知师傅接单，请保持电话通畅。";
             
         }else{
-            bottomView = self.beizhuLabel;
+            bottomView = self.soundView;
             self.bottomGroupView.hidden = YES;
-
         }
         [self setupAutoHeightWithBottomView:bottomView bottomMargin:15];
     }

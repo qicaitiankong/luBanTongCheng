@@ -11,6 +11,9 @@
 @interface OwnPersonalInfomationTopPictureGoupView (){
    
     UILabel *titleLabel;
+    UIView *smallVerticalSpaceLine;
+    UILabel *satisfyLabel;
+    
 }
 @end
 
@@ -61,7 +64,7 @@
         self.userlogoImaView.clipsToBounds = YES;
         [self addSubview:self.userlogoImaView];
         //
-        UIView *smallVerticalSpaceLine = [[UIView alloc]initWithFrame:CGRectMake(0, self.topBigImaView.bottom +10, 2, 14)];
+         smallVerticalSpaceLine = [[UIView alloc]initWithFrame:CGRectMake(0, self.topBigImaView.bottom +10, 2, 14)];
         smallVerticalSpaceLine.backgroundColor = [UIColor grayColor];
         smallVerticalSpaceLine.center = CGPointMake(frame.size.width / 2, smallVerticalSpaceLine.center.y);
         [self addSubview:smallVerticalSpaceLine];
@@ -78,6 +81,18 @@
         self.concernLabel.frame = CGRectMake(concernLabelLeft, smallVerticalSpaceLine.top, concernWidth, smallVerticalSpaceLine.height);
         [self addSubview:self.concernLabel];
         //
+        //添加雇主使用时显示信息
+        self.changeNameButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(frame.size.width - 60, smallVerticalSpaceLine.top, 50, 25) backColor:[UIColor whiteColor] cornerRadius:5 title:@"改名" titleColor:[UIColor colorWithHexString:@"#999999"] font:[UIFont getPingFangSCMedium:14]];
+        self.changeNameButt.layer.borderWidth = 1;
+        self.changeNameButt.layer.borderColor =  [UIColor colorWithHexString:@"#E3E3E3"].CGColor;
+        self.changeNameButt.hidden = YES;
+        [self addSubview:self.changeNameButt];
+        //
+        self.employmentNameLabel = [[CustomeLzhLabel alloc]initWithParamer:15 titleColor:[UIColor colorWithHexString:@"#999999"] aligement:0];
+        self.employmentNameLabel.frame = CGRectMake(self.userlogoImaView.width + 10, smallVerticalSpaceLine.top, self.changeNameButt.left - self.userlogoImaView.left - self.userlogoImaView.width - 20, self.changeNameButt.height);
+        self.employmentNameLabel.hidden = YES;
+        [self addSubview:self.employmentNameLabel];
+        //
         CGFloat editLeft = self.userlogoImaView.left + self.userlogoImaView.width + 10;
         CGFloat editWith = frame.size.width - editLeft - 15;
         //
@@ -87,7 +102,13 @@
             editButtTitle = @" 关注";
         }
         //
-        editButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(editLeft, self.fenSiLabel.bottom + 10, editWith, 30) backColor:[UIColor whiteColor] cornerRadius:15 title:editButtTitle titleColor:[UIColor colorWithHexString:@"#666666"] font:[UIFont getPingFangSCMedium:14]];
+        UIView *editButtTopView = nil;
+        if ([lzhGetAccountInfo getAccount].identityFlag){
+             editButtTopView = self.employmentNameLabel;
+        }else{
+           editButtTopView = self.fenSiLabel;
+        }
+        editButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(editLeft, editButtTopView.bottom + 10, editWith, 30) backColor:[UIColor whiteColor] cornerRadius:15 title:editButtTitle titleColor:[UIColor colorWithHexString:@"#666666"] font:[UIFont getPingFangSCMedium:14]];
         editButt.layer.borderWidth = 1;
         editButt.layer.borderColor = [UIColor colorWithHexString:@"#E3E3E3"].CGColor;
         if (targetUserID != [[lzhGetAccountInfo getAccount].userID integerValue]){
@@ -102,7 +123,7 @@
         self.sexAndHomeLabel.frame = CGRectMake(self.userlogoImaView.left, self.userlogoImaView.bottom + 10, homeLabelWidth, homeLabelHeight);
         [self addSubview:self.sexAndHomeLabel];
         //
-        UILabel *satisfyLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:2];
+        satisfyLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"] aligement:2];
         satisfyLabel.frame = CGRectMake(self.sexAndHomeLabel.right + 5, self.sexAndHomeLabel.top, 50, self.sexAndHomeLabel.height);
         satisfyLabel.text = @"满意度";
         [self addSubview:satisfyLabel];
@@ -114,6 +135,21 @@
     }
     return self;
 }
+
+//雇主
+
+- (void)displayForEmployment{
+    smallVerticalSpaceLine.hidden = YES;
+    self.fenSiLabel.hidden = YES;
+    self.concernLabel.hidden = YES;
+    self.starGroupView.hidden = YES;
+    satisfyLabel.hidden = YES;
+    //
+    self.employmentNameLabel.hidden = NO;
+    self.changeNameButt.hidden = NO;
+    [editButt.loginButt setTitle:@"历史派单" forState:UIControlStateNormal];
+}
+
 
 - (void)setEditButtDisplayByValue:(BOOL)isConcenrned{
     if (isConcenrned){

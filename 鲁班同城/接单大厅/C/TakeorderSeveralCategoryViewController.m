@@ -10,8 +10,6 @@
 //
 #import "OrderTakingQuotePriceViewController.h"
 #import "OrderTakingQuotePriceDetailViewController.h"
-#import "DispatchTicketDetailViewController.h"
-#import "DispatchOrderMapViewController.h"
 #import "TakeOrderTableViewCell.h"
 
 @interface TakeorderSeveralCategoryViewController ()<UITableViewDelegate,UITableViewDataSource>{
@@ -104,8 +102,8 @@
 }
 //
 - (void)getData:(int)page{
-    if ([lzhGetAccountInfo getAccount].identityFlag == 0){//零工
         NSDictionary *paraDict = @{@"key":@"",@"page":[NSNumber numberWithInt:page],@"pageSize":@10,@"type":[NSNumber numberWithInteger:self.flagVC]};
+        
         [TDHttpTools getReceiveOrderList:paraDict success:^(id response) {
             NSDictionary *dict = response;
             NSLog(@"零工接单大厅%@",dict);
@@ -146,55 +144,12 @@
             //处理角标显示
             [self displayJiaoBiao];
         }];
-        
-    }else{//雇主
-        NSDictionary *paraDict = @{@"key":@"",@"page":[NSNumber numberWithInt:page],@"pageSize":@10};
-        [TDHttpTools getLauchOrderList:paraDict success:^(id response) {
-            NSDictionary *dict = response;
-            NSLog(@"雇主接单大厅%@",dict);
-            if ([dict allKeys].count){
-                NSDictionary *dataDict = dict[@"data"];
-                NSArray *dataArr = dataDict[@"list"];
-                if (NO == self -> isLoad){
-                    [self.modelArr removeAllObjects];
-                }
-                if (dataArr.count){
-                    
-                    for (NSDictionary *singleDict in dataArr){
-                        TakeOrderMainHallModel *model = [TakeOrderMainHallModel setModelFromDict:singleDict];
-                        [self.modelArr addObject:model];
-                    }
-                    [self.tableView reloadData];
-                }else{
-                    if (self->isLoad && self.page > 1){
-                        self.page --;
-                    }
-                }
-            }else{
-                if (self->isLoad && self.page > 1){
-                    self.page --;
-                }
-            }
-            [self stopRefreshOrLoad];
-        } failure:^(NSError *error) {
-            if (self->isLoad && self.page > 1){
-                self.page --;
-            }
-            [self stopRefreshOrLoad];
-            
-        }];
-    }
 }
+
 //events
 //cell 发起按钮
 - (void)clickCellButt:(NSIndexPath*)path{
     NSLog(@"%ld",path.row);
-    if ([lzhGetAccountInfo getAccount].identityFlag){
-        DispatchTicketDetailViewController *dispatchDetailVC = [[DispatchTicketDetailViewController alloc]init];
-        TakeOrderMainHallModel *model = self.modelArr[path.row];
-        dispatchDetailVC.orderId = model.orderID;
-        [self.navigationController pushViewController:dispatchDetailVC animated:YES];
-    }else{//零工
         TakeOrderMainHallModel *model = self.modelArr[path.row];
         if (model.canReceive){//抢单
             OrderTakingQuotePriceViewController *quotePriceVC = [[OrderTakingQuotePriceViewController alloc]init];
@@ -237,7 +192,6 @@
                 
             }
         }
-    }
 }
 
 //view
@@ -283,17 +237,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    //    if ([lzhGetAccountInfo getAccount].identityFlag){//雇主
-    //         DispatchTicketDetailViewController *dispatchDetailVC = [[DispatchTicketDetailViewController alloc]init];
-    //         TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
-    //        dispatchDetailVC.orderId = model.orderID;
-    //        [self.navigationController pushViewController:dispatchDetailVC animated:YES];
-    //    }else{//零工
-    //        OrderTakingQuotePriceDetailViewController *orderDetailVC = [[OrderTakingQuotePriceDetailViewController alloc]init];
-    //        TakeOrderMainHallModel *model = self.modelArr[indexPath.row];
-    //        orderDetailVC.orderId = model.orderID;
-    //        [self.navigationController pushViewController:orderDetailVC animated:YES];
-    //    }
     
 }
 

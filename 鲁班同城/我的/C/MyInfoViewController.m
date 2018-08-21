@@ -290,9 +290,9 @@
             break;
         case 4:{
             if (accountFlag){
-//                OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
-//                personalInfoVC.targetUserID = [lzhGetAccountInfo getAccount].userID;
-//                [self.navigationController pushViewController:personalInfoVC animated:YES];
+                OwnPersonalInfomationViewController *personalInfoVC = [[OwnPersonalInfomationViewController alloc]init];
+                personalInfoVC.targetUserId = [lzhGetAccountInfo getAccount].userID;
+                [self.navigationController pushViewController:personalInfoVC animated:YES];
             }else{
                 SettingViewController *setVC = [[SettingViewController alloc]init];
                 [self.navigationController pushViewController:setVC animated:YES];

@@ -213,8 +213,8 @@
     };
     [cityView addOwnConstraints:[UIImage imageNamed:@"city"]];
     //
-    CGFloat buttWidth = SCREEN_WIDTH * 0.874;
-    CGFloat buttHeigt = buttWidth * 0.137;
+    CGFloat buttWidth = NEXT_BUTT_WIDTH;
+    CGFloat buttHeigt = NEXT_BUTT_HEIGHT;
     
     CustomeStyleCornerButt *nextButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, cityView.bottom + SCREEN_HEIGHT * 0.404, buttWidth, buttHeigt) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:4 title:@"下一步" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
     nextButt.center = CGPointMake(self.view.width  / 2, nextButt.centerY);

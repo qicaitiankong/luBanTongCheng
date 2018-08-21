@@ -16,13 +16,17 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        ImageAndLabelView *firstImageAndLabelView = [[ImageAndLabelView alloc] initWithFrame:CGRectMake(15,0,10, frame.size.height) image:leftImage title:leftTitle font:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"]];
+        ImageAndLabelView *firstImageAndLabelView = [[ImageAndLabelView alloc] initWithFrame:CGRectMake(15,0,10, frame.size.height * 0.8) image:leftImage title:leftTitle font:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#666666"]];
         [self addSubview:firstImageAndLabelView];
         //
         self.rightTopTipLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithRed:153.003/255.0 green:153.003/255.0 blue:153.003/255.0 alpha:1] aligement:2];
           self.rightTopTipLabel.frame = CGRectMake(firstImageAndLabelView.right + 5, firstImageAndLabelView.top, frame.size.width - firstImageAndLabelView.right - 15, firstImageAndLabelView.height);
         self.rightTopTipLabel.text = @"点击 +上传/拍摄";
         [self addSubview: self.rightTopTipLabel];
+        //
+        firstImageAndLabelView.center = CGPointMake(firstImageAndLabelView.centerX, frame.size.height / 2);
+        self.rightTopTipLabel.center = CGPointMake(self.rightTopTipLabel.centerX, frame.size.height / 2);
+        
     }
     return self;
 }

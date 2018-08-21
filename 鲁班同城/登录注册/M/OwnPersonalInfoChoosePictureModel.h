@@ -13,7 +13,7 @@
 @property (strong,nonatomic) NSMutableArray *selectedImageArr;
 
 //实际上是数组里面是data，字段名没有改过来，地方太多
-@property (strong,nonatomic) NSMutableArray *selectedImageBaseStrArr;
+@property (strong,nonatomic) NSMutableArray *selectedDataArr;
 
 @property (strong,nonatomic) NSArray *imageUrlStrArr;
 

@@ -10,6 +10,8 @@
 #import "StarView.h"
 #import "DispatchTicketDetailBaoJiaModel.h"
 #import "DispatchOrderDetailCellSureServiceCompleteGroupView.h"
+#import "MessageSoundView.h"
+
 
 @interface DispatchTicketDetailBaoJiaTableViewCell : UITableViewCell
 
@@ -22,6 +24,9 @@
 @property (strong,nonatomic) UILabel *beizhuLabel;
 
 @property (strong,nonatomic) StarView *xinxinView;
+
+@property (strong,nonatomic) MessageSoundView *soundView;
+
 
 @property (strong,nonatomic) DispatchTicketDetailBaoJiaModel *model;
 

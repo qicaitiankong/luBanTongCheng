@@ -86,6 +86,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self initNavStyle];
+    
     //图片选取回调
     WS(weakSelf);
     self.selectedImageBlock = ^(NSData *pictureData, UIImage *selectedPicture) {
@@ -93,7 +94,6 @@
         
     };
 
-    //WS(weakSelf);
     [self initOwnObjects];
     
     [self createCompleteViews];
@@ -106,7 +106,6 @@
     //
     self.title = @"个人资料";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButt)];
-    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButt)];
 }
 
 - (void)leftBarButt{
@@ -138,7 +137,7 @@
     NSData *imageData = [dict[@"imageData"] copy];
     UIImage *image = [UIImage imageWithData:imageData];
     [self.pictureModel.selectedImageArr addObject:image];
-    [self.pictureModel.selectedImageBaseStrArr addObject:imageData];
+    [self.pictureModel.selectedDataArr addObject:imageData];
     [self.tableView reloadData];
 }
 
@@ -147,12 +146,12 @@
     NSData *imageData = [dict[@"imageData"] copy];
     UIImage *image = [UIImage imageWithData:imageData];
     [self.videoModel.selectedImageArr addObject:image];
-    [self.videoModel.selectedImageBaseStrArr addObject:imageData];
+    [self.videoModel.selectedDataArr addObject:imageData];
     [self.tableView reloadData];
 }
 
 - (void)addPicture:(NSIndexPath*)path index:(NSInteger)clickIndex{
-    WS(weakSelf);
+    //WS(weakSelf);
     currentClickpath = path;
     currentClickIndex = clickIndex;
     NSLog(@"点击选取图片path.section=%ld",path.section);
@@ -182,7 +181,7 @@
 //处理删除
 - (void)dealDeletePicture:(NSIndexPath*)path index:(NSInteger)clickIndex{
     if (path.section == 1 && (self.videoModel.selectedImageArr.count > clickIndex)){
-        [self.videoModel.selectedImageBaseStrArr removeObjectAtIndex:clickIndex];
+        [self.videoModel.selectedDataArr removeObjectAtIndex:clickIndex];
         [self.videoModel.selectedImageArr removeObjectAtIndex:clickIndex];
          if (self.IncreasedNewVideoDataArr.count > currentClickIndex){
              [self.IncreasedNewVideoDataArr removeObjectAtIndex:currentClickIndex];
@@ -194,7 +193,7 @@
         }
     }
     if(path.section == 3 && (self.pictureModel.selectedImageArr.count > clickIndex)){
-        [self.pictureModel.selectedImageBaseStrArr removeObjectAtIndex:clickIndex];
+        [self.pictureModel.selectedDataArr removeObjectAtIndex:clickIndex];
         [self.pictureModel.selectedImageArr removeObjectAtIndex:clickIndex];
         if (self.IncreasedNewPictureDataArr.count > currentClickIndex){
             [self.IncreasedNewPictureDataArr removeObjectAtIndex:currentClickIndex];
@@ -246,11 +245,11 @@
              [self insteadPicture:currentClickpath index:currentClickIndex];
             //替换
             [self.videoModel.selectedImageArr replaceObjectAtIndex:currentClickIndex withObject:selectedPicture];
-            [self.videoModel.selectedImageBaseStrArr replaceObjectAtIndex:currentClickIndex withObject:pictureBase64str];
+            [self.videoModel.selectedDataArr replaceObjectAtIndex:currentClickIndex withObject:pictureBase64str];
             [self.IncreasedNewVideoDataArr replaceObjectAtIndex:currentClickIndex withObject:pictureBase64str];
         }else{
             [self.videoModel.selectedImageArr addObject:selectedPicture];
-            [self.videoModel.selectedImageBaseStrArr addObject:pictureBase64str];
+            [self.videoModel.selectedDataArr addObject:pictureBase64str];
              [self.IncreasedNewVideoDataArr addObject:pictureBase64str];
         }
         
@@ -260,12 +259,12 @@
             [self insteadPicture:currentClickpath index:currentClickIndex];
             //替换
             [self.pictureModel.selectedImageArr replaceObjectAtIndex:currentClickIndex withObject:selectedPicture];
-            [self.pictureModel.selectedImageBaseStrArr replaceObjectAtIndex:currentClickIndex withObject:pictureBase64str];
+            [self.pictureModel.selectedDataArr replaceObjectAtIndex:currentClickIndex withObject:pictureBase64str];
                 [self.IncreasedNewPictureDataArr addObject: pictureBase64str];
             
         }else{
             [self.pictureModel.selectedImageArr addObject:selectedPicture];
-            [self.pictureModel.selectedImageBaseStrArr addObject:pictureBase64str];
+            [self.pictureModel.selectedDataArr addObject:pictureBase64str];
             [self.IncreasedNewPictureDataArr addObject:pictureBase64str];
         }
     }
@@ -292,7 +291,7 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -351,56 +350,59 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section % 2){
-        return nil;
-    }else{
-        if (section == 0){
-            return firstSectionView;
-        }else{
-            return secondSectionView;
-        }
-
+    UIView *sectionView = nil;
+    switch (section) {
+        case 0:
+            sectionView = firstSectionView;
+            break;
+        case 1:
+            break;
+        case 2:
+            sectionView = secondSectionView;
+            break;
+        case 3:
+            break;
+        case 4:
+            sectionView = completeView;
+            break;
+        default:
+            break;
     }
+    return sectionView;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section % 2){
-        return 0;
-    }else{
-        if (section == 0){
-             return firstSectionView.height;
-        }else{
-             return secondSectionView.height;
-        }
-       
+    CGFloat height = 0;
+    switch (section) {
+        case 0:
+            height = firstSectionView.height;
+            break;
+        case 1:
+            break;
+        case 2:
+            height = secondSectionView.height;
+            break;
+        case 3:
+            break;
+        case 4:
+            height = completeView.height;
+            break;
+        default:
+            break;
     }
+    return height;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 3){
-        return completeView.height;
-    }else{
-        return 0;
-    }
-}
 
-
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    if (section == 3){
-        return completeView;
-    }else{
-        return nil;
-    }
-}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)createCompleteViews{
-    completeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 300)];
-        CustomeStyleCornerButt *nextButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 240, completeView.width * 0.9, 50) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:4 title:@"完成" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
-        nextButt.center = CGPointMake(completeView.width  / 2, nextButt.centerY);
+    completeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 200)];
+        CustomeStyleCornerButt *nextButt = [[CustomeStyleCornerButt alloc] initWithFrame:CGRectMake(0, 0, completeView.width * 0.9, NEXT_BUTT_HEIGHT) backColor:[UIColor colorWithHexString:@"#78CAC5"] cornerRadius:4 title:@"完成" titleColor:[UIColor whiteColor] font:[UIFont getPingFangSCMedium:18]];
+        nextButt.center = CGPointMake(completeView.width  / 2, completeView.height / 2);
         WS(weakSelf);
         nextButt.clickButtBlock = ^{
             [weakSelf nextHandler];

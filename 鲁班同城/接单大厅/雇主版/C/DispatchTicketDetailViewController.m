@@ -182,6 +182,10 @@
             [self displayCommentPopView];
         }
             break;
+        case 7:{
+            NSLog(@"先去下载语音去播放");
+        }
+            break;
         default:
             break;
     }
@@ -245,7 +249,6 @@
             WS(weakSelf);
             cell.clickButtBlock = ^(NSInteger index, NSIndexPath *path) {
                  [weakSelf dealButtClick:index path:indexPath];
-                
             };
         }
         cell.indexPath = indexPath;
@@ -271,7 +274,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -334,7 +337,6 @@
                 [weakSelf removePopView];
             };
             [baseView addSubview:payButt];
-            //
     }
 }
 
@@ -358,7 +360,6 @@
         commentPopView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.741, SCREEN_WIDTH * 0.741)];
         commentPopView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 150);
         commentPopView.backgroundColor = [UIColor whiteColor];
-        
         commentPopView.clipsToBounds = YES;
         commentPopView.layer.cornerRadius = commentPopView.width * 0.035;
         [appWindow addSubview:commentPopView];
@@ -390,9 +391,14 @@
         commentTextView.writeViewPlaceHolderLabel.text = @"服务等还满意吗？";
         [commentPopView addSubview:commentTextView];
         [commentTextView.writeTextView becomeFirstResponder];
+        WS(weakSelf);
+        commentTextView.keyBoardChangedBlock = ^(CGFloat keyBoardHeight) {
+            __strong typeof(weakSelf) sslef = weakSelf;
+            sslef -> commentPopView.frame = CGRectMake(sslef -> commentPopView.x, SCREEN_HEIGHT - keyBoardHeight - sslef -> commentPopView.height, sslef -> commentPopView.width, sslef -> commentPopView.height);
+        };
+        
         //
         CustomeStyleCornerButt *cancelButt = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, commentPopView.height * 0.85, commentPopView.width / 2, commentPopView.height * 0.15) backColor:[UIColor colorWithHexString:@"#F5F5F5"] cornerRadius:-1 title:@"取消" titleColor:[UIColor colorWithHexString:@"#999999"] font:[UIFont getPingFangSCMedium:16]];
-        WS(weakSelf);
         cancelButt.clickButtBlock = ^{
             [weakSelf removeCommentPopView];
         };

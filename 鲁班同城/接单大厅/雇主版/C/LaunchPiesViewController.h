@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LaunchPiesViewController : UIViewController
+#import "TakePhotoBaseViewController.h"
+
+
+@interface LaunchPiesViewController : TakePhotoBaseViewController
 
 @end

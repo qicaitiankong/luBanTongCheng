@@ -25,6 +25,7 @@
 
 @property (strong,nonatomic) UIImageView *userlogoImaView;
 
+//林工使用
 @property (strong,nonatomic) UILabel *fenSiLabel;
 
 @property (strong,nonatomic) UILabel *concernLabel;
@@ -32,6 +33,13 @@
 @property (strong,nonatomic) UILabel *sexAndHomeLabel;
 
 @property (strong,nonatomic) StarView * starGroupView;
+//
+//雇主使用属性
+@property (strong,nonatomic) CustomeStyleCornerButt *changeNameButt;
+
+@property (strong,nonatomic) CustomeLzhLabel *employmentNameLabel;
+
+
 
 - (instancetype)initWithFrame:(CGRect)frame targetUseId:(NSInteger)targetUserID;
 
@@ -40,5 +48,7 @@
 //显示个人资料展示
 - (void)findOwnInfoDisplay;
 
+//雇主使用调整隐藏零工的
+- (void)displayForEmployment;
 
 @end

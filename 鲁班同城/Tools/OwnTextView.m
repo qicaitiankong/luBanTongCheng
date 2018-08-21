@@ -38,7 +38,9 @@
         
         self.writeViewPlaceHolderLabel.text = @"";
         [self.writeTextView addSubview:self.writeViewPlaceHolderLabel];
-         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillChangeFrameNotification object:nil];
+         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillChangeFrameNotification  object:nil];
+        //
+         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardChanged:) name:UITextViewTextDidBeginEditingNotification  object:nil];
     }
     return self;
 }
@@ -47,7 +49,7 @@
     CGRect keyboardFrame =[notification.userInfo[UIKeyboardFrameEndUserInfoKey]CGRectValue];
     keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey]CGRectValue];
     NSLog(@"键盘高度发生变化%lf",keyboardFrame.size.height);
-    if (self.keyBoardChangedBlock){
+    if (self.keyBoardChangedBlock && keyboardFrame.size.height > 0){
         self.keyBoardChangedBlock(keyboardFrame.size.height);
     }
 }
@@ -92,7 +94,7 @@
     };
 }
 -(void)dealloc{
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 @end

@@ -32,7 +32,7 @@
             }else{//设置默认是零工还是雇主
                 selfClass.identityFlag = 2;
             }
-              NSLog(@" getAccount 时  dict:%@",dict);
+              //NSLog(@" getAccount 时  dict:%@",dict);
             NSNumber *userID = nil;
             NSString *realName = @"";
             NSString *nickName = @"";

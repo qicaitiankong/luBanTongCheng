@@ -113,7 +113,10 @@
 
 //九宫格单个图片高度
 #define IMAGE_VIEW_HEIGHT (SCREEN_WIDTH - 30 - 5 * 2) / 3
+//下一步或完成按钮宽高度
+#define NEXT_BUTT_WIDTH SCREEN_WIDTH * 0.874
 
+#define NEXT_BUTT_HEIGHT SCREEN_WIDTH * 0.12
 
 #define  FU_iPhoneX (SCREEN_WIDTH == 375.f && SCREEN_HEIGHT == 812.f ? YES : NO)
 

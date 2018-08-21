@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger,ChosePhotoType) {
 
 - (void)callActionSheetWithChangeStyleFunc:(void (^)(void))deleteBolck insteadBlock:(void (^)(void))insteadBlock{
     WS(weakSelf);
-    self.actionSheet=[UIAlertController alertControllerWithTitle:@"删除图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    self.actionSheet=[UIAlertController alertControllerWithTitle:@"删除/替换图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     [self.actionSheet addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         insteadBlock();
         [weakSelf chosePhoto:ChosePhotoTypeCamera];

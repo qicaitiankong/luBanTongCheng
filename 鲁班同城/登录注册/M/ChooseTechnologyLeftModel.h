@@ -11,7 +11,7 @@
 @interface ChooseTechnologyLeftModel : NSObject
 
 @property (assign,nonatomic) NSInteger idFlag;
-
+//用不到了，后台改了
 @property (assign,nonatomic) NSInteger parentId;
 
 @property (strong,nonatomic) NSString *title;
@@ -20,5 +20,7 @@
 
 @property (assign,nonatomic) NSIndexPath *indexPath;
 
+
++ (ChooseTechnologyLeftModel*)setModelFromDict:(NSDictionary*)modelDict;
 
 @end

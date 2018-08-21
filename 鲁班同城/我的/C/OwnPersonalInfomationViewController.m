@@ -77,30 +77,44 @@
         }];
     }
 }
-//修改界面版
+- (void)changeEmploymentName{
+    NSLog(@"修改名字");
+    
+}
+
+//
 - (void)addTableView{
+    WS(weakSelf);
     //
     topPartView = [[OwnPersonalInfomationTopPictureGoupView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 20) targetUseId:[self.targetUserId integerValue]];
-    
-    topPartView.fenSiLabel.text = @"粉丝";
-    topPartView.concernLabel.text = @"关注";
-    topPartView.sexAndHomeLabel.text = @"";
-    [topPartView.starGroupView setYellowStar:0];
-    //topPartView.editButt.hidden = YES;
-    WS(weakSelf);
+    if([lzhGetAccountInfo getAccount].identityFlag){
+        [topPartView displayForEmployment];
+        topPartView.changeNameButt.clickButtBlock = ^{
+            [weakSelf changeEmploymentName];
+        };
+    }else{
+        topPartView.fenSiLabel.text = @"粉丝";
+        topPartView.concernLabel.text = @"关注";
+        topPartView.sexAndHomeLabel.text = @"";
+        [topPartView.starGroupView setYellowStar:0];
+    }
     topPartView.navReturnButt.clickButtBlock = ^{
         [weakSelf.rdv_tabBarController setTabBarHidden:NO];
         [weakSelf.navigationController popViewControllerAnimated:YES];
         
     };
     topPartView.editButt.clickButtBlock = ^{
-        //自己的资料
-        if ([self.targetUserId integerValue] == [[lzhGetAccountInfo getAccount].userID integerValue]){
-            PersonalInfoNameViewController *nameEditVC = [[PersonalInfoNameViewController alloc]init];
-            nameEditVC.orinalInfoModel = weakSelf.infoModel;
-            [weakSelf.navigationController pushViewController:nameEditVC animated:YES];
-        }else{//他人的资料显示关注
-            [weakSelf addConcernOrCancelConcel];
+        if([lzhGetAccountInfo getAccount].identityFlag == 0){
+            //自己的资料
+            if ([self.targetUserId integerValue] == [[lzhGetAccountInfo getAccount].userID integerValue]){
+                PersonalInfoNameViewController *nameEditVC = [[PersonalInfoNameViewController alloc]init];
+                nameEditVC.orinalInfoModel = weakSelf.infoModel;
+                [weakSelf.navigationController pushViewController:nameEditVC animated:YES];
+            }else{//他人的资料显示关注
+                [weakSelf addConcernOrCancelConcel];
+            }
+        }else{
+            NSLog(@"雇主查看历史派单");
         }
     };
 
@@ -115,14 +129,24 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    NSInteger section = 0;
+    if([lzhGetAccountInfo getAccount].identityFlag){
+        section = 1;
+    }else{
+        section = 3;
+    }
+    return section;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
     switch (section) {
         case 0:
-            rows = 1;
+            if([lzhGetAccountInfo getAccount].identityFlag){
+                rows = 2;
+            }else{
+                rows = 1;
+            }
             break;
         case 1:
             rows = 2;
@@ -138,75 +162,93 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *parentCell = nil;
-    
-    switch (indexPath.section) {
-        case 0:{
-            static NSString *introCellFlag = @"introCell";
-            OwnPersonalIntroduceTableViewCell *introCell = [tableView dequeueReusableCellWithIdentifier:introCellFlag];
-            if (nil == introCell){
-                WS(weakSelf);
-                introCell = [[OwnPersonalIntroduceTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:introCellFlag];
-                soundView = introCell.soundView; introCell.soundView.clickSoundViewBlock = ^{
-                    [weakSelf playSoundIfHaveSound];
+    if([lzhGetAccountInfo getAccount].identityFlag){
+        static NSString *picFlagCell = @"picCell";
+        OwnPersonalPictureTableViewCell *picCell = [tableView dequeueReusableCellWithIdentifier:picFlagCell];
+        if (nil == picCell){
+            picCell = [[OwnPersonalPictureTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:picFlagCell];
+        }
+        picCell.path = indexPath;
+        //
+        picCell.model = self.infoModel;
+        //
+        parentCell = picCell;
+    }else{
+        switch (indexPath.section) {
+            case 0:{
+                static NSString *introCellFlag = @"introCell";
+                OwnPersonalIntroduceTableViewCell *introCell = [tableView dequeueReusableCellWithIdentifier:introCellFlag];
+                if (nil == introCell){
+                    WS(weakSelf);
+                    introCell = [[OwnPersonalIntroduceTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:introCellFlag];
+                    soundView = introCell.soundView; introCell.soundView.clickSoundViewBlock = ^{
+                        [weakSelf playSoundIfHaveSound];
                     };
+                }
+                introCell.model = self.infoModel;
+                parentCell = introCell;
             }
-            introCell.model = self.infoModel;
-            parentCell = introCell;
-        }
-            break;
-        case 1:
-        {
-            static NSString *secondFlagCell = @"cell";
-            OwnPersonalServiceTypeTableViewCell *technologyCell = [tableView dequeueReusableCellWithIdentifier:secondFlagCell];
-            if (nil == technologyCell){
-                technologyCell = [[OwnPersonalServiceTypeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+                break;
+            case 1:
+            {
+                static NSString *secondFlagCell = @"cell";
+                OwnPersonalServiceTypeTableViewCell *technologyCell = [tableView dequeueReusableCellWithIdentifier:secondFlagCell];
+                if (nil == technologyCell){
+                    technologyCell = [[OwnPersonalServiceTypeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+                }
+                technologyCell.path = indexPath;
+                technologyCell.model = self.infoModel;
+                parentCell = technologyCell;
             }
-            technologyCell.path = indexPath;
-            technologyCell.model = self.infoModel;
-            parentCell = technologyCell;
-        }
-            break;
-        case 2:{
-            static NSString *picFlagCell = @"picCell";
-            OwnPersonalPictureTableViewCell *picCell = [tableView dequeueReusableCellWithIdentifier:picFlagCell];
-            if (nil == picCell){
-                picCell = [[OwnPersonalPictureTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:picFlagCell];
+                break;
+            case 2:{
+                static NSString *picFlagCell = @"picCell";
+                OwnPersonalPictureTableViewCell *picCell = [tableView dequeueReusableCellWithIdentifier:picFlagCell];
+                if (nil == picCell){
+                    picCell = [[OwnPersonalPictureTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:picFlagCell];
+                }
+                picCell.path = indexPath;
+                //
+                picCell.model = self.infoModel;
+                //
+                parentCell = picCell;
             }
-            picCell.path = indexPath;
-            //
-            picCell.model = self.infoModel;
-            //
-            parentCell = picCell;
+                break;
+            default:
+                break;
         }
-            break;
-        default:
-            break;
     }
+    
     return parentCell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat cellHeight = 0;
-    switch (indexPath.section) {
-        case 0:{
-            cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalIntroduceTableViewCell class] contentViewWidth:SCREEN_WIDTH];
-        }
-            break;
-        case 1:{
-            if (indexPath.row == 0){
-                cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalServiceTypeTableViewCell class] contentViewWidth:SCREEN_WIDTH];
-            }else if (indexPath.row == 1){
-                cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalServiceTypeTableViewCell class] contentViewWidth:SCREEN_WIDTH];
-            }
-        }
-            break;
-        case 2:{
+    if([lzhGetAccountInfo getAccount].identityFlag){
             cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalPictureTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+    }else{
+        switch (indexPath.section) {
+            case 0:{
+                cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalIntroduceTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+            }
+                break;
+            case 1:{
+                if (indexPath.row == 0){
+                    cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalServiceTypeTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+                }else if (indexPath.row == 1){
+                    cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalServiceTypeTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+                }
+            }
+                break;
+            case 2:{
+                cellHeight = [tableView cellHeightForIndexPath:indexPath model:self.infoModel keyPath:@"model" cellClass:[OwnPersonalPictureTableViewCell class] contentViewWidth:SCREEN_WIDTH];
+            }
+                break;
+            default:
+                break;
         }
-            break;
-        default:
-            break;
     }
+   
     
     return cellHeight;
 }
@@ -219,7 +261,8 @@
 //
 - (void)getUserInfo{
     self.infoModel = [[OwnPersonalInfoModel alloc]init];
-    //零工
+    if([lzhGetAccountInfo getAccount].identityFlag == 0){
+        //零工
         NSDictionary *praDict =nil;
         if ([self.targetUserId integerValue] == [[lzhGetAccountInfo getAccount].userID integerValue]){//自己信息
             praDict = @{};
@@ -247,7 +290,13 @@
                 } failure:^(NSError *error) {
                     //
                 }];
+    }else{//雇主
+        topPartView.employmentNameLabel.text = @"我是雇主名字";
+    }
 }
+
+
+
 
 - (void)getTechnologyPictureInfo{
     [TDHttpTools getSeveralPicture:@{@"relatedId":self.targetUserId,@"application":[NSString getPictureAndVideoInfoServiceNeedFunctionStr:3],@"type":[NSString getPictureAndVideoServiceNeedTypeFlagStr:0]} success:^(id response) {

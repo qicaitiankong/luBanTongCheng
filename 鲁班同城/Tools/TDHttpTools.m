@@ -317,7 +317,7 @@
             }else if (status == 1){
                 [SVProgressHUD showInfoWithStatus:@"获取信息失败"];
                 failure(nil);
-        }
+            }
     } failure:^(NSError *error) {
         if (failure) {
             failure(error);

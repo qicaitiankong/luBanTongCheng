@@ -10,4 +10,13 @@
 
 @implementation ChooseTechnologyLeftModel
 
++ (ChooseTechnologyLeftModel*)setModelFromDict:(NSDictionary*)modelDict{
+    ChooseTechnologyLeftModel *localModel = [[ChooseTechnologyLeftModel alloc]init];
+    localModel.title = [modelDict[@"name"] copy];
+    localModel.idFlag = [modelDict[@"id"] integerValue];
+    localModel.parentId = [modelDict[@"parentId"] integerValue];
+    return localModel;
+}
+
+
 @end

@@ -15,7 +15,7 @@
     self = [super init];
     if (self) {
         self.selectedImageArr = [[NSMutableArray alloc]init];
-        self.selectedImageBaseStrArr = [[NSMutableArray alloc]init];
+        self.selectedDataArr = [[NSMutableArray alloc]init];
     }
     return self;
 }

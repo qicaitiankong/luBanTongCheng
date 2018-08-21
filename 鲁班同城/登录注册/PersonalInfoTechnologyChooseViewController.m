@@ -97,24 +97,23 @@
                         if (dataArr.count){
                             //tableview 显示打开
                             [self displayTableView];
+                            
                         }
                         for (NSDictionary *modelDict in dataArr){
-                            ChooseTechnologyLeftModel *localModel = [[ChooseTechnologyLeftModel alloc]init];
-                            localModel.title = [modelDict[@"name"] copy];
-                            localModel.idFlag = [modelDict[@"id"] integerValue];
-                            localModel.parentId = [modelDict[@"parentId"] integerValue];
+                            ChooseTechnologyLeftModel *localModel =  [ChooseTechnologyLeftModel setModelFromDict:modelDict];
                             [self.leftModelArr addObject:localModel];
                         }
-                        [self.leftTableView reloadData];
-                        //
-                        if (isSecondLevelUseItsResult && self.leftModelArr.count){
+                        if (isSecondLevelUseItsResult){
                             ChooseTechnologyLeftModel *localModel = self.leftModelArr[0];
                             localModel.judgeSelected = YES;
-                            [self getSecondLevelData:localModel.parentId];
+                            [self getSecondLevelData:localModel.idFlag];
                         }
+                        //
+                       
                     }else if (status == 1){
                         [SVProgressHUD showInfoWithStatus:@"获取失败"];
                     }
+                  [self.leftTableView reloadData];
             }
         } failure:^(NSError *error) {
         }];
@@ -132,23 +131,20 @@
                         [self displayTableView];
                     }
                     for (NSDictionary *modelDict in dataArr){
-                        ChooseTechnologyLeftModel *localModel = [[ChooseTechnologyLeftModel alloc]init];
-                        localModel.title = [modelDict[@"name"] copy];
-                        localModel.idFlag = [modelDict[@"id"] integerValue];
-                         localModel.parentId = [modelDict[@"parentId"] integerValue];
+                        ChooseTechnologyLeftModel *localModel =  [ChooseTechnologyLeftModel setModelFromDict:modelDict];
                         [self.leftModelArr addObject:localModel];
                     }
-                    [self.leftTableView reloadData];
                     //
                     if (isSecondLevelUseItsResult && self.leftModelArr.count){
                         ChooseTechnologyLeftModel *localModel = self.leftModelArr[0];
                         localModel.judgeSelected = YES;
-                        [self getSecondLevelData:localModel.parentId];
+                        [self getSecondLevelData:localModel.idFlag];
                     }
                     
                 }else if (status == 1){
                     [SVProgressHUD showInfoWithStatus:@"获取失败"];
                 }
+                 [self.leftTableView reloadData];
             }
         } failure:^(NSError *error) {
         }];
@@ -167,20 +163,18 @@
             if ([dict allKeys]){
                 int status = [dict[@"status"] intValue];
                 if (status == 0){
-                    NSLog(@"%@",dict);
+                    NSLog(@"！！！！！二级列表%@",dict);
                     NSArray *dataArr = dict[@"data"];
                     for (NSDictionary *modelDict in dataArr){
-                        ChooseTechnologyLeftModel *localModel = [[ChooseTechnologyLeftModel alloc]init];
-                        localModel.title = [modelDict[@"name"] copy];
-                        localModel.idFlag = [modelDict[@"id"] integerValue];
+                       ChooseTechnologyLeftModel *localModel =  [ChooseTechnologyLeftModel setModelFromDict:modelDict];
                         [self.rightModelArr addObject:localModel];
                     }
-                    [self.rightTableView reloadData];
+                    
                 }else if (status == 1){
                     [SVProgressHUD showInfoWithStatus:@"获取失败"];
                 }
+                [self.rightTableView reloadData];
             }
-            
         } failure:^(NSError *error) {
         }];
         
@@ -194,15 +188,14 @@
                     NSLog(@"%@",dict);
                     NSArray *dataArr = dict[@"data"];
                     for (NSDictionary *modelDict in dataArr){
-                        ChooseTechnologyLeftModel *localModel = [[ChooseTechnologyLeftModel alloc]init];
-                        localModel.title = [modelDict[@"name"] copy];
-                        localModel.idFlag = [modelDict[@"id"] integerValue];
+                       ChooseTechnologyLeftModel *localModel =  [ChooseTechnologyLeftModel setModelFromDict:modelDict];
                         [self.rightModelArr addObject:localModel];
                     }
                     [self.rightTableView reloadData];
                 }else if (status == 1){
                     [SVProgressHUD showInfoWithStatus:@"获取失败"];
                 }
+                [self.rightTableView reloadData];
             }
             
         } failure:^(NSError *error) {
@@ -282,6 +275,7 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (tableView.tag == 2){
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         ChooseTechnologyLeftModel *localModel = self.rightModelArr[indexPath.row];
@@ -300,6 +294,7 @@
         //
          [self.leftTableView reloadData];
         ChooseTechnologyLeftModel *localModel = self.leftModelArr[indexPath.row];
+        NSLog(@"点击左边tableView时的索引:%ld parentID",indexPath.row,localModel.parentId);
         [self getSecondLevelData:localModel.idFlag];
         //
        
