@@ -196,6 +196,9 @@
     OrderTakingViewController *orderTakingVC = [[OrderTakingViewController alloc] init];
     UINavigationController *orderNavi=[[UINavigationController alloc]initWithRootViewController:orderTakingVC];
     
+    
+    
+    
     VideoCenterViewController *videoCenterVC = [[VideoCenterViewController alloc] init];
     UINavigationController *videoCenterNavi=[[UINavigationController alloc]initWithRootViewController:videoCenterVC];
     

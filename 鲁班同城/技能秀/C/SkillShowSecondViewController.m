@@ -7,9 +7,12 @@
 //
 
 #import "SkillShowSecondViewController.h"
+#import "CompanyRecuritDetailViewController.h"
+
+//
 #import "SkillShowCommentToolView.h"
 #import "CustomeStyleCornerButt.h"
-#import "CompanyRecuritDetailViewController.h"
+#import "CommentTableView.h"
 
 @interface SkillShowSecondViewController (){
     CGFloat bottomCommentHeight;
@@ -21,11 +24,12 @@
 
 @property (strong,nonatomic) CustomerImageButt *backImageButt;
 
+@property (strong,nonatomic) CommentTableView *commentView;
+
+
 @end
 
 @implementation SkillShowSecondViewController
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,6 +44,7 @@
 
 - (void)sayMore{
     NSLog(@"说点什么");
+    [self showCommentPopView];
 }
 
 - (void)shareMore{
@@ -52,6 +57,23 @@
     [self.navigationController pushViewController:companyDetailVC animated:YES];
 }
 
+//评论view
+- (void)showCommentPopView{
+    if (nil == self.commentView){
+        self.commentView = [[CommentTableView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, self.view.width, SCREEN_HEIGHT * 0.6)];
+        self.commentView.hidden = YES;
+        [self.view addSubview:self.commentView];
+    }
+    //
+    self.commentView.hidden = NO;
+    [UIView animateWithDuration:0.5f animations:^{
+        self.commentView.transform = CGAffineTransformMakeTranslation(0, -self.commentView.height);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+//
 - (void)addViews{
     WS(weakSelf);
     
@@ -109,6 +131,9 @@
     bottomCommentView.commentView.rightLabel.text = @"123456";
     bottomCommentView.praiseView.rightLabel.text = @"123456";
 }
+//
+
+
 
 
 - (void)didReceiveMemoryWarning {

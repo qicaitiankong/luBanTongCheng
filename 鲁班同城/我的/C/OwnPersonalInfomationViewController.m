@@ -7,17 +7,19 @@
 //
 
 #import "OwnPersonalInfomationViewController.h"
-#import "OwnPersonalInfomationTopPictureGoupView.h"
 #import "PersonalInfoNameViewController.h"
+//view
+#import "OwnPersonalInfomationTopPictureGoupView.h"
+#import "ChageNamePop.h"
+//m
 #import "OwnPersonalInfoModel.h"
-
 //cell
 #import "OwnPersonalServiceTypeTableViewCell.h"
 #import "OwnPersonalIntroduceTableViewCell.h"
 #import "OwnPersonalPictureTableViewCell.h"
 
 
-@interface OwnPersonalInfomationViewController ()<UITableViewDelegate,UITableViewDataSource>{
+@interface OwnPersonalInfomationViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>{
     UIScrollView *baseScrollView;
     OwnPersonalInfomationTopPictureGoupView *topPartView;
     MessageSoundView *soundView;
@@ -31,6 +33,7 @@
 
 @implementation OwnPersonalInfomationViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -41,6 +44,8 @@
     //
     [self addTableView];
     [self getUserInfo];
+    //
+    
 }
 
 - (void)initOwnObjects{
@@ -54,7 +59,6 @@
     //将下载的与语音转换为amr
     [soundView giveTimeToSoundViewAndPlay:@"10s测试显示" wavData:nil];
 }
-//delegate
 
 
 
@@ -79,9 +83,11 @@
 }
 - (void)changeEmploymentName{
     NSLog(@"修改名字");
-    
+    [ChageNamePop showPopView:^(NSString *nameStr) {
+        //点击了确定
+        NSLog(@"修改名字确定=%@",nameStr);
+    }];
 }
-
 //
 - (void)addTableView{
     WS(weakSelf);
