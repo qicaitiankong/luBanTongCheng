@@ -84,7 +84,13 @@
 
 @property (strong,nonatomic) NSData *workExperienceAmrData;
 
+@property (strong,nonatomic) NSString *workExperienceUrlStr;
+
 @property (assign,nonatomic) NSInteger workExperienceSoundTime;
+
+- (NSData*)getWavData:(NSData*)amrData;
+
+
 
 //修改信息上传时需要
 //1,2,3,4
@@ -103,5 +109,8 @@
 
 //图片的获取是另外的接口，所以需要插入
 - (NSMutableArray*)getTargetImageUrlStrArr:(NSArray*)originArr;
+
+
+
 
 @end

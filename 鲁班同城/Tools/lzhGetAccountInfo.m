@@ -100,7 +100,7 @@
 
 
 
-- (void)writeToAccount:(NSDictionary*)dict{
+- (BOOL)writeToAccount:(NSDictionary*)dict{
 //    age = "<null>";
 //    fansNum = 0;
 //    focusNum = 0;
@@ -113,7 +113,6 @@
 //    state = 0;
 //    userType = "\U96c7\U4e3b";
 //    username = "<null>";
-   
     NSNumber *userType = nil;
     NSNumber *userID = nil;
     NSString *userCode = @"";
@@ -192,6 +191,7 @@
         [SVProgressHUD showErrorWithStatus:@"身份信息已更改写入本地失败"];
         NSLog(@"身份信息更改写入本地失败");
     }
+    return suc;
 }
 
 //清除账户信息

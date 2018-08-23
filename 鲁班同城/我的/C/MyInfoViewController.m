@@ -171,15 +171,17 @@
         NSDictionary *infoDict = accountInfo.infoDict;
         if (identityFlagNum == 1){//已经切换为了零工
             [infoDict setValue:@1 forKey:@"userType"];
-            [accountInfo writeToAccount:infoDict];
-            [appDelegate setupViewControllersForCasualLabour];
+           BOOL writeSuc =  [accountInfo writeToAccount:infoDict];
+            if(writeSuc){
+                [appDelegate setupViewControllersForCasualLabour];
+            }
             
         }else if (identityFlagNum == 2){//已经切换为了雇主
             //
             [infoDict setValue:@2 forKey:@"userType"];
-            [accountInfo writeToAccount:infoDict];
-            [appDelegate setupViewControllersForEmployment];
-            
+            if([accountInfo writeToAccount:infoDict]){
+                [appDelegate setupViewControllersForEmployment];
+            }
         }
         NSLog(@"打印切换身份%ld", [lzhGetAccountInfo getAccount].identityFlag);
     } failure:^(NSError *error) {

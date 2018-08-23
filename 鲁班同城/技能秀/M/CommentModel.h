@@ -25,6 +25,12 @@
 @property (assign,nonatomic) BOOL haveClickPraise;
 
 
+//
+@property (assign,nonatomic) BOOL haveConcerned;
+
+@property (assign,nonatomic) BOOL isAnswerUse;
+
+
 + (CommentModel*)setModelFromDict:(NSDictionary*)dict;
 
 

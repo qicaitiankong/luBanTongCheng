@@ -60,18 +60,12 @@
 //评论view
 - (void)showCommentPopView{
     if (nil == self.commentView){
-        self.commentView = [[CommentTableView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, self.view.width, SCREEN_HEIGHT * 0.6)];
+        self.commentView = [[CommentTableView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, self.view.width, SCREEN_HEIGHT * 0.6) parentView:self.view];
         self.commentView.hidden = YES;
         [self.view addSubview:self.commentView];
     }
     //
-    self.commentView.hidden = NO;
-    [UIView animateWithDuration:0.5f animations:^{
-        self.commentView.transform = CGAffineTransformMakeTranslation(0, -self.commentView.height);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
+    [self.commentView showCommentView];
 }
 //
 - (void)addViews{

@@ -10,4 +10,10 @@
 
 @interface CommentTableView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame parentView:(UIView*)parentView;
+
+
+- (void)showCommentView;
+
+
 @end

@@ -34,6 +34,19 @@
 
 @property (assign,nonatomic) NSInteger modelIndex;
 
+@property (strong,nonatomic) NSString *soundUrlStr;
+
+@property (strong,nonatomic) NSData *soundAmrData;
+
+@property (strong,nonatomic) NSData *soundWavData;
+
+@property (strong,nonatomic) NSString *soundTimeStr;
+
+@property (assign,nonatomic) BOOL beginPlaySound;
+
+- (void)getWavData;
+
+
 + (DispatchTicketDetailBaoJiaModel*)setModelFromDict:(NSDictionary*)dict;
 
 

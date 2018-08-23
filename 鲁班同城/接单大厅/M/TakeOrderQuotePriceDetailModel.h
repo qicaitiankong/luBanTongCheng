@@ -25,6 +25,10 @@
 @property (strong,nonatomic) NSString *praiseStr;
 
 @property (strong,nonatomic) NSString *ticketsNumberStr;
+
+@property (strong,nonatomic) NSArray *pictureUrlStrArr;
+
+
 //电话地址备注信息
 
 @property (strong,nonatomic) NSString *personInfoTipStr;

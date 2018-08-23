@@ -23,6 +23,7 @@
     UIScrollView *baseScrollView;
     OwnPersonalInfomationTopPictureGoupView *topPartView;
     MessageSoundView *soundView;
+    ShareNetWorkState *ownWorkState;
 }
 
 @property (strong,nonatomic) OwnPersonalInfoModel *infoModel;
@@ -51,16 +52,24 @@
 - (void)initOwnObjects{
     //模型必须创建，因为cell用该模型布局，如果无网络，该模型也不能为空
     self.infoModel = [[OwnPersonalInfoModel alloc]init];
-    
+    ownWorkState = [ShareNetWorkState ShareNetState];
 }
 //语音播放
 - (void)playSoundIfHaveSound{
     NSLog(@"点击了播放语音");
     //将下载的与语音转换为amr
-    [soundView giveTimeToSoundViewAndPlay:@"10s测试显示" wavData:nil];
+    [ownWorkState asynSerialDownloadMethd02:self.infoModel.workExperienceUrlStr downloadCompleteHandler:@selector(playIntroDuceSound:) target:self modelIndex:0];
+    
 }
 
-
+- (void)playIntroDuceSound:(NSDictionary*)dict{
+    //int mainIndex = [dict[@"modelIndex"] intValue];
+    NSData *amrSoundData = [dict[@"imageData"] copy];
+    self.infoModel.workExperienceAmrData = amrSoundData;
+    self.infoModel.workExperienceData = [self.infoModel getWavData:self.infoModel.workExperienceAmrData];
+    [soundView giveTimeToSoundViewAndPlay:@"10s测试显示" wavData:self.infoModel.workExperienceData];
+    
+}
 
 //添加关注
 - (void)addConcernOrCancelConcel{

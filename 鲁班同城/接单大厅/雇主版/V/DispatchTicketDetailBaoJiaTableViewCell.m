@@ -87,6 +87,11 @@
                 weakSelf.clickButtBlock(7, weakSelf.indexPath);
             }
         };
+        self.soundView.stopVoiceBlock = ^{
+            if(weakSelf.stopVoiceBlock){
+                weakSelf.stopVoiceBlock(weakSelf.indexPath);
+            }
+        };
         //
         self.bottomGroupView = [[DispatchOrderDetailCellSureServiceCompleteGroupView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 2 * leftSpace, SCREEN_WIDTH * 0.106 + 100)];
         self.bottomGroupView.messageButtView.clickBackButt = ^{
@@ -199,6 +204,12 @@
         self.baoJiaLabel.text = [NSString stringWithFormat:@"报价：%@元",model.baoJiaNameStr];
         self.beizhuLabel.text = [NSString stringWithFormat:@"备注：%@",model.beiZhuNameStr];
         [self.xinxinView setYellowStar:[model.xinxinStr floatValue]];
+        
+        if (model.beginPlaySound){
+            [self.soundView giveTimeToSoundViewAndPlay:model.soundTimeStr wavData:model.soundWavData];
+        }else{
+            [self.soundView stopVoiceVAnimation];
+        }
         //
         yuYinTipLabel.sd_resetLayout
         .leftEqualToView(self.beizhuLabel)

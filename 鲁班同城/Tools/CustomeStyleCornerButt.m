@@ -57,6 +57,15 @@
      [loginButt setTitle:title forState:UIControlStateNormal];
 }
 
+- (void)updateOwnConstraints{
+    self.loginButt.sd_resetLayout
+    .leftEqualToView(self)
+    .rightEqualToView(self)
+    .topEqualToView(self)
+    .bottomEqualToView(self);
+}
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

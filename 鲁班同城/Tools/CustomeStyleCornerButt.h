@@ -18,6 +18,7 @@
 
 - (void)setButtTitle:(NSString*)title;
 
+- (void)updateOwnConstraints;
 
 
 @end

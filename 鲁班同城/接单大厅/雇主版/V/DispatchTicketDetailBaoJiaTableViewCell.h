@@ -36,4 +36,6 @@
 
 @property (copy,nonatomic) void (^clickButtBlock)(NSInteger index,NSIndexPath *path);
 
+@property (copy,nonatomic) void (^stopVoiceBlock)(NSIndexPath *path);
+
 @end

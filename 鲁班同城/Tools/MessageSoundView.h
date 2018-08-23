@@ -20,10 +20,14 @@
 
 @property (copy,nonatomic) void (^clickSoundViewBlock)(void);
 
+@property (copy,nonatomic) void (^stopVoiceBlock)(void);
+
+
 - (void)adjustSoundView;
 
 
 - (void)giveTimeToSoundViewAndPlay:(NSString*)timeStr wavData:(NSData*)data;
 
+- (void)stopVoiceVAnimation;
 
 @end

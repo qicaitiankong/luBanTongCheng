@@ -61,6 +61,7 @@
                  [SVProgressHUD dismiss];
                  if (user.credential == nil){
                      NSLog(@"\n\n！！！！！！！！微信登录尚未授权\n\n");
+                     [SVProgressHUD showErrorWithStatus:@"微信登录失败，请重试"];
                  }else{
                      NSLog(@"\n\n！！！！！！微信登录已经授权\n\n");
                       [self wxLoginRequest:user];

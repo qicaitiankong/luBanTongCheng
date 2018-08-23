@@ -101,5 +101,36 @@
     return localTechnologyArr;
 }
 
+- (NSData*)getWavData:(NSData*)amrData{
+    __block NSData *wavData = nil;
+        if(amrData){
+            NSString *amrPathStr = [[ShareHomePath GetShareHome] getAmrSoundPath];
+            NSString *wavPathStr = [[ShareHomePath GetShareHome] getWavSoundPath];
+            //NSLog(@"保存的服务器文件路径：%@",self.amrPathStr);
+            BOOL suc =  [amrData writeToFile:amrPathStr atomically:YES];
+            if (suc){
+                NSLog(@"下载的amr 写入文件陈功");
+                [AudioConverter convertAmrToWavAtPath:amrPathStr wavSavePath:wavPathStr asynchronize:NO completion:^(BOOL success, NSString * _Nullable resultPath) {
+                    if (suc){
+                        NSLog(@"服务器amr 转wav 转换成功");
+                        wavData =  [[NSData dataWithContentsOfFile:wavPathStr] copy];
+                        
+                        NSDictionary *dict = @{};
+                        [dict writeToFile:amrPathStr atomically:YES];
+                        [dict writeToFile:wavPathStr atomically:YES];
+                    }else{
+                        [SVProgressHUD showErrorWithStatus:@"语音格式转换失败"];
+                        NSLog(@"服务器amr 转wav 转换失败");
+                    }
+                    
+                }];
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"语音格式转换失败"];
+                NSLog(@"下载的amr 写入文件失败");
+            }
+        }
+    return wavData;
+}
+
 
 @end

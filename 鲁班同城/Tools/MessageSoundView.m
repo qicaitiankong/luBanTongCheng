@@ -71,7 +71,15 @@
     [self.player stop];
     //
     [self.soundButt.imageView stopAnimating];
+    if(self.stopVoiceBlock){
+        self.stopVoiceBlock();
+    }
 }
+- (void)stopVoiceAnimation{
+     [self.soundButt.imageView stopAnimating];
+}
+
+
 //
 - (void)giveTimeToSoundViewAndPlay:(NSString*)timeStr wavData:(NSData*)data{
     if (timeStr == nil || [timeStr length] == 0){

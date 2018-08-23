@@ -19,8 +19,9 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self){
+        WS(weakSelf);
         self.contentView.backgroundColor = [UIColor whiteColor];
-        praiseButtWidth = 16;
+        praiseButtWidth = 25;
         //
         self.userImageView = [UIImageView new];
         self.userImageView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
@@ -30,7 +31,17 @@
         self.nameLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         
         self.praiseButt = [[CustomerImageButt alloc]initWithFrame:CGRectMake(0, 0, praiseButtWidth,praiseButtWidth)];
-        [self.praiseButt.imageView setImage:[UIImage imageNamed:@"clickPraise"]];
+        self.praiseButt.imageView.frame = CGRectMake(0, 0, 16, 16);
+        self.praiseButt.imageView.center = CGPointMake(self.praiseButt.width / 2, self.praiseButt.height / 2);
+        self.praiseButt.backgroundColor = [UIColor whiteColor];
+        [self.praiseButt.imageView setImage:[UIImage imageNamed:@"clickGood"]];
+        self.praiseButt.clickButtBlock = ^{
+            if (weakSelf.clickGoodBlock){
+                weakSelf.clickGoodBlock(weakSelf.indexPath);
+            }
+        };
+        
+        
         
         self.praiseLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         
@@ -40,6 +51,11 @@
         self.timeLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         //
         self.answerButtView = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, 0, 60, 30) backColor:[UIColor whiteColor] cornerRadius:5 title:@"0回复" titleColor:[UIColor colorWithHexString:@"#333333"] font:[UIFont getPingFangSCMedium:13]];
+        self.answerButtView.clickButtBlock = ^{
+            if (weakSelf.clickAnswerBlock){
+                weakSelf.clickAnswerBlock(weakSelf.indexPath);
+            }
+        };
         self.answerButtView.layer.borderWidth = 1;
         self.answerButtView.layer.borderColor = [UIColor colorWithHexString:@"#E3E3E3"].CGColor;
         
@@ -106,26 +122,41 @@
 - (void)setModel:(CommentModel*)model{
     _model = model;
     if (model){
-        self.nameLabel.text = [model.nameStr copy];
-        self.praiseLabel.text = [model.praiseStr copy];
-        self.commentContentLabel.text = [model.commentContentStr copy];
-        self.timeLabel.text = [model.timeStr copy];
-        [self.answerButtView.loginButt setTitle:[model.answerNumStr copy] forState:UIControlStateNormal];
-        
-        self.timeLabel.sd_resetLayout
-        .leftEqualToView(self.commentContentLabel)
-        .widthIs(90)
-        .topSpaceToView(self.commentContentLabel, 15)
-        .heightIs(15);
-        
-        self.answerButtView.sd_resetLayout
-        .leftSpaceToView(self.timeLabel, 15)
-        .widthIs(60)
-        .heightIs(30)
-        .centerYEqualToView(self.timeLabel);
-        
-        
-        UIView *botView = self.answerButtView;
+        self.nameLabel.text = model.nameStr;
+        self.praiseLabel.text = model.praiseStr;
+        self.commentContentLabel.text = model.commentContentStr;
+         UIView *botView = self.answerButtView;
+        if (model.isAnswerUse){//回复使用
+            self.timeLabel.text =[NSString stringWithFormat:@"%@ 回复",model.timeStr];
+            self.answerButtView.hidden = YES;
+            //
+            self.timeLabel.sd_resetLayout
+            .leftEqualToView(self.commentContentLabel)
+            .rightSpaceToView(self.contentView, 15)
+            .topSpaceToView(self.commentContentLabel, 15)
+            .heightIs(15);
+            botView = self.timeLabel;
+        }else{//评论使用
+            self.timeLabel.text = model.timeStr;
+            NSString *answerNumberStr = [NSString stringWithFormat:@"%@回复",model.answerNumStr];
+            CGFloat width = [LzhReturnLabelHeight getLabelWidth:answerNumberStr font:[UIFont getPingFangSCMedium:13] targetHeight:30] + 5;
+             [self.answerButtView.loginButt setTitle:answerNumberStr  forState:UIControlStateNormal];
+            //
+            self.timeLabel.sd_resetLayout
+            .leftEqualToView(self.commentContentLabel)
+            .widthIs(90)
+            .topSpaceToView(self.commentContentLabel, 15)
+            .heightIs(15);
+            
+            self.answerButtView.sd_resetLayout
+            .leftSpaceToView(self.timeLabel, 15)
+            .widthIs(width)
+            .heightIs(30)
+            .centerYEqualToView(self.timeLabel);
+            [self.answerButtView updateOwnConstraints];
+        }
+       
+       
         [self setupAutoHeightWithBottomView:botView bottomMargin:15];
     }
 }

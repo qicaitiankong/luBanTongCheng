@@ -25,6 +25,7 @@
     StarView *xinxinView;
     OwnTextView *commentTextView;
     //
+    ShareNetWorkState *ownWorkState;
 }
 
 @property (strong,nonatomic) TakeOrderQuotePriceDetailModel *singleModel;
@@ -49,6 +50,7 @@
     [NavTools displayNav:self.navigationController];
     [NavTools hiddenTabbar:self.rdv_tabBarController];
     self.title = @"派单详情";
+    
     //
     [self initOwnObjects];
     //
@@ -59,6 +61,7 @@
 
 - (void)initOwnObjects{
     self.modelArr = [[NSMutableArray alloc]init];
+    ownWorkState = [ShareNetWorkState ShareNetState];
 }
 
 - (void)getData{
@@ -78,6 +81,7 @@
             NSNumber *receiveNum = [NSNumber getResultNumberBySeverStr: dataDict[@"receiveNum"]];
             NSInteger receviceNum =  [receiveNum integerValue];
             self.singleModel.ticketsNumberStr =[NSString stringWithFormat:@"%ld",receviceNum];
+            self.singleModel.pictureUrlStrArr = @[@"",@"",@"",@"",@"",@""];
             //
             NSArray *bottomDataArr = dataDict[@"receiveList"];
             if (bottomDataArr.count){
@@ -183,13 +187,39 @@
         }
             break;
         case 7:{
-            NSLog(@"先去下载语音去播放");
+            
+            DispatchTicketDetailBaoJiaModel *model = self.modelArr[indexPath.row];
+            model.beginPlaySound = YES;
+            if(nil == model.soundAmrData){
+                [SVProgressHUD showInfoWithStatus:@"语音下载中"];
+                NSLog(@"先去下载语音去播放");
+                if ([model.soundUrlStr length]){
+                    [ownWorkState asynSerialDownloadMethd02:model.soundUrlStr downloadCompleteHandler:@selector(addSoundToAnswer:) target:self modelIndex:indexPath.row];
+                }
+            }else{
+                //直接播放
+                [self.tableView reloadData];
+            }
         }
             break;
         default:
             break;
     }
 }
+
+- (void)addSoundToAnswer:(NSDictionary*)dict{
+    int answerIndex = [dict[@"modelIndex"] intValue];
+    NSData *answerSoundData = [dict[@"imageData"] copy];
+    DispatchTicketDetailBaoJiaModel *answerModel = self.modelArr[answerIndex];
+    answerModel.soundAmrData = answerSoundData;
+    //->wav
+    [answerModel getWavData];
+    //
+    [self.tableView reloadData];
+}
+
+
+
 
 //views
 - (void)addTableView:(CGRect)size style:(UITableViewStyle)styles{
@@ -249,6 +279,11 @@
             WS(weakSelf);
             cell.clickButtBlock = ^(NSInteger index, NSIndexPath *path) {
                  [weakSelf dealButtClick:index path:indexPath];
+            };
+            cell.stopVoiceBlock = ^(NSIndexPath *path) {
+                DispatchTicketDetailBaoJiaModel *localModel = weakSelf.modelArr[path.row];
+                localModel.beginPlaySound = NO;
+                [weakSelf.tableView reloadData];
             };
         }
         cell.indexPath = indexPath;

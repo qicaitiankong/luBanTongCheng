@@ -18,7 +18,7 @@
         localModel.praiseStr = @"123";
         localModel.commentContentStr = @"评论内容就在这里评论内容就在这里评论内容就在这里评论内容就在这里评论内容就在这里";
         localModel.timeStr = @"07-02 16:30";
-        localModel.answerNumStr = @"23回复";
+        localModel.answerNumStr = @"23";
     }
     return localModel;
 }

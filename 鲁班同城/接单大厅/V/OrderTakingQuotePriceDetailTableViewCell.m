@@ -7,9 +7,11 @@
 //
 
 #import "OrderTakingQuotePriceDetailTableViewCell.h"
+#import "SDWeiXinPhotoContainerView.h"
 
 @interface OrderTakingQuotePriceDetailTableViewCell (){
     CGFloat leftSpace;
+    SDWeiXinPhotoContainerView *pictureView;
 }
 @end
 
@@ -39,7 +41,9 @@
         //
         self.ticketsNumberLabel = [[CustomeLzhLabel alloc] initWithCustomerParamer:[UIFont getPingFangSCMedium:12] titleColor:[UIColor colorWithRed:51.0026/255.0 green:51.0026/255.0 blue:51.0026/255.0 alpha:1] aligement:2];
         //
-        NSArray *viewArr = @[self.personLogoImaView,self.timeLabel,self.personNameLabel,self.detailLabel,self.ticketsNumberLabel,self.praiseLabel];
+        pictureView = [SDWeiXinPhotoContainerView new];
+        //
+        NSArray *viewArr = @[self.personLogoImaView,self.timeLabel,self.personNameLabel,self.detailLabel,self.ticketsNumberLabel,self.praiseLabel,pictureView];
         [self.contentView sd_addSubviews:viewArr];
         [self addOwnConstraints];
     }
@@ -82,7 +86,9 @@
     .rightSpaceToView(self.ticketsNumberLabel, 10)
     .topEqualToView(self.ticketsNumberLabel)
     .heightIs(15);
-    
+    //
+    pictureView.sd_layout.leftEqualToView(self.personLogoImaView)
+    .topSpaceToView(self.praiseLabel, 10);
 }
 
 - (void)setModel:(TakeOrderQuotePriceDetailModel*)model{
@@ -109,7 +115,9 @@
         .topEqualToView(self.ticketsNumberLabel)
         .heightIs(15);
         //
-        [self setupAutoHeightWithBottomView:self.praiseLabel bottomMargin:15];
+        [pictureView setPicPathStringsArray:model.pictureUrlStrArr];
+        //
+        [self setupAutoHeightWithBottomView:pictureView bottomMargin:15];
         
     }
 }

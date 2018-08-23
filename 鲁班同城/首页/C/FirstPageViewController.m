@@ -21,6 +21,9 @@
 
 @interface FirstPageViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,WaterFlowLayoutDelegate>{
     UICollectionView *mainCollectionView;
+    //heder所有权
+    FirstPageWaterCollectionReusableHeaderView *ownHeaderView;
+    GetLocationICitynfo *locationInfo;
     
 }
 
@@ -70,21 +73,21 @@
 //
 - (void)initObjects{
     self.modelArr = [[NSMutableArray alloc] init];
+    locationInfo =  [[GetLocationICitynfo alloc]init];
 }
 
 //获取定位城市
 - (void)getLocationCity{
-    GetLocationICitynfo *locationInfo =  [[GetLocationICitynfo alloc]init];
+    
     [locationInfo startLocation];
     WS(weakSelf);
     locationInfo.getLocationInfoBlock = ^{
-        [weakSelf refreshLocationCityDisplay];
+        __strong typeof(weakSelf) sself = weakSelf;
+        [sself -> ownHeaderView.searchView.locationCityButt setTitle:[GetLocationICitynfo getLocationInfo].cityStr forState:UIControlStateNormal];
     };
 }
 
-- (void)refreshLocationCityDisplay{
-    [mainCollectionView reloadData];
-}
+
 
 
 - (void)getData{
@@ -195,6 +198,8 @@
     //返回段头段尾视图
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
          header=[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([FirstPageWaterCollectionReusableHeaderView class]) forIndexPath:indexPath];
+        //获取头视图所有权
+        ownHeaderView = header;
         WS(weakSelf);
         header.searchView.clickLocationCity = ^(UIButton *targetCityButton) {
             [weakSelf clickLocationCity:targetCityButton];
@@ -210,8 +215,6 @@
         //添加头视图的内容
         [header addConstraints];
     }
-    NSLog(@"viewForSupplementaryElementOfKind");
-    [header.searchView.locationCityButt setTitle:[GetLocationICitynfo getLocationInfo].cityStr forState:UIControlStateNormal];
     return header;
 }
 //悬浮按钮
