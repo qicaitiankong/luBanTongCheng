@@ -29,7 +29,7 @@
         WS(weakSelf);
         self.contentView.backgroundColor = [UIColor whiteColor];
         praiseButtWidth = 25;
-        praiseNumLabelWidth = [LzhReturnLabelHeight getLabelWidth:@"12345" font:[UIFont getPingFangSCMedium:14] targetHeight:20];
+        praiseNumLabelWidth = [LzhReturnLabelHeight getLabelWidth:@"12345" font:[UIFont getPingFangSCMedium:11] targetHeight:20];
         //
         self.userImageView = [UIImageView new];
         self.userImageView.backgroundColor = IMAGEVIEW_DEFAULT_COLOR;
@@ -48,14 +48,14 @@
             }
         };
         //
-        self.praiseLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
+        self.praiseLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:11] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         
-        self.commentContentLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:16] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
+        self.commentContentLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:12] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         self.commentContentLabel.numberOfLines = 0;
         //
-        self.timeLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
+        self.timeLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:11] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         //
-         self.leftpraisedLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
+         self.leftpraisedLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:11] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         //
         self.concernButt = [[CustomeLabelButt alloc]initWithFrame:CGRectMake(0, 0, 60, 30)];
         self.concernButt.displayLabel.textAlignment = NSTextAlignmentCenter;

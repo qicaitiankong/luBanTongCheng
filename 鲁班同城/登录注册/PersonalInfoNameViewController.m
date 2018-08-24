@@ -63,19 +63,25 @@
     //将原始数据模型里面的数据拷贝一份
     //基本信息
      self.amendingInfoModel = [[OwnPersonalInfoModel alloc]init];
-    self.amendingInfoModel.nameStr = [self.orinalInfoModel.nameStr copy];
-    self.amendingInfoModel.ageNum = [self.orinalInfoModel.ageNum copy];
-    self.amendingInfoModel.sexStr = [self.orinalInfoModel.sexStr copy];
-    self.amendingInfoModel.mobileStr = [self.orinalInfoModel.mobileStr copy];
-    self.amendingInfoModel.introduceStr = [self.orinalInfoModel.introduceStr copy];
+    
+    self.amendingInfoModel.nameStr = [NSString getResultStrBySeverStr:self.orinalInfoModel.nameStr];
+  
+    if(self.orinalInfoModel.ageNum == nil){
+        self.amendingInfoModel.ageNum = [NSNumber numberWithInteger:0];
+    }else{
+          self.amendingInfoModel.ageNum = [self.orinalInfoModel.ageNum copy];
+    }
+    self.amendingInfoModel.sexStr = [NSString getResultStrBySeverStr:self.orinalInfoModel.sexStr];
+    self.amendingInfoModel.mobileStr = [NSString getResultStrBySeverStr:self.orinalInfoModel.mobileStr];
+    self.amendingInfoModel.introduceStr =  [NSString getResultStrBySeverStr:self.orinalInfoModel.introduceStr];
     
     //地址工作信息
-    self.amendingInfoModel.proviceStr = [self.orinalInfoModel.proviceStr copy];
-    self.amendingInfoModel.cityStr = [self.orinalInfoModel.cityStr copy];
-    self.amendingInfoModel.areaStr = [self.orinalInfoModel.areaStr copy];
-    self.amendingInfoModel.technologyStr =  [self.orinalInfoModel.technologyStr copy];
-    self.amendingInfoModel.jobStr =  [self.orinalInfoModel.jobStr copy];
-    self.amendingInfoModel.jobExperienceStr = [self.orinalInfoModel.jobExperienceStr copy];
+    self.amendingInfoModel.proviceStr =  [NSString getResultStrBySeverStr:self.orinalInfoModel.proviceStr];
+    self.amendingInfoModel.cityStr =  [NSString getResultStrBySeverStr:self.orinalInfoModel.cityStr];
+    self.amendingInfoModel.areaStr =  [NSString getResultStrBySeverStr:self.orinalInfoModel.areaStr];
+    self.amendingInfoModel.technologyStr =   [NSString getResultStrBySeverStr:self.orinalInfoModel.technologyStr];
+    self.amendingInfoModel.jobStr =   [NSString getResultStrBySeverStr:self.orinalInfoModel.jobStr];
+    self.amendingInfoModel.jobExperienceStr =  [NSString getResultStrBySeverStr:self.orinalInfoModel.jobExperienceStr];
     NSLog(@"\n\n!!!!!!!!!!!technologyStr%@,!!!!!!!!!%@",self.amendingInfoModel.technologyStr,self.amendingInfoModel.jobStr);
     //技术(传给后台id的格式)
     NSArray *technoArr = [self getTargetServiceneedTechnologyArr:self.orinalInfoModel.technologyArr];
@@ -87,6 +93,20 @@
     self.amendingInfoModel.pictureInfoArr = [NSArray getOwnCopyArr:self.orinalInfoModel.pictureInfoArr];
     //
     self.amendingInfoModel.videoInfoArr = [NSArray getOwnCopyArr:self.orinalInfoModel.videoInfoArr];
+    //语音信息
+    self.amendingInfoModel.nameSoundUrlStr =  [NSString getResultStrBySeverStr:self.orinalInfoModel.nameSoundUrlStr];
+    self.amendingInfoModel.nameSoundAmrData = [self.orinalInfoModel.nameSoundAmrData copy];
+    self.amendingInfoModel.nameSoundData = [self.orinalInfoModel.nameSoundData copy];
+    
+    self.amendingInfoModel.nameSoundTime = self.orinalInfoModel.nameSoundTime;
+    
+    //
+    self.amendingInfoModel.workExperienceUrlStr =  [NSString getResultStrBySeverStr:self.orinalInfoModel.workExperienceUrlStr];
+    self.amendingInfoModel.workExperienceData = [self.orinalInfoModel.workExperienceData copy];
+    self.amendingInfoModel.workExperienceAmrData = [self.orinalInfoModel.workExperienceAmrData copy];
+    
+    self.amendingInfoModel.workExperienceSoundTime = self.orinalInfoModel.workExperienceSoundTime ;
+    
 }
 
 - (NSMutableArray*)getTargetServiceneedTechnologyArr:(NSArray*)originArr{
@@ -162,6 +182,8 @@
     topTipView.clickSoundTextChangeViewBlock = ^(BOOL isSound) {
         __strong typeof(weakSelf) sself = weakSelf;
         [sself->nameView displayTextOrYuYin:isSound];
+        [weakSelf judgeNameSoundDisplay];
+
     };
     [baseScrollView addSubview:topTipView];
     [topTipView addOwnContraints];
@@ -242,6 +264,7 @@
 - (void)clickAddSound{
     if (self.amendingInfoModel.nameSoundData == nil){
         NSLog(@"没有语音");
+        //然后播放
         [self->dealRecordPlaySound startRecord];
         //录制语音弹窗
         [LuZhiYuYinPop showPopView:^{//暂时没有做取消块
@@ -265,6 +288,7 @@
             self.amendingInfoModel.nameSoundData = nil;
             self.amendingInfoModel.nameSoundAmrData = nil;
             self.amendingInfoModel.nameSoundTime = 0;
+            self.amendingInfoModel.nameSoundUrlStr = @"";
             [self -> nameView.addSoundView changeToAddSoundState];
         } completeBlock:^{//完成点击
             [self->dealRecordPlaySound stopPlay];
@@ -274,7 +298,13 @@
     }
 }
 
-
+- (void)judgeNameSoundDisplay{
+    if(self.amendingInfoModel.nameSoundUrlStr.length == 0){
+        [nameView.addSoundView changeToAddSoundState];
+    }else{
+         [nameView.addSoundView changeToPlaySoundState];
+    }
+}
 
 
 - (void)didReceiveMemoryWarning {

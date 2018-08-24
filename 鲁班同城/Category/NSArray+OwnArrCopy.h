@@ -16,6 +16,7 @@
 //将一个字典数组，重新拿出其中某个键的值组成一个新数组
 + (NSMutableArray*)getTargetArr:(NSArray*)orinalArr keyStr:(NSString*)key;
 
-
+//处理后台返回数组为空类
++ (NSMutableArray*)getResultArrBySeverArr:(NSArray*)targetArr;
 
 @end

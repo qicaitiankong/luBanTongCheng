@@ -31,7 +31,16 @@
     return resultArr;
 }
 
-
+//处理后台返回数组为空类
++ (NSMutableArray*)getResultArrBySeverArr:(NSArray*)targetArr{
+    NSMutableArray *dealArr =  nil;
+    if ([targetArr isKindOfClass:[NSNull class]]){
+        dealArr = (NSMutableArray*)@[];
+    }else{
+        dealArr = (NSMutableArray*)targetArr;
+    }
+    return dealArr;
+}
 
 
 

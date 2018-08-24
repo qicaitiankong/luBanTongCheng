@@ -119,12 +119,12 @@
     self.videoModel = [[OwnPersonalInfoChoosePictureModel alloc]init];
     self.pictureModel = [[OwnPersonalInfoChoosePictureModel alloc]init];
     //通过网络请求下载图片保存到模型里面展示
-    NSMutableArray *tecnologePicArr = [NSArray getTargetArr:self.amendingInfoModel.pictureInfoArr keyStr:@"filePath"];
+    NSMutableArray *tecnologePicArr = [NSArray getTargetArr:self.amendingInfoModel.pictureInfoArr keyStr:@"path"];
     if(tecnologePicArr.count){
         [[ShareNetWorkState ShareNetState] asynSerialDownload:tecnologePicArr downloadCompleteHandler:@selector(addPictureToPictureModel:) target:self modelIndex:1];
         //
     }
-    NSArray *tecnologeVideoPicArr = [NSArray getTargetArr:self.amendingInfoModel.videoInfoArr keyStr:@"filePath"];
+    NSArray *tecnologeVideoPicArr = [NSArray getTargetArr:self.amendingInfoModel.videoInfoArr keyStr:@"path"];
     if (tecnologeVideoPicArr.count){
         [[ShareNetWorkState ShareNetState] asynSerialDownload:tecnologeVideoPicArr downloadCompleteHandler:@selector(addPictureToVideoModel:) target:self modelIndex:2];
     }
@@ -418,24 +418,28 @@
     self.amendingInfoModel.areaStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.areaStr];
     
     self.amendingInfoModel.jobExperienceStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.jobExperienceStr];
-//    NSLog(@"请求之前答应选择的技术图片：self.pictureModel.selectedImageBaseStrArr = %@ ,jobstr = %@ 性别:%@",self.pictureModel.selectedImageBaseStrArr,self.videoModel.selectedImageBaseStrArr,self.amendingInfoModel.sexStr);
-      NSLog(@"修改个人信息提交前答应提交新增加图片数组self.IncreasedNewPictureDataArrcont=%ld\n, self.needDeleteTecPicIdStrArr=%@\n self.IncreasedNewVideoDataArr.count=%ld\n self.needDeleteTecVideoIdStrArr=%@\n",self.IncreasedNewPictureDataArr.count,self.needDeleteTecPicIdStrArr,self.IncreasedNewVideoDataArr.count,self.needDeleteTecVideoIdStrArr
-            );
+    self.amendingInfoModel.jobServiceNeedStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.jobServiceNeedStr];
+    
+    self.amendingInfoModel.technologyServiceNeedStr = [NSString getResultStrBySeverStr:self.amendingInfoModel.technologyServiceNeedStr];
+    
+
+    
     //图片和视屏要传新增加的或修改的,self.IncreasedNewPictureDataArr然后通过上传多张file类型图片操作
     //要修改删除的图片或视屏id str 拼接
-    NSString *needDeletePicStr = [self.needDeleteTecPicIdStrArr componentsJoinedByString:@","];
+    NSString *needDeletePicStr =  [self.needDeleteTecPicIdStrArr componentsJoinedByString:@","];
+    needDeletePicStr = [NSString getResultStrBySeverStr:needDeletePicStr];
     NSString *needDeleteVideoStr = [self.needDeleteTecVideoIdStrArr componentsJoinedByString:@","];
-    NSLog(@"打印工作经历:%@",self.amendingInfoModel.jobExperienceStr);
-    //
-    NSDictionary *paraDict = @{@"realName":self.amendingInfoModel.nameStr,@"realNamePath":@"",
-                               @"age":self.amendingInfoModel.ageNum,@"gender":self.amendingInfoModel.sexStr,
-                               @"province":self.amendingInfoModel.proviceStr,@"city":self.amendingInfoModel.cityStr,
-                               @"area":self.amendingInfoModel.areaStr,@"address":@"",@"gender":self.amendingInfoModel.sexStr,
-                               @"technologys":self.amendingInfoModel.technologyServiceNeedStr,@"professionals":self.amendingInfoModel.jobServiceNeedStr,@"delFileIds":needDeletePicStr,
-                               @"userId":[lzhGetAccountInfo getAccount].userID,
-                               @"mobile":@"",@"workExperience":self.amendingInfoModel.jobExperienceStr,
-                               @"workExperiencePath":@""
-                                   };
+    needDeleteVideoStr = [NSString getResultStrBySeverStr:needDeleteVideoStr];
+    
+    
+    NSString *nameSoundTime = [NSString stringWithFormat:@"%ld",self.amendingInfoModel.nameSoundTime];
+    NSString *workSoundTime = [NSString stringWithFormat:@"%ld",self.amendingInfoModel.workExperienceSoundTime];
+    
+    NSLog(@"修改个人信息提交前答应提交组%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",self.amendingInfoModel.nameStr,self.amendingInfoModel.sexStr,self.amendingInfoModel.proviceStr,self.amendingInfoModel.cityStr,self.amendingInfoModel.areaStr,self.amendingInfoModel.jobExperienceStr,self.amendingInfoModel.jobServiceNeedStr,self.amendingInfoModel.technologyServiceNeedStr,needDeletePicStr,self.amendingInfoModel.jobExperienceStr
+          );
+    
+    NSDictionary *paraDict = @{@"realName":self.amendingInfoModel.nameStr,@"age":self.amendingInfoModel.ageNum,@"gender":self.amendingInfoModel.sexStr,@"province":self.amendingInfoModel.proviceStr,@"city":self.amendingInfoModel.cityStr,@"area":self.amendingInfoModel.areaStr,@"address":@"",@"technologys":self.amendingInfoModel.technologyServiceNeedStr,@"professionals":self.amendingInfoModel.jobServiceNeedStr,@"delFileIds":needDeletePicStr,@"mobile":@"",@"workExperience":self.amendingInfoModel.jobExperienceStr,@"nameLength":nameSoundTime,@"workLength":workSoundTime
+        };
     
     
   
@@ -451,10 +455,10 @@
         }else{
             [SVProgressHUD showInfoWithStatus:webDict[@"msg"]];
         }
-       
-        
+
+
     } failure:^(NSError *error) {
-    
+
     }];
 }
 

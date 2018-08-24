@@ -36,13 +36,13 @@
 - (void)clickCapsualButt{
     [self.capsualButtView setSelectedState];
     [self.employmentButtView setNormalState];
-    self.selectedUserType = 0;
+    self.selectedUserType = 1;
 }
 
 - (void)clickEmplymentButt{
     [self.capsualButtView setNormalState];
     [self.employmentButtView setSelectedState];
-    self.selectedUserType = 1;
+    self.selectedUserType = 0;
 
 }
 

@@ -1,48 +1,33 @@
 //
-//  SettingViewController.m
+//  AboutUsViewController.m
 //  鲁班同城
 //
-//  Created by apple on 2018/7/13.
-//  Copyright © 2018 Mac. All rights reserved.
+//  Created by apple on 2018/8/24.
+//  Copyright © 2018年 Mac. All rights reserved.
 //
 
-#import "SettingViewController.h"
-#import "SettingTableViewCell.h"
-#import "MessageFeedBackViewController.h"
 #import "AboutUsViewController.h"
+#import "SettingTableViewCell.h"
 
-
-@interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>{
-    NSArray *titleArr;
+@interface AboutUsViewController ()<UITableViewDelegate,UITableViewDataSource>{
+     NSArray *titleArr;
 }
 
 @property (strong,nonatomic) UITableView *tableView;
 
 @end
 
-@implementation SettingViewController
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [NavTools displayNav:self.navigationController];
-    [NavTools hiddenTabbar:self.rdv_tabBarController];
-}
+@implementation AboutUsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"关于我们";
     self.view.backgroundColor = [UIColor whiteColor];
-    [NavTools displayNav:self.navigationController];
-    [NavTools hiddenTabbar:self.rdv_tabBarController];
-    self.title = @"设置";
-    //
+    titleArr = @[@"去评分",@"功能介绍"];
+    
     [self addTableView:CGRectMake(0, 0, self.view.width, CENTER_VIEW_HEIGHT + TAB_BAR_HEIGHT) style:UITableViewStylePlain];
-    [self getData];
 }
 
-- (void)getData{
-    titleArr = @[@"清理缓存",@"信息反馈",@"使用帮助",@"APP介绍"];
-    [self.tableView reloadData];
-}
 
 //add views
 - (void)addTableView:(CGRect)size style:(UITableViewStyle)styles{
@@ -53,6 +38,15 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
+    //
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, SCREEN_HEIGHT * 0.32)];
+    headerView.backgroundColor = [UIColor whiteColor];
+    UIImageView *baseImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, headerView.height, headerView.height)];
+    baseImageView.center = CGPointMake(headerView.width / 2, headerView.height / 2);
+    
+    [baseImageView setImage:[UIImage imageNamed:@"loginLogo"]];
+    [headerView addSubview:baseImageView];
+    self.tableView.tableHeaderView = headerView;
     
 }
 
@@ -72,17 +66,9 @@
     }
     NSString *title = titleArr[indexPath.row];
     cell.ownLeftLabel.text = [title copy];
-    if (indexPath.row == 0){
-        //显示缓存
-        cell.ownRightLabel.hidden = NO;
-        cell.ownRightLabel.text = @"30M";
-        cell.goImageView.hidden = YES;
-    }else{
-        cell.ownRightLabel.hidden = YES;
-        cell.ownRightLabel.text = @"";
-        cell.goImageView.hidden = NO;
-    }
-    
+    cell.ownRightLabel.hidden = YES;
+    cell.ownRightLabel.text = @"";
+    cell.goImageView.hidden = NO;
     return cell;
 }
 
@@ -98,23 +84,16 @@
         }
             break;
         case 1:{
-            MessageFeedBackViewController *messageVC = [[MessageFeedBackViewController alloc]init];
-            [self.navigationController pushViewController:messageVC animated:YES];
-        }
-            break;
-        case 2:{
-        
-        }
-            break;
-        case 3:{
-            AboutUsViewController *aboutVC = [[AboutUsViewController alloc]init];
-            [self.navigationController pushViewController:aboutVC animated:YES];
         }
             break;
         default:
             break;
     }
 }
+
+
+
+
 
 
 - (void)didReceiveMemoryWarning {

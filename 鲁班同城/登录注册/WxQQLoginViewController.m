@@ -98,8 +98,6 @@
          NSLog(@"openid不是数字");
     }
     
-    
-    
     NSString *unionIDStr = [weixinInfo.credential.rawData[@"unionid"] copy];
     
      NSLog(@"!!!!!! openID:%@ unionID:%@ selected tyoe %ld",openIDStr,unionIDStr,self.selectedUserType);
@@ -133,17 +131,22 @@
 //                "userCode": "FKfaKd"                //用户编码
 //            },
             //在此保存用户信息
-            [[lzhGetAccountInfo getAccount] writeToAccount:dataDict];
-            //
-            NSString *operatorToken = [dataDict[@"token"] copy];
-            [PDKeyChain keyChainSave:operatorToken];
-            [SVProgressHUD showSuccessWithStatus:dict[@"msg"]];
-            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-            if ([lzhGetAccountInfo getAccount].identityFlag == 1){
-                [app setupViewControllersForEmployment];
+            BOOL suc =  [[lzhGetAccountInfo getAccount] writeToAccount:dataDict];
+            if(suc){
+                NSString *operatorToken = [dataDict[@"token"] copy];
+                [PDKeyChain keyChainSave:operatorToken];
+                [SVProgressHUD showSuccessWithStatus:dict[@"msg"]];
+                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                if ([lzhGetAccountInfo getAccount].identityFlag == 1){
+                    [app setupViewControllersForEmployment];
+                }else{
+                    [app setupViewControllersForCasualLabour];
+                }
             }else{
-                [app setupViewControllersForCasualLabour];
+                [SVProgressHUD showInfoWithStatus:@"文件写入失败，请重新尝试登陆"];
             }
+            //
+            
 
         }else if (status == 1){
             [SVProgressHUD showErrorWithStatus:dict[@"msg"]];

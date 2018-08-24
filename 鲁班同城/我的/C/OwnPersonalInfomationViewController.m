@@ -57,17 +57,22 @@
 //语音播放
 - (void)playSoundIfHaveSound{
     NSLog(@"点击了播放语音");
-    //将下载的与语音转换为amr
-    [ownWorkState asynSerialDownloadMethd02:self.infoModel.workExperienceUrlStr downloadCompleteHandler:@selector(playIntroDuceSound:) target:self modelIndex:0];
-    
+    //将下载的与语音转换为wav
+    if(nil == self.infoModel.nameSoundData){
+        NSLog(@"下载语音");
+        [ownWorkState asynSerialDownloadMethd02:self.infoModel.nameSoundUrlStr downloadCompleteHandler:@selector(playIntroDuceSound:) target:self modelIndex:0];
+    }else{
+        NSLog(@"播放语音");
+        [soundView giveTimeToSoundViewAndPlay:[NSString stringWithFormat:@"%ld",self.infoModel.nameSoundTime] wavData:self.infoModel.nameSoundData];
+    }
 }
 
 - (void)playIntroDuceSound:(NSDictionary*)dict{
     //int mainIndex = [dict[@"modelIndex"] intValue];
     NSData *amrSoundData = [dict[@"imageData"] copy];
-    self.infoModel.workExperienceAmrData = amrSoundData;
-    self.infoModel.workExperienceData = [self.infoModel getWavData:self.infoModel.workExperienceAmrData];
-    [soundView giveTimeToSoundViewAndPlay:@"10s测试显示" wavData:self.infoModel.workExperienceData];
+    self.infoModel.nameSoundAmrData = amrSoundData;
+    self.infoModel.nameSoundData = [self.infoModel getWavData:self.infoModel.nameSoundAmrData];
+    [soundView giveTimeToSoundViewAndPlay:[NSString stringWithFormat:@"%ld",self.infoModel.nameSoundTime] wavData:self.infoModel.nameSoundData];
     
 }
 
@@ -294,13 +299,8 @@
                     if ([dataDict allKeys].count){
                         self.infoModel = [OwnPersonalInfoModel setModelFromDict:dataDict];
                         
-                        self.infoModel.videoUrlStrArr = @[@"",@"",@""]; self.infoModel.pictureUrlStrArr = @[@"",@"",@"",@""];
-                        //self.infoModel.introduceStr = @"个人介绍工作经历个人介绍工作经历个人介绍工作经历个人介绍工作经历";
-                        
                         //界面赋值
                         [self.tableView reloadData];
-                        //
-//                       [self getTechnologyPictureInfo];
                     }
                 } failure:^(NSError *error) {
                     //
@@ -310,24 +310,6 @@
     }
 }
 
-
-
-
-- (void)getTechnologyPictureInfo{
-    [TDHttpTools getSeveralPicture:@{@"relatedId":self.targetUserId,@"application":[NSString getPictureAndVideoInfoServiceNeedFunctionStr:3],@"type":[NSString getPictureAndVideoServiceNeedTypeFlagStr:0]} success:^(id response) {
-        NSInteger state = [response[@"status"] integerValue];
-        if (state == 0){
-            NSArray *dataArr = response[@"data"];
-            NSLog(@"技能秀图片 dataArr:%@",dataArr);
-            self.infoModel.pictureInfoArr = [[NSMutableArray alloc ] initWithArray:dataArr];
-            self.infoModel.pictureUrlStrArr = [self.infoModel getTargetImageUrlStrArr:self.infoModel.pictureInfoArr];
-            [self.tableView reloadData];
-        }else{
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-}
 
 
 //- (void)makeDictToWritePlist:(NSDictionary*)dict{

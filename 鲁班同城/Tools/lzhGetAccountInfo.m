@@ -178,6 +178,13 @@
     }else{
     }
     if ([[dict allKeys] containsObject:@"age"]){
+        NSNumber *realAge = dict[@"age"];
+        if ([realAge isKindOfClass:[NSNumber class]]){
+            NSLog(@"/n/nage是数字类型/n");
+        }else{
+            NSLog(@"/n/nage不是数字类型/n");
+        }
+        
         ageNum = [NSNumber getResultNumberBySeverStr:dict[@"age"]];
     }else{
     }

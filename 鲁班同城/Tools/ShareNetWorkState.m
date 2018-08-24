@@ -197,6 +197,7 @@ wifeHandler wanHandler:(SEL)wwanHandler target:(id)target
 - (void)asynSerialDownloadMethd02:(NSString*)UrlStr downloadCompleteHandler:(SEL)downloadCompleteHandler target:(id)target modelIndex:(NSInteger)index{
     
     if([self getNetState]){
+        [SVProgressHUD show];
         dispatch_async(serialQueue, ^{
             // [NSThread currentThread].name = @"lili";
             //NSLog(@"current thresd:%@",[NSThread currentThread]);
@@ -214,6 +215,7 @@ wifeHandler wanHandler:(SEL)wwanHandler target:(id)target
                         [target performSelectorOnMainThread:downloadCompleteHandler withObject:@{@"modelIndex":[NSNumber numberWithInteger:index],@"imageData":data} waitUntilDone:YES];
                     }
                 }
+                [SVProgressHUD dismiss];
             }];
             [task resume];
             

@@ -78,10 +78,9 @@
 //获取用户信息
 - (void)getData{
     WS(weakSelf);
-    if ([lzhGetAccountInfo getAccount].identityFlag){
         [TDHttpTools getEmployerMyPage:@{} success:^(id response) {
-            
-            self.userInfoDict = response;
+            NSLog(@"获取用户信息%@",response);
+            self.userInfoDict = [response[@"data"] copy];
             [self.tableView reloadData];
             //
             [weakSelf giveValue];
@@ -89,9 +88,6 @@
         } failure:^(NSError *error) {
             
         }];
-    }else{
-        
-    }
 }
 
 - (void)uploadUserPicture{
@@ -114,7 +110,7 @@
 - (void)giveValue{
     NSURL *picUrl = [NSURL URLWithString:self.userInfoDict[@"headImg"]];
     [headerView.userImageView sd_setImageWithURL:picUrl];
-    headerView.userNameLabel.text = self.userInfoDict[@"userName"];
+    headerView.userNameLabel.text = [NSString getResultStrBySeverStr:self.userInfoDict[@"userName"]];
 }
 
 - (void)initObject{

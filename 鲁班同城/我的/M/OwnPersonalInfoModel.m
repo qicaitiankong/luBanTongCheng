@@ -36,6 +36,8 @@
     
     if (localModel){
         localModel.nameStr = [NSString getResultStrBySeverStr:webDict[@"realName"]];
+        
+        
         localModel.addressStr = [NSString getResultStrBySeverStr:webDict[@"address"]];
          localModel.sexStr = [NSString getResultStrBySeverStr:webDict[@"gender"]];
         localModel.proviceStr = [NSString getResultStrBySeverStr:webDict[@"province"]];
@@ -46,24 +48,47 @@
         localModel.focusNum = [NSNumber getResultNumberBySeverStr:webDict[@"focusNum"]];
         NSNumber *focusFlagNum = [NSNumber getResultNumberBySeverStr:webDict[@"isFocused"]];
         localModel.FoucedFlag = [focusFlagNum integerValue];
+        
         NSNumber *ageNum = [NSNumber getResultNumberBySeverStr:webDict[@"age"]];
         localModel.ageNum= ageNum;
         localModel.starCountNumber = [NSNumber getResultNumberBySeverStr:webDict[@"score"]];
         localModel.introduceStr = @"";
         localModel.jobExperienceStr = [NSString getResultStrBySeverStr:webDict[@"workExperience"]];
+        //
+        localModel.nameSoundUrlStr = [NSString getResultStrBySeverStr:webDict[@" realNamePath"]];
+        //名字语音
+        NSDictionary *nameSoundInfoDict = [NSDictionary getResultDictBySeverDict:webDict[@"realNamePath"]];
+        if(nameSoundInfoDict.allKeys.count){
+            localModel.nameSoundUrlStr = nameSoundInfoDict[@"path"];
+            localModel.nameSoundTime = [nameSoundInfoDict[@"length"] integerValue];
+        }else{
+            localModel.nameSoundUrlStr = @"";
+            localModel.nameSoundTime = 0;
+        }
+        //工作经历语音
+        NSDictionary *experienceSoundInfoDict = [NSDictionary getResultDictBySeverDict:webDict[@"workExperiencePath"]];
+        if(experienceSoundInfoDict.allKeys.count){
+            localModel.workExperienceUrlStr = experienceSoundInfoDict[@"path"];
+            localModel.workExperienceSoundTime = [experienceSoundInfoDict[@"length"] integerValue];
+        }else{
+            localModel.workExperienceUrlStr = @"";
+            localModel.workExperienceSoundTime = 0;
+        }
+        
+        
         localModel.mobileStr = [NSString getResultStrBySeverStr:webDict[@"mobile"]];
         localModel.userPictureUrlStr = [NSString getResultStrBySeverStr:webDict[@"headImg"]];
         
-
-        localModel.technologyArr = webDict[@"technologys"];
-        localModel.jobArr = webDict[@"professions"];
+        localModel.technologyArr = [NSArray getResultArrBySeverArr:webDict[@"technologys"]];
+        localModel.jobArr = [NSArray getResultArrBySeverArr:webDict[@"professions"]];
         
-//        localModel.pictureInfoArr = webDict[@"technologysPic"];
-//        localModel.videoInfoArr = webDict[@"technologysVideo"];
-//        //再次解析得到视频和图片url字符串数组
-//        localModel.videoUrlStrArr = [localModel getTargetImageUrlStrArr:localModel.videoInfoArr];
-//
-//        localModel.pictureUrlStrArr = [localModel getTargetImageUrlStrArr:localModel.pictureInfoArr];
+        localModel.pictureInfoArr = [NSArray getResultArrBySeverArr:webDict[@"technologysPic"]];
+        localModel.videoInfoArr = [NSArray getResultArrBySeverArr:webDict[@"technologysVideo"]];
+        
+        //再次解析得到视频和图片url字符串数组
+        localModel.videoUrlStrArr = [localModel getTargetImageUrlStrArr:localModel.videoInfoArr];
+
+        localModel.pictureUrlStrArr = [localModel getTargetImageUrlStrArr:localModel.pictureInfoArr];
         //技能和工作
         localModel.targetTechSeviceArr = [localModel getTargetTechnologyArr:localModel.technologyArr];
          localModel.targetJobArr = [localModel getTargetTechnologyArr:localModel.jobArr];

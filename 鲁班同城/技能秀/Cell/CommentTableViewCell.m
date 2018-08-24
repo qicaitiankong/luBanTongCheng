@@ -28,7 +28,7 @@
         self.userImageView.layer.cornerRadius = 20;
         self.userImageView.clipsToBounds = YES;
         //
-        self.nameLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
+        self.nameLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:15] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         
         self.praiseButt = [[CustomerImageButt alloc]initWithFrame:CGRectMake(0, 0, praiseButtWidth,praiseButtWidth)];
         self.praiseButt.imageView.frame = CGRectMake(0, 0, 16, 16);
@@ -43,14 +43,14 @@
         
         
         
-        self.praiseLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:14] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
+        self.praiseLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:15] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         
-         self.commentContentLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:16] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
+         self.commentContentLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:12] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         self.commentContentLabel.numberOfLines = 0;
         //
-        self.timeLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:13] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
+        self.timeLabel = [[CustomeLzhLabel alloc]initWithCustomerParamer:[UIFont getPingFangSCMedium:11] titleColor:[UIColor colorWithHexString:@"#333333"] aligement:0];
         //
-        self.answerButtView = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, 0, 60, 30) backColor:[UIColor whiteColor] cornerRadius:5 title:@"0回复" titleColor:[UIColor colorWithHexString:@"#333333"] font:[UIFont getPingFangSCMedium:13]];
+        self.answerButtView = [[CustomeStyleCornerButt alloc]initWithFrame:CGRectMake(0, 0, 60, 30) backColor:[UIColor whiteColor] cornerRadius:5 title:@"0回复" titleColor:[UIColor colorWithHexString:@"#333333"] font:[UIFont getPingFangSCMedium:11]];
         self.answerButtView.clickButtBlock = ^{
             if (weakSelf.clickAnswerBlock){
                 weakSelf.clickAnswerBlock(weakSelf.indexPath);
@@ -139,7 +139,7 @@
         }else{//评论使用
             self.timeLabel.text = model.timeStr;
             NSString *answerNumberStr = [NSString stringWithFormat:@"%@回复",model.answerNumStr];
-            CGFloat width = [LzhReturnLabelHeight getLabelWidth:answerNumberStr font:[UIFont getPingFangSCMedium:13] targetHeight:30] + 5;
+            CGFloat width = [LzhReturnLabelHeight getLabelWidth:answerNumberStr font:[UIFont getPingFangSCMedium:11] targetHeight:30] + 5;
              [self.answerButtView.loginButt setTitle:answerNumberStr  forState:UIControlStateNormal];
             //
             self.timeLabel.sd_resetLayout

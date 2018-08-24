@@ -89,6 +89,7 @@
     if (self.kindTag == 1){//技能
         [TDHttpTools getTechnologyList:@{@"parentId":[NSNumber numberWithInteger:0]} success:^(id response) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+            NSLog(@"技能列表=%@",dict);
             if ([dict allKeys]){
                     int status = [dict[@"status"] intValue];
                     if (status == 0){

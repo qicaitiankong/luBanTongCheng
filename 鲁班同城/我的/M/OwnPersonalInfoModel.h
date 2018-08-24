@@ -79,6 +79,8 @@
 //名字语音时间
 @property (assign,nonatomic) NSInteger nameSoundTime;
 
+@property (strong,nonatomic) NSString *nameSoundUrlStr;
+
 //工作经历语音
 @property (strong,nonatomic) NSData *workExperienceData;
 

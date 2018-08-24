@@ -47,6 +47,20 @@
         self.soundTimeLabel.frame = CGRectMake(self.soundButt.right + 15, 0, frame.size.width - self.soundButt.right - 30, frame.size.height);
         self.soundTimeLabel.text = @"语音介绍";
         [self addSubview:self.soundTimeLabel];
+        
+        //
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+        
+        [audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
+        [audioSession setActive:YES error:nil];
+        //
+        //NSDictionary *recordFormat = @{AVSampleRateKey : @(8000.f),
+//                                       AVFormatIDKey : @(kAudioFormatLinearPCM),
+//                                       AVLinearPCMBitDepthKey : @(16),
+//                                       AVNumberOfChannelsKey : @(1),
+//                                       AVEncoderAudioQualityKey : @(AVAudioQualityHigh)};
+        //
     }
     return self;
 }
@@ -58,10 +72,6 @@
     }
 }
 - (void)startVoiceAnimation{
-    if (self.player.isPlaying){
-        [SVProgressHUD showInfoWithStatus:@"有其他语音正在播放"];
-        return;
-    }
     if (NO == self.soundButt.imageView.isAnimating){
         [self.soundButt.imageView startAnimating];
     }
@@ -101,9 +111,12 @@
     BOOL suc =  [self.player play];
     //
     if (suc){
-          [self startVoiceAnimation];
+        [self startVoiceAnimation];
+        NSLog(@"开始语音播放");
+    }else{
+        NSLog(@"语音播放失败");
     }
-    NSLog(@"开始语音播放");
+    
 }
 
 - (void)adjustSoundView{

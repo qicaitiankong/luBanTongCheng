@@ -74,11 +74,8 @@
 - (void)setModel:(OwnPersonalInfoModel*)model{
     _model = model;
     NSString *str = [model.introduceStr copy];
-    NSData *soundData = model.nameSoundData;
     UIView *bottomView = self.topDisplayLabel;
     self.topDisplayLabel.text = @"个人介绍";
-    
-    
     
     if (str.length){
         self.introduceLabel.sd_resetLayout
@@ -89,7 +86,7 @@
         self.introduceLabel.text = str;
         //bottomView = self.introduceLabel;
     }
-    //if (soundData){
+    if (model.nameSoundUrlStr.length){
         self.soundView.hidden = NO;
         self.soundView.sd_resetLayout
         .leftEqualToView(self.introduceLabel)
@@ -97,9 +94,9 @@
         .widthIs(260)
         .heightIs(40);
         bottomView = self.soundView;
-    //}else{
-       // self.soundView.hidden = YES;
-    //}
+    }else{
+        self.soundView.hidden = YES;
+    }
     
     [self setupAutoHeightWithBottomView:bottomView bottomMargin:15];
     

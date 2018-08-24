@@ -225,7 +225,6 @@
         userIDstr = [[lzhGetAccountInfo getAccount].userID stringValue];
         [manager.requestSerializer setValue:userIDstr forHTTPHeaderField:@"userId"];
         //
-        //
         token = [PDKeyChain keyChainLoad];
     
         //时间戳毫秒
@@ -234,7 +233,9 @@
         //签名认证
         NSMutableString *signStr = [[NSMutableString alloc]initWithString:@""];
         [signStr appendFormat:@"%@%@%@%ld",token,[lzhGetAccountInfo getAccount].userCode,currentTime,[[lzhGetAccountInfo getAccount].userID integerValue]];
+        
         NSString *md5SignStr = [NSString md5:signStr];
+        NSLog(@"/n/n/n/n签名：userID=%@ time=%@ token=%@ usercode=%@",userIDstr,currentTime,token,[lzhGetAccountInfo getAccount].userCode);
         [manager.requestSerializer setValue:md5SignStr forHTTPHeaderField:@"sign"];
     }
     //

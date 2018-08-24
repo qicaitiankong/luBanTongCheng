@@ -81,7 +81,7 @@
             NSNumber *receiveNum = [NSNumber getResultNumberBySeverStr: dataDict[@"receiveNum"]];
             NSInteger receviceNum =  [receiveNum integerValue];
             self.singleModel.ticketsNumberStr =[NSString stringWithFormat:@"%ld",receviceNum];
-            self.singleModel.pictureUrlStrArr = @[@"",@"",@"",@"",@"",@""];
+            self.singleModel.pictureUrlStrArr = [NSArray getResultArrBySeverArr:dataDict[@"publishOrderPics"]];
             //
             NSArray *bottomDataArr = dataDict[@"receiveList"];
             if (bottomDataArr.count){

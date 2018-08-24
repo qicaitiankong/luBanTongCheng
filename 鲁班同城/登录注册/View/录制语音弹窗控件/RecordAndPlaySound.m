@@ -81,6 +81,8 @@
         //
         NSLog(@"录音停止");
         BOOL deleteSuc = [self.recorder deleteRecording];
+        //再次清空包括amr文件
+        [self cleanSoundOnFile];
         if (deleteSuc){
             NSLog(@"录音停止本地文件删除成功");
         }else{
@@ -116,8 +118,14 @@
     if (self.recorder){
         [self.recorder stop];
     }
-    
 }
+//清空文件中的语音
+- (void)cleanSoundOnFile{
+    NSDictionary *dict = @{};
+    [dict writeToFile:[[ShareHomePath GetShareHome]getAmrSoundPath] atomically:YES];
+     [dict writeToFile:[[ShareHomePath GetShareHome]getWavSoundPath] atomically:YES];
+}
+
 
 -(void)dealloc{
     if (self.audioPlayer){

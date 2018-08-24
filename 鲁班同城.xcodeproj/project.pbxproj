@@ -260,6 +260,8 @@
 		1828C21221252448009E9B40 /* OwnPersonalServiceTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1828C21121252448009E9B40 /* OwnPersonalServiceTypeTableViewCell.m */; };
 		1828C21521255B9F009E9B40 /* OwnPersonalIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1828C21421255B9F009E9B40 /* OwnPersonalIntroduceTableViewCell.m */; };
 		1828C218212567DB009E9B40 /* OwnPersonalPictureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1828C217212567DB009E9B40 /* OwnPersonalPictureTableViewCell.m */; };
+		182F0DFA212F92A500004D10 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F0DF9212F92A500004D10 /* AboutUsViewController.m */; };
+		182F0DFD212FEFD500004D10 /* NSDictionary+DealNullServiceDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F0DFC212FEFD500004D10 /* NSDictionary+DealNullServiceDict.m */; };
 		1832B99120F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99020F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m */; };
 		1832B99D20F59CC400D6CE4F /* SDWeiXinPhotoContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99320F59CC300D6CE4F /* SDWeiXinPhotoContainerView.m */; };
 		1832B99E20F59CC400D6CE4F /* SDPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1832B99720F59CC400D6CE4F /* SDPhotoBrowser.m */; };
@@ -930,6 +932,10 @@
 		1828C21421255B9F009E9B40 /* OwnPersonalIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalIntroduceTableViewCell.m; sourceTree = "<group>"; };
 		1828C216212567DB009E9B40 /* OwnPersonalPictureTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnPersonalPictureTableViewCell.h; sourceTree = "<group>"; };
 		1828C217212567DB009E9B40 /* OwnPersonalPictureTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnPersonalPictureTableViewCell.m; sourceTree = "<group>"; };
+		182F0DF8212F92A500004D10 /* AboutUsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		182F0DF9212F92A500004D10 /* AboutUsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		182F0DFB212FEFD500004D10 /* NSDictionary+DealNullServiceDict.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DealNullServiceDict.h"; sourceTree = "<group>"; };
+		182F0DFC212FEFD500004D10 /* NSDictionary+DealNullServiceDict.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DealNullServiceDict.m"; sourceTree = "<group>"; };
 		1832B98F20F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyCruitDetailPictureTableViewCell.h; sourceTree = "<group>"; };
 		1832B99020F5972000D6CE4F /* CompanyCruitDetailPictureTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyCruitDetailPictureTableViewCell.m; sourceTree = "<group>"; };
 		1832B99320F59CC300D6CE4F /* SDWeiXinPhotoContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWeiXinPhotoContainerView.m; sourceTree = "<group>"; };
@@ -1663,6 +1669,8 @@
 				1866B0B4211AD9FD00B1F5A7 /* UIImage+OwnCalculateImageSize.m */,
 				18662A0A211BE80E00DE1DB6 /* UIView+ShowNullTipImageView.h */,
 				18662A0B211BE80E00DE1DB6 /* UIView+ShowNullTipImageView.m */,
+				182F0DFB212FEFD500004D10 /* NSDictionary+DealNullServiceDict.h */,
+				182F0DFC212FEFD500004D10 /* NSDictionary+DealNullServiceDict.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2017,6 +2025,7 @@
 		1818E4CD20EB558300B676C2 /* C */ = {
 			isa = PBXGroup;
 			children = (
+				182F0DF7212F927000004D10 /* 关于我们 */,
 				1443C59F20E3327B0009E82F /* MyInfoViewController.h */,
 				1443C5A020E3327B0009E82F /* MyInfoViewController.m */,
 				1824F74C20EF090500E99823 /* OwnPersonalInfomationViewController.h */,
@@ -2332,6 +2341,15 @@
 				1828C20D21250BFC009E9B40 /* SMS_SDK.framework */,
 			);
 			path = SMSSDK;
+			sourceTree = "<group>";
+		};
+		182F0DF7212F927000004D10 /* 关于我们 */ = {
+			isa = PBXGroup;
+			children = (
+				182F0DF8212F92A500004D10 /* AboutUsViewController.h */,
+				182F0DF9212F92A500004D10 /* AboutUsViewController.m */,
+			);
+			path = "关于我们";
 			sourceTree = "<group>";
 		};
 		1832B99220F59CC300D6CE4F /* PhotoContainer */ = {
@@ -3609,6 +3627,7 @@
 				180609A920F479DB00471E08 /* CompanyCruitDetailTableViewCell.m in Sources */,
 				1822849A20FF0CF90059FB94 /* LaunchPiesViewController.m in Sources */,
 				185BDBA72114400C00F18CD5 /* CityModel.m in Sources */,
+				182F0DFA212F92A500004D10 /* AboutUsViewController.m in Sources */,
 				1443C5C620E343E50009E82F /* RDVTabBar.m in Sources */,
 				185BDBA42114400C00F18CD5 /* YAddressPickerView.m in Sources */,
 				1824F75120EF0C6100E99823 /* BaseHiddenNavAndTabBarViewController.m in Sources */,
@@ -3715,6 +3734,7 @@
 				1443C4FF20E204170009E82F /* AppDelegate.m in Sources */,
 				1443C61920E37A3D0009E82F /* RegisterButtonStyleView.m in Sources */,
 				18264E5F210AED5F001B793B /* GSPickerView.m in Sources */,
+				182F0DFD212FEFD500004D10 /* NSDictionary+DealNullServiceDict.m in Sources */,
 				188CB37C20FC82FE00302C94 /* DispatchTicketDetailBaoJiaTableViewCell.m in Sources */,
 				1824F74E20EF090500E99823 /* OwnPersonalInfomationViewController.m in Sources */,
 				1824F78020EF4F4A00E99823 /* OwnPersonalInfomationPersonalServiceTypeGoupView.m in Sources */,

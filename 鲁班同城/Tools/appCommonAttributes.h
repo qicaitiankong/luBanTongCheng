@@ -38,6 +38,7 @@
 #import "BoFangYuYinOwnPop.h"
 #import "ShareHomePath.h"
 #import "RecordAndPlaySound.h"
+#import "NSDictionary+DealNullServiceDict.h"
 
 //third party class
 #import <SVProgressHUD.h>

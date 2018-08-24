@@ -170,6 +170,7 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
     NSLog(@"打印称呼 nameStr=%@",nameStr);
     NSDictionary *paraDict = @{@"userName":nameStr,@"mobile":mobileStr,@"provinceName":self.locationInfo.provinceStr,@"cityName":self.locationInfo.cityStr,@"areaName":self.locationInfo.areaStr,@"address":addressStr,@"technologys":self.selectedTechnoStr,@"professional":self.selectedJobStr,@"toDoorTime":self.selectedTimeStr,@"remark":beiZhuStr,@"budget":[NSNumber numberWithInteger:yuSuanMoney]};
     
+    NSLog(@"/////选择的图片%ld",self.pictureModel.selectedDataArr.count);
     [TDHttpTools launchOder:paraDict pictureDataArr:self.pictureModel.selectedDataArr success:^(id response) {
         int status = [response[@"status"] intValue];
         if (status == 0){
@@ -178,7 +179,7 @@ struct ViewTagStruct viewTag = {0,1,2,3,4,5,6};
             [SVProgressHUD showInfoWithStatus:response[@"msg"]];
         }
     } failure:^(NSError *error) {
-        
+
     }];
 }
 //
